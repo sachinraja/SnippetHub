@@ -1,2 +1,2 @@
-# snippetsplace
-A home for code snippets from many languages.
+## SnippetsHub
+A home for sharing snippets across various languages.
