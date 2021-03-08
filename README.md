@@ -1,2 +1,3 @@
-## SnippetsHub
-A home for sharing snippets across various languages.
+## SnippetHub
+
+A home for snippets across various languages.

@@ -1,0 +1,46 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Snippet {
+  id          Int                   @id @default(autoincrement())
+  authorId    Int
+  title       String
+  description String
+  language    enum_Snippet_language @default(other)
+  upvotes     Int                   @default(0)
+  code        String
+  author      User                  @relation(fields: [authorId], references: [id])
+  createdAt   DateTime              @default(now()) @db.Timestamptz
+  updatedAt   DateTime              @updatedAt @db.Timestamptz
+}
+
+model User {
+  id        Int            @id @default(autoincrement())
+  gitHubId  Int            @unique
+  username  String         @unique @db.VarChar(39)
+  type      enum_User_type @default(user)
+  snippets  Snippet[]
+  createdAt DateTime       @default(now()) @db.Timestamptz
+  updatedAt DateTime       @updatedAt @db.Timestamptz
+}
+
+enum enum_Snippet_language {
+  python
+  javascript
+  typescript
+  csharp
+  elixir
+  other
+}
+
+enum enum_User_type {
+  user
+  admin
+}

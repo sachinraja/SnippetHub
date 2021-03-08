@@ -1,21 +1,24 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import Head from 'next/head';
+import React from 'react';
 import 'tailwindcss/tailwind.css';
-import 'public/main.css'
+import 'public/main.css';
 import Nav from '@components/Nav/Nav';
+import type { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }) {
+export function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>SnippetsHub</title>
+        <title>SnippetHub</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="icon" href="/snippetsplace.svg" />
+        <link rel="icon" href="/logo.svg" />
       </Head>
-      
+
       <Nav />
-      <Component className="bg-gray-500" {...pageProps} />
+      <Component {...pageProps} />
     </>
-  )
+  );
 }
 
-export default MyApp
+export default App;

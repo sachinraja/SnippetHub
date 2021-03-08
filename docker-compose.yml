@@ -1,25 +1,8 @@
 services:
   web:
     build: .
+    command: /bin/sh -c 'npx prisma migrate deploy --preview-feature && npx prisma db seed --preview-feature && npm run build && npm start'
     ports:
       - 3000:3000
-    env_file:
-      - .env
-    depends_on:
-      db:
-        condition: service_healthy
-
-  db:
-    image: postgres:13.1-alpine
-    env_file:
-      - .env
-    volumes:
-      - pg-db:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 3s
-      timeout: 5s
-      retries: 5
-
-volumes:
-  pg-db:
+    environment:
+      - NODE_ENV=production

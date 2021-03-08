@@ -1,11 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap");
 
 hr {
-    background-color: white;
-    height: 1px;
-    border: 0;
+  background-color: white;
+  height: 1px;
+  border: 0;
 }
 
-body{
-    @apply bg-carbon-900;
+header {
+  @apply mt-2;
+}
+
+body {
+  @apply bg-carbon-900;
+  @apply text-white;
+}
+
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+:-moz-placeholder {
+  font-style: italic;  
+}
+::-moz-placeholder {
+  font-style: italic;  
+}
+:-ms-input-placeholder {  
+  font-style: italic; 
 }

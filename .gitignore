@@ -135,3 +135,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# development and test databases
+data/
