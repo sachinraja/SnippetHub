@@ -21,11 +21,10 @@ module.exports = {
       jsx: true,
     },
     project: 'tsconfig.json',
-    ecmaVersion: 12,
     sourceType: 'module',
   },
   plugins: ['prettier', '@typescript-eslint', 'react'],
-  ignorePatterns: ['*.config.js', 'generated'],
+  ignorePatterns: ['generated'],
   rules: {
     'no-console': 'error',
     camelcase: 'off',

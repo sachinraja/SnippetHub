@@ -6,7 +6,7 @@ module.exports = {
     ],
     options: {
       // prevent purging of dynamic class names
-      safelist: [/^text-.+?-(4|6)0{2}/, /^border-.+?-50{2}/],
+      safelist: [/^text-.+?-(4|6)0{2}/, /^text-\d?xl/, /^border-.+?-50{2}/],
     },
   },
 
