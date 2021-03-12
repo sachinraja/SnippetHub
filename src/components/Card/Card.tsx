@@ -21,8 +21,8 @@ const Card = ({
   language,
   imageUrl,
 }: CardProps) => {
-  const header = useRef() as React.MutableRefObject<HTMLDivElement>;
-  const attributes = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const header = useRef<HTMLDivElement>(null);
+  const attributes = useRef<HTMLDivElement>(null);
   const [attributesFloatedRight, setAttributesFloatedRight] = useState(true);
 
   const languageAttributes = languages[language];
@@ -30,8 +30,13 @@ const Card = ({
   // detect flex wrap and style accordingly
   function checkFloat() {
     const attributesElement = attributes.current;
+    const headerElement = header.current;
 
-    if (attributesElement.offsetTop > header.current.offsetTop) {
+    if (
+      attributesElement &&
+      headerElement &&
+      attributesElement.offsetTop > headerElement.offsetTop
+    ) {
       setAttributesFloatedRight(false);
     } else {
       setAttributesFloatedRight(true);

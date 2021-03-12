@@ -16,16 +16,16 @@ const Heading = ({
   bold,
   center,
 }: HeadingProps) => {
-  const Tag = `h${priority}` as keyof JSX.IntrinsicElements;
+  const HTag = `h${priority}` as keyof JSX.IntrinsicElements;
   const textSizeClass = size === 1 ? 'text-xl' : `text-${size}xl`;
   return (
-    <Tag
+    <HTag
       className={`${className} ${textSizeClass}${bold ? ' font-bold' : ''}${
         center ? ' text-center' : ''
       }`}
     >
       {children}
-    </Tag>
+    </HTag>
   );
 };
 
