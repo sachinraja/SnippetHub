@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "test": "jest",
-    "type-check": "tsc",
+    "typecheck": "tsc --noemit",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
