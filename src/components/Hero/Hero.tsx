@@ -1,17 +1,19 @@
+import Header from '@components/Header/Header';
 import Heading from '@components/Heading/Heading';
 import SearchInput from '@components/Input/SearchInput';
+import Image from 'next/image';
 
 const Hero = () => {
   return (
-    <div className="bg-gradient-to-b from-carbon-800 to-carbon-900 py-10">
-      <div className="d-block m-auto ml-14">
+    <Header>
+      <section className="md:w-1/2">
         <Heading priority={1} size={4} bold center={false}>
           SnippetHub
         </Heading>
 
         <Heading
-          priority={2}
           className="mt-3"
+          priority={2}
           size={1}
           bold={false}
           center={false}
@@ -20,8 +22,19 @@ const Hero = () => {
         </Heading>
 
         <SearchInput placeholder="Search for a snippet..." />
-      </div>
-    </div>
+      </section>
+
+      <section className="md:w-1/2">
+        <div className="relative h-full">
+          <Image
+            layout="fill"
+            objectFit="contain"
+            src="/logo.svg"
+            alt="SnippetsPlace Logo"
+          />
+        </div>
+      </section>
+    </Header>
   );
 };
 

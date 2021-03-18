@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const Nav = () => {
   const [profileOptionsOn, setProfileOptionsOn] = useState(false);
+  let profileOptionsTimeoutId: NodeJS.Timeout;
+  const profileOptionsContainer = useRef<HTMLDivElement>(null);
   const [mobileMenuOn, setMobileMenuOn] = useState(false);
 
   return (
@@ -89,9 +91,22 @@ const Nav = () => {
                   type="button"
                   className="bg-carbon-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-carbon-800 focus:ring-white"
                   onClick={() => setProfileOptionsOn(!profileOptionsOn)}
-                  onBlur={() => setProfileOptionsOn(false)}
+                  onBlur={() => {
+                    if (
+                      profileOptionsContainer.current &&
+                      !profileOptionsContainer.current.contains(
+                        document.activeElement,
+                      ) &&
+                      document.activeElement !== profileOptionsContainer.current
+                    ) {
+                      profileOptionsTimeoutId = setTimeout(() => {
+                        setProfileOptionsOn(false);
+                      });
+                    }
+                  }}
                   id="user-menu"
                   aria-haspopup="true"
+                  aria-expanded={profileOptionsOn}
                 >
                   <span className="sr-only">Open user menu</span>
 
@@ -109,17 +124,25 @@ const Nav = () => {
               <div
                 className={
                   profileOptionsOn
-                    ? 'origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-carbon-700 dark:text-white font-medium   ring-1 ring-black ring-opacity-5 z-10'
+                    ? 'origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-carbon-700 dark:text-white font-medium ring-1 ring-black ring-opacity-5 z-10'
                     : 'hidden'
                 }
+                ref={profileOptionsContainer}
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu"
+                onBlur={() => {
+                  profileOptionsTimeoutId = setTimeout(() => {
+                    setProfileOptionsOn(false);
+                  });
+                }}
+                onFocus={() => clearTimeout(profileOptionsTimeoutId)}
               >
                 <Link href="#">
                   <a
                     className="block px-4 py-2 text-sm hover:bg-carbon-500"
                     role="menuitem"
+                    tabIndex={0}
                   >
                     Your Profile
                   </a>
@@ -128,6 +151,7 @@ const Nav = () => {
                   <a
                     className="block px-4 py-2 text-sm hover:bg-carbon-500"
                     role="menuitem"
+                    tabIndex={0}
                   >
                     Settings
                   </a>
@@ -136,6 +160,7 @@ const Nav = () => {
                   <a
                     className="block px-4 py-2 text-sm hover:bg-carbon-500"
                     role="menuitem"
+                    tabIndex={0}
                   >
                     Sign out
                   </a>

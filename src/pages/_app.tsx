@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Head from 'next/head';
 import React from 'react';
-import 'tailwindcss/tailwind.css';
 import 'public/main.css';
 import Nav from '@components/Nav/Nav';
 import type { AppProps } from 'next/app';

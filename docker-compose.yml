@@ -4,5 +4,8 @@ services:
     command: /bin/sh -c 'npx prisma migrate deploy --preview-feature && npx prisma db seed --preview-feature && npm run build && npm start'
     ports:
       - 3000:3000
+    env_file:
+    - .env.local
+    - src/prisma/.env.local
     environment:
       - NODE_ENV=production

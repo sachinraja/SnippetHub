@@ -3,6 +3,7 @@ module.exports = {
     content: [
       './src/components/**/*.{js,ts,jsx,tsx}',
       './src/pages/**/*.{js,ts,jsx,tsx}',
+      './safelist.txt'
     ],
     options: {
       // prevent purging of dynamic class names
@@ -33,11 +34,6 @@ module.exports = {
       borderWidth: {
         1: '1px',
       },
-    },
-  },
-  variants: {
-    extend: {
-      transform: ['motion-reduce'],
     },
   },
   plugins: [],

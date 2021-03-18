@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 interface HeadingProps {
   children: ReactNode;
   className?: string;
-  priority: number;
-  size: number;
+  priority: 1 | 2 | 3 | 4 | 5 | 6;
+  size: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
   bold: boolean;
   center: boolean;
 }

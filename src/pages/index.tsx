@@ -1,19 +1,19 @@
-import Card, { CardProps } from '@components/Card/Card';
+import { CardProps } from '@components/Card/Card';
 import CardContainer from '@components/CardContainer/CardContainer';
 import Heading from '@components/Heading/Heading';
 import Hero from '@components/Hero/Hero';
 import Paragraph from '@components/Paragraph/Paragraph';
+import getCardFromSnippet from '@lib/snippet/card';
 import getTopSnippets from '@lib/snippet/top';
-import { numberWithCommas } from '@lib/utils/number';
 import type { InferGetStaticPropsType } from 'next';
 import type { ReactElement } from 'react';
 
 export const getStaticProps = async () => {
   return {
     props: {
-      topSnippets: await getTopSnippets(10),
+      topSnippets: await getTopSnippets(20),
     },
-    revalidate: 30,
+    revalidate: 120,
   };
 };
 
@@ -22,21 +22,8 @@ const HomePage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   // create components for top snippets
   const cards = topSnippets.map(
-    (snippet): ReactElement<CardProps> => {
-      const { username, gitHubId } = snippet.author;
-      const count = numberWithCommas(snippet.upvotes);
-      return (
-        <Card
-          key={snippet.id}
-          title={snippet.title}
-          subtitle={username}
-          count={count}
-          description={snippet.description}
-          language={snippet.language}
-          imageUrl={`https://avatars.githubusercontent.com/u/${gitHubId}`}
-        />
-      );
-    },
+    (snippet): ReactElement<CardProps> =>
+      getCardFromSnippet(snippet, snippet.author),
   );
 
   return (
@@ -45,7 +32,7 @@ const HomePage = ({
       <header className="flex mx-4">
         <div className="h-14">
           <svg
-            className="w-auto h-full text-blue-600"
+            className="h-full text-blue-600 motion-safe:animate-bounce"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -70,7 +57,7 @@ const HomePage = ({
           >
             Most Popular Snippets
           </Heading>
-          <Paragraph>The snippets with the most votes.</Paragraph>
+          <Paragraph size={3}>The snippets with the most votes.</Paragraph>
         </div>
       </header>
 

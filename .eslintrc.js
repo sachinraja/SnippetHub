@@ -26,7 +26,6 @@ module.exports = {
   plugins: ['prettier', '@typescript-eslint', 'react'],
   ignorePatterns: ['generated'],
   rules: {
-    'no-console': 'error',
     camelcase: 'off',
     // suppress errors for missing 'import React' in files - Next.js automatically imports it
     'react/react-in-jsx-scope': 'off',

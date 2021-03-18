@@ -6,7 +6,7 @@ interface SearchInputProps {
 
 const SearchInput = ({ placeholder }: SearchInputProps) => {
   return (
-    <div className="mt-10 flex justify-between w-4/5 md:w-2/5">
+    <div className="mt-10 flex justify-between">
       <div className="bg-carbon-900 focus-within:ring-carbon-500 focus-within:ring-2 rounded-md inline-flex flex-grow transition-all ease-in-out duration-500">
         <TextInput id="search" placeholder={placeholder}>
           <div className="inline-flex items-center p-2">

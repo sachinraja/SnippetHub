@@ -28,22 +28,17 @@ const Login = ({
         Sign in to SnippetHub
       </h1>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-2">
         <Link href={githubAuthUrl}>
-          <a className="inline-block">
-            <button
-              type="submit"
-              className="bg-carbon-800 hover:bg-carbon-700 text-white text-lg mt-2 p-1.5 rounded-sm"
+          <a className="inline-block bg-blue-800 hover:bg-blue-700 text-white text-lg p-1.5 rounded-md">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="ml-1 my-1 w-5 inline-block"
+              viewBox="0 0 24 24"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="ml-1 my-1 w-5 inline-block"
-                viewBox="0 0 24 24"
-              >
-                <path fill="white" d={githubIcon.path} />
-              </svg>
-              &nbsp;| Sign in with GitHub
-            </button>
+              <path fill="white" d={githubIcon.path} />
+            </svg>
+            &nbsp;| Sign in with GitHub
           </a>
         </Link>
       </div>

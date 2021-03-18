@@ -1,0 +1,14 @@
+{
+	"name": "SnippetHub",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspace",
+	"settings": {
+		"terminal.integrated.shell.linux": null
+	},
+	"extensions": [],
+
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
+	"postCreateCommand": "npm ci && npx prisma generate && npx prisma migrate dev --preview-feature && npx prisma db seed --preview-feature",
+}
