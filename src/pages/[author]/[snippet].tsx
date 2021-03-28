@@ -1,5 +1,13 @@
-const SnippetPage = () => {
-  return <main />;
-};
+export const getServerSideProps = async () => {
+  return {
+    props: {
+      title: 'Flask | SnippetHub',
+    },
+  }
+}
 
-export default SnippetPage;
+const SnippetPage = () => {
+  return <main />
+}
+
+export default SnippetPage

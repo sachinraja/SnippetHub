@@ -1,4 +1,4 @@
-import prisma from '@lib/prisma';
+import prisma from '@lib/prisma'
 
 export function getUser(username: string) {
   return prisma.user.findUnique({
@@ -8,19 +8,19 @@ export function getUser(username: string) {
       gitHubId: true,
       username: true,
     },
-  });
+  })
 }
 
 export function getUserSnippetsAllData(authorId: number) {
   return prisma.snippet.findMany({
     where: { authorId },
-  });
+  })
 }
 
 interface GetUserSnippetsOptions {
-  skip?: number;
-  take?: number;
-  orderBy?: 'asc' | 'desc';
+  skip?: number
+  take?: number
+  orderBy?: 'asc' | 'desc'
 }
 export async function getUserSnippets(
   authorId: number,
@@ -38,5 +38,5 @@ export async function getUserSnippets(
       description: true,
       language: true,
     },
-  });
+  })
 }

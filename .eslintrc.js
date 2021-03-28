@@ -23,7 +23,12 @@ module.exports = {
     project: 'tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['prettier', '@typescript-eslint', 'react'],
+  plugins: [
+    'prettier',
+    '@typescript-eslint',
+    'react',
+    'sort-imports-es6-autofix',
+  ],
   ignorePatterns: ['generated'],
   rules: {
     camelcase: 'off',
@@ -48,6 +53,19 @@ module.exports = {
     '@typescript-eslint/no-unsafe-member-access': 'off',
     // incompatible with the simple-icon imports
     '@typescript-eslint/no-var-requires': 'off',
-    'prettier/prettier': ['error', { singleQuote: true, trailingComma: 'all' }],
+    'prettier/prettier': [
+      'error',
+      { singleQuote: true, trailingComma: 'all', semi: false },
+    ],
+    'sort-imports-es6-autofix/sort-imports-es6': [
+      2,
+      {
+        ignoreCase: false,
+        ignoreMemberSort: false,
+        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
+      },
+    ],
+    // does not work with sort imports
+    'import/order': 'off',
   },
-};
+}

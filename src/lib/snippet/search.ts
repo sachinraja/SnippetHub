@@ -1,9 +1,12 @@
 import prisma from '@lib/prisma'
 
-export default function getTopSnippets(take: number) {
+export default function searchForSnippet(
+  title: string,
+  orderBy?: 'desc' | 'asc',
+) {
   return prisma.snippet.findMany({
-    take,
-    orderBy: { upvotes: 'desc' },
+    where: { title: { contains: title, mode: 'insensitive' } },
+    orderBy: { upvotes: orderBy },
     select: {
       id: true,
       title: true,

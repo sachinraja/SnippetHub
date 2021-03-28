@@ -1,15 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import Head from 'next/head';
-import React from 'react';
-import 'public/main.css';
-import Nav from '@components/Nav/Nav';
-import type { AppProps } from 'next/app';
+import 'public/main.css'
+import Head from 'next/head'
+import Nav from '@components/Nav/Nav'
+import React from 'react'
+import type { AppProps } from 'next/app'
 
 export function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>SnippetHub</title>
+        <title>{pageProps.title || 'SnippetHub'}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="icon" href="/logo.svg" />
       </Head>
@@ -17,7 +17,7 @@ export function App({ Component, pageProps }: AppProps) {
       <Nav />
       <Component {...pageProps} />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

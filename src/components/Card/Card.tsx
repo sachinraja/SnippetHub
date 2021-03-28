@@ -1,17 +1,17 @@
-import languages from '@lib/language/language';
-import type { enum_Snippet_language } from '@prisma/client';
-import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-import type React from 'react';
+import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+import languages from '@lib/language/language'
+import type { enum_Snippet_language } from '@prisma/client'
+import type React from 'react'
 
 export interface CardProps {
-  title: string;
-  subtitle: string;
-  count: string | number;
-  bodyUrl?: string;
-  description: string;
-  language: enum_Snippet_language;
-  imageUrl: string;
+  title: string
+  subtitle: string
+  count: string | number
+  bodyUrl?: string
+  description: string
+  language: enum_Snippet_language
+  imageUrl: string
 }
 
 const Card = ({
@@ -23,34 +23,34 @@ const Card = ({
   language,
   imageUrl,
 }: CardProps) => {
-  const header = useRef<HTMLDivElement>(null);
-  const attributes = useRef<HTMLDivElement>(null);
-  const [attributesFloatedRight, setAttributesFloatedRight] = useState(true);
+  const header = useRef<HTMLDivElement>(null)
+  const attributes = useRef<HTMLDivElement>(null)
+  const [attributesFloatedRight, setAttributesFloatedRight] = useState(true)
 
-  const languageAttributes = languages[language];
+  const languageAttributes = languages[language]
 
   // detect flex wrap and style accordingly
   function checkFloat() {
-    const attributesElement = attributes.current;
-    const headerElement = header.current;
+    const attributesElement = attributes.current
+    const headerElement = header.current
 
     if (
       attributesElement &&
       headerElement &&
       attributesElement.offsetTop > headerElement.offsetTop
     ) {
-      setAttributesFloatedRight(false);
+      setAttributesFloatedRight(false)
     } else {
-      setAttributesFloatedRight(true);
+      setAttributesFloatedRight(true)
     }
   }
 
   // continue running on client on resize
   useEffect(() => {
-    checkFloat();
-    window.addEventListener('resize', checkFloat);
-    return () => window.removeEventListener('resize', checkFloat);
-  }, []);
+    checkFloat()
+    window.addEventListener('resize', checkFloat)
+    return () => window.removeEventListener('resize', checkFloat)
+  }, [])
 
   const cardElement = (
     <div className="bg-opacity-80 border-carbon-500 border-1 rounded p-2 transform motion-safe:hover:-translate-y-0.5 hover:border-carbon-50 transition-colors duration-500">
@@ -133,7 +133,7 @@ const Card = ({
 
       <p className="mt-3">{description}</p>
     </div>
-  );
+  )
   return (
     <article>
       {bodyUrl ? (
@@ -144,7 +144,7 @@ const Card = ({
         cardElement
       )}
     </article>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

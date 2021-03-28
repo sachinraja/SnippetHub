@@ -3,7 +3,7 @@ module.exports = {
     content: [
       './src/components/**/*.{js,ts,jsx,tsx}',
       './src/pages/**/*.{js,ts,jsx,tsx}',
-      './safelist.txt'
+      './safelist.txt',
     ],
     options: {
       // prevent purging of dynamic class names
@@ -37,4 +37,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+}

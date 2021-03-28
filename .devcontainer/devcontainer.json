@@ -4,11 +4,12 @@
 	"service": "devcontainer",
 	"workspaceFolder": "/workspace",
 	"settings": {
-		"terminal.integrated.shell.linux": null
+		"terminal.integrated.shell.linux": "/bin/bash"
 	},
-	"extensions": [],
+	"extensions": ["dbaeumer.vscode-eslint"],
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
-	"postCreateCommand": "npm ci && npx prisma generate && npx prisma migrate dev --preview-feature && npx prisma db seed --preview-feature",
+	"postCreateCommand": "npx prisma generate && npx prisma migrate dev && npx prisma db seed --preview-feature",
+	"remoteUser": "node"
 }

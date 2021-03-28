@@ -1,21 +1,21 @@
-import { enum_Snippet_language } from '@prisma/client';
-import type { SimpleIcon } from 'simple-icons';
+import { enum_Snippet_language } from '@prisma/client'
+import type { SimpleIcon } from 'simple-icons'
 
-const pythonIcon: SimpleIcon = require('simple-icons/icons/python');
-const javascriptIcon: SimpleIcon = require('simple-icons/icons/javascript');
-const typescriptIcon: SimpleIcon = require('simple-icons/icons/typescript');
-const csharpIcon: SimpleIcon = require('simple-icons/icons/csharp');
-const elixirIcon: SimpleIcon = require('simple-icons/icons/elixir');
-const svgIcon: SimpleIcon = require('simple-icons/icons/svg');
+const pythonIcon: SimpleIcon = require('simple-icons/icons/python')
+const javascriptIcon: SimpleIcon = require('simple-icons/icons/javascript')
+const typescriptIcon: SimpleIcon = require('simple-icons/icons/typescript')
+const csharpIcon: SimpleIcon = require('simple-icons/icons/csharp')
+const elixirIcon: SimpleIcon = require('simple-icons/icons/elixir')
+const svgIcon: SimpleIcon = require('simple-icons/icons/svg')
 
 class Language {
-  name: string;
+  name: string
 
-  color: string;
+  color: string
 
-  icon: SimpleIcon;
+  icon: SimpleIcon
 
-  iconColor: string;
+  iconColor: string
 
   constructor(
     name: string,
@@ -23,10 +23,10 @@ class Language {
     icon: SimpleIcon,
     iconColor: string,
   ) {
-    this.name = name;
-    this.color = color;
-    this.icon = icon;
-    this.iconColor = iconColor;
+    this.name = name
+    this.color = color
+    this.icon = icon
+    this.iconColor = iconColor
   }
 }
 
@@ -68,6 +68,6 @@ const languages: Record<enum_Snippet_language, Language> = {
     svgIcon,
     '#4B5563',
   ),
-};
+}
 
-export default languages;
+export default languages

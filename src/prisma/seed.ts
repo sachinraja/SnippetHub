@@ -1,12 +1,12 @@
 import {
+  PrismaClient,
   enum_Snippet_language,
   enum_User_type,
-  PrismaClient,
-} from '@prisma/client';
+} from '@prisma/client'
 // must be relative import for ts-node resolution
-import config from '../config';
+import config from '../config'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 async function main() {
   await prisma.user.upsert({
@@ -56,7 +56,7 @@ async function main() {
           },
           {
             id: 5,
-            title: 'Python Pack',
+            title: 'python-pack',
             upvotes: 62461224,
             description:
               'Code 5x faster than before with these blocks that greatly enhance your python experience.',
@@ -73,7 +73,7 @@ async function main() {
           },
           {
             id: 7,
-            title: 'Unity Blocks',
+            title: 'Unity-Blocks',
             upvotes: 4211223,
             description:
               'Supercharge your Unity experience with a multitude of easy-to-insert statements.',
@@ -92,18 +92,18 @@ async function main() {
         ],
       },
     },
-  });
+  })
 }
 
 main()
   .catch((e) => {
     /* eslint-disable no-console */
-    console.error(e);
-    process.exit(1);
+    console.error(e)
+    process.exit(1)
   })
   .finally(() => {
     prisma.$disconnect().catch((e) => {
-      console.error(e);
-      process.exit(1);
-    });
-  });
+      console.error(e)
+      process.exit(1)
+    })
+  })

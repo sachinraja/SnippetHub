@@ -1,7 +1,7 @@
 version: '3'
 services:
   devcontainer:
-    image: node:15.11-alpine
+    image: node:15.12
     ports:
       - 3000:3000
     volumes:
@@ -27,6 +27,6 @@ services:
       interval: 3s
       timeout: 5s
       retries: 5
-    
+
 volumes:
   data:

@@ -1,23 +1,23 @@
-import config from 'src/config';
-import type { InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
-import type { SimpleIcon } from 'simple-icons';
+import Link from 'next/link'
+import config from 'src/config'
+import type { InferGetStaticPropsType } from 'next'
+import type { SimpleIcon } from 'simple-icons'
 
-const githubIcon: SimpleIcon = require('simple-icons/icons/github');
+const githubIcon: SimpleIcon = require('simple-icons/icons/github')
 
 export const getStaticProps = () => {
   const searchParams = new URLSearchParams({
     client_id: config.get('github').clientId,
-  });
+  })
 
-  const githubAuthUrl = `https://github.com/login/oauth/authorize?${searchParams.toString()}`;
+  const githubAuthUrl = `https://github.com/login/oauth/authorize?${searchParams.toString()}`
 
   return {
     props: {
       githubAuthUrl,
     },
-  };
-};
+  }
+}
 
 const Login = ({
   githubAuthUrl,
@@ -44,6 +44,6 @@ const Login = ({
       </div>
     </div>
   </main>
-);
+)
 
-export default Login;
+export default Login

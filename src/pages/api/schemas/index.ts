@@ -1,6 +1,6 @@
-import { makeSchema } from 'nexus';
-import path from 'path';
-import * as QueryTypes from './Query';
+import * as QueryTypes from './Query'
+import { makeSchema } from 'nexus'
+import path from 'path'
 
 const schema = makeSchema({
   types: [QueryTypes],
@@ -12,6 +12,6 @@ const schema = makeSchema({
     module: path.join(process.cwd(), __dirname, 'Context.ts'),
     export: 'Context',
   },
-});
+})
 
-export default schema;
+export default schema

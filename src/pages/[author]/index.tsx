@@ -1,35 +1,35 @@
-import { CardProps } from '@components/Card/Card';
-import CardContainer from '@components/CardContainer/CardContainer';
-import Header from '@components/Header/Header';
-import Heading from '@components/Heading/Heading';
-import Paragraph from '@components/Paragraph/Paragraph';
-import getCardFromSnippet from '@lib/snippet/card';
-import { getUser, getUserSnippets } from '@lib/user';
-import type { GetStaticPaths } from 'next';
-import { ReactElement } from 'react';
+import { CardProps } from '@components/Card/Card'
+import { ReactElement } from 'react'
+import { getUser, getUserSnippets } from '@lib/user'
+import CardContainer from '@components/CardContainer/CardContainer'
+import Header from '@components/Header/Header'
+import Heading from '@components/Heading/Heading'
+import Paragraph from '@components/Paragraph/Paragraph'
+import getCardFromSnippet from '@lib/snippet/card'
+import type { GetStaticPaths } from 'next'
 
 export const getStaticProps = async ({
   params,
 }: {
-  params: { author: string };
+  params: { author: string }
 }) => {
   // return 404 if the route is not prefixed with @ (signifying a user)
   if (!params.author.startsWith('@')) {
-    return { notFound: true };
+    return { notFound: true }
   }
 
-  const username = params.author.slice(1);
+  const username = params.author.slice(1)
 
-  const user = await getUser(username);
+  const user = await getUser(username)
 
   if (!user) {
-    return { notFound: true };
+    return { notFound: true }
   }
 
   const snippets = await getUserSnippets(user.id, {
     take: 20,
     orderBy: 'desc',
-  });
+  })
 
   return {
     props: {
@@ -37,8 +37,8 @@ export const getStaticProps = async ({
       snippets,
     },
     revalidate: 30,
-  };
-};
+  }
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -46,21 +46,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
     // nextjs passes empty props if fallback is true and page is on first render
     // blocking works like SSR, but caches the page
     fallback: 'blocking',
-  };
-};
+  }
+}
 
 const AuthorPage = ({
   author,
   snippets,
 }: {
-  author: Exclude<ThenArg<ReturnType<typeof getUser>>, null>;
-  snippets: ThenArg<ReturnType<typeof getUserSnippets>>;
+  author: Exclude<ThenArg<ReturnType<typeof getUser>>, null>
+  snippets: ThenArg<ReturnType<typeof getUserSnippets>>
 }) => {
   // must copy to keep state of arguments
-  const snippetsCopy = [...snippets];
+  const snippetsCopy = [...snippets]
   const cards = snippetsCopy.map(
     (snippet): ReactElement<CardProps> => getCardFromSnippet(snippet, author),
-  );
+  )
 
   return (
     <>
@@ -92,7 +92,7 @@ const AuthorPage = ({
         <CardContainer>{cards}</CardContainer>
       </main>
     </>
-  );
-};
+  )
+}
 
-export default AuthorPage;
+export default AuthorPage

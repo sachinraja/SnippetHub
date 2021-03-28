@@ -1,7 +1,7 @@
-import convict from 'convict';
-import dotenv from 'dotenv';
+import convict from 'convict'
+import dotenv from 'dotenv'
 
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env.local' })
 
 const config = convict({
   env: {
@@ -82,8 +82,8 @@ const config = convict({
       env: 'REFRESH_TOKEN_SECRET',
     },
   },
-});
+})
 
-config.validate({ allowed: 'strict' });
+config.validate({ allowed: 'strict' })
 
-export default config;
+export default config

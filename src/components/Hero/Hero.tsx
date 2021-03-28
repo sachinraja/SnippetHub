@@ -1,9 +1,14 @@
-import Header from '@components/Header/Header';
-import Heading from '@components/Heading/Heading';
-import SearchInput from '@components/Input/SearchInput';
-import Image from 'next/image';
+import { useRef } from 'react'
+import { useRouter } from 'next/dist/client/router'
+import Header from '@components/Header/Header'
+import Heading from '@components/Heading/Heading'
+import Image from 'next/image'
+import SearchInput from '@components/Input/SearchInput'
 
 const Hero = () => {
+  const router = useRouter()
+  const textInput = useRef<HTMLInputElement>(null)
+
   return (
     <Header>
       <section className="md:w-1/2">
@@ -21,7 +26,18 @@ const Hero = () => {
           A home for snippets across various languages.
         </Heading>
 
-        <SearchInput placeholder="Search for a snippet..." />
+        <SearchInput
+          placeholder="Search for a snippet..."
+          ref={textInput}
+          onSubmit={(e) => {
+            e.preventDefault()
+
+            const searchValue = textInput.current?.value.trim()
+            if (!searchValue) return
+
+            router.push(`/search?q=${searchValue}`)
+          }}
+        />
       </section>
 
       <section className="md:w-1/2">
@@ -30,12 +46,12 @@ const Hero = () => {
             layout="fill"
             objectFit="contain"
             src="/logo.svg"
-            alt="SnippetsPlace Logo"
+            alt="SnippetHub Logo"
           />
         </div>
       </section>
     </Header>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
