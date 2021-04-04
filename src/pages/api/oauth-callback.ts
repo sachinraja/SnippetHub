@@ -58,14 +58,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   // find user or insert
   const user: User = await prisma.user.upsert({
-    where: {
-      gitHubId: userData.databaseId,
-    },
     create: {
       gitHubId: userData.databaseId,
       username: userData.login,
     },
     update: {},
+    where: {
+      gitHubId: userData.databaseId,
+    },
   })
 
   const tokens = createTokens(user)

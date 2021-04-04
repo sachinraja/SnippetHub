@@ -1,4 +1,4 @@
-import { enum_Snippet_language } from '@prisma/client'
+import { enum_Pack_language } from '@prisma/client'
 import type { SimpleIcon } from 'simple-icons'
 
 const pythonIcon: SimpleIcon = require('simple-icons/icons/python')
@@ -31,43 +31,38 @@ class Language {
 }
 
 // iconColor is the tailwind color for 600
-const languages: Record<enum_Snippet_language, Language> = {
-  [enum_Snippet_language.python]: new Language(
+const languages: Record<enum_Pack_language, Language> = {
+  [enum_Pack_language.python]: new Language(
     'python',
     'green',
     pythonIcon,
     '#059669',
   ),
-  [enum_Snippet_language.javascript]: new Language(
+  [enum_Pack_language.javascript]: new Language(
     'javascript',
     'yellow',
     javascriptIcon,
     '#D97706',
   ),
-  [enum_Snippet_language.typescript]: new Language(
+  [enum_Pack_language.typescript]: new Language(
     'typescript',
     'blue',
     typescriptIcon,
     '#2563EB',
   ),
-  [enum_Snippet_language.csharp]: new Language(
+  [enum_Pack_language.csharp]: new Language(
     'C#',
     'purple',
     csharpIcon,
     '#7C3AED',
   ),
-  [enum_Snippet_language.elixir]: new Language(
+  [enum_Pack_language.elixir]: new Language(
     'elixir',
     'indigo',
     elixirIcon,
     '#4F46E5',
   ),
-  [enum_Snippet_language.other]: new Language(
-    'other',
-    'gray',
-    svgIcon,
-    '#4B5563',
-  ),
+  [enum_Pack_language.other]: new Language('other', 'gray', svgIcon, '#4B5563'),
 }
 
 export default languages

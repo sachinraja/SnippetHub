@@ -15,19 +15,13 @@ header {
 }
 
 body {
-  @apply bg-carbon-900;
-  @apply text-white;
+  @apply bg-carbon-900 text-white;
 }
 
-.underlined-link {
-  @apply inline-block;
-  @apply transition-colors;
-  @apply ease-in-out;
-  @apply duration-300;
-  @apply border-b;
-  @apply border-transparent;
-  @apply hover:border-white;
+button-active {
+  @apply bg-carbon-900;
 }
+
 ::-webkit-input-placeholder {
   font-style: italic;
 }
@@ -39,4 +33,20 @@ body {
 }
 :-ms-input-placeholder {  
   font-style: italic; 
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-carbon-700;
+}
+ 
+::-webkit-scrollbar-thumb {
+  @apply bg-carbon-600;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-carbon-500;
 }

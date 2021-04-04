@@ -4,82 +4,82 @@ import dotenv from 'dotenv'
 dotenv.config({ path: '.env.local' })
 
 const config = convict({
-  env: {
-    doc: 'The application environment.',
-    format: ['development', 'test', 'production'],
-    default: 'development',
-    env: 'NODE_ENV',
-  },
   db: {
-    name: {
-      doc: 'The database name.',
-      format: String,
-      default: 'snippethub',
-      env: 'POSTGRES_DB',
-    },
     host: {
-      doc: 'The host to make the connection to.',
-      format: String,
       default: 'localhost',
+      doc: 'The host to make the connection to.',
       env: 'HOST',
-    },
-    port: {
-      doc: 'The database port.',
-      format: 'port',
-      default: 5432,
-      env: 'DB_PORT',
-    },
-    user: {
-      doc: 'The name of the user.',
       format: String,
-      default: 'postgres',
-      env: 'POSTGRES_USER',
+    },
+    name: {
+      default: 'snippethub',
+      doc: 'The database name.',
+      env: 'POSTGRES_DB',
+      format: String,
     },
     password: {
-      doc: 'The password for the user.',
-      format: '*',
       default: null,
+      doc: 'The password for the user.',
       env: 'POSTGRES_PASSWORD',
+      format: '*',
+    },
+    port: {
+      default: 5432,
+      doc: 'The database port.',
+      env: 'DB_PORT',
+      format: 'port',
     },
     url: {
-      doc: 'The url.',
-      format: String,
       default: '',
+      doc: 'The url.',
       env: 'DATABASE_URL',
+      format: String,
     },
+    user: {
+      default: 'postgres',
+      doc: 'The name of the user.',
+      env: 'POSTGRES_USER',
+      format: String,
+    },
+  },
+  env: {
+    default: 'development',
+    doc: 'The application environment.',
+    env: 'NODE_ENV',
+    format: ['development', 'test', 'production'],
   },
   github: {
     clientId: {
-      doc: 'The OAuth client id.',
-      format: String,
       default: '',
+      doc: 'The OAuth client id.',
       env: 'GITHUB_CLIENT_ID',
+      format: String,
     },
     clientSecret: {
-      doc: 'The OAuth client secret.',
-      format: String,
       default: '',
+      doc: 'The OAuth client secret.',
       env: 'GITHUB_CLIENT_SECRET',
+      format: String,
     },
     personalGitHubId: {
-      doc: 'Your GitHub id.',
-      format: Number,
       default: 0,
+      doc: 'Your GitHub id.',
       env: 'GITHUB_PERSONAL_ID',
+      format: Number,
     },
   },
   jwt: {
     accessTokenSecret: {
-      doc: 'The secret used to sign the access token.',
-      format: String,
       default: '',
+      doc: 'The secret used to sign the access token.',
       env: 'ACCESS_TOKEN_SECRET',
+      format: String,
     },
     refreshTokenSecret: {
-      doc: 'The secret used to sign the refresh token.',
-      format: String,
       default: '',
+      doc: 'The secret used to sign the refresh token.',
       env: 'REFRESH_TOKEN_SECRET',
+      format: String,
     },
   },
 })

@@ -1,20 +1,20 @@
 import type { ReactNode } from 'react'
 
 interface HeadingProps {
+  bold?: boolean
+  center?: boolean
   children: ReactNode
   className?: string
   priority: 1 | 2 | 3 | 4 | 5 | 6
   size: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-  bold: boolean
-  center: boolean
 }
 const Heading = ({
+  bold,
+  center,
   children,
   className,
   priority,
   size,
-  bold,
-  center,
 }: HeadingProps) => {
   const HTag = `h${priority}` as keyof JSX.IntrinsicElements
   const textSizeClass = size === 1 ? 'text-xl' : `text-${size}xl`
@@ -30,6 +30,8 @@ const Heading = ({
 }
 
 Heading.defaultProps = {
+  bold: false,
+  center: false,
   className: '',
 }
 

@@ -1,7 +1,11 @@
 module.exports = {
+  darkMode: false,
+  /* eslint-disable-next-line global-require */
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
   purge: {
     content: [
       './src/components/**/*.{js,ts,jsx,tsx}',
+      './src/layouts/**/*.{js,ts,jsx,tsx}',
       './src/pages/**/*.{js,ts,jsx,tsx}',
       './safelist.txt',
     ],
@@ -10,20 +14,19 @@ module.exports = {
       safelist: [/^text-.+?-(4|6)0{2}/, /^text-\d?xl/, /^border-.+?-50{2}/],
     },
   },
-
-  darkMode: false, // or 'media' or 'class'
+  // or 'media' or 'class'
   theme: {
     extend: {
-      fontFamily: {
-        inter: ['Inter', 'Montserrat', 'Helvetica', 'Arial', 'sans-serif'],
+      borderWidth: {
+        1: '1px',
       },
       colors: {
         carbon: {
-          50: '#f3f3f3',
           100: '#dcdcdc',
           200: '#bebebe',
           300: '#a4a4a4',
           400: '#8c8c8c',
+          50: '#f3f3f3',
           500: '#6f6f6f',
           600: '#565656',
           700: '#3d3d3d',
@@ -31,10 +34,67 @@ module.exports = {
           900: '#171717',
         },
       },
-      borderWidth: {
-        1: '1px',
+      fontFamily: {
+        inter: ['Inter', 'Montserrat', 'Helvetica', 'Arial', 'sans-serif'],
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.carbon.300'),
+            p: {
+              color: theme('colors.carbon.300'),
+            },
+            h1: {
+              color: theme('colors.carbon.400'),
+            },
+            h2: {
+              color: theme('colors.carbon.400'),
+            },
+            h3: {
+              color: theme('colors.carbon.400'),
+            },
+            h4: {
+              color: theme('colors.carbon.400'),
+            },
+            h5: {
+              color: theme('colors.carbon.400'),
+            },
+            h6: {
+              color: theme('colors.carbon.400'),
+            },
+            strong: {
+              color: theme('colors.carbon.300'),
+            },
+            a: {
+              color: theme('colors.carbon.600'),
+            },
+            table: {
+              textAlign: 'center',
+              th: {
+                color: theme('colors.carbon.400'),
+                borderLeft: '1px solid #FFF',
+                borderRight: '1px solid #FFF',
+              },
+              'th:first-child': {
+                borderLeft: 'none',
+              },
+              'th:last-child': {
+                borderRight: 'none',
+              },
+              td: {
+                borderLeft: '1px solid #FFF',
+                borderRight: '1px solid #FFF',
+              },
+              'td:first-child': {
+                borderLeft: 'none',
+              },
+              'td:last-child': {
+                borderRight: 'none',
+              },
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
 }

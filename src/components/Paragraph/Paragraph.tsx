@@ -1,10 +1,11 @@
 interface ParagraphProps {
+  center?: boolean
   children: React.ReactNode
   className?: string
   size: 1 | 2 | 3 | 4
 }
 
-const Paragraph = ({ children, className, size }: ParagraphProps) => {
+const Paragraph = ({ center, children, className, size }: ParagraphProps) => {
   let textSizeClass: string
 
   switch (size) {
@@ -25,10 +26,19 @@ const Paragraph = ({ children, className, size }: ParagraphProps) => {
       break
   }
 
-  return <p className={`${className} text-${textSizeClass}`}>{children}</p>
+  return (
+    <p
+      className={`${className} text-${textSizeClass}${
+        center ? ' text-center' : ''
+      }`}
+    >
+      {children}
+    </p>
+  )
 }
 
 Paragraph.defaultProps = {
+  center: false,
   className: '',
 }
 

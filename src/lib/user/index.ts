@@ -2,41 +2,42 @@ import prisma from '@lib/prisma'
 
 export function getUser(username: string) {
   return prisma.user.findUnique({
-    where: { username },
     select: {
-      id: true,
       gitHubId: true,
+      id: true,
       username: true,
     },
+    where: { username },
   })
 }
 
-export function getUserSnippetsAllData(authorId: number) {
-  return prisma.snippet.findMany({
+export function getUserPacksAllData(authorId: number) {
+  return prisma.pack.findMany({
     where: { authorId },
   })
 }
 
-interface GetUserSnippetsOptions {
+interface GetUserPacksOptions {
+  orderBy?: 'asc' | 'desc'
   skip?: number
   take?: number
-  orderBy?: 'asc' | 'desc'
 }
-export async function getUserSnippets(
+
+export async function getUserPacks(
   authorId: number,
-  options?: GetUserSnippetsOptions,
+  options?: GetUserPacksOptions,
 ) {
-  return prisma.snippet.findMany({
+  return prisma.pack.findMany({
+    orderBy: { upvotes: options?.orderBy },
+    select: {
+      description: true,
+      id: true,
+      language: true,
+      name: true,
+      upvotes: true,
+    },
     skip: options?.skip,
     take: options?.take,
     where: { authorId },
-    orderBy: { upvotes: options?.orderBy },
-    select: {
-      id: true,
-      title: true,
-      upvotes: true,
-      description: true,
-      language: true,
-    },
   })
 }

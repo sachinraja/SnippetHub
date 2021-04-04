@@ -1,13 +1,13 @@
+import Container from '@components/Container/Container'
+
 export const getServerSideProps = async () => {
   return {
-    props: {
-      title: 'Flask | SnippetHub',
-    },
+    props: {},
   }
 }
 
 const SnippetPage = () => {
-  return <main />
+  return <Container>hi</Container>
 }
 
 export default SnippetPage

@@ -6,7 +6,7 @@
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
-	"extensions": ["dbaeumer.vscode-eslint"],
+	"extensions": ["dbaeumer.vscode-eslint", "prisma.prisma", "bradlc.vscode-tailwindcss"],
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],

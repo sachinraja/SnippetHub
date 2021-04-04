@@ -11,5 +11,5 @@ export default function createTokens(user: User) {
     expiresIn: '15min',
   })
 
-  return { refreshToken, accessToken }
+  return { accessToken, refreshToken }
 }

@@ -4,17 +4,13 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  settings: {
-    'import/resolver': {
-      typescript: {},
-    },
-  },
   extends: [
     'airbnb',
     'plugin:prettier/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
   ],
+  ignorePatterns: ['generated'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -29,11 +25,24 @@ module.exports = {
     'react',
     'sort-imports-es6-autofix',
   ],
-  ignorePatterns: ['generated'],
   rules: {
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+
+    // does not matter as prettier already checks for semis
+    // interferes with prettier's rule to place semi before lists
+    '@typescript-eslint/no-extra-semi': 'off',
+
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+
+    '@typescript-eslint/no-use-before-define': 'error',
+
+    // incompatible with the simple-icon imports
+    '@typescript-eslint/no-var-requires': 'off',
+
     camelcase: 'off',
-    // suppress errors for missing 'import React' in files - Next.js automatically imports it
-    'react/react-in-jsx-scope': 'off',
+
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -42,21 +51,27 @@ module.exports = {
         tsx: 'never',
       },
     ],
-    'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+
+    // does not work with sort imports
+    'import/order': 'off',
+    'import/prefer-default-export': 'off',
+
     // This rule is not compatible with Next.js's <Link /> components
     'jsx-a11y/anchor-is-valid': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
+
     // does not always work correctly, only enable the ts version
     'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': 'error',
-    '@typescript-eslint/no-unsafe-assignment': 'off',
-    '@typescript-eslint/no-unsafe-member-access': 'off',
-    // incompatible with the simple-icon imports
-    '@typescript-eslint/no-var-requires': 'off',
+
     'prettier/prettier': [
       'error',
-      { singleQuote: true, trailingComma: 'all', semi: false },
+      { semi: false, singleQuote: true, trailingComma: 'all' },
     ],
+
+    'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+
+    // suppress errors for missing 'import React' in files - Next.js automatically imports it
+    'react/react-in-jsx-scope': 'off',
+
     'sort-imports-es6-autofix/sort-imports-es6': [
       2,
       {
@@ -65,7 +80,10 @@ module.exports = {
         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
       },
     ],
-    // does not work with sort imports
-    'import/order': 'off',
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
   },
 }

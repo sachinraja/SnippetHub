@@ -1,6 +1,6 @@
 generator client {
   provider      = "prisma-client-js"
-  binaryTargets = ["native", "linux-musl"]
+  binaryTargets = ["native"]
 }
 
 datasource db {
@@ -9,29 +9,46 @@ datasource db {
 }
 
 model Snippet {
-  id          Int                   @id @default(autoincrement())
-  authorId    Int
-  title       String
+  id        Int      @id @default(autoincrement())
+  name      String
+  code      String
+  packId    Int      @map("pack_id")
+  pack      Pack     @relation(fields: [packId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("snippet")
+}
+
+model Pack {
+  id          Int                @id @default(autoincrement())
+  name        String
   description String
-  language    enum_Snippet_language @default(other)
-  upvotes     Int                   @default(0)
-  code        String
-  author      User                  @relation(fields: [authorId], references: [id])
-  createdAt   DateTime              @default(now()) @db.Timestamptz
-  updatedAt   DateTime              @updatedAt @db.Timestamptz
+  language    enum_Pack_language @default(other)
+  upvotes     Int                @default(0)
+  snippets    Snippet[]
+  authorId    Int                @map("author_id")
+  author      User               @relation(fields: [authorId], references: [id])
+  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime           @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("pack")
 }
 
 model User {
   id        Int            @id @default(autoincrement())
-  gitHubId  Int            @unique
+  gitHubId  Int            @unique @map("github_id")
   username  String         @unique @db.VarChar(39)
+  bio       String?        @db.Text
   type      enum_User_type @default(user)
-  snippets  Snippet[]
-  createdAt DateTime       @default(now()) @db.Timestamptz
-  updatedAt DateTime       @updatedAt @db.Timestamptz
+  packs     Pack[]
+  createdAt DateTime       @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime       @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("user")
 }
 
-enum enum_Snippet_language {
+enum enum_Pack_language {
   python
   javascript
   typescript
