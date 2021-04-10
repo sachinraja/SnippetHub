@@ -1,11 +1,9 @@
 import { InferGetServerSidePropsType } from 'next'
-import { ParsedUrlQuery } from 'querystring'
+import { searchForPack } from '@lib/pack/search'
 import Container from '@components/Container/Container'
 import SearchPageLayout from '@layouts/SearchPageLayout'
 import getCardFromPack from '@lib/pack/card'
-import searchForPack from '@lib/pack/search'
-import type { CardProps } from '@components/Card/Card'
-import type { ReactElement } from 'react'
+import type { ParsedUrlQuery } from 'querystring'
 
 export const getServerSideProps = async ({
   query,
@@ -21,7 +19,7 @@ export const getServerSideProps = async ({
 
   return {
     props: {
-      foundPacks: await searchForPack(searchKeyword, 'desc'),
+      foundPacks: await searchForPack(searchKeyword, { take: 20 }),
       searchKeyword,
     },
   }
@@ -31,10 +29,8 @@ const SearchPage = ({
   foundPacks,
   searchKeyword,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  // create components for found snippets
-  const cards = foundPacks.map(
-    (pack): ReactElement<CardProps> => getCardFromPack(pack, pack.author),
-  )
+  // create components for found packs
+  const cards = foundPacks.map((pack) => getCardFromPack(pack, pack.author))
 
   return (
     <Container meta={{ title: `${searchKeyword} | SnippetHub Search` }}>

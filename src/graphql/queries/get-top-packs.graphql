@@ -1,0 +1,13 @@
+query GetTopPacks($skip: Int, $take: Int) {
+  getTopPacks(skip: $skip, take: $take) {
+    author {
+      gitHubId
+      username
+    }
+    id
+    name
+    description
+    language
+    upvotes
+  }
+}

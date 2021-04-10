@@ -1,17 +1,13 @@
 /* eslint-disable no-console */
-import {
-  PrismaClient,
-  enum_Pack_language,
-  enum_User_type,
-} from '@prisma/client'
+import { Language, PrismaClient, UserType } from '@prisma/client'
 import axios from 'axios'
 // must be relative import for ts-node resolution
-import config from '../config'
+import envConfig from '../config'
 
 const prisma = new PrismaClient()
 
 async function main() {
-  const { personalGitHubId } = config.get('github')
+  const { personalGitHubId } = envConfig.get('github')
 
   // fetch username from github
   const githubUsername: string = (
@@ -28,7 +24,7 @@ async function main() {
           {
             description:
               'A collection of snippets for the React JavaScript Framework.',
-            language: enum_Pack_language.javascript,
+            language: Language.javascript,
             name: 'React',
             snippets: {
               create: [
@@ -43,7 +39,7 @@ async function main() {
           {
             description:
               'Streamline your Vue.js code with these snippets to boost productivity.',
-            language: enum_Pack_language.javascript,
+            language: Language.javascript,
             name: 'Vue.js',
             snippets: {
               create: [
@@ -58,7 +54,7 @@ async function main() {
           {
             description:
               'The emerging leader in concurrency brings you these amazing snippets.',
-            language: enum_Pack_language.elixir,
+            language: Language.elixir,
             name: 'Elixir',
             snippets: {
               create: [
@@ -73,7 +69,7 @@ async function main() {
           {
             description:
               'Build rich, interactive web applications quickly, with less code and fewer moving parts. Join our growing community of developers using Phoenix to craft APIs, HTML5 apps and more, for fun or at scale.',
-            language: enum_Pack_language.elixir,
+            language: Language.elixir,
             name: 'Phoenix',
             snippets: {
               create: [
@@ -88,7 +84,7 @@ async function main() {
           {
             description:
               'Code 5x faster than before with these blocks that greatly enhance your python experience.',
-            language: enum_Pack_language.python,
+            language: Language.python,
             name: 'python-pack',
             snippets: {
               create: [
@@ -102,7 +98,7 @@ async function main() {
           },
           {
             description: 'Essential snippets for the Node.js runtime.',
-            language: enum_Pack_language.javascript,
+            language: Language.javascript,
             name: 'Node.js',
             snippets: {
               create: [
@@ -117,7 +113,7 @@ async function main() {
           {
             description:
               'Supercharge your Unity experience with a multitude of easy-to-insert statements.',
-            language: enum_Pack_language.csharp,
+            language: Language.csharp,
             name: 'Unity-Blocks',
             snippets: {
               create: [
@@ -132,7 +128,7 @@ async function main() {
           {
             description:
               'Flask is a lightweight package for python web development.',
-            language: enum_Pack_language.python,
+            language: Language.python,
             name: 'Flask',
             snippets: {
               create: {
@@ -144,7 +140,7 @@ async function main() {
           },
         ],
       },
-      type: enum_User_type.admin,
+      type: UserType.admin,
       username: githubUsername,
     },
     update: {},

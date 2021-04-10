@@ -1,0 +1,15 @@
+mutation CreatePack(
+  $packName: String!
+  $packDescription: String!
+  $packLanguage: Language!
+  $snippets: [SnippetInput!]!
+) {
+  createPack(
+    name: $packName
+    description: $packDescription
+    language: $packLanguage
+    snippets: $snippets
+  ) {
+    name
+  }
+}

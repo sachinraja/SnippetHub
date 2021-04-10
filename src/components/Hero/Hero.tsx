@@ -34,7 +34,7 @@ const Hero = ({ searchInputValue }: HeroProps) => {
 
             router.push({ pathname: '/search', query: { q: searchValue } })
           }}
-          placeholder="Search for a snippet..."
+          placeholder="Search for a pack..."
         />
       </section>
 

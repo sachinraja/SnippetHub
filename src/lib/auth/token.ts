@@ -1,13 +1,13 @@
 import { User } from '@prisma/client'
 import { sign } from 'jsonwebtoken'
-import config from 'src/config'
+import envConfig from 'src/config'
 
 export default function createTokens(user: User) {
-  const refreshToken = sign(user, config.get('jwt').refreshTokenSecret, {
+  const refreshToken = sign(user, envConfig.get('jwt').refreshTokenSecret, {
     expiresIn: '14d',
   })
 
-  const accessToken = sign(user, config.get('jwt').accessTokenSecret, {
+  const accessToken = sign(user, envConfig.get('jwt').accessTokenSecret, {
     expiresIn: '15min',
   })
 

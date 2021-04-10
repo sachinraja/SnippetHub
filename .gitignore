@@ -136,5 +136,9 @@ dist
 # TernJS port file
 .tern-port
 
-# development and test databases
-data/
+# generated types
+__generated__
+
+# graphql-let
+*.graphqls.d.ts
+*.graphql.d.ts

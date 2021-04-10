@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config({ path: '.env.local' })
 
-const config = convict({
+const envConfig = convict({
   db: {
     host: {
       default: 'localhost',
@@ -82,8 +82,14 @@ const config = convict({
       format: String,
     },
   },
+  serverUrl: {
+    default: 'http://localhost:3000',
+    doc: 'The server url.',
+    env: 'NEXT_PUBLIC_SERVER_URL',
+    format: String,
+  },
 })
 
-config.validate({ allowed: 'strict' })
+envConfig.validate({ allowed: 'strict' })
 
-export default config
+export default envConfig

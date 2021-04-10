@@ -10,7 +10,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
   ],
-  ignorePatterns: ['generated'],
+  ignorePatterns: ['__generated__', '**/*.graphql.d.ts'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -73,7 +73,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
 
     'sort-imports-es6-autofix/sort-imports-es6': [
-      2,
+      'error',
       {
         ignoreCase: false,
         ignoreMemberSort: false,

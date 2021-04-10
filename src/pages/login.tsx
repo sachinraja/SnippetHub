@@ -1,6 +1,6 @@
 import Container from '@components/Container/Container'
 import Link from 'next/link'
-import config from 'src/config'
+import envConfig from 'src/config'
 import type { InferGetStaticPropsType } from 'next'
 import type { SimpleIcon } from 'simple-icons'
 
@@ -8,7 +8,7 @@ const githubIcon: SimpleIcon = require('simple-icons/icons/github')
 
 export const getStaticProps = () => {
   const searchParams = new URLSearchParams({
-    client_id: config.get('github').clientId,
+    client_id: envConfig.get('github').clientId,
   })
 
   const githubAuthUrl = `https://github.com/login/oauth/authorize?${searchParams.toString()}`

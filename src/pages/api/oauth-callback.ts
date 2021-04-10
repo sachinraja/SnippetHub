@@ -1,7 +1,7 @@
 import { User } from '@prisma/client'
 import axios from 'axios'
-import config from 'src/config'
 import createTokens from '@lib/auth/token'
+import envConfig from 'src/config'
 import prisma from '@lib/prisma'
 import type { AxiosRequestConfig } from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  const githubConfig = config.get('github')
+  const githubConfig = envConfig.get('github')
 
   const tokenReqBody = {
     client_id: githubConfig.clientId,

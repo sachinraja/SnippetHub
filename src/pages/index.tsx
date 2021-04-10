@@ -1,15 +1,28 @@
+import {
+  GetTopPacksDocument,
+  useGetTopPacksQuery,
+} from '@graphql/queries/get-top-packs.graphql'
+import { initializeApollo } from '@lib/apollo-client'
 import Container from '@components/Container/Container'
 import SearchPageLayout from '@layouts/SearchPageLayout'
 import getCardFromPack from '@lib/pack/card'
-import getTopPacks from '@lib/pack/top'
-import type { CardProps } from '@components/Card/Card'
 import type { InferGetStaticPropsType } from 'next'
-import type { ReactElement } from 'react'
 
 export const getStaticProps = async () => {
+  const apolloClient = initializeApollo()
+
+  const {
+    data: { getTopPacks: topPacks },
+  }: {
+    data: Exclude<ReturnType<typeof useGetTopPacksQuery>['data'], undefined>
+  } = await apolloClient.query({
+    query: GetTopPacksDocument,
+  })
+
   return {
     props: {
-      topPacks: await getTopPacks(20),
+      initialApolloState: apolloClient.cache.extract(),
+      topPacks,
     },
     revalidate: 120,
   }
@@ -19,9 +32,7 @@ const HomePage = ({
   topPacks,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   // create components for top snippets
-  const cards = topPacks.map(
-    (pack): ReactElement<CardProps> => getCardFromPack(pack, pack.author),
-  )
+  const cards = topPacks.map((pack) => getCardFromPack(pack, pack.author))
 
   return (
     <Container

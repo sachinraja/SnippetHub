@@ -1,0 +1,8 @@
+schema: 'src/graphql/**/*.graphqls'
+schemaEntrypoint: 'src/graphql/__generated__/schema.graphqls'
+documents: 'src/graphql/**/*.graphql'
+plugins:
+  - typescript
+  - typescript-operations
+  - typescript-react-apollo
+cacheDir: __generated__

@@ -1,21 +1,12 @@
 import prisma from '@lib/prisma'
 
-export default function getTopPacks(take: number) {
+export default function getTopPacks(take: number, skip?: number) {
   return prisma.pack.findMany({
-    orderBy: { upvotes: 'desc' },
-    select: {
-      author: {
-        select: {
-          gitHubId: true,
-          username: true,
-        },
-      },
-      description: true,
-      id: true,
-      language: true,
-      name: true,
-      upvotes: true,
-    },
+    skip,
     take,
+    include: {
+      author: true,
+    },
+    orderBy: { upvotes: 'desc' },
   })
 }

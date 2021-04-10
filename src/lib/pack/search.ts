@@ -1,21 +1,14 @@
 import prisma from '@lib/prisma'
+import type { PrismaQueryOptions } from 'src/types'
 
-export default function searchForPack(name: string, orderBy?: 'desc' | 'asc') {
+export function searchForPack(name: string, options?: PrismaQueryOptions) {
   return prisma.pack.findMany({
-    orderBy: { upvotes: orderBy },
-    select: {
-      author: {
-        select: {
-          gitHubId: true,
-          username: true,
-        },
-      },
-      description: true,
-      id: true,
-      language: true,
-      name: true,
-      upvotes: true,
+    skip: options?.skip,
+    take: options?.take,
+    include: {
+      author: true,
     },
+    orderBy: { upvotes: 'desc' },
     where: { name: { contains: name, mode: 'insensitive' } },
   })
 }

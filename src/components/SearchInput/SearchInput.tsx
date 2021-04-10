@@ -11,7 +11,7 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
     const [value, setValue] = useState(defaultValue)
 
     return (
-      <div className="mt-10 flex justify-between">
+      <div className="mt-10 flex justify-between w-5/6 focus-within:w-full transition-all">
         <form
           className="bg-carbon-900 focus-within:ring-carbon-500 focus-within:ring-2 shadow-md rounded-md inline-flex flex-grow transition-all duration-500"
           onSubmit={onSubmit}

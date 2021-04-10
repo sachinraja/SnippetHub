@@ -17,10 +17,14 @@
       ],
       "@lib/*": [
         "./src/lib/*"
+      ],
+      "@graphql/*": [
+        "src/graphql/*"
       ]
     },
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "src/types"
     ],
     "skipLibCheck": true,
     "strict": true,
@@ -34,17 +38,19 @@
     "allowJs": true
   },
   "include": [
-    "src/next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".eslintrc.js",
-    "tailwind.config.js",
-    "postcss.config.js",
+    "src/next-env.d.ts",
     "next.config.js",
+    "babel.config.js",
+    "postcss.config.js",
+    "tailwind.config.js",
+    ".eslintrc.js",
     "jest.config.js"
   ],
   "exclude": [
     "node_modules",
+    "__generated__",
     ".next"
   ],
   "ts-node": {

@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 import FadeIn from '@components/FadeIn/FadeIn'
 import Link from 'next/link'
 import languages from '@lib/language/language'
+import type { Language } from '@prisma/client'
 import type { ReactNode } from 'react'
-import type { enum_Pack_language } from '@prisma/client'
 
 export interface CardProps {
   bodyUrl?: string
   count: string | number
   description: string
   imageUrl: string
-  language: enum_Pack_language
+  language: Language
   subtitle: string
   title: string
 }

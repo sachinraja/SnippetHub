@@ -1,6 +1,7 @@
+import { Language } from './language'
 import { Pack } from './pack'
-import { Prisma, Pack as PrismaPack } from '.prisma/client'
 import { inputObjectType, objectType } from 'nexus'
+import type { Prisma, Pack as PrismaPack } from '@prisma/client'
 
 export const Snippet = objectType({
   name: 'Snippet',
@@ -9,11 +10,14 @@ export const Snippet = objectType({
     t.nonNull.string('name')
     t.nonNull.string('code')
     t.nonNull.int('packId')
+    t.nonNull.field('language', {
+      type: Language,
+    })
     t.nonNull.field('pack', {
-      resolve(root, __, ctx) {
+      resolve(parent, args, ctx) {
         return <Prisma.Prisma__PackClient<PrismaPack>>(
           ctx.prisma.pack.findUnique({
-            where: { id: root.packId },
+            where: { id: parent.packId },
           })
         )
       },
@@ -27,5 +31,8 @@ export const SnippetInput = inputObjectType({
   definition(t) {
     t.nonNull.string('name')
     t.nonNull.string('code')
+    t.nonNull.field('language', {
+      type: Language,
+    })
   },
 })

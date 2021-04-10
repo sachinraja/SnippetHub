@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import envConfig from 'src/config'
 
 /* eslint-disable @typescript-eslint/no-namespace */
 declare global {
@@ -11,7 +12,7 @@ declare global {
 
 /* eslint-disable-next-line import/no-mutable-exports */
 let prisma: PrismaClient
-if (process.env.NODE_ENV === 'production') {
+if (envConfig.get('env') === 'production') {
   prisma = new PrismaClient()
 } else {
   if (!global.prisma) {

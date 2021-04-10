@@ -1,20 +1,21 @@
 import { numberWithCommas } from '@lib/utils/number'
 import Card from '@components/Card/Card'
-import type { enum_Pack_language } from '.prisma/client'
+import type { CardProps } from '@components/Card/Card'
+import type { Language } from '@prisma/client'
+import type { ReactElement } from 'react'
 
 interface PackCard {
   description: string
   id: number
-  language: enum_Pack_language
+  language: Language
   name: string
   upvotes: number
 }
 
 export default function getCardFromPack(
   pack: PackCard,
-  author: { gitHubId: number; username: string },
-) {
-  const { gitHubId, username } = author
+  { gitHubId, username }: { gitHubId: number; username: string },
+): ReactElement<CardProps> {
   const count = numberWithCommas(pack.upvotes)
   return (
     <Card

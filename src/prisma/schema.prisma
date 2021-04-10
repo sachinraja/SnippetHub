@@ -10,54 +10,63 @@ datasource db {
 
 model Snippet {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @db.Citext
   code      String
+  language  Language @default(other)
   packId    Int      @map("pack_id")
   pack      Pack     @relation(fields: [packId], references: [id])
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
+  @@unique([name, packId])
   @@map("snippet")
 }
 
 model Pack {
-  id          Int                @id @default(autoincrement())
-  name        String
+  id          Int       @id @default(autoincrement())
+  name        String    @db.Citext
   description String
-  language    enum_Pack_language @default(other)
-  upvotes     Int                @default(0)
+  language    Language  @default(other)
+  upvotes     Int       @default(0)
   snippets    Snippet[]
-  authorId    Int                @map("author_id")
-  author      User               @relation(fields: [authorId], references: [id])
-  createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt   DateTime           @updatedAt @map("updated_at") @db.Timestamptz
+  authorId    Int       @map("author_id")
+  author      User      @relation(fields: [authorId], references: [id])
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
+  @@unique([name, authorId])
   @@map("pack")
 }
 
 model User {
-  id        Int            @id @default(autoincrement())
-  gitHubId  Int            @unique @map("github_id")
-  username  String         @unique @db.VarChar(39)
-  bio       String?        @db.Text
-  type      enum_User_type @default(user)
+  id        Int      @id @default(autoincrement())
+  gitHubId  Int      @unique @map("github_id")
+  username  String   @unique @db.Citext
+  bio       String?  @db.Text
+  type      UserType @default(user)
   packs     Pack[]
-  createdAt DateTime       @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt DateTime       @updatedAt @map("updated_at") @db.Timestamptz
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
   @@map("user")
 }
 
-enum enum_Pack_language {
+enum Language {
   python
   javascript
   typescript
   csharp
   elixir
+  html
+  css
   other
+
+  @@map("language")
 }
 
-enum enum_User_type {
+enum UserType {
   user
   admin
+
+  @@map("user_type")
 }

@@ -1,3 +1,7 @@
+import {
+  Language,
+  useCreatePackMutation,
+} from '@graphql/queries/create-pack.graphql'
 import Container from '@components/Container/Container'
 import Heading from '@components/Heading/Heading'
 import MDEditor from '@components/MDEditor/MDEditor'
@@ -6,6 +10,26 @@ import SubmitInput from '@components/FormInputs/SubmitInput'
 import TextInput from '@components/FormInputs/TextInput'
 
 const NewPack = () => {
+  const [createPack] = useCreatePackMutation({
+    variables: {
+      packName: 'e.js',
+      packDescription: 'This is a test.',
+      packLanguage: Language.Typescript,
+      snippets: [
+        {
+          name: 'r/test',
+          code: "import test from './test'",
+          language: Language.Typescript,
+        },
+        {
+          name: 'rea',
+          code: "import b from './test'",
+          language: Language.Elixir,
+        },
+      ],
+    },
+  })
+
   return (
     <Container className="m-auto w-2/3" meta={{ title: 'Create a New Pack' }}>
       <header className="mt-6">
@@ -18,12 +42,13 @@ const NewPack = () => {
       </header>
 
       <form className="space-y-3">
-        <TextInput id="name" label="Name" required />
+        <TextInput id="name" label="Name" placeholder="Enter Name" required />
 
         <MDEditor className="w-full" />
         <hr className="bg-carbon-600" />
 
         <SubmitInput value="Create pack" />
+        <input type="button" onClick={() => createPack()} value="Test" />
       </form>
     </Container>
   )

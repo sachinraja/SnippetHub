@@ -16,6 +16,9 @@ border-indigo-500
 text-gray-400
 text-gray-600
 border-gray-500
+text-red-400
+text-red-600
+border-red-500
 text-2xl
 text-3xl
 text-4xl
