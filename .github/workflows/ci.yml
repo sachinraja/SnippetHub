@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Generate types
-        run: npm run types:gen
+        run: npm run type:gen
 
       - name: Typecheck
         run: npm run typecheck
