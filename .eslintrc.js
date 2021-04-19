@@ -42,7 +42,8 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
 
     camelcase: 'off',
-
+    // doesn't work with typescript enum
+    'no-shadow': 'off',
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -67,10 +68,11 @@ module.exports = {
       { semi: false, singleQuote: true, trailingComma: 'all' },
     ],
 
-    'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+    'react/jsx-filename-extension': ['warn', { extensions: ['.ts', '.tsx'] }],
 
     // suppress errors for missing 'import React' in files - Next.js automatically imports it
     'react/react-in-jsx-scope': 'off',
+    'react/jsx-props-no-spreading': 'off',
 
     'sort-imports-es6-autofix/sort-imports-es6': [
       'error',

@@ -6,19 +6,21 @@ COPY package*.json ./
 COPY tsconfig.json ./
 
 # install only production modules and set aside
-RUN npm ci --production
+RUN npm ci
 
 # generate @prisma/client - is a production package that will be copied
 COPY src/prisma/schema.prisma ./src/prisma/
 RUN npx prisma generate
 
 # install all other dependencies (devDependencies)
-RUN npm i ts-node
 
 # set aside production packages
 #RUN cp -R node_modules /tmp/prod_node_modules/
 
+
 COPY . .
+
+RUN npm run graphql-let:generate
 
 #FROM node:15.0-alpine AS release
 

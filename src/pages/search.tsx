@@ -1,4 +1,5 @@
 import { InferGetServerSidePropsType } from 'next'
+import { SearchIcon } from '@heroicons/react/outline'
 import { searchForPack } from '@lib/pack/search'
 import Container from '@components/Container/Container'
 import SearchPageLayout from '@layouts/SearchPageLayout'
@@ -38,20 +39,7 @@ const SearchPage = ({
         cards={cards}
         heading={`Search Results - ${searchKeyword}`}
         headingIcon={
-          <svg
-            className="h-full text-blue-600 motion-safe:animate-pulse"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-            />
-          </svg>
+          <SearchIcon className="h-full text-blue-600 motion-safe:animate-pulse" />
         }
         headingLabel={`${foundPacks.length} snippet pack${
           foundPacks.length === 1 ? '' : 's'

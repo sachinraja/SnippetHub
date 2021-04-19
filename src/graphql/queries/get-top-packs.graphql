@@ -6,7 +6,7 @@ query GetTopPacks($skip: Int, $take: Int) {
     }
     id
     name
-    description
+    shortDescription
     language
     upvotes
   }

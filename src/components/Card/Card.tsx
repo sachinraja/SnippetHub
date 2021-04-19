@@ -1,3 +1,4 @@
+import { ChevronUpIcon } from '@heroicons/react/outline'
 import { useEffect, useRef, useState } from 'react'
 import FadeIn from '@components/FadeIn/FadeIn'
 import Link from 'next/link'
@@ -53,7 +54,7 @@ const Card = ({
     return () => window.removeEventListener('resize', checkFloat)
   }, [])
 
-  function WithLink({ children }: { children: ReactNode }) {
+  const WithLink = ({ children }: { children: ReactNode }) => {
     return bodyUrl ? (
       <Link href={bodyUrl}>
         <a>{children}</a>
@@ -86,20 +87,7 @@ const Card = ({
             >
               <div>
                 <div className="inline-block border-blue-500 border-2 rounded-sm">
-                  <svg
-                    className="w-6 inline text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M5 15l7-7 7 7"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    />
-                  </svg>
+                  <ChevronUpIcon className="w-6 inline text-blue-600" />
 
                   <p className="inline mx-1 text-blue-400">{count}</p>
                 </div>

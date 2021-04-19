@@ -1,4 +1,5 @@
-import { FormEventHandler, forwardRef, useState } from 'react'
+import { FormEventHandler, forwardRef } from 'react'
+import { SearchIcon } from '@heroicons/react/outline'
 
 interface SearchInputProps {
   defaultValue?: string
@@ -8,8 +9,6 @@ interface SearchInputProps {
 
 const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ defaultValue, onSubmit, placeholder }: SearchInputProps, ref) => {
-    const [value, setValue] = useState(defaultValue)
-
     return (
       <div className="mt-10 flex justify-between w-5/6 focus-within:w-full transition-all">
         <form
@@ -22,30 +21,13 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
             className="text-xl bg-carbon-900 rounded-md w-full border-0 focus:ring-0"
             id="search"
             name="search"
-            onChange={(e) => {
-              setValue(e.target.value)
-            }}
             placeholder={placeholder}
             type="text"
-            value={value}
+            defaultValue={defaultValue}
           />
           <button type="submit">
             <div className="inline-flex items-center hover:bg-carbon-500 p-2 cursor-pointer transition-colors duration-300 rounded-md">
-              <svg
-                fill="none"
-                height={35}
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                width={35}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                />
-              </svg>
+              <SearchIcon height={35} width={35} />
             </div>
           </button>
         </form>

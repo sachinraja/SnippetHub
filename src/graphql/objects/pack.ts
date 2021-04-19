@@ -10,7 +10,8 @@ export const Pack = objectType({
     t.nonNull.int('id')
     t.nonNull.int('authorId')
     t.nonNull.string('name')
-    t.nonNull.string('description')
+    t.nonNull.string('shortDescription')
+    t.string('longDescription')
     t.nonNull.field('language', {
       type: Language,
     })
@@ -42,8 +43,9 @@ export const CreatePack = mutationField('createPack', {
   type: Pack,
   args: {
     name: nonNull(stringArg()),
-    description: nonNull(stringArg()),
-    language: nonNull(Language),
+    shortDescription: nonNull(stringArg()),
+    longDescription: stringArg(),
+    language: Language,
     snippets: nonNull(list(nonNull('SnippetInput'))),
   },
   resolve(parent, args, ctx) {
@@ -51,8 +53,9 @@ export const CreatePack = mutationField('createPack', {
       data: {
         authorId: 1,
         name: args.name,
-        description: args.description,
-        language: args.language,
+        shortDescription: args.shortDescription,
+        longDescription: args.longDescription ?? undefined,
+        language: args.language ?? undefined,
         snippets: {
           create: args.snippets,
         },

@@ -1,83 +1,89 @@
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
+import CodeInput from '@components/FormInputs/CodeInput'
+import CodeMirrorMode from '@lib/utils/codemirror/mode'
+import Label from '@components/FormInputs/Label'
 import Link from 'next/link'
 import MDRenderer from '@components/MDRenderer/MDRenderer'
 import Menu, { LeftAlign, RightAlign } from './Menu'
 import MenuItem from './MenuItem'
-import TextAreaInput from '@components/FormInputs/TextAreaInput'
+import type { IUnControlledCodeMirror } from 'react-codemirror2'
 import type { SimpleIcon } from 'simple-icons'
 
 const markdownIcon: SimpleIcon = require('simple-icons/icons/markdown')
 
-interface MDEditorProps {
+type MDEditorProps = IUnControlledCodeMirror & {
   className?: string
+  value?: string
+  required?: boolean
+  name: string
 }
 
-const MDEditor = ({ className }: MDEditorProps) => {
-  const editorId = 'markdownDescription'
+const MDEditor = forwardRef<HTMLTextAreaElement, MDEditorProps>(
+  ({ className, value, required, name, ...props }: MDEditorProps, ref) => {
+    const [writing, setWriting] = useState(true)
 
-  const [value, setValue] = useState('')
-  const [writing, setWriting] = useState(true)
+    return (
+      <div className={className}>
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <Label htmlFor={name} required={required}>
+          Long Description - Supports Markdown (GFM)
+        </Label>
 
-  return (
-    <div>
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label htmlFor={editorId} className="text-lg">
-        Description
-      </label>
+        <div className="ring-1 ring-carbon-400 mt-2">
+          <Menu>
+            <LeftAlign>
+              <MenuItem
+                className={writing ? 'bg-carbon-900' : ''}
+                onClick={() => setWriting(true)}
+              >
+                Write
+              </MenuItem>
+              <MenuItem
+                className={writing ? '' : 'bg-carbon-900'}
+                onClick={() => setWriting(false)}
+              >
+                Preview
+              </MenuItem>
+            </LeftAlign>
 
-      <div className="ring-1 ring-carbon-400 mt-2">
-        <Menu>
-          <LeftAlign>
-            <MenuItem
-              className={writing ? 'bg-carbon-900' : ''}
-              onClick={() => setWriting(true)}
-            >
-              Write
-            </MenuItem>
-            <MenuItem
-              className={writing ? '' : 'bg-carbon-900'}
-              onClick={() => setWriting(false)}
-            >
-              Preview
-            </MenuItem>
-          </LeftAlign>
+            <RightAlign>
+              <Link href="https://github.github.com/gfm/">
+                <a className="h-full" target="_blank">
+                  <svg
+                    className="w-5 mr-2 h-full"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d={markdownIcon.path} fill={markdownIcon.hex} />
+                  </svg>
+                </a>
+              </Link>
+            </RightAlign>
+          </Menu>
 
-          <RightAlign>
-            <Link href="https://github.github.com/gfm/">
-              <a className="h-full" target="_blank">
-                <svg
-                  className="w-5 mr-2 h-full"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d={markdownIcon.path} fill={markdownIcon.hex} />
-                </svg>
-              </a>
-            </Link>
-          </RightAlign>
-        </Menu>
+          <CodeInput
+            id={name}
+            className={`${writing ? '' : 'hidden'}`}
+            ref={ref}
+            mode={CodeMirrorMode.gfm}
+            {...props}
+          />
 
-        <TextAreaInput
-          style={{ height: 300 }}
-          className={`h-full ${className} ${writing ? 'block' : 'hidden'}`}
-          id={editorId}
-          responsive={false}
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value)
-          }}
-        />
-
-        <MDRenderer className={writing ? 'hidden' : 'block'}>
-          {value}
-        </MDRenderer>
+          <MDRenderer className={writing ? 'hidden' : 'block'}>
+            {value ?? ''}
+          </MDRenderer>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  },
+)
+
+MDEditor.displayName = 'MDEditor'
 
 MDEditor.defaultProps = {
   className: '',
+  value: undefined,
+  required: false,
 }
 
 export default MDEditor

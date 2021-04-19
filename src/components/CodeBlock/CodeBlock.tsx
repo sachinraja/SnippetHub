@@ -1,5 +1,5 @@
 import { Prism } from 'react-syntax-highlighter'
-import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 interface CodeBlockProps {
   language: string
@@ -8,7 +8,7 @@ interface CodeBlockProps {
 
 const CodeBlock = ({ language, value }: CodeBlockProps) => {
   return (
-    <Prism language={language} style={atomDark}>
+    <Prism language={language} style={materialDark}>
       {value}
     </Prism>
   )

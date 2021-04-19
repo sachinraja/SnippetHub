@@ -19,7 +19,7 @@ export async function getUserPacks(author: User, options: PrismaQueryOptions) {
     ...options,
     orderBy: { upvotes: options.orderBy },
     select: {
-      description: true,
+      shortDescription: true,
       id: true,
       language: true,
       name: true,

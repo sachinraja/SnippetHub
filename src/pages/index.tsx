@@ -1,3 +1,4 @@
+import { ChevronUpIcon } from '@heroicons/react/outline'
 import {
   GetTopPacksDocument,
   useGetTopPacksQuery,
@@ -49,20 +50,7 @@ const HomePage = ({
         cards={cards}
         heading="Most Popular Snippet Packs"
         headingIcon={
-          <svg
-            className="h-full text-blue-600 motion-safe:animate-bounce"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5 15l7-7 7 7"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-            />
-          </svg>
+          <ChevronUpIcon className="h-full text-blue-600 motion-safe:animate-bounce" />
         }
         headingLabel="The snippet packs with the most votes."
       />

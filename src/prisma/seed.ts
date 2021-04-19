@@ -22,7 +22,7 @@ async function main() {
       packs: {
         create: [
           {
-            description:
+            shortDescription:
               'A collection of snippets for the React JavaScript Framework.',
             language: Language.javascript,
             name: 'React',
@@ -37,7 +37,7 @@ async function main() {
             upvotes: 456123,
           },
           {
-            description:
+            shortDescription:
               'Streamline your Vue.js code with these snippets to boost productivity.',
             language: Language.javascript,
             name: 'Vue.js',
@@ -52,7 +52,7 @@ async function main() {
             upvotes: 3123412,
           },
           {
-            description:
+            shortDescription:
               'The emerging leader in concurrency brings you these amazing snippets.',
             language: Language.elixir,
             name: 'Elixir',
@@ -67,7 +67,7 @@ async function main() {
             upvotes: 5312,
           },
           {
-            description:
+            shortDescription:
               'Build rich, interactive web applications quickly, with less code and fewer moving parts. Join our growing community of developers using Phoenix to craft APIs, HTML5 apps and more, for fun or at scale.',
             language: Language.elixir,
             name: 'Phoenix',
@@ -82,7 +82,7 @@ async function main() {
             upvotes: 2000,
           },
           {
-            description:
+            shortDescription:
               'Code 5x faster than before with these blocks that greatly enhance your python experience.',
             language: Language.python,
             name: 'python-pack',
@@ -97,7 +97,7 @@ async function main() {
             upvotes: 62461224,
           },
           {
-            description: 'Essential snippets for the Node.js runtime.',
+            shortDescription: 'Essential snippets for the Node.js runtime.',
             language: Language.javascript,
             name: 'Node.js',
             snippets: {
@@ -111,7 +111,7 @@ async function main() {
             upvotes: 9132,
           },
           {
-            description:
+            shortDescription:
               'Supercharge your Unity experience with a multitude of easy-to-insert statements.',
             language: Language.csharp,
             name: 'Unity-Blocks',
@@ -126,7 +126,7 @@ async function main() {
             upvotes: 4211223,
           },
           {
-            description:
+            shortDescription:
               'Flask is a lightweight package for python web development.',
             language: Language.python,
             name: 'Flask',

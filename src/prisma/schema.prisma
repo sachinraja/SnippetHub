@@ -23,16 +23,17 @@ model Snippet {
 }
 
 model Pack {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.Citext
-  description String
-  language    Language  @default(other)
-  upvotes     Int       @default(0)
-  snippets    Snippet[]
-  authorId    Int       @map("author_id")
-  author      User      @relation(fields: [authorId], references: [id])
-  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+  id               Int       @id @default(autoincrement())
+  name             String    @db.Citext
+  shortDescription String    @map("short_description")
+  longDescription  String?    @map("long_description")
+  language         Language  @default(other)
+  upvotes          Int       @default(0)
+  snippets         Snippet[]
+  authorId         Int       @map("author_id")
+  author           User      @relation(fields: [authorId], references: [id])
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt        DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
   @@unique([name, authorId])
   @@map("pack")

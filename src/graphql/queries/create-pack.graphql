@@ -1,12 +1,14 @@
 mutation CreatePack(
   $packName: String!
-  $packDescription: String!
-  $packLanguage: Language!
+  $packShortDescription: String!
+  $packLongDescription: String
+  $packLanguage: Language
   $snippets: [SnippetInput!]!
 ) {
   createPack(
     name: $packName
-    description: $packDescription
+    shortDescription: $packShortDescription
+    longDescription: $packLongDescription
     language: $packLanguage
     snippets: $snippets
   ) {

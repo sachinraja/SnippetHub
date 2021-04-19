@@ -1,3 +1,4 @@
+-- CreateExtension
 CREATE EXTENSION citext;
 
 -- CreateEnum
@@ -23,7 +24,8 @@ CREATE TABLE "snippet" (
 CREATE TABLE "pack" (
     "id" SERIAL NOT NULL,
     "name" CITEXT NOT NULL,
-    "description" TEXT NOT NULL,
+    "short_description" TEXT NOT NULL,
+    "long_description" TEXT,
     "language" "language" NOT NULL DEFAULT E'other',
     "upvotes" INTEGER NOT NULL DEFAULT 0,
     "author_id" INTEGER NOT NULL,

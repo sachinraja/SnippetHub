@@ -5,7 +5,7 @@ import type { Language } from '@prisma/client'
 import type { ReactElement } from 'react'
 
 interface PackCard {
-  description: string
+  shortDescription: string
   id: number
   language: Language
   name: string
@@ -22,7 +22,7 @@ export default function getCardFromPack(
       key={pack.id}
       bodyUrl={`/@${username}/${pack.name}`}
       count={count}
-      description={pack.description}
+      description={pack.shortDescription}
       imageUrl={`https://avatars.githubusercontent.com/u/${gitHubId}`}
       language={pack.language}
       subtitle={username}

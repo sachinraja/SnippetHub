@@ -1,4 +1,4 @@
-import CodeBlock from '@components/MDEditor/CodeBlock'
+import CodeBlock from '@components/CodeBlock/CodeBlock'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
 
