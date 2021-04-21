@@ -37,9 +37,8 @@ const CodeInput = forwardRef(
       }
 
       getImport()
-    })
+    }, [resolvedMode])
 
-    console.log(resolvedMode)
     return (
       <div className={className}>
         {label && (
