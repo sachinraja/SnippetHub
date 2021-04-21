@@ -40,7 +40,7 @@ const languages: Record<PrismaLanguage, Language> = {
     color: 'blue',
     icon: typescriptIcon,
     iconColor: '#2563EB',
-    codeMirrorMode: CodeMirrorMode.javascript,
+    codeMirrorMode: CodeMirrorMode.typescript,
   },
   [PrismaLanguage.csharp]: {
     name: 'C#',

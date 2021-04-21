@@ -6,6 +6,9 @@ const modeToImport: Record<CodeMirrorMode, () => Promise<unknown>> = {
   [CodeMirrorMode.javascript]: () =>
     // @ts-expect-error Mode import not typed.
     import('codemirror/mode/javascript/javascript'),
+  [CodeMirrorMode.typescript]: () =>
+    // @ts-expect-error Mode import not typed.
+    import('codemirror/mode/javascript/javascript'),
   // @ts-expect-error Mode import not typed.
   [CodeMirrorMode.csharp]: () => import('codemirror/mode/clike/clike'),
   // @ts-expect-error Mode import not typed.

@@ -1,9 +1,10 @@
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material-darker.css'
 import { UnControlled as CodeMirror } from 'react-codemirror2'
-import { forwardRef, useEffect } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import CodeMirrorMode from '@lib/utils/codemirror/mode'
 import Label from './Label'
+import getImportFromMode from '@lib/utils/codemirror/get-import'
 import type { IUnControlledCodeMirror } from 'react-codemirror2'
 
 type CodeInputProps = IUnControlledCodeMirror & {
@@ -18,25 +19,24 @@ const CodeInput = forwardRef(
     { label, className, id, mode, required, options, ...props }: CodeInputProps,
     ref,
   ) => {
+    const [modeImported, setModeImported] = useState(false)
+
     let resolvedMode: CodeMirrorMode
     if (typeof mode === 'object') {
       resolvedMode = mode.name
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
       resolvedMode = mode!
     }
 
     useEffect(() => {
-      async function getImport() {
-        const { default: getImportFromMode } = await import(
-          '@lib/utils/codemirror/get-import'
-        )
-
-        const modeImport = getImportFromMode(resolvedMode)
-        return modeImport()
+      setModeImported(false)
+      async function importMode() {
+        await getImportFromMode(resolvedMode)()
+        setModeImported(true)
       }
 
-      getImport()
+      importMode()
     }, [resolvedMode])
 
     return (
@@ -47,17 +47,19 @@ const CodeInput = forwardRef(
           </Label>
         )}
 
-        <CodeMirror
-          // @ts-expect-error Legacy ref
-          ref={ref}
-          options={{
-            mode: resolvedMode,
-            theme: 'material-darker',
-            lineNumbers: true,
-            ...options,
-          }}
-          {...props}
-        />
+        {modeImported && (
+          <CodeMirror
+            // @ts-expect-error Legacy ref
+            ref={ref}
+            options={{
+              mode: resolvedMode,
+              theme: 'material-darker',
+              lineNumbers: true,
+              ...options,
+            }}
+            {...props}
+          />
+        )}
       </div>
     )
   },

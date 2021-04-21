@@ -4,7 +4,7 @@ import {
   Language as GraphQLLanguage,
   useCreatePackMutation,
 } from '@graphql/queries/create-pack.graphql'
-import { Language, Language as PrismaLanguage } from '@prisma/client'
+import { Language as PrismaLanguage } from '@prisma/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ButtonInput from '@components/FormInputs/ButtonInput'
 import CodeInput from '@components/FormInputs/CodeInput'
@@ -58,6 +58,7 @@ const NewPackForm = () => {
     control,
     formState: { errors },
     setValue,
+    getValues,
     watch,
     trigger,
   } = useForm<Inputs>({ resolver: yupResolver(schema), mode: 'onBlur' })
@@ -98,6 +99,7 @@ const NewPackForm = () => {
             onChange={(editor, data, val) =>
               setValue('packLongDescription', val as never)
             }
+            value={getValues('packLongDescription')}
           />
         )}
         control={control}
@@ -147,6 +149,7 @@ const NewPackForm = () => {
               onChange={(editor, data, val) =>
                 setValue(snippetCodeId, val as never)
               }
+              value={getValues(snippetCodeId)}
             />
 
             <FormError name={snippetCodeId} errors={errors} />
