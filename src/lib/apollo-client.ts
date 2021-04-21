@@ -1,12 +1,8 @@
 /* eslint-disable global-require */
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { SchemaLink as SchemaLinkType } from '@apollo/client/link/schema'
 import { mergeDeep } from '@apollo/client/utilities'
 import { useMemo } from 'react'
-import type {
-  HttpLink as HttpLinkType,
-  NormalizedCacheObject,
-} from '@apollo/client'
+import type { NormalizedCacheObject } from '@apollo/client'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
@@ -14,9 +10,7 @@ function createIsomorphLink() {
   if (typeof window === 'undefined') {
     const {
       SchemaLink,
-    }: {
-      SchemaLink: typeof SchemaLinkType
-    } = require('@apollo/client/link/schema')
+    } = require('@apollo/client/link/schema') as typeof import('@apollo/client/link/schema')
 
     return new SchemaLink({
       schema: require('@graphql/schema').default,
@@ -25,7 +19,7 @@ function createIsomorphLink() {
   }
   const {
     HttpLink,
-  }: { HttpLink: typeof HttpLinkType } = require('@apollo/client/link/http')
+  } = require('@apollo/client/link/http') as typeof import('@apollo/client/link/http')
 
   return new HttpLink({
     uri: '/api/graphql',

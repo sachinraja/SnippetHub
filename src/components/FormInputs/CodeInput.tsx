@@ -27,15 +27,19 @@ const CodeInput = forwardRef(
     }
 
     useEffect(() => {
-      async function asyncImport() {
-        ;(await import('@lib/utils/codemirror/get-import')).default(
-          resolvedMode,
-        )()
+      async function getImport() {
+        const { default: getImportFromMode } = await import(
+          '@lib/utils/codemirror/get-import'
+        )
+
+        const modeImport = getImportFromMode(resolvedMode)
+        return modeImport()
       }
 
-      asyncImport()
-    }, [resolvedMode])
+      getImport()
+    })
 
+    console.log(resolvedMode)
     return (
       <div className={className}>
         {label && (
@@ -48,7 +52,7 @@ const CodeInput = forwardRef(
           // @ts-expect-error Legacy ref
           ref={ref}
           options={{
-            mode,
+            mode: resolvedMode,
             theme: 'material-darker',
             lineNumbers: true,
             ...options,

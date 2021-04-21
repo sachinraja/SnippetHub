@@ -1,6 +1,6 @@
 import CodeMirrorMode from './mode'
 
-const modeToImport = {
+const modeToImport: Record<CodeMirrorMode, () => Promise<unknown>> = {
   // @ts-expect-error Mode import not typed.
   [CodeMirrorMode.python]: () => import('codemirror/mode/python/python'),
   [CodeMirrorMode.javascript]: () =>
