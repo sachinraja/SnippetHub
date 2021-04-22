@@ -1,12 +1,20 @@
-interface LabelProps {
-  htmlFor?: string
-  children: string
+import type { DetailedHTMLProps, LabelHTMLAttributes } from 'react'
+
+type LabelProps = DetailedHTMLProps<
+  LabelHTMLAttributes<HTMLLabelElement>,
+  HTMLLabelElement
+> & {
   required?: boolean
 }
 
-const Label = ({ htmlFor, children, required }: LabelProps) => {
+const Label = ({ children, required, htmlFor, ...props }: LabelProps) => {
   return (
-    <label htmlFor={htmlFor} className="block sm:inline mr-3 text-lg">
+    <label
+      className="block sm:inline mr-3 text-lg"
+      // must be specified to prevent eslint error
+      htmlFor={htmlFor}
+      {...props}
+    >
       {children}
       {required && (
         <span className="text-red-500 ml-1" aria-hidden>
@@ -18,7 +26,6 @@ const Label = ({ htmlFor, children, required }: LabelProps) => {
 }
 
 Label.defaultProps = {
-  htmlFor: undefined,
   required: false,
 }
 

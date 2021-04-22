@@ -48,7 +48,7 @@ const MDEditor = forwardRef<HTMLTextAreaElement, MDEditorProps>(
 
             <RightAlign>
               <Link href="https://github.github.com/gfm/">
-                <a className="h-full" target="_blank">
+                <a className="h-full" target="_blank" rel="noopener noreferrer">
                   <svg
                     className="w-5 mr-2 h-full"
                     viewBox="0 0 24 24"

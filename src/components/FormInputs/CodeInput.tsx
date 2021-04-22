@@ -30,8 +30,8 @@ const CodeInput = forwardRef(
     }
 
     useEffect(() => {
-      setModeImported(false)
       async function importMode() {
+        setModeImported(false)
         await getImportFromMode(resolvedMode)()
         setModeImported(true)
       }

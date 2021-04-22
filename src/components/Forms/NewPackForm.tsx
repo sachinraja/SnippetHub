@@ -35,7 +35,7 @@ const schema = Yup.object().shape({
   packLongDescription: Yup.string().max(10000, validationErrors.maxLength),
   snippets: Yup.array()
     .required(validationErrors.required)
-    .min(1, validationErrors.minLength)
+    .min(1, ({ min }) => `You must have at least ${min} snippet.`)
     .of(
       Yup.object().shape({
         name: Yup.string()
@@ -161,6 +161,7 @@ const NewPackForm = () => {
         value="Add Snippet"
         onClick={() => snippetAppend({ language: GraphQLLanguage.Javascript })}
       />
+      <FormError name="snippets" errors={errors} />
 
       <hr className="bg-carbon-600" />
 
