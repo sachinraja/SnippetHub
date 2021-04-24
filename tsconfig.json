@@ -20,7 +20,7 @@
       ],
       "@graphql/*": [
         "src/graphql/*"
-      ],
+      ]
     },
     "skipLibCheck": true,
     "strict": true,
