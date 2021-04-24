@@ -1,6 +1,6 @@
-import { User } from '.prisma/client'
 import { getUser } from '@lib/user'
 import prisma from '@lib/prisma'
+import type { User } from '@prisma/client'
 
 export async function getAuthorFromParam(authorUsername: string) {
   if (!authorUsername.startsWith('@')) return null

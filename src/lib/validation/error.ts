@@ -8,8 +8,8 @@ interface ErrorsInterface {
 
 const validationErrors: ErrorsInterface = {
   required: 'Field is required',
-  maxLength: (message) => `Field cannot be over ${message.max} characters`,
-  minLength: (message) => `Field cannot be over ${message.min} characters`,
+  maxLength: ({ max }) => `Field cannot be over ${max} characters`,
+  minLength: ({ min }) => `Field cannot be over ${min} characters`,
 }
 
 export default validationErrors

@@ -1,12 +1,16 @@
+import { CodeMirrorMode } from '@lib/utils/codemirror/mode'
 import { forwardRef, useState } from 'react'
 import CodeInput from '@components/FormInputs/CodeInput'
-import CodeMirrorMode from '@lib/utils/codemirror/mode'
 import Label from '@components/FormInputs/Label'
 import Link from 'next/link'
 import MDRenderer from '@components/MDRenderer/MDRenderer'
 import Menu, { LeftAlign, RightAlign } from './Menu'
 import MenuItem from './MenuItem'
-import type { IUnControlledCodeMirror } from 'react-codemirror2'
+import type {
+  UnControlled as CodeMirror,
+  IUnControlledCodeMirror,
+} from 'react-codemirror2'
+
 import type { SimpleIcon } from 'simple-icons'
 
 const markdownIcon: SimpleIcon = require('simple-icons/icons/markdown')
@@ -18,7 +22,7 @@ type MDEditorProps = IUnControlledCodeMirror & {
   name: string
 }
 
-const MDEditor = forwardRef<HTMLTextAreaElement, MDEditorProps>(
+const MDEditor = forwardRef<CodeMirror, MDEditorProps>(
   ({ className, value, required, name, ...props }: MDEditorProps, ref) => {
     const [writing, setWriting] = useState(true)
 

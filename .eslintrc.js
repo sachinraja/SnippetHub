@@ -10,7 +10,12 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
   ],
-  ignorePatterns: ['__generated__', '**/*.graphql.d.ts'],
+  ignorePatterns: [
+    'node_modules',
+    '.next',
+    '__generated__',
+    '**/*.graphql.d.ts',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {

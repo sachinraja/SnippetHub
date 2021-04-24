@@ -10,22 +10,18 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": [
-        "./src/components/*"
+        "src/components/*"
       ],
       "@layouts/*": [
-        "./src/layouts/*"
+        "src/layouts/*"
       ],
       "@lib/*": [
-        "./src/lib/*"
+        "src/lib/*"
       ],
       "@graphql/*": [
         "src/graphql/*"
-      ]
+      ],
     },
-    "typeRoots": [
-      "node_modules/@types",
-      "src/types"
-    ],
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -41,16 +37,13 @@
     "**/*.ts",
     "**/*.tsx",
     "src/next-env.d.ts",
-    "next.config.js",
-    "babel.config.js",
-    "postcss.config.js",
-    "tailwind.config.js",
-    ".eslintrc.js",
-    "jest.config.js"
+    "*.config.js",
+    ".eslintrc.js"
   ],
   "exclude": [
     "node_modules",
     "__generated__",
+    "src/types",
     ".next"
   ],
   "ts-node": {

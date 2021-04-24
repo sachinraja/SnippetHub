@@ -1,5 +1,6 @@
+import { CodeMirrorMode } from '@lib/utils/codemirror/mode'
 import { Language as PrismaLanguage } from '@prisma/client'
-import CodeMirrorMode from '@lib/utils/codemirror/mode'
+import type { CodeMirrorModeObject } from '@lib/utils/codemirror/mode'
 import type { SimpleIcon } from 'simple-icons'
 
 const pythonIcon: SimpleIcon = require('simple-icons/icons/python')
@@ -16,7 +17,7 @@ interface Language {
   color: string
   icon: SimpleIcon
   iconColor: string
-  codeMirrorMode: CodeMirrorMode
+  codeMirrorMode: CodeMirrorModeObject
 }
 
 // iconColor is the tailwind color for 600

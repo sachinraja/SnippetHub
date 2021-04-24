@@ -1,4 +1,4 @@
-enum CodeMirrorMode {
+export enum CodeMirrorMode {
   python = 'python',
   javascript = 'javascript',
   typescript = 'text/typescript',
@@ -9,4 +9,6 @@ enum CodeMirrorMode {
   gfm = 'gfm',
 }
 
-export default CodeMirrorMode
+export type CodeMirrorModeObject =
+  | CodeMirrorMode
+  | (Record<string, unknown> & { name: CodeMirrorMode })

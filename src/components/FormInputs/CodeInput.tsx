@@ -1,42 +1,37 @@
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/material-darker.css'
 import { UnControlled as CodeMirror } from 'react-codemirror2'
+import { CodeMirrorMode } from '@lib/utils/codemirror/mode'
 import { forwardRef, useEffect, useState } from 'react'
-import CodeMirrorMode from '@lib/utils/codemirror/mode'
 import Label from './Label'
 import getImportFromMode from '@lib/utils/codemirror/get-import'
+import resolveMode from '@lib/utils/codemirror/resolve-mode'
+import type { CodeMirrorModeObject } from '@lib/utils/codemirror/mode'
 import type { IUnControlledCodeMirror } from 'react-codemirror2'
 
 type CodeInputProps = IUnControlledCodeMirror & {
   label?: string
   id?: string
-  mode?: CodeMirrorMode | (Record<string, unknown> & { name: CodeMirrorMode })
+  mode?: CodeMirrorModeObject
   required?: boolean
 }
 
-const CodeInput = forwardRef(
+const CodeInput = forwardRef<CodeMirror, CodeInputProps>(
   (
     { label, className, id, mode, required, options, ...props }: CodeInputProps,
     ref,
   ) => {
-    const [modeImported, setModeImported] = useState(false)
+    const [isModeImported, setisModeImported] = useState(false)
 
-    let resolvedMode: CodeMirrorMode
-    if (typeof mode === 'object') {
-      resolvedMode = mode.name
-    } else {
-      /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-      resolvedMode = mode!
-    }
+    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+    const resolvedMode = resolveMode(mode!)
 
     useEffect(() => {
-      async function importMode() {
-        setModeImported(false)
+      ;(async () => {
+        setisModeImported(false)
         await getImportFromMode(resolvedMode)()
-        setModeImported(true)
-      }
-
-      importMode()
+        setisModeImported(true)
+      })()
     }, [resolvedMode])
 
     return (
@@ -47,9 +42,8 @@ const CodeInput = forwardRef(
           </Label>
         )}
 
-        {modeImported && (
+        {isModeImported && (
           <CodeMirror
-            // @ts-expect-error Legacy ref
             ref={ref}
             options={{
               mode: resolvedMode,
