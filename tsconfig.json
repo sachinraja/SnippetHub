@@ -40,7 +40,7 @@
     "**/*.tsx",
     "src/next-env.d.ts",
     "*.config.js",
-    ".eslintrc.js",
+    ".eslintrc.js"
   ],
   "exclude": [
     "node_modules",
