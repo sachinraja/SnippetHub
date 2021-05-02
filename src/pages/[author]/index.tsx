@@ -7,7 +7,7 @@ import Heading from '@components/Heading/Heading'
 import Paragraph from '@components/Paragraph/Paragraph'
 import getCardFromPack from '@lib/pack/card'
 import type { GetStaticPaths } from 'next'
-import type { ThenArg } from 'src/types'
+import type { UnwrapPromise } from 'src/types'
 
 export const getStaticProps = async ({
   params,
@@ -45,8 +45,8 @@ const AuthorPage = ({
   author,
   packs,
 }: {
-  author: Exclude<ThenArg<ReturnType<typeof getAuthorFromParam>>, null>
-  packs: ThenArg<ReturnType<typeof getUserPacks>>
+  author: Exclude<UnwrapPromise<ReturnType<typeof getAuthorFromParam>>, null>
+  packs: UnwrapPromise<ReturnType<typeof getUserPacks>>
 }) => {
   // must copy to keep state of arguments
   const packsCopy = [...packs]

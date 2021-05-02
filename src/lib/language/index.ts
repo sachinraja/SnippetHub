@@ -1,6 +1,5 @@
-import { CodeMirrorMode } from '@lib/utils/codemirror/mode'
+import { LanguageMode } from '@lib/language/mode'
 import { Language as PrismaLanguage } from '@prisma/client'
-import type { CodeMirrorModeObject } from '@lib/utils/codemirror/mode'
 import type { SimpleIcon } from 'simple-icons'
 
 const pythonIcon: SimpleIcon = require('simple-icons/icons/python')
@@ -17,7 +16,7 @@ interface Language {
   color: string
   icon: SimpleIcon
   iconColor: string
-  codeMirrorMode: CodeMirrorModeObject
+  mode?: LanguageMode
 }
 
 // iconColor is the tailwind color for 600
@@ -27,56 +26,55 @@ const languages: Record<PrismaLanguage, Language> = {
     color: 'green',
     icon: pythonIcon,
     iconColor: '#059669',
-    codeMirrorMode: CodeMirrorMode.python,
+    mode: LanguageMode.python,
   },
   [PrismaLanguage.javascript]: {
     name: 'javascript',
     color: 'yellow',
     icon: javascriptIcon,
     iconColor: '#D97706',
-    codeMirrorMode: CodeMirrorMode.javascript,
+    mode: LanguageMode.javascript,
   },
   [PrismaLanguage.typescript]: {
     name: 'typescript',
     color: 'blue',
     icon: typescriptIcon,
     iconColor: '#2563EB',
-    codeMirrorMode: CodeMirrorMode.typescript,
+    mode: LanguageMode.typescript,
   },
   [PrismaLanguage.csharp]: {
     name: 'C#',
     color: 'purple',
     icon: csharpIcon,
     iconColor: '#7C3AED',
-    codeMirrorMode: CodeMirrorMode.csharp,
+    mode: LanguageMode.csharp,
   },
   [PrismaLanguage.elixir]: {
     name: 'elixir',
     color: 'indigo',
     icon: elixirIcon,
     iconColor: '#4F46E5',
-    codeMirrorMode: CodeMirrorMode.erlang,
+    mode: LanguageMode.erlang,
   },
   [PrismaLanguage.html]: {
     name: 'html',
     color: 'red',
     icon: htmlIcon,
     iconColor: '#DC2626',
-    codeMirrorMode: CodeMirrorMode.xml,
+    mode: LanguageMode.html,
   },
   [PrismaLanguage.css]: {
     name: 'css',
     color: 'blue',
     icon: cssIcon,
     iconColor: '#2563EB',
-    codeMirrorMode: CodeMirrorMode.css,
+    mode: LanguageMode.css,
   },
   [PrismaLanguage.other]: {
     name: 'other',
     color: 'gray',
     icon: otherIcon,
     iconColor: '#4B5563',
-    codeMirrorMode: CodeMirrorMode.xml,
   },
 }
 

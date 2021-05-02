@@ -57,7 +57,10 @@ module.exports = {
         tsx: 'never',
       },
     ],
-
+    'no-param-reassign': [
+      'error',
+      { ignorePropertyModificationsFor: ['accu'] },
+    ],
     // does not work with sort imports
     'import/order': 'off',
     'import/prefer-default-export': 'off',

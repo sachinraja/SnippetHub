@@ -31,6 +31,8 @@
     "jsx": "preserve",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "allowJs": true
   },
   "include": [
@@ -38,7 +40,7 @@
     "**/*.tsx",
     "src/next-env.d.ts",
     "*.config.js",
-    ".eslintrc.js"
+    ".eslintrc.js",
   ],
   "exclude": [
     "node_modules",

@@ -7,9 +7,7 @@ export async function getAuthorFromParam(authorUsername: string) {
 
   const username = authorUsername.slice(1)
 
-  const user = await getUser(username)
-
-  return user
+  return getUser(username)
 }
 
 export async function getPackFromParam(author: User, packName: string) {

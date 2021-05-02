@@ -1,13 +1,8 @@
 import { forwardRef } from 'react'
 import Label from './Label'
-import type { DetailedHTMLProps, TextareaHTMLAttributes } from 'react'
+import type { ComponentPropsWithRef } from 'react'
 
-type TextAreaInputPropsBase = DetailedHTMLProps<
-  TextareaHTMLAttributes<HTMLTextAreaElement>,
-  HTMLTextAreaElement
->
-
-type TextAreaInputProps = TextAreaInputPropsBase & {
+type TextAreaInputProps = ComponentPropsWithRef<'textarea'> & {
   label?: string
   responsive?: boolean
 }

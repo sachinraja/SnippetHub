@@ -1,20 +1,37 @@
-import { CodeMirrorMode } from './mode'
+import { LanguageMode } from '@lib/language/mode'
+import { StreamLanguage } from '@codemirror/stream-parser'
+import { markdownLanguage } from '@codemirror/lang-markdown'
 
 const modeToImport = {
-  [CodeMirrorMode.python]: () => import('codemirror/mode/python/python'),
-  [CodeMirrorMode.javascript]: () =>
-    import('codemirror/mode/javascript/javascript'),
-  [CodeMirrorMode.typescript]: () =>
-    import('codemirror/mode/javascript/javascript'),
-  [CodeMirrorMode.csharp]: () => import('codemirror/mode/clike/clike'),
-  [CodeMirrorMode.erlang]: () => import('codemirror/mode/erlang/erlang'),
-  [CodeMirrorMode.xml]: () => import('codemirror/mode/xml/xml'),
-  [CodeMirrorMode.css]: () => import('codemirror/mode/css/css'),
-  [CodeMirrorMode.gfm]: () => import('codemirror/mode/gfm/gfm'),
+  [LanguageMode.python]: async () =>
+    (await import('@codemirror/lang-python')).python(),
+  [LanguageMode.javascript]: async () =>
+    (await import('@codemirror/lang-javascript')).javascript(),
+  [LanguageMode.typescript]: async () =>
+    (await import('@codemirror/lang-javascript')).javascript({
+      typescript: true,
+    }),
+  [LanguageMode.csharp]: async () =>
+    StreamLanguage.define(
+      (await import('@codemirror/legacy-modes/mode/clike')).csharp,
+    ),
+  [LanguageMode.erlang]: async () =>
+    StreamLanguage.define(
+      (await import('@codemirror/legacy-modes/mode/erlang')).erlang,
+    ),
+  [LanguageMode.html]: async () =>
+    (await import('@codemirror/lang-html')).html(),
+  [LanguageMode.css]: async () => (await import('@codemirror/lang-css')).css(),
+  [LanguageMode.markdown]: async () =>
+    (await import('@codemirror/lang-markdown')).markdown(),
+  [LanguageMode.gfm]: async () =>
+    (await import('@codemirror/lang-markdown')).markdown({
+      base: markdownLanguage,
+    }),
 }
 
-function getImportFromMode(mode: CodeMirrorMode) {
-  return modeToImport[mode]
+async function getImportFromMode(mode: LanguageMode) {
+  return modeToImport[mode]()
 }
 
 export default getImportFromMode

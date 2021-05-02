@@ -1,7 +1,10 @@
 import { Language } from '@prisma/client'
-import languages from '@lib/language/language'
+import languages from '@lib/language'
 
-test('Typescript language name found.', () => {
+describe('Typescript language', () => {
   const languageData = languages[Language.typescript]
-  expect(languageData.name).toBe('typescript')
+
+  it('has the correct name', () => {
+    expect(languageData.name).toBe('typescript')
+  })
 })

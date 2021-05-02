@@ -1,10 +1,7 @@
 import { forwardRef } from 'react'
-import type { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import type { ComponentPropsWithRef } from 'react'
 
-type ButtonInputProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
-> & {
+type ButtonInputProps = ComponentPropsWithRef<'input'> & {
   type?: 'button' | 'submit'
 }
 

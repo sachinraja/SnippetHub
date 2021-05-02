@@ -1,59 +1,77 @@
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/material-darker.css'
-import { UnControlled as CodeMirror } from 'react-codemirror2'
-import { CodeMirrorMode } from '@lib/utils/codemirror/mode'
-import { forwardRef, useEffect, useState } from 'react'
+import { EditorState } from '@codemirror/state'
+import { EditorView, basicSetup } from '@codemirror/basic-setup'
+import { LanguageMode } from '@lib/language/mode'
+import { forwardRef, useEffect, useRef } from 'react'
+import { oneDark } from '@codemirror/theme-one-dark'
 import Label from './Label'
 import getImportFromMode from '@lib/utils/codemirror/get-import'
-import resolveMode from '@lib/utils/codemirror/resolve-mode'
-import type { CodeMirrorModeObject } from '@lib/utils/codemirror/mode'
-import type { IUnControlledCodeMirror } from 'react-codemirror2'
+import type { Extension } from '@codemirror/state'
+import type { FocusEventHandler } from 'react'
+import type { ViewUpdate } from '@codemirror/view'
 
-type CodeInputProps = IUnControlledCodeMirror & {
+export type CodeInputProps = {
   label?: string
   id?: string
-  mode?: CodeMirrorModeObject
+  className?: string
+  mode?: LanguageMode
   required?: boolean
+  value?: string
+  onUpdate?: (update: ViewUpdate) => void
+  onBlur?: FocusEventHandler<HTMLDivElement>
 }
 
-const CodeInput = forwardRef<CodeMirror, CodeInputProps>(
+const CodeInput = forwardRef<HTMLDivElement, CodeInputProps>(
   (
-    { label, className, id, mode, required, options, ...props }: CodeInputProps,
+    {
+      label,
+      className,
+      id,
+      mode,
+      required,
+      value,
+      onUpdate,
+      onBlur,
+    }: CodeInputProps,
     ref,
   ) => {
-    const [isModeImported, setisModeImported] = useState(false)
-
-    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-    const resolvedMode = resolveMode(mode!)
+    const editor = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+      const currentEditor = editor.current as Exclude<
+        typeof editor['current'],
+        null
+      >
+
+      let view: EditorView
       ;(async () => {
-        setisModeImported(false)
-        await getImportFromMode(resolvedMode)()
-        setisModeImported(true)
+        const extensions: Extension[] = [
+          basicSetup,
+          oneDark,
+          EditorView.contentAttributes.of({ 'data-gramm_editor': 'false' }),
+        ]
+
+        if (mode) extensions.push(await getImportFromMode(mode))
+        if (onUpdate) extensions.push(EditorView.updateListener.of(onUpdate))
+
+        const state = EditorState.create({
+          doc: value,
+          extensions,
+        })
+        view = new EditorView({ state, parent: currentEditor })
       })()
-    }, [resolvedMode])
+
+      return () => view.destroy()
+    }, [mode, editor])
 
     return (
-      <div className={className}>
+      <div ref={ref} className={className}>
         {label && (
           <Label htmlFor={id} required={required}>
             {label}
           </Label>
         )}
 
-        {isModeImported && (
-          <CodeMirror
-            ref={ref}
-            options={{
-              mode: resolvedMode,
-              theme: 'material-darker',
-              lineNumbers: true,
-              ...options,
-            }}
-            {...props}
-          />
-        )}
+        <div ref={editor} onBlur={onBlur} />
       </div>
     )
   },
@@ -64,8 +82,11 @@ CodeInput.displayName = 'CodeInput'
 CodeInput.defaultProps = {
   label: undefined,
   id: undefined,
-  mode: CodeMirrorMode.javascript,
+  className: undefined,
   required: false,
+  value: '',
+  onUpdate: undefined,
+  onBlur: undefined,
 }
 
 export default CodeInput

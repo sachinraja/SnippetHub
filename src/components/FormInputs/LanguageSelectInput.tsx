@@ -1,9 +1,17 @@
-import { Language } from '@prisma/client'
 import Paragraph from '@components/Paragraph/Paragraph'
 import Select from 'react-select'
-import languages from '@lib/language/language'
+import languages from '@lib/language'
+import type { Props as ReactSelectProps } from 'react-select'
 
-const LanguageSelectInput = (props: any) => {
+type LanguageSelectInputProps = {
+  value: string
+  onChange: ReactSelectProps['onChange']
+}
+
+const LanguageSelectInput = ({
+  value: languageValue,
+  ...props
+}: LanguageSelectInputProps) => {
   const options = Object.entries(languages).map(([value, language]) => {
     return {
       value,
@@ -23,12 +31,13 @@ const LanguageSelectInput = (props: any) => {
       ),
     }
   })
+
   return (
     <Select
-      options={options}
-      defaultValue={options.filter(
-        ({ value }) => value === Language.javascript,
-      )}
+      options={options as any}
+      defaultValue={
+        options.filter(({ value }) => value === languageValue) as any
+      }
       styles={{ menu: (base) => ({ ...base, position: 'relative' }) }}
       className="z-10"
       theme={(theme) => ({

@@ -29,8 +29,9 @@ async function main() {
             snippets: {
               create: [
                 {
-                  code: "import React from 'react'",
                   name: 'Import React',
+                  code: "import React from 'react'",
+                  language: Language.javascript,
                 },
               ],
             },
@@ -44,8 +45,9 @@ async function main() {
             snippets: {
               create: [
                 {
-                  code: "import Vue from 'vue'",
                   name: 'Import Vue',
+                  code: "import Vue from 'vue'",
+                  language: Language.javascript,
                 },
               ],
             },
@@ -59,8 +61,9 @@ async function main() {
             snippets: {
               create: [
                 {
-                  code: 'defmodule x do:\n',
                   name: 'Elixir defmodule',
+                  code: 'defmodule x do:\n',
+                  language: Language.elixir,
                 },
               ],
             },
@@ -74,8 +77,9 @@ async function main() {
             snippets: {
               create: [
                 {
-                  code: 'use Phoenix.Socket',
                   name: 'Use Phoenix.Socket',
+                  code: 'use Phoenix.Socket',
+                  language: Language.elixir,
                 },
               ],
             },
@@ -89,8 +93,9 @@ async function main() {
             snippets: {
               create: [
                 {
-                  code: 'from PIL import Image',
                   name: 'Import PIL',
+                  code: 'from PIL import Image',
+                  language: Language.python,
                 },
               ],
             },
@@ -103,8 +108,9 @@ async function main() {
             snippets: {
               create: [
                 {
-                  code: "import lodash from 'lodash'",
                   name: 'Lodash Import',
+                  code: "import lodash from 'lodash'",
+                  language: Language.javascript,
                 },
               ],
             },
@@ -118,8 +124,9 @@ async function main() {
             snippets: {
               create: [
                 {
-                  code: 'using UnityEngine;',
                   name: 'Use Unity Engine',
+                  code: 'using UnityEngine;',
+                  language: Language.csharp,
                 },
               ],
             },
@@ -132,8 +139,9 @@ async function main() {
             name: 'Flask',
             snippets: {
               create: {
-                code: 'from flask import Flask',
                 name: 'Flask Import',
+                code: 'from flask import Flask',
+                language: Language.python,
               },
             },
             upvotes: 551231,

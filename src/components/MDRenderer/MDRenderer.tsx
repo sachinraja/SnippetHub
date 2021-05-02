@@ -10,7 +10,7 @@ interface MDRendererProps {
 const MDRenderer = ({ children, className }: MDRendererProps) => {
   return (
     <ReactMarkdown
-      className={`prose p-2 max-w-none font-inter ${className}`}
+      className={`prose prose-quoteless p-2 max-w-none font-inter bg-carbon-800 ${className}`}
       plugins={[gfm]}
       renderers={{ code: CodeBlock }}
     >

@@ -2,7 +2,7 @@ import { ChevronUpIcon } from '@heroicons/react/outline'
 import { useEffect, useRef, useState } from 'react'
 import FadeIn from '@components/FadeIn/FadeIn'
 import Link from 'next/link'
-import languages from '@lib/language/language'
+import languages from '@lib/language'
 import type { Language } from '@prisma/client'
 import type { ReactNode } from 'react'
 

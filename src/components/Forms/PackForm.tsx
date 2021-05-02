@@ -5,6 +5,7 @@ import {
   useCreatePackMutation,
 } from '@graphql/queries/create-pack.graphql'
 import { Language as PrismaLanguage } from '@prisma/client'
+import { TrashIcon } from '@heroicons/react/outline'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ButtonInput from '@components/FormInputs/ButtonInput'
 import CodeInput from '@components/FormInputs/CodeInput'
@@ -14,18 +15,18 @@ import LanguageSelectInput from '@components/FormInputs/LanguageSelectInput'
 import MDEditor from '@components/MDEditor/MDEditor'
 import TextAreaInput from '@components/FormInputs/TextAreaInput'
 import TextInput from '@components/FormInputs/TextInput'
-import languageToMode from '@lib/utils/codemirror/language-to-mode'
+import getLanguageMode from '@lib/language/get-language-mode'
 import validationErrors from '@lib/validation/error'
 import type { SnippetInput } from '@graphql/queries/create-pack.graphql'
 
-type Inputs = {
+type PackFormInputs = {
   packName: string
   packShortDescription: string
   packLongDescription: string
   snippets: SnippetInput[]
 }
 
-const schema = Yup.object().shape({
+const packFormSchema = Yup.object().shape({
   packName: Yup.string()
     .required(validationErrors.required)
     .max(50, validationErrors.maxLength),
@@ -36,6 +37,7 @@ const schema = Yup.object().shape({
   snippets: Yup.array()
     .required(validationErrors.required)
     .min(1, ({ min }) => `You must have at least ${min} snippet.`)
+    .max(5, ({ max }) => `You can only have up to ${max} snippets.`)
     .of(
       Yup.object().shape({
         name: Yup.string()
@@ -49,7 +51,11 @@ const schema = Yup.object().shape({
     ),
 })
 
-const NewPackForm = () => {
+export interface PackFormProps {
+  defaultValues?: Partial<PackFormInputs>
+}
+
+const PackForm = ({ defaultValues }: PackFormProps) => {
   const [createPack] = useCreatePackMutation()
 
   const {
@@ -61,9 +67,17 @@ const NewPackForm = () => {
     getValues,
     watch,
     trigger,
-  } = useForm<Inputs>({ resolver: yupResolver(schema), mode: 'onBlur' })
+  } = useForm<PackFormInputs>({
+    resolver: yupResolver(packFormSchema),
+    mode: 'onBlur',
+    defaultValues,
+  })
 
-  const { fields: snippetFields, append: snippetAppend } = useFieldArray({
+  const {
+    fields: snippetFields,
+    append: appendSnippet,
+    remove: removeSnippet,
+  } = useFieldArray({
     control,
     name: 'snippets',
   })
@@ -96,8 +110,8 @@ const NewPackForm = () => {
             className="w-full"
             {...mdEditorField}
             onBlur={() => trigger('packLongDescription')}
-            onChange={(editor, data, val) =>
-              setValue('packLongDescription', val as never)
+            onUpdate={(v) =>
+              setValue('packLongDescription', v.state.doc.toString())
             }
             value={getValues('packLongDescription')}
           />
@@ -114,9 +128,30 @@ const NewPackForm = () => {
 
         return (
           <div key={field.id}>
-            <Heading priority={5} size={2}>
-              Snippet {index + 1}
-            </Heading>
+            <div className="flex">
+              <button
+                type="button"
+                onClick={() => {
+                  if (
+                    window.confirm(
+                      `Are you sure you want to delete snippet ${
+                        getValues(snippetNameId) || index + 1
+                      }?`,
+                    )
+                  ) {
+                    removeSnippet(index)
+                    trigger('snippets')
+                  }
+                }}
+                aria-label="Remove snippet"
+                className="hover:text-red-500 tranistion-colors duration-200"
+              >
+                <TrashIcon height={35} width={35} />
+              </button>
+              <Heading priority={5} size={2}>
+                Snippet {index + 1}
+              </Heading>
+            </div>
 
             <hr className="my-2 w-5/6 bg-carbon-600" />
 
@@ -125,29 +160,34 @@ const NewPackForm = () => {
               id={snippetNameId}
               className="mb-3"
               required
+              defaultValue={getValues(snippetNameId)}
               {...register(snippetNameId)}
             />
             <FormError name={snippetNameId} errors={errors} />
 
             <Controller
-              render={({ field: { onChange, ref } }) => (
+              render={({ field: { onChange, value } }) => (
                 <LanguageSelectInput
-                  inputRef={ref}
-                  onChange={(val: { value: string }) => onChange(val.value)}
+                  value={value}
+                  onChange={(val) => {
+                    if (!val) return
+                    onChange(val.value)
+                  }}
                 />
               )}
-              defaultValue={GraphQLLanguage.Javascript}
+              defaultValue={getValues(snippetLanguageId)}
               control={control}
               name={snippetLanguageId}
             />
+
             <CodeInput
               label="Code"
-              mode={languageToMode(watch(snippetLanguageId))}
+              mode={getLanguageMode(watch(snippetLanguageId))}
               required
               id={snippetCodeId}
               onBlur={() => trigger(snippetCodeId)}
-              onChange={(editor, data, val) =>
-                setValue(snippetCodeId, val as never)
+              onUpdate={(v) =>
+                setValue(snippetCodeId, v.state.doc.toString() as never)
               }
               value={getValues(snippetCodeId)}
             />
@@ -159,8 +199,12 @@ const NewPackForm = () => {
       <ButtonInput
         className="!mt-8"
         value="Add Snippet"
-        onClick={() => snippetAppend({ language: GraphQLLanguage.Javascript })}
+        onClick={() => {
+          appendSnippet({ language: GraphQLLanguage.Javascript })
+          trigger('snippets')
+        }}
       />
+
       <FormError name="snippets" errors={errors} />
 
       <hr className="bg-carbon-600" />
@@ -170,4 +214,4 @@ const NewPackForm = () => {
   )
 }
 
-export default NewPackForm
+export default PackForm

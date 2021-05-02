@@ -1,7 +1,0 @@
-declare module 'codemirror/mode/python/python'
-declare module 'codemirror/mode/javascript/javascript'
-declare module 'codemirror/mode/clike/clike'
-declare module 'codemirror/mode/erlang/erlang'
-declare module 'codemirror/mode/xml/xml'
-declare module 'codemirror/mode/css/css'
-declare module 'codemirror/mode/gfm/gfm'

@@ -43,25 +43,25 @@ module.exports = {
           css: {
             color: theme('colors.carbon.300'),
             p: {
-              color: theme('colors.carbon.300'),
+              color: theme('colors.carbon.100'),
             },
             h1: {
-              color: theme('colors.carbon.400'),
+              color: theme('colors.carbon.200'),
             },
             h2: {
-              color: theme('colors.carbon.400'),
+              color: theme('colors.carbon.200'),
             },
             h3: {
-              color: theme('colors.carbon.400'),
+              color: theme('colors.carbon.200'),
             },
             h4: {
-              color: theme('colors.carbon.400'),
+              color: theme('colors.carbon.200'),
             },
             h5: {
-              color: theme('colors.carbon.400'),
+              color: theme('colors.carbon.200'),
             },
             h6: {
-              color: theme('colors.carbon.400'),
+              color: theme('colors.carbon.200'),
             },
             strong: {
               color: theme('colors.carbon.300'),
@@ -93,6 +93,13 @@ module.exports = {
                 borderRight: 'none',
               },
             },
+          },
+        },
+
+        quoteless: {
+          css: {
+            'blockquote p:first-of-type::before': { content: 'none' },
+            'blockquote p:first-of-type::after': { content: 'none' },
           },
         },
       }),

@@ -25,7 +25,7 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
             type="text"
             defaultValue={defaultValue}
           />
-          <button type="submit">
+          <button type="submit" name="Search">
             <div className="inline-flex items-center hover:bg-carbon-500 p-2 cursor-pointer transition-colors duration-300 rounded-md">
               <SearchIcon height={35} width={35} />
             </div>

@@ -1,11 +1,8 @@
 import { forwardRef } from 'react'
 import Label from './Label'
-import type { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import type { ComponentPropsWithRef } from 'react'
 
-type TextInputProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
-> & {
+type TextInputProps = ComponentPropsWithRef<'input'> & {
   label?: string
   required?: boolean
 }

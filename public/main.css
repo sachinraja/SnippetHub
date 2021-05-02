@@ -50,3 +50,6 @@ button-active {
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-carbon-500;
 }
+
+.cm-editor { height: auto }
+.cm-editor .cm-content, .cm-editor .cm-gutter { min-height: 200px }

@@ -26,7 +26,7 @@ model Pack {
   id               Int       @id @default(autoincrement())
   name             String    @db.Citext
   shortDescription String    @map("short_description")
-  longDescription  String?    @map("long_description")
+  longDescription  String?   @map("long_description")
   language         Language  @default(other)
   upvotes          Int       @default(0)
   snippets         Snippet[]
