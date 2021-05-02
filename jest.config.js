@@ -1,5 +1,6 @@
 const { pathsToModuleNameMapper } = require('ts-jest/utils')
-const { compilerOptions } = require('./tsconfig.json')
+const JSON5 = require('json5')
+const fs = require('fs')
 
 module.exports = {
   globals: {
@@ -9,9 +10,13 @@ module.exports = {
     },
   },
   moduleFileExtensions: ['ts', 'js', 'tsx', 'jsx'],
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>',
-  }),
+  moduleNameMapper: pathsToModuleNameMapper(
+    // must parse with JSON5 for trailing commas and comments
+    JSON5.parse(fs.readFileSync('tsconfig.json')).compilerOptions.paths,
+    {
+      prefix: '<rootDir>',
+    },
+  ),
   preset: 'ts-jest',
   testEnvironment: 'node',
 }

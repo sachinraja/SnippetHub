@@ -5,22 +5,22 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
     ],
     "baseUrl": ".",
     "paths": {
       "@components/*": [
-        "src/components/*"
+        "src/components/*",
       ],
       "@layouts/*": [
-        "src/layouts/*"
+        "src/layouts/*",
       ],
       "@lib/*": [
-        "src/lib/*"
+        "src/lib/*",
       ],
       "@graphql/*": [
-        "src/graphql/*"
-      ]
+        "src/graphql/*",
+      ],
     },
     "skipLibCheck": true,
     "strict": true,
@@ -40,17 +40,17 @@
     "**/*.tsx",
     "src/next-env.d.ts",
     "*.config.js",
-    ".eslintrc.js"
+    ".eslintrc.js",
   ],
   "exclude": [
     "node_modules",
     "__generated__",
     "src/types",
-    ".next"
+    ".next",
   ],
   "ts-node": {
     "compilerOptions": {
-      "module": "commonjs"
-    }
-  }
+      "module": "commonjs",
+    },
+  },
 }
