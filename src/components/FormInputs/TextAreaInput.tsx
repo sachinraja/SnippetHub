@@ -29,9 +29,9 @@ const TextAreaInput = forwardRef<HTMLTextAreaElement, TextAreaInputProps>(
         )}
         <textarea
           ref={ref}
-          className={`bg-carbon-900 ${
+          className={`${className} bg-carbon-900 ${
             responsive ? 'w-full sm:w-2/3' : ''
-          } border-0 align-middle rounded-sm ring-1 ring-carbon-700 focus:ring-carbon-400 transition-shadow duration-300 ${className}`}
+          } border-0 align-middle rounded-sm ring-1 ring-carbon-700 focus:ring-carbon-400 transition-shadow duration-300`}
           id={id}
           name={id}
           autoComplete="off"

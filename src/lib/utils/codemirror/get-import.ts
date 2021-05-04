@@ -15,10 +15,8 @@ const modeToImport = {
     StreamLanguage.define(
       (await import('@codemirror/legacy-modes/mode/clike')).csharp,
     ),
-  [LanguageMode.erlang]: async () =>
-    StreamLanguage.define(
-      (await import('@codemirror/legacy-modes/mode/erlang')).erlang,
-    ),
+  [LanguageMode.elixir]: async () =>
+    StreamLanguage.define((await import('codemirror-lang-elixir')).elixir),
   [LanguageMode.html]: async () =>
     (await import('@codemirror/lang-html')).html(),
   [LanguageMode.css]: async () => (await import('@codemirror/lang-css')).css(),

@@ -3,7 +3,7 @@ export enum LanguageMode {
   javascript = 'javascript',
   typescript = 'typescript',
   csharp = 'csharp',
-  erlang = 'erlang',
+  elixir = 'elixir',
   html = 'html',
   css = 'css',
   markdown = 'markdown',

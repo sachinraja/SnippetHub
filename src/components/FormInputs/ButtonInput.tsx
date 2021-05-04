@@ -11,7 +11,7 @@ const ButtonInput = forwardRef<HTMLInputElement, ButtonInputProps>(
       <input
         ref={ref}
         type={type}
-        className={`text-xl bg-carbon-800 cursor-pointer py-1.5 px-5 rounded-md hover:bg-carbon-700 transition-colors ${className}`}
+        className={`${className} text-xl bg-carbon-800 cursor-pointer py-1.5 px-5 rounded-md hover:bg-carbon-700 transition-colors`}
         {...props}
       />
     )

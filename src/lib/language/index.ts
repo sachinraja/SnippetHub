@@ -54,7 +54,7 @@ const languages: Record<PrismaLanguage, Language> = {
     color: 'indigo',
     icon: elixirIcon,
     iconColor: '#4F46E5',
-    mode: LanguageMode.erlang,
+    mode: LanguageMode.elixir,
   },
   [PrismaLanguage.html]: {
     name: 'html',
