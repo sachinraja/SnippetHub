@@ -15,6 +15,7 @@ module.exports = {
     '.next',
     '__generated__',
     '**/*.graphql.d.ts',
+    '__codegen_cache__',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
