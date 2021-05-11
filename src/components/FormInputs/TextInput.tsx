@@ -13,7 +13,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     ref,
   ) => {
     return (
-      <div className={className}>
+      <div className={`overflow-hidden ${className}`}>
         {label && (
           <Label htmlFor={id} required={required}>
             {label}
@@ -22,7 +22,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         <input
           ref={ref}
           type="text"
-          className="text-xl bg-carbon-900 align-middle w-full sm:w-2/3 border-0 border-b-1 border-carbon-700 shadow-lg focus:ring-0 focus:border-carbon-400 transition-colors duration-500"
+          className="text-xl bg-carbon-900 align-middle border-0 border-b-1 border-carbon-700 shadow-lg focus:ring-0 focus:border-carbon-400 transition-colors duration-500"
           id={id}
           name={id}
           required={required}

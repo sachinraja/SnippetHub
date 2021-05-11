@@ -1,4 +1,5 @@
 import { getAuthorFromParam, getPackFromParam } from '@lib/utils/url-params'
+import { useUpdatePackMutation } from '@graphql/queries/update-pack.graphql'
 import Container from '@components/Container/Container'
 import PackFormLayout from '@layouts/PackFormLayout'
 import type { AuthorPackProps, PackParams } from './pack'
@@ -21,6 +22,8 @@ export const getServerSideProps = async ({
 }
 
 const PackEditPage = ({ pack }: AuthorPackProps) => {
+  const [updatePack] = useUpdatePackMutation()
+
   return (
     <Container meta={{ title: 'Edit a Pack' }}>
       <PackFormLayout
@@ -30,9 +33,9 @@ const PackEditPage = ({ pack }: AuthorPackProps) => {
           packName: pack.name,
           packShortDescription: pack.shortDescription,
           packLongDescription: pack.longDescription ?? '',
-          // @ts-expect-error TODO type-graphql: Prisma and GraphQL `Language` enums are the same.
           snippets: pack.snippets,
         }}
+        submitHandler={(data) => updatePack({ variables: data })}
       />
     </Container>
   )

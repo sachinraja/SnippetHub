@@ -1,8 +1,11 @@
-import { Language } from '@graphql/queries/create-pack.graphql'
+import { Language } from '@prisma/client'
+import { useCreatePackMutation } from '@graphql/queries/create-pack.graphql'
 import Container from '@components/Container/Container'
 import PackFormLayout from '@layouts/PackFormLayout'
 
 const NewPack = () => {
+  const [createPack] = useCreatePackMutation()
+
   return (
     <Container meta={{ title: 'Create a New Pack' }}>
       <PackFormLayout
@@ -13,10 +16,11 @@ const NewPack = () => {
             {
               name: '',
               code: '',
-              language: Language.Javascript,
+              language: Language.javascript,
             },
           ],
         }}
+        submitHandler={(data) => createPack({ variables: data })}
       />
     </Container>
   )

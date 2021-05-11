@@ -1,3 +1,12 @@
 {
   "css.validate": false,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "__codegen_cache__": true,
+  },
 }

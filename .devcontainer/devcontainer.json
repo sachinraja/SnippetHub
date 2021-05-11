@@ -3,9 +3,6 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "devcontainer",
 	"workspaceFolder": "/workspace",
-	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash"
-	},
 	"extensions": [
 		"dbaeumer.vscode-eslint",
 		"prisma.prisma",

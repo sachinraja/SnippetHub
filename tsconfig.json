@@ -44,9 +44,9 @@
   ],
   "exclude": [
     "node_modules",
-    "__generated__",
     "src/types",
     ".next",
+    "__codegen_cache__",
   ],
   "ts-node": {
     "compilerOptions": {

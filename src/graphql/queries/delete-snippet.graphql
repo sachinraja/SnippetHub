@@ -1,0 +1,9 @@
+mutation DeleteSnippet(
+  $snippetId: Int!
+) {
+  deleteSnippet(
+    id: $snippetId
+  ) {
+    name
+  }
+}

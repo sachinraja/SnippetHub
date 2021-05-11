@@ -2,7 +2,7 @@ import { ErrorMessage } from '@hookform/error-message'
 import Paragraph from '@components/Paragraph/Paragraph'
 import type { DeepMap, FieldError, FieldValues } from 'react-hook-form'
 
-interface FormErrorProps {
+export interface FormErrorProps {
   name: string
   errors: DeepMap<FieldValues, FieldError>
 }

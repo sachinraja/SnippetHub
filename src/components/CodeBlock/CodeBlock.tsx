@@ -10,7 +10,7 @@ import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typesc
 
 interface CodeBlockProps {
   language?: string
-  value?: string
+  children?: string
 }
 
 SyntaxHighlighter.registerLanguage('python', python)
@@ -21,17 +21,17 @@ SyntaxHighlighter.registerLanguage('elixir', elixir)
 SyntaxHighlighter.registerLanguage('markup', markup)
 SyntaxHighlighter.registerLanguage('css', css)
 
-const CodeBlock = ({ language, value }: CodeBlockProps) => {
+const CodeBlock = ({ language, children }: CodeBlockProps) => {
   return (
     <SyntaxHighlighter language={language} style={atomDark} showLineNumbers>
-      {value}
+      {children}
     </SyntaxHighlighter>
   )
 }
 
 CodeBlock.defaultProps = {
   language: undefined,
-  value: '',
+  children: '',
 }
 
 export default CodeBlock

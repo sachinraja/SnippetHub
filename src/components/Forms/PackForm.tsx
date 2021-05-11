@@ -1,14 +1,10 @@
-import * as Yup from 'yup'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
-import {
-  Language as GraphQLLanguage,
-  useCreatePackMutation,
-} from '@graphql/queries/create-pack.graphql'
-import { Language as PrismaLanguage } from '@prisma/client'
-import { TrashIcon } from '@heroicons/react/outline'
+import { Language } from '@prisma/client'
+import { packFormSchema } from '@lib/schemas/pack-schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ButtonInput from '@components/FormInputs/ButtonInput'
 import CodeInput from '@components/FormInputs/CodeInput'
+import DeleteIcon from '@components/Icons/DeleteIcon'
 import FormError from './FormError'
 import Heading from '@components/Heading/Heading'
 import LanguageSelectInput from '@components/FormInputs/LanguageSelectInput'
@@ -16,48 +12,15 @@ import MDEditor from '@components/MDEditor/MDEditor'
 import TextAreaInput from '@components/FormInputs/TextAreaInput'
 import TextInput from '@components/FormInputs/TextInput'
 import getLanguageMode from '@lib/language/get-language-mode'
-import validationErrors from '@lib/validation/error'
-import type { SnippetInput } from '@graphql/queries/create-pack.graphql'
-
-type PackFormInputs = {
-  packName: string
-  packShortDescription: string
-  packLongDescription: string
-  snippets: SnippetInput[]
-}
-
-const packFormSchema = Yup.object().shape({
-  packName: Yup.string()
-    .required(validationErrors.required)
-    .max(50, validationErrors.maxLength),
-  packShortDescription: Yup.string()
-    .required(validationErrors.required)
-    .max(255, validationErrors.maxLength),
-  packLongDescription: Yup.string().max(10000, validationErrors.maxLength),
-  snippets: Yup.array()
-    .required(validationErrors.required)
-    .min(1, ({ min }) => `You must have at least ${min} snippet.`)
-    .max(5, ({ max }) => `You can only have up to ${max} snippets.`)
-    .of(
-      Yup.object().shape({
-        name: Yup.string()
-          .required(validationErrors.required)
-          .max(50, validationErrors.maxLength),
-        code: Yup.string()
-          .required(validationErrors.required)
-          .max(5000, validationErrors.maxLength),
-        language: Yup.string().oneOf(Object.values(PrismaLanguage)),
-      }),
-    ),
-})
+import type { PackFormInputs } from '@lib/schemas/pack-schema'
+import type { SubmitHandler } from 'react-hook-form'
 
 export interface PackFormProps {
   defaultValues?: Partial<PackFormInputs>
+  submitHandler: SubmitHandler<PackFormInputs>
 }
 
-const PackForm = ({ defaultValues }: PackFormProps) => {
-  const [createPack] = useCreatePackMutation()
-
+const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
   const {
     register,
     handleSubmit,
@@ -83,7 +46,7 @@ const PackForm = ({ defaultValues }: PackFormProps) => {
   })
 
   return (
-    <form onSubmit={handleSubmit((data) => createPack({ variables: data }))}>
+    <form onSubmit={handleSubmit(submitHandler)}>
       <div className="space-y-3">
         <TextInput
           id="packName"
@@ -111,6 +74,7 @@ const PackForm = ({ defaultValues }: PackFormProps) => {
               onUpdate={(v) =>
                 setValue('packLongDescription', v.state.doc.toString())
               }
+              label="Long Description - Supports Markdown (GFM)"
               value={getValues('packLongDescription')}
             />
           )}
@@ -142,9 +106,8 @@ const PackForm = ({ defaultValues }: PackFormProps) => {
                     }
                   }}
                   aria-label="Remove snippet"
-                  className="hover:text-red-500 tranistion-colors duration-200"
                 >
-                  <TrashIcon height={35} width={35} />
+                  <DeleteIcon />
                 </button>
                 <Heading priority={5} size={2}>
                   Snippet {index + 1}
@@ -200,7 +163,7 @@ const PackForm = ({ defaultValues }: PackFormProps) => {
         className="my-4"
         value="Add Snippet"
         onClick={() => {
-          appendSnippet({ language: GraphQLLanguage.Javascript })
+          appendSnippet({ language: Language.javascript })
           trigger('snippets')
         }}
       />

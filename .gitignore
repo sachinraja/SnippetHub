@@ -139,6 +139,7 @@ dist
 # generated types
 __generated__
 
-# graphql-let
+# graphql-codegen
+__codegen_cache__
 *.graphqls.d.ts
 *.graphql.d.ts

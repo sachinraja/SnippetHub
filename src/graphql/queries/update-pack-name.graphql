@@ -1,0 +1,11 @@
+mutation UpdatePackName(
+  $packId: Int!
+  $packName: String!
+) {
+  updatePackName(
+    id: $packId
+    name: $packName
+  ) {
+    name
+  }
+}

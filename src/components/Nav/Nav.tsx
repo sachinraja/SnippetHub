@@ -1,3 +1,4 @@
+import { ChevronDownIcon, PlusIcon } from '@heroicons/react/outline'
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -112,34 +113,8 @@ const Nav = () => {
                 type="button"
               >
                 <span className="sr-only">Create new</span>
-                <svg
-                  className="h-6 w-6 inline"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                  />
-                </svg>
-                <svg
-                  className="h-6 w-4 inline transform translate-y-2 -translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M19 9l-7 7-7-7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                  />
-                </svg>
+                <PlusIcon className="h-6 w-6 inline" />
+                <ChevronDownIcon className="h-6 w-4 inline transform translate-y-2 -translate-x-1" />
               </button>
               <div
                 ref={newOptionsContainer}

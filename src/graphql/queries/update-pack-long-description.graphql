@@ -1,0 +1,11 @@
+mutation UpdatePackLongDescription(
+  $packId: Int!
+  $packLongDescription: String!
+) {
+  updatePackLongDescription(
+    id: $packId
+    longDescription: $packLongDescription
+  ) {
+    name
+  }
+}

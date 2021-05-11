@@ -1,0 +1,11 @@
+mutation UpdatePackShortDescription(
+  $packId: Int!
+  $packShortDescription: String!
+) {
+  updatePackShortDescription(
+    id: $packId
+    shortDescription: $packShortDescription
+  ) {
+    name
+  }
+}

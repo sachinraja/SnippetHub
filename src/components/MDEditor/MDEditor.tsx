@@ -19,15 +19,20 @@ type MDEditorProps = {
 } & CodeInputProps
 
 const MDEditor = forwardRef<HTMLDivElement, MDEditorProps>(
-  ({ className, value, required, name, ...props }: MDEditorProps, ref) => {
+  (
+    { className, value, required, name, label, ...props }: MDEditorProps,
+    ref,
+  ) => {
     const [writing, setWriting] = useState(true)
 
     return (
       <div className={className}>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <Label htmlFor={name} required={required}>
-          Long Description - Supports Markdown (GFM)
-        </Label>
+        {label && (
+          <Label htmlFor={name} required={required}>
+            {label}
+          </Label>
+        )}
 
         <div className="ring-1 ring-carbon-400 mt-2">
           <Menu>

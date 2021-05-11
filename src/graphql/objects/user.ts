@@ -1,4 +1,4 @@
-import { Pack } from './pack'
+import { Pack } from '@graphql/objects/pack'
 import { nonNull, objectType } from 'nexus'
 
 export const User = objectType({

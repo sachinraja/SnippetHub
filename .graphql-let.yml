@@ -5,4 +5,9 @@ plugins:
   - typescript
   - typescript-operations
   - typescript-react-apollo
-cacheDir: __generated__
+config:
+  enumValues:
+    Language: '@prisma/client#Language'
+  enumPrefix: GQL
+
+cacheDir: __codegen_cache__
