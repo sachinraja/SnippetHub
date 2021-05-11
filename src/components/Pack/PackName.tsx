@@ -7,7 +7,7 @@ import Heading from '@components/Heading/Heading'
 import PackEdit from '@components/Pack/PackEdit'
 import TextInput from '@components/FormInputs/TextInput'
 import type { Dispatch, SetStateAction } from 'react'
-import type { PackFormInputs } from '@lib/schemas/pack-schema'
+import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
 
 interface PackNameProps {
   packId: number
@@ -25,7 +25,7 @@ const PackName = ({ packId, packName, setPackName }: PackNameProps) => {
     getValues,
     trigger,
     formState: { errors },
-  } = useFormContext<PackFormInputs>()
+  } = useFormContext<PackEditFormInputs>()
 
   const router = useRouter()
 

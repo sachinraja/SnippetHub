@@ -9,6 +9,7 @@ import Heading from '@components/Heading/Heading'
 import PackEdit from '@components/Pack/PackEdit'
 import TextInput from '@components/FormInputs/TextInput'
 import type { Dispatch, SetStateAction } from 'react'
+import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
 import type { Snippet } from '@prisma/client'
 import type { UseFieldArrayReturn } from 'react-hook-form'
 
@@ -37,11 +38,11 @@ const PackSnippetName = ({
     setValue,
     trigger,
     formState: { errors },
-  } = useFormContext<PackFormInputs>()
+  } = useFormContext<PackEditFormInputs>()
 
   const formSnippetId = `snippets.${index}.name` as const
   useEffect(() => {
-    setValue(formSnippetId, snippet.name)
+    setValue(formSnippetId, snippet.name as never)
   }, [snippet])
 
   return (

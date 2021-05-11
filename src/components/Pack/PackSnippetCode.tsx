@@ -7,7 +7,7 @@ import FormError from '@components/Forms/FormError'
 import PackEdit from '@components/Pack/PackEdit'
 import getLanguageMode from '@lib/language/get-language-mode'
 import type { Dispatch, SetStateAction } from 'react'
-import type { PackFormInputs } from '@lib/schemas/pack-schema'
+import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
 import type { Snippet } from '@prisma/client'
 
 interface PackSnippetCodeProps {
@@ -32,11 +32,11 @@ const PackSnippetCode = ({
     setValue,
     trigger,
     formState: { errors },
-  } = useFormContext<PackFormInputs>()
+  } = useFormContext<PackEditFormInputs>()
 
   const formSnippetId = `snippets.${index}.code` as const
   useEffect(() => {
-    setValue(formSnippetId, snippet.code)
+    setValue(formSnippetId, snippet.code as never)
   }, [snippet])
 
   const languageMode = getLanguageMode(snippet.language)
@@ -50,7 +50,9 @@ const PackSnippetCode = ({
         <CodeInput
           mode={languageMode}
           onBlur={() => trigger(formSnippetId)}
-          onUpdate={(v) => setValue(formSnippetId, v.state.doc.toString())}
+          onUpdate={(v) =>
+            setValue(formSnippetId, v.state.doc.toString() as never)
+          }
           value={getValues(formSnippetId)}
         />
       }

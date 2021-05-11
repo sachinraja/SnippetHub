@@ -8,14 +8,13 @@ import SubmitIcon from '@components/Icons/SubmitIcon'
 import TextInput from '@components/FormInputs/TextInput'
 import getLanguageMode from '@lib/language/get-language-mode'
 import type { Dispatch, SetStateAction } from 'react'
-import type { PackEditFormInputs } from 'src/pages/[author]/[pack]'
-import type { PackFormInputs } from '@lib/schemas/pack-schema'
+import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
 import type { Snippet } from '@prisma/client'
 import type { UseFieldArrayReturn } from 'react-hook-form'
 
 interface CreateSnippetProps {
   packId: number
-  methods: UseFieldArrayReturn<PackFormInputs, 'snippets', 'id'>
+  methods: UseFieldArrayReturn<PackEditFormInputs, 'snippets', 'id'>
   snippets: Snippet[]
   setSnippets: Dispatch<SetStateAction<Snippet[]>>
   setIsCreatingSnippet: Dispatch<SetStateAction<boolean>>

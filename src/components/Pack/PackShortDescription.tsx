@@ -8,7 +8,7 @@ import Paragraph from '@components/Paragraph/Paragraph'
 import SubmitIcon from '@components/Icons/SubmitIcon'
 import TextAreaInput from '@components/FormInputs/TextAreaInput'
 import type { Dispatch, SetStateAction } from 'react'
-import type { PackFormInputs } from '@lib/schemas/pack-schema'
+import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
 
 interface PackShortDescriptionProps {
   packId: number
@@ -32,7 +32,7 @@ const PackShortDescription = ({
     getValues,
     trigger,
     formState: { errors },
-  } = useFormContext<PackFormInputs>()
+  } = useFormContext<PackEditFormInputs>()
 
   return (
     <PackEdit

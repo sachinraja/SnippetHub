@@ -6,7 +6,7 @@ import MDEditor from '@components/MDEditor/MDEditor'
 import MDRenderer from '@components/MDRenderer/MDRenderer'
 import PackEdit from '@components/Pack/PackEdit'
 import type { Dispatch, SetStateAction } from 'react'
-import type { PackFormInputs } from '@lib/schemas/pack-schema'
+import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
 
 interface PackLongDescriptionProps {
   packId: number
@@ -29,7 +29,7 @@ const PackLongDescription = ({
     setValue,
     trigger,
     formState: { errors },
-  } = useFormContext<PackFormInputs>()
+  } = useFormContext<PackEditFormInputs>()
 
   return (
     <PackEdit

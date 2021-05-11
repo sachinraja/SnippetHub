@@ -1,10 +1,11 @@
-import * as Yup from 'yup'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { Language, Snippet } from '@prisma/client'
+import {
+  PackEditFormInputs,
+  packEditFormSchema,
+} from '@lib/schemas/pack-edit-schema'
 import { PlusIcon } from '@heroicons/react/outline'
-import { SnippetInput } from '@graphql/queries/create-snippet.graphql'
 import { getAuthorFromParam, getPackFromParam } from '@lib/utils/url-params'
-import { packFormSchema, snippet } from '@lib/schemas/pack-schema'
 import { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Container from '@components/Container/Container'
@@ -17,7 +18,6 @@ import PackShortDescription from '@components/Pack/PackShortDescription'
 import PackSnippetCode from '@components/Pack/PackSnippetCode'
 import PackSnippetName from '@components/Pack/PackSnippetName'
 import type { AuthorPackProps, PackParams } from './pack'
-import type { PackFormInputs } from '@lib/schemas/pack-schema'
 
 export const getServerSideProps = async ({
   params,
@@ -36,15 +36,6 @@ export const getServerSideProps = async ({
     },
   }
 }
-
-export type PackEditFormInputs = PackFormInputs & { newSnippet: SnippetInput }
-
-const packEditFormSchema = packFormSchema.concat(
-  // @ts-expect-error yup is not typed well here
-  Yup.object({
-    newSnippet: snippet,
-  }),
-)
 
 const PackPage = ({ author, pack }: AuthorPackProps) => {
   const [packName, setPackName] = useState(pack.name)
