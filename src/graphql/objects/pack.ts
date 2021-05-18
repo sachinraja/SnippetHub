@@ -1,6 +1,7 @@
 import { Language } from '@graphql/objects/language'
 import { Snippet } from '@graphql/objects/snippet'
 import { User } from '@graphql/objects/user'
+import { getLanguageFromSnippets } from '@graphql/utils/update-language'
 import {
   intArg,
   list,
@@ -9,7 +10,6 @@ import {
   objectType,
   stringArg,
 } from 'nexus'
-import getLanguageFromSnippets from '@graphql/utils/get-language-from-snippets'
 import type { Prisma, User as PrismaUser } from '@prisma/client'
 
 export const Pack = objectType({

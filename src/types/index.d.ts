@@ -1,4 +1,4 @@
-import type { Prisma } from '@prisma/client'
+import { Prisma } from '@prisma/client'
 
 type UnwrapPromise<T> = T extends PromiseLike<infer U> ? U : T
 

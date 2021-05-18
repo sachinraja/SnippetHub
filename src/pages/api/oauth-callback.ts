@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return
   }
 
-  const githubConfig = envConfig.get('github')
+  const githubConfig = envConfig.get('gitHub')
 
   const tokenReqBody = {
     client_id: githubConfig.clientId,

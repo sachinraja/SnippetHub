@@ -102,6 +102,11 @@ module.exports = {
             'blockquote p:first-of-type::after': { content: 'none' },
           },
         },
+        tight: {
+          css: {
+            '*': { margin: '0 !important' },
+          },
+        },
       }),
     },
   },

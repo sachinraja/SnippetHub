@@ -9,6 +9,6 @@
 		"bradlc.vscode-tailwindcss",
 		"graphql.vscode-graphql"
 	],
-	"postCreateCommand": "npx prisma generate && npx prisma migrate dev && npx prisma db seed --preview-feature && npm run graphql-let:gen",
+	"postCreateCommand": "npx prisma generate && npx prisma migrate dev && npx prisma db seed --preview-feature && npm run graphql:gen",
 	"remoteUser": "node"
 }

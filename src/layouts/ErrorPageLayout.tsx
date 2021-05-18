@@ -1,6 +1,6 @@
-import Container from '@components/Container/Container'
-import Heading from '@components/Heading/Heading'
-import Paragraph from '@components/Paragraph/Paragraph'
+import Container from '@components/containers/Container'
+import Heading from '@components/Heading'
+import Paragraph from '@components/Paragraph'
 import type { ErrorProps } from 'next/error'
 
 const ErrorPageLayout = ({ statusCode, title }: ErrorProps) => {

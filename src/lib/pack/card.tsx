@@ -1,6 +1,6 @@
 import { numberWithCommas } from '@lib/utils/number'
-import Card from '@components/Card/Card'
-import type { CardProps } from '@components/Card/Card'
+import Card from '@components/card/Card'
+import type { CardProps } from '@components/card/Card'
 import type { Language } from '@prisma/client'
 import type { ReactElement } from 'react'
 

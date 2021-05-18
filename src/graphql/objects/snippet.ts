@@ -8,6 +8,7 @@ import {
   objectType,
   stringArg,
 } from 'nexus'
+import { updatePackLanguage } from '@graphql/utils/update-language'
 import type { Prisma, Pack as PrismaPack } from '@prisma/client'
 
 export const Snippet = objectType({
@@ -50,25 +51,58 @@ export const CreateSnippet = mutationField('createSnippet', {
     packId: nonNull(intArg()),
     snippet: nonNull(SnippetInput),
   },
-  resolve(parent, args, ctx) {
-    return ctx.prisma.snippet.create({
+  async resolve(parent, args, ctx) {
+    const pack = await ctx.prisma.pack.findUnique({
+      where: { id: args.packId },
+      include: { snippets: true },
+    })
+
+    if (!pack?.snippets) return null
+
+    const createdSnippet = await ctx.prisma.snippet.create({
       data: {
         packId: args.packId,
         ...args.snippet,
       },
     })
+
+    updatePackLanguage(
+      [createdSnippet, ...pack.snippets],
+      args.packId,
+      pack.language,
+    )
+
+    return createdSnippet
   },
 })
 
 export const DeleteSnippet = mutationField('deleteSnippet', {
   type: Snippet,
   args: {
+    packId: nonNull(intArg()),
     id: nonNull(intArg()),
   },
-  resolve(parent, args, ctx) {
-    const deletedSnippet = ctx.prisma.snippet.delete({
+  async resolve(parent, args, ctx) {
+    const pack = await ctx.prisma.pack.findUnique({
+      where: { id: args.packId },
+      include: { snippets: true },
+    })
+
+    if (!pack?.snippets || pack?.snippets.length === 1) return null
+
+    const deletedSnippet = await ctx.prisma.snippet.delete({
       where: { id: args.id },
     })
+
+    // remove deleted snippet
+    const deletedSnippetIndex = pack.snippets.findIndex((snippet) => {
+      return snippet.id === deletedSnippet.id
+    })
+
+    const newPackSnippets = pack.snippets.slice()
+    newPackSnippets.splice(deletedSnippetIndex, 1)
+
+    updatePackLanguage(newPackSnippets, args.packId, pack.language)
 
     return deletedSnippet
   },

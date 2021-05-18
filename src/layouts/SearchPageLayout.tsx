@@ -1,8 +1,8 @@
-import CardContainer from '@components/CardContainer/CardContainer'
-import Heading from '@components/Heading/Heading'
-import Hero from '@components/Hero/Hero'
-import Paragraph from '@components/Paragraph/Paragraph'
-import type { CardProps } from '@components/Card/Card'
+import CardContainer from '@components/card/CardContainer'
+import Heading from '@components/Heading'
+import Hero from '@components/hero/Hero'
+import Paragraph from '@components/Paragraph'
+import type { CardProps } from '@components/card/Card'
 import type { ReactElement, ReactNode } from 'react'
 
 interface SearchPageLayoutProps {

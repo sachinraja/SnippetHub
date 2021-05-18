@@ -1,7 +1,7 @@
 import { InferGetServerSidePropsType } from 'next'
 import { SearchIcon } from '@heroicons/react/outline'
 import { searchForPack } from '@lib/pack/search'
-import Container from '@components/Container/Container'
+import Container from '@components/containers/Container'
 import SearchPageLayout from '@layouts/SearchPageLayout'
 import getCardFromPack from '@lib/pack/card'
 import type { ParsedUrlQuery } from 'querystring'

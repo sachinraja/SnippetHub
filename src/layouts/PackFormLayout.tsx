@@ -1,6 +1,6 @@
-import Heading from '@components/Heading/Heading'
-import PackForm, { PackFormProps } from '@components/Forms/PackForm'
-import Paragraph from '@components/Paragraph/Paragraph'
+import Heading from '@components/Heading'
+import PackForm, { PackFormProps } from '@components/forms/PackForm'
+import Paragraph from '@components/Paragraph'
 
 type PackFormLayoutProps = {
   heading: string

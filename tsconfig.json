@@ -12,6 +12,9 @@
       "@components/*": [
         "src/components/*",
       ],
+      "@hooks/*": [
+        "src/hooks/*",
+      ],
       "@layouts/*": [
         "src/layouts/*",
       ],
@@ -44,7 +47,6 @@
   ],
   "exclude": [
     "node_modules",
-    "src/types",
     ".next",
     "__codegen_cache__",
   ],

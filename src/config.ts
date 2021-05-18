@@ -1,14 +1,16 @@
 import convict from 'convict'
 import dotenv from 'dotenv'
+import path from 'path'
 
 dotenv.config({ path: '.env.local' })
+dotenv.config({ path: path.join('src', 'prisma', '.env.local') })
 
-const envConfig = convict({
+const unvalidatedEnvConfig = convict({
   db: {
     host: {
       default: 'localhost',
       doc: 'The host to make the connection to.',
-      env: 'HOST',
+      env: 'DB_HOST',
       format: String,
     },
     name: {
@@ -21,7 +23,8 @@ const envConfig = convict({
       default: null,
       doc: 'The password for the user.',
       env: 'POSTGRES_PASSWORD',
-      format: '*',
+      format: String,
+      nullable: true,
     },
     port: {
       default: 5432,
@@ -31,7 +34,7 @@ const envConfig = convict({
     },
     url: {
       default: '',
-      doc: 'The url.',
+      doc: 'The databaase url.',
       env: 'DATABASE_URL',
       format: String,
     },
@@ -48,7 +51,7 @@ const envConfig = convict({
     env: 'NODE_ENV',
     format: ['development', 'test', 'production'],
   },
-  github: {
+  gitHub: {
     clientId: {
       default: '',
       doc: 'The OAuth client id.',
@@ -90,6 +93,6 @@ const envConfig = convict({
   },
 })
 
-envConfig.validate({ allowed: 'strict' })
+const envConfig = unvalidatedEnvConfig.validate({ allowed: 'strict' })
 
 export default envConfig

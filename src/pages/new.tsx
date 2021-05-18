@@ -1,6 +1,6 @@
 import { Language } from '@prisma/client'
 import { useCreatePackMutation } from '@graphql/queries/create-pack.graphql'
-import Container from '@components/Container/Container'
+import Container from '@components/containers/Container'
 import PackFormLayout from '@layouts/PackFormLayout'
 
 const NewPack = () => {

@@ -4,7 +4,7 @@ import {
   useGetTopPacksQuery,
 } from '@graphql/queries/get-top-packs.graphql'
 import { initializeApollo } from '@lib/apollo-client'
-import Container from '@components/Container/Container'
+import Container from '@components/containers/Container'
 import SearchPageLayout from '@layouts/SearchPageLayout'
 import getCardFromPack from '@lib/pack/card'
 import type { InferGetStaticPropsType } from 'next'
