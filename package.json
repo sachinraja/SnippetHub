@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start:prod": "docker-compose up --build",
+    "start:test": "docker-compose -f docker-compose.test.yml -f docker-compose.yml up",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
