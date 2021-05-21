@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+/* eslint-disable global-require, @typescript-eslint/no-var-requires */
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { mergeDeep } from '@apollo/client/utilities'
 import { useMemo } from 'react'

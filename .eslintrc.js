@@ -6,9 +6,9 @@ module.exports = {
   },
   extends: [
     'airbnb',
-    'plugin:prettier/recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
   ],
   ignorePatterns: [
     '.next',
@@ -21,23 +21,15 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: 'tsconfig.json',
-    sourceType: 'module',
   },
   plugins: [
-    'prettier',
     'react',
     'sort-imports-es6-autofix',
     '@typescript-eslint',
+    'prettier',
   ],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-
-    // interferes with prettier's rule to place semi before lists
-    '@typescript-eslint/no-extra-semi': 'off',
-
-    // incompatible with the simple-icon imports
-    '@typescript-eslint/no-var-requires': 'off',
 
     camelcase: [
       'error',
@@ -79,7 +71,7 @@ module.exports = {
       { semi: false, singleQuote: true, trailingComma: 'all' },
     ],
 
-    'react/jsx-filename-extension': ['warn', { extensions: ['.ts', '.tsx'] }],
+    'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
 
     // using jsx transform
     'react/react-in-jsx-scope': 'off',
@@ -97,10 +89,7 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      typescript: {
-        alwaysTryTypes: true,
-        project: 'tsconfig.json',
-      },
+      typescript: {},
     },
   },
 }

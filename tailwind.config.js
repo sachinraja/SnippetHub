@@ -1,7 +1,7 @@
+/* eslint-disable global-require */
 module.exports = {
   mode: 'jit',
   darkMode: false,
-  /* eslint-disable-next-line global-require */
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
   purge: {
     content: [
@@ -11,11 +11,9 @@ module.exports = {
       './safelist.txt',
     ],
     options: {
-      // prevent purging of dynamic class names
       safelist: [/^text-.+?-(4|6)0{2}/, /^text-\d?xl/, /^border-.+?-50{2}/],
     },
   },
-  // or 'media' or 'class'
   theme: {
     extend: {
       borderWidth: {
