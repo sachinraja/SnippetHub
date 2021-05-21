@@ -3,11 +3,11 @@ import { EditorView, basicSetup } from '@codemirror/basic-setup'
 import { LanguageMode } from '@lib/language/mode'
 import { forwardRef, useEffect, useRef } from 'react'
 import { oneDark } from '@codemirror/theme-one-dark'
-import Label from './Label'
 import getImportFromMode from '@lib/utils/codemirror/get-import'
 import type { Extension } from '@codemirror/state'
 import type { FocusEventHandler } from 'react'
 import type { ViewUpdate } from '@codemirror/view'
+import Label from './Label'
 
 export type CodeInputProps = {
   label?: string
@@ -61,6 +61,7 @@ const CodeInput = forwardRef<HTMLDivElement, CodeInputProps>(
       })()
 
       return () => view.destroy()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mode, editor])
 
     return (

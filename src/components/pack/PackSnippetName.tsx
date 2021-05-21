@@ -43,7 +43,7 @@ const PackSnippetName = ({
   const formSnippetId = `snippets.${index}.name` as const
   useEffect(() => {
     setValue(formSnippetId, snippet.name as never)
-  }, [snippet])
+  }, [formSnippetId, setValue, snippet])
 
   return (
     <PackEdit

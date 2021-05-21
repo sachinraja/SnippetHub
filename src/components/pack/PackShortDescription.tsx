@@ -21,9 +21,8 @@ const PackShortDescription = ({
 }: PackShortDescriptionProps) => {
   const [isEditing, setIsEditing] = useState(false)
 
-  const [
-    updatePackShortDescriptionMutation,
-  ] = useUpdatePackShortDescriptionMutation()
+  const [updatePackShortDescriptionMutation] =
+    useUpdatePackShortDescriptionMutation()
 
   const {
     register,

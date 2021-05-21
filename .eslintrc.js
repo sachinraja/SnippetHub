@@ -6,9 +6,9 @@ module.exports = {
   },
   extends: [
     'airbnb',
-    'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'next',
   ],
   ignorePatterns: [
     '.next',
@@ -22,12 +22,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: [
-    'react',
-    'sort-imports-es6-autofix',
-    '@typescript-eslint',
-    'prettier',
-  ],
+  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
 
@@ -58,9 +53,6 @@ module.exports = {
       { ignorePropertyModificationsFor: ['accu'] },
     ],
 
-    // does not work with sort imports
-    'import/order': 'off',
-
     'import/prefer-default-export': 'off',
 
     // not compatible with Next.js <Link /> components
@@ -77,15 +69,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
 
     'react/jsx-props-no-spreading': 'off',
-
-    'sort-imports-es6-autofix/sort-imports-es6': [
-      'error',
-      {
-        ignoreCase: false,
-        ignoreMemberSort: false,
-        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-      },
-    ],
   },
   settings: {
     'import/resolver': {

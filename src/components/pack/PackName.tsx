@@ -39,6 +39,7 @@ const PackName = ({ packId, packName, setPackName }: PackNameProps) => {
       `/${router.query.author}/${packName}`,
       { shallow: true },
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [packName])
 
   return (

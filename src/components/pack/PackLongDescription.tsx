@@ -19,9 +19,8 @@ const PackLongDescription = ({
   packLongDescription,
   setPackLongDescription,
 }: PackLongDescriptionProps) => {
-  const [
-    updatePackLongDescriptionMutation,
-  ] = useUpdatePackLongDescriptionMutation()
+  const [updatePackLongDescriptionMutation] =
+    useUpdatePackLongDescriptionMutation()
   const [isEditing, setIsEditing] = useState(false)
 
   const {

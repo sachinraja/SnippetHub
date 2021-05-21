@@ -6,7 +6,7 @@ import type { InferGetStaticPropsType } from 'next'
 
 export const getStaticProps = () => {
   const searchParams = new URLSearchParams({
-    /* eslint-disable-next-line camelcase */
+    // eslint-disable-next-line camelcase
     client_id: envConfig.get('gitHub.clientId'),
   })
 

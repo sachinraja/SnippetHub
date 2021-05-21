@@ -11,6 +11,9 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ['avatars.githubusercontent.com'],
+  },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.graphql$/,

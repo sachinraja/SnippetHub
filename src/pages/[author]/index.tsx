@@ -8,6 +8,7 @@ import Paragraph from '@components/Paragraph'
 import getCardFromPack from '@lib/pack/card'
 import type { GetStaticPaths } from 'next'
 import type { UnwrapPromise } from 'src/types'
+import Image from 'next/image'
 
 export const getStaticProps = async ({
   params,
@@ -57,19 +58,18 @@ const AuthorPage = ({
       <header className="mt-0">
         <Header>
           <section className="m-auto sm:w-2/3">
-            <img
-              alt={`${author.username} Profile`}
-              className="inline-block rounded-full w-12 sm:w-20"
-              src={`https://avatars.githubusercontent.com/u/${author.gitHubId}`}
-            />
-            <Heading
-              className="inline font-inter pl-2 align-middle"
-              priority={1}
-              size={4}
-              bold
-            >
-              {author.username}
-            </Heading>
+            <div className="flex items-center">
+              <Image
+                width={80}
+                height={80}
+                alt={`${author.username} Profile`}
+                className="rounded-full"
+                src={`https://avatars.githubusercontent.com/u/${author.gitHubId}`}
+              />
+              <Heading className="font-inter pl-2" priority={1} size={4} bold>
+                {author.username}
+              </Heading>
+            </div>
 
             <Paragraph className="font-inter mt-2" size={4}>
               {author.bio}

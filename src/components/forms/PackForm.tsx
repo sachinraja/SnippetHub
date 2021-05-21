@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import ButtonInput from '@components/form-inputs/ButtonInput'
 import CodeInput from '@components/form-inputs/CodeInput'
 import DeleteIcon from '@components/icons/DeleteIcon'
-import FormError from './FormError'
 import Heading from '@components/Heading'
 import LanguageSelectInput from '@components/form-inputs/LanguageSelectInput'
 import MDEditor from '@components/md-editor/MDEditor'
@@ -14,6 +13,7 @@ import TextInput from '@components/form-inputs/TextInput'
 import getLanguageMode from '@lib/language/get-language-mode'
 import type { PackFormInputs } from '@lib/schemas/pack-schema'
 import type { SubmitHandler } from 'react-hook-form'
+import FormError from './FormError'
 
 export interface PackFormProps {
   defaultValues?: Partial<PackFormInputs>

@@ -4,12 +4,12 @@ import type {
   getPackFromParam,
 } from '@lib/utils/url-params'
 
-interface PackParams {
+export interface PackParams {
   author: string
   pack: string
 }
 
-interface AuthorPackProps {
+export interface AuthorPackProps {
   author: Exclude<UnwrapPromise<ReturnType<typeof getAuthorFromParam>>, null>
   pack: Exclude<UnwrapPromise<ReturnType<typeof getPackFromParam>>, null>
 }

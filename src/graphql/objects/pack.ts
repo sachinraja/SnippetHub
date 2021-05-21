@@ -1,6 +1,4 @@
 import { Language } from '@graphql/objects/language'
-import { Snippet } from '@graphql/objects/snippet'
-import { User } from '@graphql/objects/user'
 import { getLanguageFromSnippets } from '@graphql/utils/update-language'
 import {
   intArg,
@@ -30,7 +28,7 @@ export const Pack = objectType({
           where: { packId: parent.id },
         })
       },
-      type: nonNull(Snippet),
+      type: nonNull('Snippet'),
     })
     t.nonNull.field('author', {
       resolve(parent, args, ctx) {
@@ -38,7 +36,7 @@ export const Pack = objectType({
           where: { id: parent.authorId },
         }) as Prisma.Prisma__UserClient<PrismaUser>
       },
-      type: User,
+      type: 'User',
     })
     t.nonNull.dateTime('createdAt')
     t.nonNull.dateTime('updatedAt')

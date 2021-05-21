@@ -20,8 +20,7 @@ async function main() {
       gitHubId: personalGitHubId,
       type: UserType.admin,
       username: githubUsername,
-      bio:
-        'A student and aspiring software engineer with a love for TypeScript and Python.',
+      bio: 'A student and aspiring software engineer with a love for TypeScript and Python.',
       packs: {
         create: [
           {

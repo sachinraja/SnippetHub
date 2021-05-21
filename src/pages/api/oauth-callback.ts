@@ -7,7 +7,7 @@ import prisma from '@lib/prisma'
 import type { AxiosRequestConfig } from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.query.code) {
     res.status(401).send('Required parameter code is missing.')
     return
@@ -73,3 +73,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.status(200).json(tokens)
   // res.redirect('/');
 }
+
+export default handler

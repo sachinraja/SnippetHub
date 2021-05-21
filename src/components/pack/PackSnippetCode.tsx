@@ -37,7 +37,7 @@ const PackSnippetCode = ({
   const formSnippetId = `snippets.${index}.code` as const
   useEffect(() => {
     setValue(formSnippetId, snippet.code as never)
-  }, [snippet])
+  }, [formSnippetId, setValue, snippet])
 
   const languageMode = getLanguageMode(snippet.language)
 

@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-/* eslint-disable-next-line import/no-mutable-exports */
+// eslint-disable-next-line import/no-mutable-exports
 let prisma: PrismaClient
 if (envConfig.get('env') === 'production') {
   prisma = new PrismaClient()

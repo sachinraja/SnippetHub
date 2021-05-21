@@ -5,6 +5,7 @@ import Link from 'next/link'
 import languages from '@lib/language'
 import type { Language } from '@prisma/client'
 import type { ReactNode } from 'react'
+import Image from 'next/image'
 
 export interface CardProps {
   bodyUrl?: string
@@ -119,8 +120,10 @@ const Card = ({
             </section>
 
             <div className="w-full">
-              <div className="relative w-10 top-2 left-2">
-                <img
+              <div className="relative w-10 top-3 left-2">
+                <Image
+                  width={60}
+                  height={60}
                   alt={`${subtitle} Profile`}
                   className="rounded-full"
                   src={imageUrl}

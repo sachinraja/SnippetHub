@@ -3,7 +3,6 @@ import 'public/main.css'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '@lib/apollo-client'
 import Head from 'next/head'
-import React from 'react'
 import type { AppProps } from 'next/app'
 
 export function App({ Component, pageProps }: AppProps) {
