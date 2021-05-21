@@ -1,7 +1,7 @@
 import * as Yup from 'yup'
 import { Language } from '@prisma/client'
-import { SnippetInput } from '@graphql/queries/create-pack.graphql'
 import validationErrors from '@lib/validation/error'
+import type { SnippetInput } from '@graphql-types'
 
 export type PackFormInputs = {
   packName: string

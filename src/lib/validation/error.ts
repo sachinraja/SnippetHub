@@ -1,9 +1,7 @@
-import type * as Yup from 'yup'
-
 interface ErrorsInterface {
   required: string
-  maxLength: Yup.TestOptionsMessage<{ max: number }>
-  minLength: Yup.TestOptionsMessage<{ min: number }>
+  maxLength: ({ max }: { max: number }) => string
+  minLength: ({ min }: { min: number }) => string
 }
 
 const validationErrors: ErrorsInterface = {

@@ -7,6 +7,7 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    "__codegen_cache__": true,
+    "**/__generated__": true,
+    ".cache": true,
   },
 }

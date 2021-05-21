@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { User } from '@prisma/client'
 import axios from 'axios'
 import createTokens from '@lib/auth/token'

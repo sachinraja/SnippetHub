@@ -1,8 +1,6 @@
 schema: src/graphql/**/*.graphqls
-schemaEntrypoint: src/graphql/__generated__/schema.graphqls
 documents: src/graphql/**/*.graphql
 plugins:
-  - typescript
   - typescript-operations
   - typescript-react-apollo
 config:
@@ -10,4 +8,4 @@ config:
     Language: '@prisma/client#Language'
   enumPrefix: GQL
 
-cacheDir: __codegen_cache__
+cacheDir: .cache

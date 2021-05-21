@@ -1,15 +1,13 @@
 import { LanguageMode } from '@lib/language/mode'
 import { Language as PrismaLanguage } from '@prisma/client'
-import type { SimpleIcon } from 'simple-icons'
-
-const pythonIcon: SimpleIcon = require('simple-icons/icons/python')
-const javascriptIcon: SimpleIcon = require('simple-icons/icons/javascript')
-const typescriptIcon: SimpleIcon = require('simple-icons/icons/typescript')
-const csharpIcon: SimpleIcon = require('simple-icons/icons/csharp')
-const elixirIcon: SimpleIcon = require('simple-icons/icons/elixir')
-const htmlIcon: SimpleIcon = require('simple-icons/icons/html5')
-const cssIcon: SimpleIcon = require('simple-icons/icons/css3')
-const otherIcon: SimpleIcon = require('simple-icons/icons/svg')
+import csharpIcon from 'simple-icons/icons/csharp'
+import cssIcon from 'simple-icons/icons/css3'
+import elixirIcon from 'simple-icons/icons/elixir'
+import htmlIcon from 'simple-icons/icons/html5'
+import javascriptIcon from 'simple-icons/icons/javascript'
+import otherIcon from 'simple-icons/icons/svg'
+import pythonIcon from 'simple-icons/icons/python'
+import typescriptIcon from 'simple-icons/icons/typescript'
 
 interface Language {
   name: string

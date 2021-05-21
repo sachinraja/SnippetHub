@@ -12,7 +12,12 @@ const MDRenderer = ({ children, className }: MDRendererProps) => {
     <ReactMarkdown
       className={`prose prose-quoteless prose-tight p-2 max-w-none font-inter bg-carbon-800 ${className}`}
       plugins={[gfm]}
-      renderers={{ code: MDCode }}
+      components={{
+        code: (node, ...props) => {
+          const component = <MDCode {...props} />
+          return component
+        },
+      }}
     >
       {children}
     </ReactMarkdown>

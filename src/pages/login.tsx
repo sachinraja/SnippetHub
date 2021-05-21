@@ -1,13 +1,12 @@
 import Container from '@components/containers/Container'
 import Link from 'next/link'
 import envConfig from 'src/config'
+import githubIcon from 'simple-icons/icons/github'
 import type { InferGetStaticPropsType } from 'next'
-import type { SimpleIcon } from 'simple-icons'
-
-const githubIcon: SimpleIcon = require('simple-icons/icons/github')
 
 export const getStaticProps = () => {
   const searchParams = new URLSearchParams({
+    /* eslint-disable-next-line camelcase */
     client_id: envConfig.get('gitHub.clientId'),
   })
 

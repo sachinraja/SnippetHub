@@ -6,10 +6,8 @@ import Link from 'next/link'
 import MDRenderer from '@components/md-renderer/MDRenderer'
 import Menu, { LeftAlign, RightAlign } from './Menu'
 import MenuItem from './MenuItem'
+import markdownIcon from 'simple-icons/icons/markdown'
 import type { CodeInputProps } from '@components/form-inputs/CodeInput'
-import type { SimpleIcon } from 'simple-icons'
-
-const markdownIcon: SimpleIcon = require('simple-icons/icons/markdown')
 
 type MDEditorProps = {
   className?: string

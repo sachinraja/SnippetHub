@@ -7,11 +7,10 @@ module.exports = {
   extends: [
     'airbnb',
     'plugin:prettier/recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   ignorePatterns: [
-    'node_modules',
     '.next',
     '__generated__',
     '**/*.graphql.d.ts',
@@ -27,29 +26,32 @@ module.exports = {
   },
   plugins: [
     'prettier',
-    '@typescript-eslint',
     'react',
     'sort-imports-es6-autofix',
+    '@typescript-eslint',
   ],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
 
-    // does not matter as prettier already checks for semis
     // interferes with prettier's rule to place semi before lists
     '@typescript-eslint/no-extra-semi': 'off',
-
-    '@typescript-eslint/no-unsafe-assignment': 'off',
-
-    '@typescript-eslint/no-unsafe-member-access': 'off',
-
-    '@typescript-eslint/no-use-before-define': 'error',
 
     // incompatible with the simple-icon imports
     '@typescript-eslint/no-var-requires': 'off',
 
-    camelcase: 'off',
-    // doesn't work with typescript enum
+    camelcase: [
+      'error',
+      {
+        allow: ['Prisma__UserClient', 'Prisma__PackClient', 'name_authorId'],
+      },
+    ],
+    // doesn't work with ts - use @typescript-eslint version
+    '@typescript-eslint/no-shadow': 'error',
+    '@typescript-eslint/no-use-before-define': 'error',
     'no-shadow': 'off',
+    'no-use-before-define': 'off',
+
+    // override airbnb
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -58,19 +60,19 @@ module.exports = {
         tsx: 'never',
       },
     ],
+
     'no-param-reassign': [
       'error',
       { ignorePropertyModificationsFor: ['accu'] },
     ],
+
     // does not work with sort imports
     'import/order': 'off',
+
     'import/prefer-default-export': 'off',
 
-    // This rule is not compatible with Next.js's <Link /> components
+    // not compatible with Next.js <Link /> components
     'jsx-a11y/anchor-is-valid': 'off',
-
-    // does not always work correctly, only enable the ts version
-    'no-use-before-define': 'off',
 
     'prettier/prettier': [
       'error',
@@ -79,8 +81,9 @@ module.exports = {
 
     'react/jsx-filename-extension': ['warn', { extensions: ['.ts', '.tsx'] }],
 
-    // suppress errors for missing 'import React' in files - Next.js automatically imports it
+    // using jsx transform
     'react/react-in-jsx-scope': 'off',
+
     'react/jsx-props-no-spreading': 'off',
 
     'sort-imports-es6-autofix/sort-imports-es6': [
@@ -94,7 +97,10 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      typescript: {},
+      typescript: {
+        alwaysTryTypes: true,
+        project: 'tsconfig.json',
+      },
     },
   },
 }

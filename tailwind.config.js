@@ -5,9 +5,9 @@ module.exports = {
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
   purge: {
     content: [
-      './src/components/**/*.{js,ts,jsx,tsx}',
-      './src/layouts/**/*.{js,ts,jsx,tsx}',
-      './src/pages/**/*.{js,ts,jsx,tsx}',
+      './src/components/**/*.tsx',
+      './src/layouts/**/*.tsx',
+      './src/pages/**/*.tsx',
       './safelist.txt',
     ],
     options: {
