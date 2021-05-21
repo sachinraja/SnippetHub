@@ -10,10 +10,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Use Node.js 15.x
+      - name: Use Node.js 16.x
         uses: actions/setup-node@v2
         with:
-          node-version: 15.x
+          node-version: 16.x
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -28,7 +28,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install dependencies
-        run: npm i --prefer-offline
+        run: npm i
 
       - name: Generate types
         run: npm run type:gen
