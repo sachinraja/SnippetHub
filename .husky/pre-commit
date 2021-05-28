@@ -4,4 +4,4 @@
 npm run type:gen
 npm run type:check
 npm run lint:fix
-npm test
+npm run test:docker

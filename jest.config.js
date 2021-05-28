@@ -11,13 +11,15 @@ module.exports = {
     },
   },
   moduleFileExtensions: ['ts', 'js', 'tsx', 'jsx'],
-  moduleNameMapper: pathsToModuleNameMapper(
-    // must parse with JSON5 for trailing commas and comments
-    JSON5.parse(fs.readFileSync('tsconfig.json')).compilerOptions.paths,
-    {
-      prefix: '<rootDir>',
-    },
-  ),
+  moduleNameMapper: {
+    ...pathsToModuleNameMapper(
+      JSON5.parse(fs.readFileSync('tsconfig.json')).compilerOptions.paths,
+      {
+        prefix: '<rootDir>',
+      },
+    ),
+  },
+  modulePaths: ['node_modules', '<rootDir>'],
   preset: 'ts-jest',
   testEnvironment: 'node',
 }

@@ -5,39 +5,39 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    container: node:16
+    services:
+      db:
+        image: postgres:13.3-alpine
+      env:
+        POSTGRES_PASSWORD: postgres
+      # Set health checks to wait until postgres has started
+      options: >-
+        --health-cmd pg_isready
+        --health-interval 10s
+        --health-timeout 5s
+        --health-retries 5
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost
 
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v2
 
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
+      - name: install dependencies
+        run: npm ci
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-
-      - name: Install dependencies
-        run: npm i
-
-      - name: Generate types
+      - name: generate types
         run: npm run type:gen
 
-      - name: Type check
+      - name: type check
         run: npm run type:check
 
-      - name: Lint
+      - name: lint
         run: npm run lint
 
-      - name: Test
+      - name: migrate and seed database
+        run: npx prisma migrate deploy && npx prisma db seed --preview-feature
+
+      - name: test
         run: npm test

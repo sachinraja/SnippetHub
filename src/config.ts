@@ -2,8 +2,16 @@ import convict from 'convict'
 import dotenv from 'dotenv'
 import path from 'path'
 
-dotenv.config({ path: '.env.local' })
-dotenv.config({ path: path.join('src', 'prisma', '.env.local') })
+function loadEnv() {
+  // load env from files if not in production
+  if (process.env.NODE_ENV === 'production') return
+  const envFileExt =
+    process.env.NODE_ENV === 'development' ? '.env.local' : '.env.test.local'
+  dotenv.config({ path: '.env.local' })
+  dotenv.config({ path: path.join('src', 'prisma', envFileExt) })
+}
+
+loadEnv()
 
 const unvalidatedEnvConfig = convict({
   db: {

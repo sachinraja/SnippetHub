@@ -7,5 +7,4 @@ config:
   enumValues:
     Language: '@prisma/client#Language'
   enumPrefix: GQL
-
-cacheDir: .cache
+cacheDir: .cache/graphql-let
