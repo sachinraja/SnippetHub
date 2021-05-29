@@ -8,8 +8,8 @@ env:
   POSTGRES_DB: snippethub
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
-  DB_HOST: localhost
-  DATABASE_URL: postgres://postgres:postgres@localhost/snippethub
+  DB_HOST: db
+  DATABASE_URL: postgres://postgres:postgres@db/snippethub
 
 jobs:
   test:
