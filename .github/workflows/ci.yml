@@ -9,6 +9,7 @@ env:
   POSTGRES_PASSWORD: postgres
   DB_HOST: localhost
   DATABASE_URL: postgres://postgres:postgres@localhost
+  HUSKY_SKIP_INSTALL: true
 
 jobs:
   test:
