@@ -5,10 +5,11 @@ env:
   GITHUB_PERSONAL_ID: 58836760
   NEXT_PUBLIC_SERVER_URL: http://localhost:3000
   NEXTAUTH_URL: http://localhost:3000
+  POSTGRES_DB: snippethub
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   DB_HOST: localhost
-  DATABASE_URL: postgres://postgres:postgres@localhost
+  DATABASE_URL: postgres://postgres:postgres@localhost/snippethub
 
 jobs:
   test:
@@ -19,6 +20,7 @@ jobs:
       db:
         image: postgres:13.3-alpine
         env:
+          POSTGRES_DB: ${{env.POSTGRES_DB}}
           POSTGRES_USER: ${{env.POSTGRES_USER}}
           POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
           DB_HOST: ${{env.DB_HOST}}
