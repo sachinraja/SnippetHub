@@ -8,23 +8,21 @@ env:
   POSTGRES_DB: snippethub
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
-  DB_HOST: db
-  DATABASE_URL: postgres://postgres:postgres@db/snippethub
+  DB_HOST: localhost
+  DATABASE_URL: postgres://postgres:postgres@localhost/snippethub
 
 jobs:
   test:
-    name: Test
     runs-on: ubuntu-latest
 
     services:
       db:
         image: postgres:13.3-alpine
+        ports: ['5432:5432']
         env:
           POSTGRES_DB: ${{env.POSTGRES_DB}}
           POSTGRES_USER: ${{env.POSTGRES_USER}}
           POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
-          DB_HOST: ${{env.DB_HOST}}
-          DATABASE_URL: ${{env.DATABASE_URL}}
 
         # Set health checks to wait until postgres has started
         options: >-
