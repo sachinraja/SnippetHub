@@ -1,24 +1,37 @@
 name: CI
 on: [push, pull_request]
 
+env:
+  GITHUB_PERSONAL_ID: 58836760
+  NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+  NEXTAUTH_URL: http://localhost:3000
+  DATABASE_URL: postgres://postgres:postgres@localhost
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  DB_HOST: localhost
+  DATABASE_URL: postgres://postgres:postgres@localhost:5431
+
 jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
     container: node:16
+
     services:
       db:
         image: postgres:13.3-alpine
         env:
-          POSTGRES_PASSWORD: postgres
-      # Set health checks to wait until postgres has started
-      options: >-
-        --health-cmd pg_isready
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
-    env:
-      DATABASE_URL: postgres://postgres:postgres@localhost
+          POSTGRES_USER: ${{env.POSTGRES_USER}}
+          POSTGRES_PASSWORD: ${{env.POSTGRES_PASSWORD}}
+          DB_HOST: ${{env.DB_HOST}}
+          DATABASE_URL: ${{env.DATABASE_URL}}
+
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: checkout
