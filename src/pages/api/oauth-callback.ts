@@ -71,7 +71,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   })
 
   const tokens = createTokens(user)
-  // res.status(200).json(tokens)
   setCookie({ res }, 'user', tokens.accessToken, {
     path: '/',
   })

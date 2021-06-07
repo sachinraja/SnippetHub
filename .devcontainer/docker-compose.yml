@@ -2,8 +2,6 @@ version: '3'
 services:
   devcontainer:
     image: node:16
-    ports:
-      - 3000:3000
     volumes:
       - ..:/workspace:cached
     env_file:

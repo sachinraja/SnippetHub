@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start:prod": "docker-compose -f docker/docker-compose.yml up",
-    "test:docker": "NODE_ENV=test docker-compose -f docker/docker-compose.test.yml up -d && dotenv -e src/prisma/.env.test.local prisma migrate deploy && npm run prisma:seed && npm test",
+    "test:docker": "NODE_ENV=test docker-compose -f docker/docker-compose.test.yml up -d && while ! docker-compose -f docker/docker-compose.test.yml exec db pg_isready -U postgres; do sleep .2; done && dotenv -e src/prisma/.env.test.local prisma migrate deploy && npm run prisma:seed && npm test",
     "test": "jest",
     "dev": "next dev",
     "build": "next build",
