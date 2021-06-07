@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import NewNav from '@components/nav/NewNav'
 import Nav from '@components/nav/Nav'
 import type { ReactNode } from 'react'
 
@@ -20,7 +19,6 @@ function Container({ children, className, head, meta }: ContainerProps) {
       </Head>
 
       <Nav />
-      <NewNav />
       <main className={className}>{children}</main>
     </>
   )

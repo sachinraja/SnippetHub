@@ -10,7 +10,7 @@ interface NavLinkProps {
 const NavLink = ({ link, active, children }: NavLinkProps) => (
   <Link href={link} passHref>
     <a
-      className={`px-3 py-2 rounded-md text-sm font-medium ${
+      className={`px-3 py-2 text-sm font-medium sm:rounded-md ${
         active ? 'bg-carbon-900' : 'text-carbon-300 hover:bg-carbon-700'
       }`}
     >
