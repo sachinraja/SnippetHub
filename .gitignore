@@ -140,6 +140,6 @@ dist
 __generated__
 
 # graphql-codegen
-__codegen_cache__
+.cache
 *.graphqls.d.ts
 *.graphql.d.ts

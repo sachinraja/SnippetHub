@@ -10,12 +10,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'next',
   ],
-  ignorePatterns: [
-    '.next',
-    '__generated__',
-    '**/*.graphql.d.ts',
-    '__codegen_cache__',
-  ],
+  ignorePatterns: ['.next', '.cache', '__generated__', '**/*.graphql.d.ts'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -32,6 +27,7 @@ module.exports = {
         allow: ['Prisma__UserClient', 'Prisma__PackClient', 'name_authorId'],
       },
     ],
+
     // doesn't work with ts - use @typescript-eslint version
     'no-shadow': 'off',
     'no-use-before-define': 'off',
@@ -75,6 +71,7 @@ module.exports = {
 
     'react/jsx-props-no-spreading': 'off',
   },
+
   settings: {
     'import/resolver': {
       typescript: {
