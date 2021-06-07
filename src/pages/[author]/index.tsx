@@ -7,7 +7,6 @@ import Heading from '@components/Heading'
 import Paragraph from '@components/Paragraph'
 import getCardFromPack from '@lib/pack/card'
 import type { GetStaticPaths } from 'next'
-import type { UnwrapPromise } from 'src/types'
 import Image from 'next/image'
 
 export const getStaticProps = async ({
@@ -46,7 +45,7 @@ const AuthorPage = ({
   author,
   packs,
 }: {
-  author: Exclude<UnwrapPromise<ReturnType<typeof getAuthorFromParam>>, null>
+  author: AuthorPropFromParam
   packs: UnwrapPromise<ReturnType<typeof getUserPacks>>
 }) => {
   // must copy to keep state of arguments
@@ -66,14 +65,12 @@ const AuthorPage = ({
                 className="rounded-full"
                 src={`https://avatars.githubusercontent.com/u/${author.gitHubId}`}
               />
-              <Heading className="font-inter pl-2" priority={1} size={4} bold>
+              <Heading className="font-inter pl-2" priority={1} size="4xl" bold>
                 {author.username}
               </Heading>
             </div>
 
-            <Paragraph className="font-inter mt-2" size={4}>
-              {author.bio}
-            </Paragraph>
+            <Paragraph className="font-inter mt-2">{author.bio}</Paragraph>
           </section>
         </Header>
       </header>

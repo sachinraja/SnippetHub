@@ -78,7 +78,7 @@ const PackSnippetName = ({
           >
             <DeleteIcon />
           </button>
-          <Heading priority={3} size={3}>
+          <Heading priority={3} size="3xl">
             {snippet.name}
           </Heading>
         </>

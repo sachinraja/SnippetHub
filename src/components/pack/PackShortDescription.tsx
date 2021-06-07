@@ -34,7 +34,7 @@ const PackShortDescription = ({
   return (
     <PackEdit
       displayComponent={
-        <Paragraph className="font-inter mt-2" size={4}>
+        <Paragraph className="font-inter mt-2" size="lg">
           {packShortDescription}
         </Paragraph>
       }

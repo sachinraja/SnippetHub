@@ -33,10 +33,10 @@ module.exports = {
       },
     ],
     // doesn't work with ts - use @typescript-eslint version
-    '@typescript-eslint/no-shadow': 'error',
-    '@typescript-eslint/no-use-before-define': 'error',
     'no-shadow': 'off',
     'no-use-before-define': 'off',
+    '@typescript-eslint/no-shadow': 'error',
+    '@typescript-eslint/no-use-before-define': 'error',
 
     // override airbnb
     'import/extensions': [
@@ -50,10 +50,15 @@ module.exports = {
 
     'no-param-reassign': [
       'error',
+      // for Array.reduce
       { ignorePropertyModificationsFor: ['accu'] },
     ],
 
+    // completely unnecessary and annoying
     'import/prefer-default-export': 'off',
+
+    // easier to scan
+    'import/order': 'error',
 
     // not compatible with Next.js <Link /> components
     'jsx-a11y/anchor-is-valid': 'off',
@@ -72,7 +77,9 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      typescript: {},
+      typescript: {
+        alwaysTryTypes: true,
+      },
     },
   },
 }

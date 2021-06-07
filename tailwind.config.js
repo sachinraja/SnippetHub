@@ -1,4 +1,5 @@
 /* eslint-disable global-require */
+/** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   mode: 'jit',
   darkMode: false,
@@ -21,11 +22,11 @@ module.exports = {
       },
       colors: {
         carbon: {
+          50: '#f3f3f3',
           100: '#dcdcdc',
           200: '#bebebe',
           300: '#a4a4a4',
           400: '#8c8c8c',
-          50: '#f3f3f3',
           500: '#6f6f6f',
           600: '#565656',
           700: '#3d3d3d',

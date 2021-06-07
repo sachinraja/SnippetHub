@@ -2,6 +2,7 @@ import { ChevronDownIcon, PlusIcon } from '@heroicons/react/outline'
 import { useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import useUser from '@hooks/use-user'
 
 const Nav = () => {
   const [newOptionsOn, setNewOptionsOn] = useState(false)
@@ -11,6 +12,8 @@ const Nav = () => {
   let profileOptionsTimeoutId: NodeJS.Timeout
   const profileOptionsContainer = useRef<HTMLDivElement>(null)
   const [mobileMenuOn, setMobileMenuOn] = useState(false)
+
+  const user = useUser()
 
   return (
     <nav className="bg-carbon-800">
@@ -176,7 +179,7 @@ const Nav = () => {
                       className="rounded-full"
                       layout="fill"
                       objectFit="cover"
-                      src="/profile-pic.png"
+                      src={`https://avatars.githubusercontent.com/u/${user?.gitHubId}`}
                     />
                   </div>
                 </button>

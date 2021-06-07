@@ -29,10 +29,10 @@ const SearchPageLayout = ({
         <div className="h-14">{headingIcon}</div>
 
         <div>
-          <Heading className="font-inter text-xl" priority={2} size={2} bold>
+          <Heading className="font-inter text-xl" priority={2} size="2xl" bold>
             {heading}
           </Heading>
-          <Paragraph size={3}>{headingLabel}</Paragraph>
+          <Paragraph>{headingLabel}</Paragraph>
         </div>
       </header>
 

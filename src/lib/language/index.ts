@@ -8,71 +8,78 @@ import javascriptIcon from 'simple-icons/icons/javascript'
 import otherIcon from 'simple-icons/icons/svg'
 import pythonIcon from 'simple-icons/icons/python'
 import typescriptIcon from 'simple-icons/icons/typescript'
+import { colors } from '@lib/styling/tailwind-config'
+import type { TailwindColorGroup } from 'tailwindcss/tailwind-config'
+
+interface LanguageColor {
+  text: string
+  icon: string
+  border: string
+}
 
 interface Language {
   name: string
-  color: string
+  color: LanguageColor
   icon: SimpleIcon
-  iconColor: string
   mode?: LanguageMode
+}
+
+function getLanguageColorFromTWColorGroup(colorGroup: TailwindColorGroup) {
+  return {
+    text: colorGroup[400],
+    icon: colorGroup[600],
+    border: colorGroup[500],
+  }
 }
 
 // iconColor is the tailwind color for 600
 const languages: Record<PrismaLanguage, Language> = {
   [PrismaLanguage.python]: {
     name: 'python',
-    color: 'green',
+    color: getLanguageColorFromTWColorGroup(colors.green),
     icon: pythonIcon,
-    iconColor: '#059669',
     mode: LanguageMode.python,
   },
   [PrismaLanguage.javascript]: {
     name: 'javascript',
-    color: 'yellow',
+    color: getLanguageColorFromTWColorGroup(colors.yellow),
     icon: javascriptIcon,
-    iconColor: '#D97706',
     mode: LanguageMode.javascript,
   },
   [PrismaLanguage.typescript]: {
     name: 'typescript',
-    color: 'blue',
+    color: getLanguageColorFromTWColorGroup(colors.blue),
     icon: typescriptIcon,
-    iconColor: '#2563EB',
     mode: LanguageMode.typescript,
   },
   [PrismaLanguage.csharp]: {
     name: 'C#',
-    color: 'purple',
+    color: getLanguageColorFromTWColorGroup(colors.purple),
     icon: csharpIcon,
-    iconColor: '#7C3AED',
     mode: LanguageMode.csharp,
   },
   [PrismaLanguage.elixir]: {
     name: 'elixir',
-    color: 'indigo',
+    color: getLanguageColorFromTWColorGroup(colors.indigo),
     icon: elixirIcon,
-    iconColor: '#4F46E5',
     mode: LanguageMode.elixir,
   },
   [PrismaLanguage.html]: {
     name: 'html',
-    color: 'red',
+    color: getLanguageColorFromTWColorGroup(colors.red),
     icon: htmlIcon,
-    iconColor: '#DC2626',
     mode: LanguageMode.html,
   },
   [PrismaLanguage.css]: {
     name: 'css',
-    color: 'blue',
+    color: getLanguageColorFromTWColorGroup(colors.blue),
     icon: cssIcon,
-    iconColor: '#2563EB',
     mode: LanguageMode.css,
   },
   [PrismaLanguage.other]: {
     name: 'other',
-    color: 'gray',
+    color: getLanguageColorFromTWColorGroup(colors.gray),
     icon: otherIcon,
-    iconColor: '#4B5563',
   },
 }
 

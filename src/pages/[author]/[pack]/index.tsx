@@ -1,4 +1,3 @@
-import { AuthorPackProps, PackParams } from 'src/types/pack'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { Language, Snippet } from '@prisma/client'
 import {
@@ -106,7 +105,7 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
           />
 
           <div className="m-auto mt-5 w-3/4">
-            <Heading className="mb-3" priority={2} size={4} bold>
+            <Heading className="mb-3" priority={2} size="4xl" bold>
               Snippets
             </Heading>
             {snippetFields.map((field, index) => {

@@ -28,7 +28,8 @@ const Card = ({
 }: CardProps) => {
   const header = useRef<HTMLDivElement>(null)
   const attributes = useRef<HTMLDivElement>(null)
-  const [attributesFloatedRight, setAttributesFloatedRight] = useState(true)
+  const [areAttributesFloatedRight, setAreAttributesFloatedRight] =
+    useState(true)
 
   const languageAttributes = languages[language]
 
@@ -42,9 +43,9 @@ const Card = ({
       headerElement &&
       attributesElement.offsetTop > headerElement.offsetTop
     ) {
-      setAttributesFloatedRight(false)
+      setAreAttributesFloatedRight(false)
     } else {
-      setAttributesFloatedRight(true)
+      setAreAttributesFloatedRight(true)
     }
   }
 
@@ -84,7 +85,7 @@ const Card = ({
             <section
               ref={attributes}
               className={`whitespace-nowrap font-inter font-bold grid grid-cols-1 ${
-                attributesFloatedRight ? 'justify-items-end' : ''
+                areAttributesFloatedRight ? 'justify-items-end' : ''
               }`}
             >
               <div>
@@ -97,7 +98,8 @@ const Card = ({
 
               <div className="mt-1">
                 <div
-                  className={`inline-flex items-center border-${languageAttributes.color}-500 border-2 rounded-sm`}
+                  className="inline-flex items-center border-2 rounded-sm"
+                  style={{ borderColor: languageAttributes.color.border }}
                 >
                   <svg
                     className="ml-1 my-1 w-5 inline-block"
@@ -106,12 +108,13 @@ const Card = ({
                   >
                     <path
                       d={languageAttributes.icon.path}
-                      fill={languageAttributes.iconColor}
+                      fill={languageAttributes.color.icon}
                     />
                   </svg>
 
                   <p
-                    className={`inline-block mx-1 text-${languageAttributes.color}-400`}
+                    className="inline-block mx-1"
+                    style={{ color: languageAttributes.color.text }}
                   >
                     {languageAttributes.name}
                   </p>

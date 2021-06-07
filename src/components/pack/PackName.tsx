@@ -45,7 +45,7 @@ const PackName = ({ packId, packName, setPackName }: PackNameProps) => {
   return (
     <PackEdit
       displayComponent={
-        <Heading className="font-inter" priority={1} size={4} bold>
+        <Heading className="font-inter" priority={1} size="4xl" bold>
           {packName}
         </Heading>
       }

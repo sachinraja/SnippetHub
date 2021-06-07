@@ -15,11 +15,11 @@ const Hero = ({ searchInputValue }: HeroProps) => {
   return (
     <Header>
       <section className="md:w-1/2">
-        <Heading priority={1} size={4} bold>
+        <Heading priority={1} size="4xl" bold>
           <span>SnippetHub</span>
         </Heading>
 
-        <Heading className="mt-3" priority={2} size={1}>
+        <Heading className="mt-3" priority={2} size="xl">
           A home for snippets across various languages.
         </Heading>
 

@@ -13,9 +13,7 @@ const FormError = ({ name, errors }: FormErrorProps) => {
       name={name}
       errors={errors}
       render={({ message }) => (
-        <Paragraph size={3} className="p-1 text-red-400">
-          {message}
-        </Paragraph>
+        <Paragraph className="p-1 text-red-400">{message}</Paragraph>
       )}
     />
   )

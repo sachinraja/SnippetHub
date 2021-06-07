@@ -18,7 +18,7 @@ const ConfirmModal = ({
   return (
     <div>
       <Modal {...props} className="bg-carbon-600">
-        <Heading priority={5} size={2}>
+        <Heading priority={5} size="2xl">
           {message}
         </Heading>
 

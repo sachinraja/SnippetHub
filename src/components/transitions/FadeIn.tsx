@@ -1,25 +1,51 @@
-import FadeInTransition from 'react-fade-in'
 import usePrefersReducedMotion from '@hooks/use-reduced-motion'
-import type { ReactNode } from 'react'
+import { Transition } from '@headlessui/react'
+import { Fragment } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
 interface FadeInProps {
-  as?: keyof JSX.IntrinsicElements
+  as?: ComponentProps<typeof Transition>['as']
+  from?: Direction
   children: ReactNode
 }
-function FadeIn({ as, children }: FadeInProps) {
+
+function FadeIn({ as, from, children }: FadeInProps) {
   const prefersReducedMotion = usePrefersReducedMotion()
 
+  function getDirectionClassName() {
+    switch (from) {
+      case 'left':
+        return '-translate-x-1/2'
+      case 'right':
+        return 'translate-x-1/2'
+      case 'up':
+        return '-translate-y-1/2'
+      // down
+      default:
+        return 'translate-y-1/2'
+    }
+  }
+
+  const Tag = as ?? Fragment
+
   return prefersReducedMotion ? (
-    <div>{children}</div>
+    <Tag>children</Tag>
   ) : (
-    // @ts-expect-error Docs show string passed into wrapperTag, it has the wrong type here.
-    <FadeInTransition wrapperTag={as} transitionDuration={500}>
+    <Transition
+      as={as}
+      show
+      appear
+      enter="transition duration-1000"
+      enterFrom={`transform opacity-0 ${getDirectionClassName()}`}
+      enterTo="opacity-100"
+    >
       {children}
-    </FadeInTransition>
+    </Transition>
   )
 }
 
 FadeIn.defaultProps = {
+  from: 'down',
   as: undefined,
 }
 

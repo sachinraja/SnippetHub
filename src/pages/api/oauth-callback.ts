@@ -6,6 +6,7 @@ import envConfig from 'src/config'
 import prisma from '@lib/prisma'
 import type { AxiosRequestConfig } from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { setCookie } from 'nookies'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.query.code) {
@@ -70,8 +71,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   })
 
   const tokens = createTokens(user)
-  res.status(200).json(tokens)
-  // res.redirect('/');
+  // res.status(200).json(tokens)
+  setCookie({ res }, 'user', tokens.accessToken, {
+    path: '/',
+  })
+  res.redirect('/')
 }
 
 export default handler

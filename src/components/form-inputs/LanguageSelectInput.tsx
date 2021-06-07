@@ -22,9 +22,9 @@ const LanguageSelectInput = ({
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d={language.icon.path} fill={language.iconColor} />
+            <path d={language.icon.path} fill={language.color.icon} />
           </svg>
-          <Paragraph className="p-2 inline align-middle" size={3}>
+          <Paragraph className="p-2 inline align-middle">
             {language.name}
           </Paragraph>
         </>

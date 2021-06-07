@@ -109,7 +109,7 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
                 >
                   <DeleteIcon />
                 </button>
-                <Heading priority={5} size={2}>
+                <Heading priority={5} size="2xl">
                   Snippet {index + 1}
                 </Heading>
               </div>
@@ -136,7 +136,7 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
                     }}
                   />
                 )}
-                defaultValue={getValues(snippetLanguageId)}
+                defaultValue={field.language}
                 control={control}
                 name={snippetLanguageId}
               />

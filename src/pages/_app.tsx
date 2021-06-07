@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import 'public/main.css'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '@lib/apollo-client'

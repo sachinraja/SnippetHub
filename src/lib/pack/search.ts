@@ -1,5 +1,4 @@
 import prisma from '@lib/prisma'
-import type { PrismaQueryOptions } from 'src/types'
 
 export function searchForPack(name: string, options?: PrismaQueryOptions) {
   return prisma.pack.findMany({

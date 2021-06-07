@@ -1,5 +1,4 @@
 import prisma from '@lib/prisma'
-import type { PrismaQueryOptions } from 'src/types'
 import type { User } from '@prisma/client'
 
 export function getUser(username: string) {
