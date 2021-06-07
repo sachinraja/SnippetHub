@@ -65,7 +65,7 @@ jobs:
         run: npm run lint
 
       - name: migrate and seed database
-        run: npx prisma migrate deploy && npx prisma db seed --preview-feature
+        run: npx prisma migrate deploy && npm run prisma:seed
 
       - name: test
         run: npm test
