@@ -10,7 +10,7 @@ module.exports = {
       tsconfig: 'tsconfig.json',
     },
   },
-  moduleFileExtensions: ['ts', 'js', 'tsx', 'jsx'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   moduleNameMapper: {
     ...pathsToModuleNameMapper(
       JSON5.parse(fs.readFileSync('tsconfig.json')).compilerOptions.paths,
