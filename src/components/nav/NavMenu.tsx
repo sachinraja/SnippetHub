@@ -1,6 +1,6 @@
 import { Menu } from '@headlessui/react'
-import type { ComponentProps, ReactNode } from 'react'
 import LinkWithPropsPassed from '@components/LinkWithPropsPassed'
+import type { ComponentProps, ReactNode } from 'react'
 
 type NavMenuButtonProps = ExtractProps<typeof Menu.Button> & {
   open: boolean

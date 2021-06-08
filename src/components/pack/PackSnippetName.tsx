@@ -1,17 +1,17 @@
-import { PackFormInputs } from '@lib/schemas/pack-schema'
-import { useDeleteSnippetMutation } from '@graphql/queries/delete-snippet.graphql'
 import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { PackFormInputs } from '@lib/schemas/pack-schema'
+import { useDeleteSnippetMutation } from '@graphql/queries/delete-snippet.graphql'
 import { useUpdateSnippetNameMutation } from '@graphql/queries/update-snippet-name.graphql'
 import DeleteIcon from '@components/icons/DeleteIcon'
 import FormError from '@components/forms/FormError'
 import Heading from '@components/Heading'
 import PackEdit from '@components/pack/PackEdit'
 import TextInput from '@components/form-inputs/TextInput'
+import type { UseFieldArrayReturn } from 'react-hook-form'
+import type { Snippet } from '@prisma/client'
 import type { Dispatch, SetStateAction } from 'react'
 import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
-import type { Snippet } from '@prisma/client'
-import type { UseFieldArrayReturn } from 'react-hook-form'
 
 interface PackSnippetNameProps {
   snippet: Snippet

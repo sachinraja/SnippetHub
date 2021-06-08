@@ -1,6 +1,6 @@
+import { intArg, list, nonNull, queryType, stringArg } from 'nexus'
 import { Pack } from '@graphql/objects/pack'
 import { User } from '@graphql/objects/user'
-import { intArg, list, nonNull, queryType, stringArg } from 'nexus'
 import { searchForPack } from '@lib/pack/search'
 import getTopPacks from '@lib/pack/top'
 

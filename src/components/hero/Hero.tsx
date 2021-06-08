@@ -1,8 +1,8 @@
 import { useRef } from 'react'
 import { useRouter } from 'next/dist/client/router'
+import Image from 'next/image'
 import Header from '@components/header/Header'
 import Heading from '@components/Heading'
-import Image from 'next/image'
 import SearchInput from '@components/hero/SearchInput'
 
 interface HeroProps {

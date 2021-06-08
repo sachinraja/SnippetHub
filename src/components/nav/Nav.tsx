@@ -1,5 +1,3 @@
-import NavLink from '@components/nav/Link'
-import NavMenu from '@components/nav/NavMenu'
 import { Menu } from '@headlessui/react'
 import {
   ChevronDownIcon,
@@ -7,26 +5,40 @@ import {
   PlusIcon,
   XIcon,
 } from '@heroicons/react/outline'
-import useUser from '@hooks/use-user'
+import { useRouter } from 'next/dist/client/router'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import useUser from '@hooks/use-user'
+import NavMenu from '@components/nav/NavMenu'
+import NavLink from '@components/nav/Link'
 
-const NavLinks = () => (
-  <>
-    <NavLink link="/search" active>
-      Browse
-    </NavLink>
-    <NavLink link="/">Your Snippets</NavLink>
-  </>
-)
+const links: Record<string, string> = {
+  '/': 'Top Packs',
+  '/search': 'Search Packs',
+}
+
+const NavLinks = () => {
+  const { pathname } = useRouter()
+
+  // loop over and check if link is active
+  return (
+    <>
+      {Object.entries(links).map(([href, text]) => (
+        <NavLink key={href} href={href} active={pathname === href}>
+          {text}
+        </NavLink>
+      ))}
+    </>
+  )
+}
 
 const Nav = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const user = useUser()
 
   return (
-    <nav className="pt-4 bg-carbon-800">
+    <nav className="bg-carbon-800 py-2 sm:py-4">
       <div className="flex items-center px-2 sm:px-6">
         <button
           type="button"
@@ -57,56 +69,68 @@ const Nav = () => {
           <NavLinks />
         </div>
 
-        <div className="relative ml-auto">
-          <Menu>
-            {({ open }) => {
-              return (
-                <>
-                  <NavMenu.Button open={open} className="whitespace-nowrap">
-                    <PlusIcon className="h-6 w-6 inline" />
-                    <ChevronDownIcon className="h-6 w-4 inline transform translate-y-2 -translate-x-1" />
-                  </NavMenu.Button>
+        {user ? (
+          <>
+            <div className="relative ml-auto">
+              <Menu>
+                {({ open }) => {
+                  return (
+                    <>
+                      <NavMenu.Button open={open} className="whitespace-nowrap">
+                        <PlusIcon className="h-6 w-6 inline" />
+                        <ChevronDownIcon className="h-6 w-4 inline transform translate-y-2 -translate-x-1" />
+                      </NavMenu.Button>
 
-                  <NavMenu.Items>
-                    <NavMenu.Item href="/new">New Pack</NavMenu.Item>
-                  </NavMenu.Items>
-                </>
-              )
-            }}
-          </Menu>
-        </div>
+                      <NavMenu.Items>
+                        <NavMenu.Item href="/new">New Pack</NavMenu.Item>
+                      </NavMenu.Items>
+                    </>
+                  )
+                }}
+              </Menu>
+            </div>
 
-        <div className="relative">
-          <Menu>
-            {({ open }) => {
-              return (
-                <>
-                  <NavMenu.Button open={open}>
-                    <div className="relative h-8 w-8">
-                      <Image
-                        alt="Profile Picture"
-                        className="rounded-full"
-                        layout="fill"
-                        objectFit="cover"
-                        src={`https://avatars.githubusercontent.com/u/${user?.gitHubId}`}
-                      />
-                    </div>
-                  </NavMenu.Button>
+            <div className="relative">
+              <Menu>
+                {({ open }) => {
+                  return (
+                    <>
+                      <NavMenu.Button open={open}>
+                        <div className="relative h-8 w-8">
+                          <Image
+                            alt="Profile Picture"
+                            className="rounded-full"
+                            layout="fill"
+                            objectFit="cover"
+                            src={`https://avatars.githubusercontent.com/u/${user?.gitHubId}`}
+                          />
+                        </div>
+                      </NavMenu.Button>
 
-                  <NavMenu.Items>
-                    <NavMenu.Item href={`/@${user?.username}`}>
-                      Profile
-                    </NavMenu.Item>
-                    <NavMenu.Item href="/new">Sign out</NavMenu.Item>
-                  </NavMenu.Items>
-                </>
-              )
-            }}
-          </Menu>
-        </div>
+                      <NavMenu.Items>
+                        <NavMenu.Item href={`/@${user?.username}`}>
+                          Profile
+                        </NavMenu.Item>
+                        <NavMenu.Item href="/new">Sign out</NavMenu.Item>
+                      </NavMenu.Items>
+                    </>
+                  )
+                }}
+              </Menu>
+            </div>
+          </>
+        ) : (
+          <NavLink className="ml-auto" href="/login">
+            Login
+          </NavLink>
+        )}
       </div>
 
-      <div className={`flex-col sm:hidden ${isMobileOpen ? 'flex' : 'hidden'}`}>
+      <div
+        className={`flex-col mt-2 sm:hidden ${
+          isMobileOpen ? 'flex' : 'hidden'
+        }`}
+      >
         <NavLinks />
       </div>
     </nav>

@@ -1,11 +1,11 @@
 import { ChevronUpIcon } from '@heroicons/react/outline'
 import { useEffect, useRef, useState } from 'react'
-import FadeIn from '@components/transitions/FadeIn'
 import Link from 'next/link'
-import languages from '@lib/language'
-import type { Language } from '@prisma/client'
-import type { ReactNode } from 'react'
 import Image from 'next/image'
+import languages from '@lib/language'
+import FadeIn from '@components/transitions/FadeIn'
+import type { ReactNode } from 'react'
+import type { Language } from '@prisma/client'
 
 export interface CardProps {
   bodyUrl?: string

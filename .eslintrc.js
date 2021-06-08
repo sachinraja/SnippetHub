@@ -54,7 +54,10 @@ module.exports = {
     'import/prefer-default-export': 'off',
 
     // easier to scan
-    'import/order': 'error',
+    'import/order': [
+      'error',
+      { groups: ['builtin', 'external', 'internal', 'type'] },
+    ],
 
     // not compatible with Next.js <Link /> components
     'jsx-a11y/anchor-is-valid': 'off',

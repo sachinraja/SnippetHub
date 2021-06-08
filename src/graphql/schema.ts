@@ -1,6 +1,6 @@
+import path from 'path'
 import { applyMiddleware } from 'graphql-middleware'
 import { makeSchema } from 'nexus'
-import path from 'path'
 import * as types from './objects'
 import permissions from './permissions'
 

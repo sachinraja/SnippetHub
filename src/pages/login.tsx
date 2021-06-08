@@ -1,7 +1,7 @@
-import Container from '@components/containers/Container'
 import Link from 'next/link'
-import envConfig from 'src/config'
 import githubIcon from 'simple-icons/icons/github'
+import envConfig from 'src/config'
+import Container from '@components/containers/Container'
 import type { InferGetStaticPropsType } from 'next'
 
 export const getStaticProps = () => {

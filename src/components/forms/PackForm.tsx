@@ -1,7 +1,7 @@
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { Language } from '@prisma/client'
-import { packFormSchema } from '@lib/schemas/pack-schema'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { packFormSchema } from '@lib/schemas/pack-schema'
 import ButtonInput from '@components/form-inputs/ButtonInput'
 import CodeInput from '@components/form-inputs/CodeInput'
 import DeleteIcon from '@components/icons/DeleteIcon'
@@ -11,8 +11,8 @@ import MDEditor from '@components/md-editor/MDEditor'
 import TextAreaInput from '@components/form-inputs/TextAreaInput'
 import TextInput from '@components/form-inputs/TextInput'
 import getLanguageMode from '@lib/language/get-language-mode'
-import type { PackFormInputs } from '@lib/schemas/pack-schema'
 import type { SubmitHandler } from 'react-hook-form'
+import type { PackFormInputs } from '@lib/schemas/pack-schema'
 import FormError from './FormError'
 
 export interface PackFormProps {

@@ -1,5 +1,5 @@
-import type { CardProps } from '@components/card/Card'
 import type { ReactElement } from 'react'
+import type { CardProps } from '@components/card/Card'
 
 interface CardContainerProps {
   children: ReactElement<CardProps>[]

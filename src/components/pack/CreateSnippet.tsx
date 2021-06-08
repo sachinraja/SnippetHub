@@ -7,10 +7,10 @@ import LanguageSelectInput from '@components/form-inputs/LanguageSelectInput'
 import SubmitIcon from '@components/icons/SubmitIcon'
 import TextInput from '@components/form-inputs/TextInput'
 import getLanguageMode from '@lib/language/get-language-mode'
+import type { UseFieldArrayReturn } from 'react-hook-form'
+import type { Snippet } from '@prisma/client'
 import type { Dispatch, SetStateAction } from 'react'
 import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
-import type { Snippet } from '@prisma/client'
-import type { UseFieldArrayReturn } from 'react-hook-form'
 
 interface CreateSnippetProps {
   packId: number

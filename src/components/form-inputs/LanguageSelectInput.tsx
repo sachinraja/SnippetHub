@@ -1,5 +1,5 @@
-import Paragraph from '@components/Paragraph'
 import Select from 'react-select'
+import Paragraph from '@components/Paragraph'
 import languages from '@lib/language'
 import type { Props as ReactSelectProps } from 'react-select'
 

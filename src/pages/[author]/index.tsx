@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { getAuthorFromParam } from '@lib/utils/url-params'
 import { getUserPacks } from '@lib/user'
 import CardContainer from '@components/card/CardContainer'
@@ -7,7 +8,6 @@ import Heading from '@components/Heading'
 import Paragraph from '@components/Paragraph'
 import getCardFromPack from '@lib/pack/card'
 import type { GetStaticPaths } from 'next'
-import Image from 'next/image'
 
 export const getStaticProps = async ({
   params,

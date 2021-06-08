@@ -6,9 +6,9 @@ import CodeInput from '@components/form-inputs/CodeInput'
 import FormError from '@components/forms/FormError'
 import PackEdit from '@components/pack/PackEdit'
 import getLanguageMode from '@lib/language/get-language-mode'
+import type { Snippet } from '@prisma/client'
 import type { Dispatch, SetStateAction } from 'react'
 import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
-import type { Snippet } from '@prisma/client'
 
 interface PackSnippetCodeProps {
   snippet: Snippet

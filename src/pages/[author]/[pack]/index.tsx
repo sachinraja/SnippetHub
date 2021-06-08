@@ -1,13 +1,13 @@
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { Language, Snippet } from '@prisma/client'
+import { PlusIcon } from '@heroicons/react/outline'
+import { useState } from 'react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { getAuthorFromParam, getPackFromParam } from '@lib/utils/url-params'
 import {
   PackEditFormInputs,
   packEditFormSchema,
 } from '@lib/schemas/pack-edit-schema'
-import { PlusIcon } from '@heroicons/react/outline'
-import { getAuthorFromParam, getPackFromParam } from '@lib/utils/url-params'
-import { useState } from 'react'
-import { yupResolver } from '@hookform/resolvers/yup'
 import Container from '@components/containers/Container'
 import CreateSnippet from '@components/pack/CreateSnippet'
 import Header from '@components/header/Header'

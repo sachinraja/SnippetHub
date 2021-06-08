@@ -1,6 +1,6 @@
-import { LanguageMode } from '@lib/language/mode'
 import { StreamLanguage } from '@codemirror/stream-parser'
 import { markdownLanguage } from '@codemirror/lang-markdown'
+import { LanguageMode } from '@lib/language/mode'
 
 const modeToImport = {
   [LanguageMode.python]: async () =>

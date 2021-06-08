@@ -1,6 +1,6 @@
+import Modal from 'react-modal'
 import ButtonInput from '@components/form-inputs/ButtonInput'
 import Heading from '@components/Heading'
-import Modal from 'react-modal'
 import type { MouseEventHandler } from 'react'
 
 type ConfirmModalProps = {

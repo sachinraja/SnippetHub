@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
 import { User } from '@prisma/client'
 import axios from 'axios'
+import { setCookie } from 'nookies'
 import createTokens from '@lib/auth/token'
 import envConfig from 'src/config'
 import prisma from '@lib/prisma'
-import type { AxiosRequestConfig } from 'axios'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { setCookie } from 'nookies'
+import type { AxiosRequestConfig } from 'axios'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!req.query.code) {

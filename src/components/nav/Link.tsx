@@ -1,18 +1,25 @@
 import Link from 'next/link'
-import { ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
-interface NavLinkProps {
-  link: string
+type NavLinkProps = ComponentProps<'a'> & {
+  href: string
   active?: boolean
   children: ReactNode
 }
 
-const NavLink = ({ link, active, children }: NavLinkProps) => (
-  <Link href={link} passHref>
+const NavLink = ({
+  href,
+  active,
+  className,
+  children,
+  ...props
+}: NavLinkProps) => (
+  <Link href={href}>
     <a
       className={`px-3 py-2 text-sm font-medium sm:rounded-md ${
         active ? 'bg-carbon-900' : 'text-carbon-300 hover:bg-carbon-700'
-      }`}
+      } ${className}`}
+      {...props}
     >
       {children}
     </a>

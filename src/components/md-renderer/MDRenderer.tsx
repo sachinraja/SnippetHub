@@ -1,6 +1,6 @@
-import MDCode from '@components/md-renderer/MDCode'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
+import MDCode from '@components/md-renderer/MDCode'
 
 interface MDRendererProps {
   children: string

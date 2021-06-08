@@ -1,5 +1,3 @@
-import { Language } from '@graphql/objects/language'
-import { Pack } from '@graphql/objects/pack'
 import {
   inputObjectType,
   intArg,
@@ -8,6 +6,8 @@ import {
   objectType,
   stringArg,
 } from 'nexus'
+import { Language } from '@graphql/objects/language'
+import { Pack } from '@graphql/objects/pack'
 import { updatePackLanguage } from '@graphql/utils/update-language'
 import type { Prisma, Pack as PrismaPack } from '@prisma/client'
 

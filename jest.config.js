@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const fs = require('fs')
 const { pathsToModuleNameMapper } = require('ts-jest/utils')
 const JSON5 = require('json5')
-const fs = require('fs')
 
 module.exports = {
   globals: {

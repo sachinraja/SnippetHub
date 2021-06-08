@@ -1,6 +1,6 @@
-import usePrefersReducedMotion from '@hooks/use-reduced-motion'
 import { Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import usePrefersReducedMotion from '@hooks/use-reduced-motion'
 import type { ComponentProps, ReactNode } from 'react'
 
 interface FadeInProps {

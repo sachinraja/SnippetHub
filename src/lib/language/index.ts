@@ -1,4 +1,3 @@
-import { LanguageMode } from '@lib/language/mode'
 import { Language as PrismaLanguage } from '@prisma/client'
 import csharpIcon from 'simple-icons/icons/csharp'
 import cssIcon from 'simple-icons/icons/css3'
@@ -9,6 +8,7 @@ import otherIcon from 'simple-icons/icons/svg'
 import pythonIcon from 'simple-icons/icons/python'
 import typescriptIcon from 'simple-icons/icons/typescript'
 import { colors } from '@lib/styling/tailwind-config'
+import { LanguageMode } from '@lib/language/mode'
 import type { TailwindColorGroup } from 'tailwindcss/tailwind-config'
 
 interface LanguageColor {
