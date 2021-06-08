@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
-import type { ComponentPropsWithRef } from 'react'
 import Label from './Label'
+import type { ComponentPropsWithRef } from 'react'
 
 type TextAreaInputProps = ComponentPropsWithRef<'textarea'> & {
   label?: string

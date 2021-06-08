@@ -4,10 +4,10 @@ import { forwardRef, useEffect, useRef } from 'react'
 import { oneDark } from '@codemirror/theme-one-dark'
 import getImportFromMode from '@lib/utils/codemirror/get-import'
 import { LanguageMode } from '@lib/language/mode'
+import Label from './Label'
 import type { Extension } from '@codemirror/state'
 import type { FocusEventHandler } from 'react'
 import type { ViewUpdate } from '@codemirror/view'
-import Label from './Label'
 
 export type CodeInputProps = {
   label?: string

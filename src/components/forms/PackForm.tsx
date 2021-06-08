@@ -11,9 +11,9 @@ import MDEditor from '@components/md-editor/MDEditor'
 import TextAreaInput from '@components/form-inputs/TextAreaInput'
 import TextInput from '@components/form-inputs/TextInput'
 import getLanguageMode from '@lib/language/get-language-mode'
+import FormError from './FormError'
 import type { SubmitHandler } from 'react-hook-form'
 import type { PackFormInputs } from '@lib/schemas/pack-schema'
-import FormError from './FormError'
 
 export interface PackFormProps {
   defaultValues?: Partial<PackFormInputs>

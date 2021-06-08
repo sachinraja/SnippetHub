@@ -1,6 +1,5 @@
 {
-  "css.validate": false,
-  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "css.lint.unknownAtRules": "ignore",
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,

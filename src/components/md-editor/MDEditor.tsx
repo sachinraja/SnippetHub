@@ -5,9 +5,9 @@ import { LanguageMode } from '@lib/language/mode'
 import CodeInput from '@components/form-inputs/CodeInput'
 import Label from '@components/form-inputs/Label'
 import MDRenderer from '@components/md-renderer/MDRenderer'
-import type { CodeInputProps } from '@components/form-inputs/CodeInput'
 import Menu, { LeftAlign, RightAlign } from './Menu'
 import MenuItem from './MenuItem'
+import type { CodeInputProps } from '@components/form-inputs/CodeInput'
 
 type MDEditorProps = {
   className?: string
