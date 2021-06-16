@@ -1,7 +1,7 @@
 import { getTextSizeClassNameFromProp } from '@lib/styling/text-size'
 import type { ReactNode } from 'react'
 
-interface HeadingProps {
+export interface HeadingProps {
   priority: 1 | 2 | 3 | 4 | 5 | 6
   size?: TextSize
   bold?: boolean

@@ -11,7 +11,7 @@ export interface CardProps {
   bodyUrl?: string
   count: string | number
   description: string
-  imageUrl: string
+  imageUrl?: string
   language: Language
   subtitle: string
   title: string
@@ -122,19 +122,21 @@ const Card = ({
               </div>
             </section>
 
-            <div className="w-full">
-              <div className="relative w-10 top-3 left-2">
-                <Image
-                  width={60}
-                  height={60}
-                  alt={`${subtitle} Profile`}
-                  className="rounded-full"
-                  src={imageUrl}
-                />
-              </div>
+            {imageUrl && (
+              <div className="w-full">
+                <div className="relative w-10 top-3 left-2">
+                  <Image
+                    width={60}
+                    height={60}
+                    alt={`${subtitle} Profile`}
+                    className="rounded-full"
+                    src={imageUrl}
+                  />
+                </div>
 
-              <hr />
-            </div>
+                <hr />
+              </div>
+            )}
           </div>
 
           <p className="mt-3">{description}</p>

@@ -1,5 +1,5 @@
 import prisma from '@lib/prisma'
-import type { Pack, Snippet } from '@prisma/client'
+import type { Pack, Snippet, User } from '@prisma/client'
 
 let pack:
   | (Pack & {
@@ -10,11 +10,16 @@ let pack:
 beforeAll(async () => {
   await prisma.$connect()
 
+  const author = (await prisma.user.findUnique({
+    where: { username: 'sachinraja' },
+  })) as User
+
   pack = await prisma.pack.findUnique({
-    where: { name_authorId: { name: 'python-pack', authorId: 1 } },
+    where: { name_authorId: { name: 'python-pack', authorId: author.id } },
     include: { snippets: true },
   })
 })
+
 afterAll(() => prisma.$disconnect())
 
 describe('snippet', () => {

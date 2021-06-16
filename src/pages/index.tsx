@@ -33,7 +33,12 @@ const HomePage = ({
   topPacks,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   // create components for top snippets
-  const cards = topPacks.map((pack) => getCardFromPack(pack, pack.author))
+  const cards = topPacks.map((pack) =>
+    getCardFromPack(pack, {
+      username: pack.author.username,
+      image: pack.author.image ?? undefined,
+    }),
+  )
 
   return (
     <Container

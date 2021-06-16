@@ -7,7 +7,7 @@ export function getUser(username: string) {
   })
 }
 
-export function getUserPacksAllData(authorId: number) {
+export function getUserPacksAllData(authorId: string) {
   return prisma.pack.findMany({
     where: { authorId },
   })

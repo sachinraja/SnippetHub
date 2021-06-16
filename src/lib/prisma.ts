@@ -20,4 +20,5 @@ if (envConfig.get('env') === 'production') {
   }
   prisma = global.prisma
 }
+
 export default prisma

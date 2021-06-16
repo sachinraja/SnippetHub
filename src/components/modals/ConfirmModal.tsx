@@ -1,37 +1,39 @@
-import Modal from 'react-modal'
-import ButtonInput from '@components/form-inputs/ButtonInput'
+import { Dialog } from '@headlessui/react'
 import Heading from '@components/Heading'
-import type { MouseEventHandler } from 'react'
+import type { HeadingProps } from '@components/Heading'
+import type { ReactNode } from 'react'
 
-type ConfirmModalProps = {
-  message: string
-  onCancel?: MouseEventHandler<HTMLInputElement>
-  onConfirm?: MouseEventHandler<HTMLInputElement>
-} & Modal.Props
+type ConfirmModalProps = ExtractProps<typeof Dialog> & {
+  heading: HeadingProps['children']
+  headingPriority: HeadingProps['priority']
+  children: ReactNode
+}
 
 const ConfirmModal = ({
-  message,
-  onCancel,
-  onConfirm,
+  className,
+  heading,
+  headingPriority,
+  children,
   ...props
-}: ConfirmModalProps) => {
-  return (
-    <div>
-      <Modal {...props} className="bg-carbon-600">
-        <Heading priority={5} size="2xl">
-          {message}
-        </Heading>
+}: ConfirmModalProps) => (
+  <Dialog
+    as="div"
+    className={`fixed z-10 inset-0 overflow-y-auto ${className}`}
+    {...props}
+  >
+    <div className="flex items-center justify-center min-h-screen">
+      <Dialog.Overlay className="fixed inset-0 bg-black opacity-80" />
 
-        <ButtonInput value="Cancel" onClick={onCancel} />
-        <ButtonInput value="Confirm" onClick={onConfirm} />
-      </Modal>
+      <div className="z-10 text-center mx-4">
+        <Dialog.Title>
+          <Heading priority={headingPriority} size="4xl">
+            {heading}
+          </Heading>
+        </Dialog.Title>
+        {children}
+      </div>
     </div>
-  )
-}
-
-ConfirmModal.defaultProps = {
-  onCancel: undefined,
-  onConfirm: undefined,
-}
+  </Dialog>
+)
 
 export default ConfirmModal

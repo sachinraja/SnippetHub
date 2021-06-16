@@ -1,31 +1,28 @@
 import { numberWithCommas } from '@lib/utils/number'
 import Card from '@components/card/Card'
-import type { Language } from '@prisma/client'
+import type { Pack, User } from '@prisma/client'
 import type { ReactElement } from 'react'
 import type { CardProps } from '@components/card/Card'
 
-interface PackCard {
-  shortDescription: string
-  id: number
-  language: Language
-  name: string
-  upvotes: number
-}
+type PackArg = Pick<
+  Pack,
+  'shortDescription' | 'id' | 'language' | 'name' | 'upvotes'
+>
 
 export default function getCardFromPack(
-  pack: PackCard,
-  { gitHubId, username }: { gitHubId: number; username: string },
+  pack: PackArg,
+  author: Pick<User, 'username'> & { image?: string },
 ): ReactElement<CardProps> {
   const count = numberWithCommas(pack.upvotes)
   return (
     <Card
       key={pack.id}
-      bodyUrl={`/@${username}/${pack.name}`}
+      bodyUrl={`/@${author.username}/${pack.name}`}
       count={count}
       description={pack.shortDescription}
-      imageUrl={`https://avatars.githubusercontent.com/u/${gitHubId}`}
+      imageUrl={author.image ?? undefined}
       language={pack.language}
-      subtitle={username}
+      subtitle={author.username}
       title={pack.name}
     />
   )

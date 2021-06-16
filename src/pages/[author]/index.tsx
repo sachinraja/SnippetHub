@@ -36,8 +36,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     // nextjs passes empty props if fallback is true and page is on first render
     // blocking works like SSR, but caches the page
     fallback: 'blocking',
-
-    paths: [{ params: { author: '@xCloudzx' } }],
+    paths: [],
   }
 }
 
@@ -50,7 +49,12 @@ const AuthorPage = ({
 }) => {
   // must copy to keep state of arguments
   const packsCopy = [...packs]
-  const cards = packsCopy.map((pack) => getCardFromPack(pack, author))
+  const cards = packsCopy.map((pack) =>
+    getCardFromPack(pack, {
+      username: author.username,
+      image: author.image ?? undefined,
+    }),
+  )
 
   return (
     <Container meta={{ title: `@${author.username}` }}>
@@ -58,13 +62,15 @@ const AuthorPage = ({
         <Header>
           <section className="m-auto sm:w-2/3">
             <div className="flex items-center">
-              <Image
-                width={80}
-                height={80}
-                alt={`${author.username} Profile`}
-                className="rounded-full"
-                src={`https://avatars.githubusercontent.com/u/${author.gitHubId}`}
-              />
+              {author.image && (
+                <Image
+                  width={70}
+                  height={70}
+                  alt={`${author.username} Profile`}
+                  className="rounded-full"
+                  src={author.image}
+                />
+              )}
               <Heading className="font-inter pl-2" priority={1} size="4xl" bold>
                 {author.username}
               </Heading>

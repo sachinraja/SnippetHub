@@ -1,8 +1,8 @@
 import { intArg, list, nonNull, queryType, stringArg } from 'nexus'
-import { Pack } from '@graphql/objects/pack'
-import { User } from '@graphql/objects/user'
 import { searchForPack } from '@lib/pack/search'
 import getTopPacks from '@lib/pack/top'
+import { Pack } from './pack'
+import { User } from './user'
 
 export const Query = queryType({
   definition(t) {

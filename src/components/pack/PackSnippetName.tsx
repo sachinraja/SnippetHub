@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { PackFormInputs } from '@lib/schemas/pack-schema'
 import { useDeleteSnippetMutation } from '@graphql/queries/delete-snippet.graphql'
@@ -8,6 +8,8 @@ import FormError from '@components/forms/FormError'
 import Heading from '@components/Heading'
 import PackEdit from '@components/pack/PackEdit'
 import TextInput from '@components/form-inputs/TextInput'
+import ConfirmModal from '@components/modals/ConfirmModal'
+import ButtonInput from '@components/form-inputs/ButtonInput'
 import type { UseFieldArrayReturn } from 'react-hook-form'
 import type { Snippet } from '@prisma/client'
 import type { Dispatch, SetStateAction } from 'react'
@@ -45,39 +47,50 @@ const PackSnippetName = ({
     setValue(formSnippetId, snippet.name as never)
   }, [formSnippetId, setValue, snippet])
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const deleteButtonRef = useRef<HTMLButtonElement>(null)
+
   return (
     <PackEdit
       displayComponent={
         <>
-          <button
-            type="button"
-            onClick={() => {
-              if (snippets.length === 1)
-                return window.alert('You cannot delete your last snippet.')
+          {snippets.length !== 1 && (
+            <>
+              <button type="button" onClick={() => setIsDeleteModalOpen(true)}>
+                <DeleteIcon />
+              </button>
 
-              if (
-                window.confirm(
-                  `Are you sure you want to delete snippet ${snippet.name}?`,
-                )
-              ) {
-                deleteSnippetMutation({
-                  variables: { packId: snippet.packId, snippetId: snippet.id },
-                })
+              <ConfirmModal
+                initialFocus={deleteButtonRef}
+                open={isDeleteModalOpen}
+                onClose={() => setIsDeleteModalOpen(false)}
+                heading={`Are you sure you want to delete snippet ${snippet.name}?`}
+                headingPriority={2}
+              >
+                <ButtonInput
+                  className="mt-4"
+                  onClick={() => {
+                    deleteSnippetMutation({
+                      variables: {
+                        packId: snippet.packId,
+                        snippetId: snippet.id,
+                      },
+                    })
 
-                const newSnippets = [...snippets]
-                newSnippets.splice(index, 1)
-                setSnippets(newSnippets)
+                    const newSnippets = [...snippets]
+                    newSnippets.splice(index, 1)
+                    setSnippets(newSnippets)
 
-                methods.remove(index)
+                    methods.remove(index)
+                  }}
+                  ref={deleteButtonRef}
+                >
+                  Confirm Deletion
+                </ButtonInput>
+              </ConfirmModal>
+            </>
+          )}
 
-                return true
-              }
-
-              return false
-            }}
-          >
-            <DeleteIcon />
-          </button>
           <Heading priority={3} size="3xl">
             {snippet.name}
           </Heading>

@@ -1,27 +1,8 @@
-import Link from 'next/link'
 import githubIcon from 'simple-icons/icons/github'
-import envConfig from 'src/config'
+import { signIn } from 'next-auth/client'
 import Container from '@components/containers/Container'
-import type { InferGetStaticPropsType } from 'next'
 
-export const getStaticProps = () => {
-  const searchParams = new URLSearchParams({
-    // eslint-disable-next-line camelcase
-    client_id: envConfig.get('gitHub.clientId'),
-  })
-
-  const githubAuthUrl = `https://github.com/login/oauth/authorize?${searchParams.toString()}`
-
-  return {
-    props: {
-      githubAuthUrl,
-    },
-  }
-}
-
-const Login = ({
-  githubAuthUrl,
-}: InferGetStaticPropsType<typeof getStaticProps>) => (
+const Login = () => (
   <Container meta={{ title: 'Sign in to SnippetHub' }}>
     <section className="md:w-1/2 w-2/3 m-auto mt-4">
       <div className="border-white border-1 rounded-md p-2">
@@ -30,18 +11,20 @@ const Login = ({
         </h1>
 
         <div className="flex justify-center mt-2">
-          <Link href={githubAuthUrl}>
-            <a className="inline-block bg-blue-800 hover:bg-blue-700 text-white text-lg p-1.5 rounded-md">
-              <svg
-                className="ml-1 my-1 w-5 inline-block"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d={githubIcon.path} fill="white" />
-              </svg>
-              &nbsp;| Sign in with GitHub
-            </a>
-          </Link>
+          <button
+            type="button"
+            className="inline-block bg-blue-800 hover:bg-blue-700 text-white text-lg p-1.5 rounded-md"
+            onClick={() => signIn('github')}
+          >
+            <svg
+              className="ml-1 my-1 w-5 inline-block"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d={githubIcon.path} fill="white" />
+            </svg>
+            &nbsp;| Sign in with GitHub
+          </button>
         </div>
       </div>
     </section>

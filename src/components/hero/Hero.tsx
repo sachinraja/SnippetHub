@@ -40,7 +40,7 @@ const Hero = ({ searchInputValue }: HeroProps) => {
 
       <section className="md:w-1/2">
         <div className="relative h-full">
-          <Image src="/logo.svg" layout="fill" aria-hidden />
+          <Image src="/logo.svg" layout="fill" alt="" aria-hidden />
         </div>
       </section>
     </Header>

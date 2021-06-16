@@ -9,9 +9,9 @@ import { useRouter } from 'next/dist/client/router'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import useUser from '@hooks/use-user'
+import { useSession } from 'next-auth/client'
 import NavMenu from '@components/nav/NavMenu'
-import NavLink from '@components/nav/Link'
+import NavLink from '@components/nav/NavLink'
 
 const links: Record<string, string> = {
   '/': 'Top Packs',
@@ -35,7 +35,7 @@ const NavLinks = () => {
 
 const Nav = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
-  const user = useUser()
+  const [session] = useSession()
 
   return (
     <nav className="bg-carbon-800 py-2 sm:py-4">
@@ -69,7 +69,7 @@ const Nav = () => {
           <NavLinks />
         </div>
 
-        {user ? (
+        {session && session.user ? (
           <>
             <div className="relative ml-auto">
               <Menu>
@@ -98,17 +98,18 @@ const Nav = () => {
                       <NavMenu.Button open={open}>
                         <div className="relative h-8 w-8">
                           <Image
-                            alt="Profile Picture"
+                            alt="Profile"
                             className="rounded-full"
                             layout="fill"
                             objectFit="cover"
-                            src={`https://avatars.githubusercontent.com/u/${user?.gitHubId}`}
+                            // TODO: fix type
+                            src={session.user?.image ?? ''}
                           />
                         </div>
                       </NavMenu.Button>
 
                       <NavMenu.Items>
-                        <NavMenu.Item href={`/@${user?.username}`}>
+                        <NavMenu.Item href={`/@${session.user?.name}`}>
                           Profile
                         </NavMenu.Item>
                         <NavMenu.Item href="/new">Sign out</NavMenu.Item>

@@ -18,6 +18,6 @@ type PackPropFromParam = Exclude<
 >
 
 interface AuthorPackProps {
-  author: AuthorParam
+  author: AuthorPropFromParam
   pack: PackPropFromParam
 }

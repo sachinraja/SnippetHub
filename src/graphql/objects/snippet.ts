@@ -6,9 +6,9 @@ import {
   objectType,
   stringArg,
 } from 'nexus'
-import { Language } from '@graphql/objects/language'
-import { Pack } from '@graphql/objects/pack'
 import { updatePackLanguage } from '@graphql/utils/update-language'
+import { Language } from './language'
+import { Pack } from './pack'
 import type { Prisma, Pack as PrismaPack } from '@prisma/client'
 
 export const Snippet = objectType({

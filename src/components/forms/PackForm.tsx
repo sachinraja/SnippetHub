@@ -1,16 +1,17 @@
-import { Controller, useFieldArray, useForm } from 'react-hook-form'
+import {
+  Controller,
+  useFieldArray,
+  useForm,
+  FormProvider,
+} from 'react-hook-form'
 import { Language } from '@prisma/client'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { packFormSchema } from '@lib/schemas/pack-schema'
 import ButtonInput from '@components/form-inputs/ButtonInput'
-import CodeInput from '@components/form-inputs/CodeInput'
-import DeleteIcon from '@components/icons/DeleteIcon'
-import Heading from '@components/Heading'
-import LanguageSelectInput from '@components/form-inputs/LanguageSelectInput'
 import MDEditor from '@components/md-editor/MDEditor'
 import TextAreaInput from '@components/form-inputs/TextAreaInput'
 import TextInput from '@components/form-inputs/TextInput'
-import getLanguageMode from '@lib/language/get-language-mode'
+import SnippetInput from '@components/form-inputs/SnippetInput'
 import FormError from './FormError'
 import type { SubmitHandler } from 'react-hook-form'
 import type { PackFormInputs } from '@lib/schemas/pack-schema'
@@ -21,6 +22,12 @@ export interface PackFormProps {
 }
 
 const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
+  const formMethods = useForm<PackFormInputs>({
+    resolver: yupResolver(packFormSchema),
+    mode: 'onBlur',
+    defaultValues,
+  })
+
   const {
     register,
     handleSubmit,
@@ -28,152 +35,86 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
     formState: { errors },
     setValue,
     getValues,
-    watch,
     trigger,
-  } = useForm<PackFormInputs>({
-    resolver: yupResolver(packFormSchema),
-    mode: 'onBlur',
-    defaultValues,
-  })
+  } = formMethods
 
-  const {
-    fields: snippetFields,
-    append: appendSnippet,
-    remove: removeSnippet,
-  } = useFieldArray({
+  const snippetFieldArray = useFieldArray({
     control,
     name: 'snippets',
   })
 
+  const { fields: snippetFields, append: appendSnippet } = snippetFieldArray
+
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
-      <div className="space-y-3">
-        <TextInput
-          id="packName"
-          label="Pack Name"
-          placeholder="React Snippets"
-          required
-          {...register('packName')}
-        />
-        <FormError name="packName" errors={errors} />
+    <FormProvider {...formMethods}>
+      <form onSubmit={handleSubmit(submitHandler)}>
+        <div className="space-y-3">
+          <TextInput
+            id="packName"
+            label="Pack Name"
+            placeholder="React Snippets"
+            required
+            {...register('packName')}
+          />
+          <FormError name="packName" errors={errors} />
 
-        <TextAreaInput
-          id="packShortDescription"
-          label="Short Description"
-          required
-          {...register('packShortDescription')}
-        />
-        <FormError name="packShortDescription" errors={errors} />
+          <TextAreaInput
+            id="packShortDescription"
+            label="Short Description"
+            required
+            {...register('packShortDescription')}
+          />
+          <FormError name="packShortDescription" errors={errors} />
 
-        <Controller
-          render={({ field: mdEditorField }) => (
-            <MDEditor
-              className="w-full"
-              {...mdEditorField}
-              onBlur={() => trigger('packLongDescription')}
-              onUpdate={(v) =>
-                setValue('packLongDescription', v.state.doc.toString())
-              }
-              label="Long Description - Supports Markdown (GFM)"
-              value={getValues('packLongDescription')}
-            />
-          )}
-          control={control}
-          name="packLongDescription"
-        />
-        <FormError name="packLongDescription" errors={errors} />
-
-        {snippetFields.map((field, index) => {
-          const snippetNameId = `snippets.${index}.name` as const
-          const snippetLanguageId = `snippets.${index}.language` as const
-          const snippetCodeId = `snippets.${index}.code` as const
-
-          return (
-            <div key={field.id}>
-              <div className="flex">
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        `Are you sure you want to delete snippet ${
-                          getValues(snippetNameId) || index + 1
-                        }?`,
-                      )
-                    ) {
-                      removeSnippet(index)
-                      trigger('snippets')
-                    }
-                  }}
-                  aria-label="Remove snippet"
-                >
-                  <DeleteIcon />
-                </button>
-                <Heading priority={5} size="2xl">
-                  Snippet {index + 1}
-                </Heading>
-              </div>
-
-              <hr className="my-2 w-5/6 bg-carbon-600" />
-
-              <TextInput
-                label="Name"
-                id={snippetNameId}
-                className="mb-3"
-                required
-                defaultValue={getValues(snippetNameId)}
-                {...register(snippetNameId)}
-              />
-              <FormError name={snippetNameId} errors={errors} />
-
-              <Controller
-                render={({ field: { onChange, value } }) => (
-                  <LanguageSelectInput
-                    value={value}
-                    onChange={(val) => {
-                      if (!val) return
-                      onChange(val.value)
-                    }}
-                  />
-                )}
-                defaultValue={field.language}
-                control={control}
-                name={snippetLanguageId}
-              />
-
-              <CodeInput
-                label="Code"
-                mode={getLanguageMode(watch(snippetLanguageId))}
-                required
-                id={snippetCodeId}
-                onBlur={() => trigger(snippetCodeId)}
+          <Controller
+            render={({ field: mdEditorField }) => (
+              <MDEditor
+                className="w-full"
+                {...mdEditorField}
+                onBlur={() => trigger('packLongDescription')}
                 onUpdate={(v) =>
-                  setValue(snippetCodeId, v.state.doc.toString() as never)
+                  setValue('packLongDescription', v.state.doc.toString())
                 }
-                value={getValues(snippetCodeId)}
+                label="Long Description - Supports Markdown (GFM)"
+                value={getValues('packLongDescription')}
               />
+            )}
+            control={control}
+            name="packLongDescription"
+          />
+          <FormError name="packLongDescription" errors={errors} />
 
-              <FormError name={snippetCodeId} errors={errors} />
-            </div>
-          )
-        })}
-      </div>
+          {snippetFields.map((field, index) => {
+            return (
+              <SnippetInput
+                key={field.id}
+                field={field}
+                index={index}
+                fieldArray={snippetFieldArray}
+              />
+            )
+          })}
+        </div>
 
-      <ButtonInput
-        className="my-4"
-        value="Add Snippet"
-        onClick={() => {
-          appendSnippet({ language: Language.javascript })
-          trigger('snippets')
-        }}
-      />
+        <ButtonInput
+          className="my-4"
+          onClick={() => {
+            appendSnippet({ language: Language.javascript })
+            trigger('snippets')
+          }}
+        >
+          Add Snippet
+        </ButtonInput>
 
-      <FormError name="snippets" errors={errors} />
+        <FormError name="snippets" errors={errors} />
 
-      <hr className="bg-carbon-600" />
+        <hr className="bg-carbon-600" />
 
-      <ButtonInput className="my-4" type="submit" value="Create pack" />
-    </form>
+        <ButtonInput className="my-4" type="submit">
+          Create pack
+        </ButtonInput>
+      </form>
+    </FormProvider>
   )
 }
 

@@ -6,7 +6,7 @@ import envConfig from '../config'
 
 const prisma = new PrismaClient()
 
-async function main() {
+export async function seed() {
   const personalGitHubId = envConfig.get('gitHub.personalGitHubId')
 
   // fetch username from github
@@ -15,11 +15,11 @@ async function main() {
   ).data.login
 
   await prisma.user.upsert({
-    where: { gitHubId: personalGitHubId },
+    where: { username: githubUsername },
     create: {
-      gitHubId: personalGitHubId,
       type: UserType.admin,
       username: githubUsername,
+      image: `https://avatars.githubusercontent.com/u/${personalGitHubId}`,
       bio: 'A student and aspiring software engineer with a love for TypeScript and Python.',
       packs: {
         create: [
@@ -153,16 +153,6 @@ async function main() {
     },
     update: {},
   })
-}
 
-main()
-  .catch((e) => {
-    console.error(e)
-    process.exit(1)
-  })
-  .finally(() => {
-    prisma.$disconnect().catch((e) => {
-      console.error(e)
-      process.exit(1)
-    })
-  })
+  prisma.$disconnect()
+}

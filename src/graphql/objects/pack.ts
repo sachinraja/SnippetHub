@@ -6,15 +6,15 @@ import {
   objectType,
   stringArg,
 } from 'nexus'
-import { Language } from '@graphql/objects/language'
 import { getLanguageFromSnippets } from '@graphql/utils/update-language'
+import { Language } from './language'
 import type { Prisma, User as PrismaUser } from '@prisma/client'
 
 export const Pack = objectType({
   name: 'Pack',
   definition(t) {
     t.nonNull.int('id')
-    t.nonNull.int('authorId')
+    t.nonNull.string('authorId')
     t.nonNull.string('name')
     t.nonNull.string('shortDescription')
     t.string('longDescription')
@@ -108,7 +108,11 @@ export const CreatePack = mutationField('createPack', {
   resolve(parent, args, ctx) {
     return ctx.prisma.pack.create({
       data: {
-        authorId: 1,
+        author: {
+          connect: {
+            username: 'sachinraja',
+          },
+        },
         name: args.name,
         shortDescription: args.shortDescription,
         longDescription: args.longDescription ?? undefined,

@@ -31,7 +31,12 @@ const SearchPage = ({
   searchKeyword,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   // create components for found packs
-  const cards = foundPacks.map((pack) => getCardFromPack(pack, pack.author))
+  const cards = foundPacks.map((pack) =>
+    getCardFromPack(pack, {
+      username: pack.author.username,
+      image: pack.author.image ?? undefined,
+    }),
+  )
 
   return (
     <Container meta={{ title: `${searchKeyword} | SnippetHub Search` }}>

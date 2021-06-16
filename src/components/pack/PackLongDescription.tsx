@@ -34,7 +34,9 @@ const PackLongDescription = ({
     <PackEdit
       className="justify-center"
       displayComponent={
-        <MDRenderer className="w-3/4">{packLongDescription}</MDRenderer>
+        packLongDescription !== '' && (
+          <MDRenderer className="w-3/4">{packLongDescription}</MDRenderer>
+        )
       }
       editComponent={
         <MDEditor
