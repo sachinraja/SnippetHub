@@ -69,7 +69,7 @@ const Card = ({
   return (
     <FadeIn as="article">
       <WithLink>
-        <div className="bg-opacity-80 border-carbon-500 border-1 rounded p-2 transform motion-safe:hover:-translate-y-0.5 hover:border-carbon-50 transition-colors duration-500">
+        <div className="bg-opacity-80 border-carbon-500 border-1 rounded p-2 motion-safe:hover:-translate-y-0.5 hover:border-carbon-50 transition-colors duration-500">
           <div className="flex flex-wrap">
             <section ref={header} className="flex-grow mr-2">
               <section>

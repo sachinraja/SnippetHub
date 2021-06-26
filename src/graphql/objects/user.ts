@@ -1,22 +1,15 @@
-import { nonNull, objectType } from 'nexus'
-import { Pack } from '@graphql/objects/pack'
+import { objectType } from 'nexus'
+import { User as NexusUser } from 'nexus-prisma'
 
 export const User = objectType({
-  name: 'User',
+  name: NexusUser.$name,
   definition(t) {
-    t.nonNull.string('id')
-    t.nonNull.string('username')
-    t.string('image')
-    t.string('bio')
-    t.list.field('packs', {
-      resolve(parent, args, ctx) {
-        return ctx.prisma.pack.findMany({
-          where: { authorId: parent.id },
-        })
-      },
-      type: nonNull(Pack),
-    })
-    t.nonNull.dateTime('createdAt')
-    t.nonNull.dateTime('updatedAt')
+    t.field(NexusUser.id)
+    t.field(NexusUser.username)
+    t.field(NexusUser.image)
+    t.field(NexusUser.bio)
+    t.field(NexusUser.packs)
+    t.field(NexusUser.createdAt)
+    t.field(NexusUser.updatedAt)
   },
 })

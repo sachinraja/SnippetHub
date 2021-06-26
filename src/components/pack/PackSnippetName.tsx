@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { PackFormInputs } from '@lib/schemas/pack-schema'
 import { useDeleteSnippetMutation } from '@graphql/queries/delete-snippet.graphql'
 import { useUpdateSnippetNameMutation } from '@graphql/queries/update-snippet-name.graphql'
@@ -113,19 +114,22 @@ const PackSnippetName = ({
 
           const formSnippetName = getValues(formSnippetId)
           if (formSnippetName !== snippet.name) {
-            updateSnippetNameMutation({
-              variables: {
-                snippetId: snippet.id,
-                snippetName: formSnippetName,
-              },
-            })
+            try {
+              await updateSnippetNameMutation({
+                variables: {
+                  snippetId: snippet.id,
+                  snippetName: formSnippetName,
+                },
+              })
 
-            const newSnippets = [...snippets]
-            newSnippets[index].name = formSnippetName
-            setSnippets(newSnippets)
+              const newSnippets = [...snippets]
+              newSnippets[index].name = formSnippetName
+              setSnippets(newSnippets)
+              setIsEditing(false)
+            } catch {
+              toast.error("There was an error updating this snippet's name.")
+            }
           }
-
-          setIsEditing(false)
         })()
       }
       formError={<FormError errors={errors} name={formSnippetId} />}

@@ -8,10 +8,7 @@ type TextInputProps = ComponentPropsWithRef<'input'> & {
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    { children, className, id, label, required, ...props }: TextInputProps,
-    ref,
-  ) => {
+  ({ children, className, id, label, required, ...props }, ref) => {
     return (
       <div className={`overflow-hidden ${className}`}>
         {label && (

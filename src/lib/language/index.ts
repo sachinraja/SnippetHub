@@ -7,8 +7,8 @@ import javascriptIcon from 'simple-icons/icons/javascript'
 import otherIcon from 'simple-icons/icons/svg'
 import pythonIcon from 'simple-icons/icons/python'
 import typescriptIcon from 'simple-icons/icons/typescript'
-import { colors } from '@lib/styling/tailwind-config'
 import { LanguageMode } from '@lib/language/mode'
+import colors from '@lib/styling/tailwind-colors.preval'
 import type { TailwindColorGroup } from 'tailwindcss/tailwind-config'
 
 interface LanguageColor {
@@ -24,11 +24,13 @@ interface Language {
   mode?: LanguageMode
 }
 
-function getLanguageColorFromTWColorGroup(colorGroup: TailwindColorGroup) {
+function getLanguageColorFromTWColorGroup(
+  colorGroup: Pick<TailwindColorGroup, 400 | 500 | 600>,
+) {
   return {
     text: colorGroup[400],
-    icon: colorGroup[600],
     border: colorGroup[500],
+    icon: colorGroup[600],
   }
 }
 

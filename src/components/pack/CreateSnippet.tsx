@@ -1,5 +1,6 @@
 import { Controller, useFormContext } from 'react-hook-form'
 import { Language } from '@prisma/client'
+import toast from 'react-hot-toast'
 import { useCreateSnippetMutation } from '@graphql/queries/create-snippet.graphql'
 import CodeInput from '@components/form-inputs/CodeInput'
 import FormError from '@components/forms/FormError'
@@ -99,27 +100,31 @@ const CreateSnippet = ({
 
             const newSnippet = getValues('newSnippet')
 
-            const { data } = await createSnippetMutation({
-              variables: {
-                packId,
-                snippet: newSnippet,
-              },
-            })
+            try {
+              const { data } = await createSnippetMutation({
+                variables: {
+                  packId,
+                  snippet: newSnippet,
+                },
+              })
 
-            if (!data || !data.createSnippet) return
+              if (!data || !data.createSnippet) return
 
-            const { createSnippet } = data
-            setSnippets([...snippets, createSnippet])
-            methods.append(createSnippet)
+              const { createSnippet } = data
+              setSnippets([...snippets, createSnippet])
+              methods.append(createSnippet)
 
-            // reset input values
-            setValue('newSnippet', {
-              name: '',
-              language: Language.javascript,
-              code: '',
-            })
+              // reset input values
+              setValue('newSnippet', {
+                name: '',
+                language: Language.javascript,
+                code: '',
+              })
 
-            setIsCreatingSnippet(false)
+              setIsCreatingSnippet(false)
+            } catch {
+              toast.error('There was an error creating your snippet.')
+            }
           })()
         }}
       >

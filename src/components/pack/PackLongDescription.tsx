@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import { useUpdatePackLongDescriptionMutation } from '@graphql/queries/update-pack-long-description.graphql'
 import FormError from '@components/forms/FormError'
 import MDEditor from '@components/md-editor/MDEditor'
@@ -59,16 +60,19 @@ const PackLongDescription = ({
           const formPackLongDescription = getValues('packLongDescription')
 
           if (formPackLongDescription !== packLongDescription) {
-            updatePackLongDescriptionMutation({
-              variables: {
-                packId,
-                packLongDescription: formPackLongDescription,
-              },
-            })
-            setPackLongDescription(formPackLongDescription)
+            try {
+              await updatePackLongDescriptionMutation({
+                variables: {
+                  packId,
+                  packLongDescription: formPackLongDescription,
+                },
+              })
+              setPackLongDescription(formPackLongDescription)
+              setIsEditing(false)
+            } catch {
+              toast.error('There was an error updating the long description.')
+            }
           }
-
-          setIsEditing(false)
         })()
       }
       formError={<FormError errors={errors} name="packLongDescription" />}

@@ -84,6 +84,13 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
 
     'react/jsx-props-no-spreading': 'off',
+
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['*.config.{js,ts}', '**/*.test.ts', '**/*.preval.ts'],
+      },
+    ],
   },
 
   settings: {

@@ -1,53 +1,30 @@
-import {
-  intArg,
-  list,
-  mutationField,
-  nonNull,
-  objectType,
-  stringArg,
-} from 'nexus'
+import { arg, list, mutationField, nonNull, objectType } from 'nexus'
+import { Pack as NexusPack } from 'nexus-prisma'
 import { getLanguageFromSnippets } from '@graphql/utils/update-language'
-import { Language } from './language'
-import type { Prisma, User as PrismaUser } from '@prisma/client'
+import { SnippetInput } from './snippet'
 
 export const Pack = objectType({
-  name: 'Pack',
+  name: NexusPack.$name,
   definition(t) {
-    t.nonNull.int('id')
-    t.nonNull.string('authorId')
-    t.nonNull.string('name')
-    t.nonNull.string('shortDescription')
-    t.string('longDescription')
-    t.nonNull.field('language', {
-      type: Language,
-    })
-    t.nonNull.int('upvotes')
-    t.nonNull.list.field('snippets', {
-      resolve(parent, args, ctx) {
-        return ctx.prisma.snippet.findMany({
-          where: { packId: parent.id },
-        })
-      },
-      type: nonNull('Snippet'),
-    })
-    t.nonNull.field('author', {
-      resolve(parent, args, ctx) {
-        return ctx.prisma.user.findUnique({
-          where: { id: parent.authorId },
-        }) as Prisma.Prisma__UserClient<PrismaUser>
-      },
-      type: 'User',
-    })
-    t.nonNull.dateTime('createdAt')
-    t.nonNull.dateTime('updatedAt')
+    t.field(NexusPack.id)
+    t.field(NexusPack.authorId)
+    t.field(NexusPack.name)
+    t.field(NexusPack.shortDescription)
+    t.field(NexusPack.longDescription)
+    t.field(NexusPack.language)
+    t.field(NexusPack.upvotes)
+    t.field(NexusPack.snippets)
+    t.field(NexusPack.author)
+    t.field(NexusPack.createdAt)
+    t.field(NexusPack.updatedAt)
   },
 })
 
 export const UpdatePackName = mutationField('updatePackName', {
   type: Pack,
   args: {
-    id: nonNull(intArg()),
-    name: nonNull(stringArg()),
+    id: nonNull(arg(NexusPack.id)),
+    name: nonNull(arg(NexusPack.name)),
   },
   resolve(parent, args, ctx) {
     return ctx.prisma.pack.update({
@@ -64,8 +41,8 @@ export const UpdatePackShortDescription = mutationField(
   {
     type: Pack,
     args: {
-      id: nonNull(intArg()),
-      shortDescription: nonNull(stringArg()),
+      id: nonNull(arg(NexusPack.id)),
+      shortDescription: nonNull(arg(NexusPack.shortDescription)),
     },
     resolve(parent, args, ctx) {
       return ctx.prisma.pack.update({
@@ -83,8 +60,8 @@ export const UpdatePackLongDescription = mutationField(
   {
     type: Pack,
     args: {
-      id: nonNull(intArg()),
-      longDescription: nonNull(stringArg()),
+      id: nonNull(arg(NexusPack.id)),
+      longDescription: nonNull(arg(NexusPack.longDescription)),
     },
     resolve(parent, args, ctx) {
       return ctx.prisma.pack.update({
@@ -100,10 +77,10 @@ export const UpdatePackLongDescription = mutationField(
 export const CreatePack = mutationField('createPack', {
   type: Pack,
   args: {
-    name: nonNull(stringArg()),
-    shortDescription: nonNull(stringArg()),
-    longDescription: stringArg(),
-    snippets: nonNull(list(nonNull('SnippetInput'))),
+    name: nonNull(arg(NexusPack.name)),
+    shortDescription: nonNull(arg(NexusPack.shortDescription)),
+    longDescription: arg(NexusPack.longDescription),
+    snippets: nonNull(list(nonNull(SnippetInput))),
   },
   resolve(parent, args, ctx) {
     return ctx.prisma.pack.create({

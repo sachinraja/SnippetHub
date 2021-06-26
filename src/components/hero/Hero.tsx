@@ -11,7 +11,6 @@ interface HeroProps {
 const Hero = ({ searchInputValue }: HeroProps) => {
   const router = useRouter()
   const textInput = useRef<HTMLInputElement>(null)
-
   return (
     <Header>
       <section className="md:w-1/2">

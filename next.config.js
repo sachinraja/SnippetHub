@@ -1,4 +1,9 @@
-module.exports = {
+/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
+const createNextPluginPreval = require('next-plugin-preval/config')
+
+const withNextPluginPreval = createNextPluginPreval()
+
+module.exports = withNextPluginPreval({
   api: {
     bodyParser: {
       sizeLimit: '1mb',
@@ -28,4 +33,4 @@ module.exports = {
 
     return config
   },
-}
+})

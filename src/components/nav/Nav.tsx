@@ -78,7 +78,7 @@ const Nav = () => {
                     <>
                       <NavMenu.Button open={open} className="whitespace-nowrap">
                         <PlusIcon className="h-6 w-6 inline" />
-                        <ChevronDownIcon className="h-6 w-4 inline transform translate-y-2 -translate-x-1" />
+                        <ChevronDownIcon className="h-6 w-4 inline translate-y-2 -translate-x-1" />
                       </NavMenu.Button>
 
                       <NavMenu.Items>

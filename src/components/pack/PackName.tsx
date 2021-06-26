@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useRouter } from 'next/dist/client/router'
+import toast from 'react-hot-toast'
 import { useUpdatePackNameMutation } from '@graphql/queries/update-pack-name.graphql'
 import FormError from '@components/forms/FormError'
 import Heading from '@components/Heading'
@@ -66,16 +67,19 @@ const PackName = ({ packId, packName, setPackName }: PackNameProps) => {
           const formPackName = getValues('packName')
 
           if (formPackName !== packName) {
-            updatePackNameMutation({
-              variables: {
-                packId,
-                packName: formPackName,
-              },
-            })
-            setPackName(formPackName)
+            try {
+              await updatePackNameMutation({
+                variables: {
+                  packId,
+                  packName: formPackName,
+                },
+              })
+              setPackName(formPackName)
+              setIsEditing(false)
+            } catch {
+              toast.error('There was an error updating the name.')
+            }
           }
-
-          setIsEditing(false)
         })()
       }
       formError={<FormError errors={errors} name="packName" />}

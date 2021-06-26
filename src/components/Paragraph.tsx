@@ -1,20 +1,29 @@
+import { ComponentPropsWithRef, forwardRef } from 'react'
 import { getTextSizeClassNameFromProp } from '@lib/styling/text-size'
 
-interface ParagraphProps {
+type ParagraphProps = ComponentPropsWithRef<'p'> & {
   children: React.ReactNode
   className?: string
   size?: TextSize
 }
 
-const Paragraph = ({ children, className, size }: ParagraphProps) => {
-  const textSizeClassName = getTextSizeClassNameFromProp(size)
+const Paragraph = forwardRef<HTMLParagraphElement, ParagraphProps>(
+  ({ children, className, size, ...props }, ref) => {
+    const textSizeClassName = getTextSizeClassNameFromProp(size)
 
-  return <p className={`${textSizeClassName} ${className}`}>{children}</p>
-}
+    return (
+      <p className={`${textSizeClassName} ${className}`} ref={ref} {...props}>
+        {children}
+      </p>
+    )
+  },
+)
 
 Paragraph.defaultProps = {
   className: '',
   size: undefined,
 }
+
+Paragraph.displayName = 'Paragraph'
 
 export default Paragraph

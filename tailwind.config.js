@@ -4,17 +4,12 @@ module.exports = {
   mode: 'jit',
   darkMode: false,
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
-  purge: {
-    content: [
-      './src/components/**/*.tsx',
-      './src/layouts/**/*.tsx',
-      './src/pages/**/*.tsx',
-      './safelist.txt',
-    ],
-    options: {
-      safelist: [/^text-.+?-(4|6)0{2}/, /^text-\d?xl/, /^border-.+?-50{2}/],
-    },
-  },
+  purge: [
+    './src/components/**/*.tsx',
+    './src/layouts/**/*.tsx',
+    './src/pages/**/*.tsx',
+    './safelist.txt',
+  ],
   theme: {
     extend: {
       borderWidth: {

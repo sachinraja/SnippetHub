@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import { useUpdatePackShortDescriptionMutation } from '@graphql/queries/update-pack-short-description.graphql'
 import FormError from '@components/forms/FormError'
 import PackEdit from '@components/pack/PackEdit'
@@ -54,16 +55,19 @@ const PackShortDescription = ({
           const formPackShortDescription = getValues('packShortDescription')
 
           if (formPackShortDescription !== packShortDescription) {
-            updatePackShortDescriptionMutation({
-              variables: {
-                packId,
-                packShortDescription: formPackShortDescription,
-              },
-            })
-            setPackShortDescription(formPackShortDescription)
+            try {
+              await updatePackShortDescriptionMutation({
+                variables: {
+                  packId,
+                  packShortDescription: formPackShortDescription,
+                },
+              })
+              setPackShortDescription(formPackShortDescription)
+              setIsEditing(false)
+            } catch {
+              toast.error('There was an error updating the short description.')
+            }
           }
-
-          setIsEditing(false)
         })()
       }
       formError={<FormError errors={errors} name="packShortDescription" />}

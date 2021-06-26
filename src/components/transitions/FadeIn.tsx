@@ -36,7 +36,7 @@ function FadeIn({ as, from, children }: FadeInProps) {
       show
       appear
       enter="transition duration-1000"
-      enterFrom={`transform opacity-0 ${getDirectionClassName()}`}
+      enterFrom={`opacity-0 ${getDirectionClassName()}`}
       enterTo="opacity-100"
     >
       {children}

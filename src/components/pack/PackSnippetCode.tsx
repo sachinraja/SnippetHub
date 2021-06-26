@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { useUpdateSnippetCodeMutation } from '@graphql/queries/update-snippet-code.graphql'
 import CodeBlock from '@components/CodeBlock'
 import CodeInput from '@components/form-inputs/CodeInput'
@@ -68,19 +69,22 @@ const PackSnippetCode = ({
           const formSnippetCode = getValues(formSnippetId)
 
           if (formSnippetCode !== snippet.code) {
-            updateSnippetCodeMutation({
-              variables: {
-                snippetId: snippet.id,
-                snippetCode: formSnippetCode,
-              },
-            })
-            const newSnippets = [...snippets]
-            newSnippets[index].code = formSnippetCode
+            try {
+              await updateSnippetCodeMutation({
+                variables: {
+                  snippetId: snippet.id,
+                  snippetCode: formSnippetCode,
+                },
+              })
+              const newSnippets = [...snippets]
+              newSnippets[index].code = formSnippetCode
 
-            setSnippets(newSnippets)
+              setSnippets(newSnippets)
+              setIsEditing(false)
+            } catch {
+              toast.error("There was an error updating this snippet's code.")
+            }
           }
-
-          setIsEditing(false)
         })()
       }
       formError={<FormError errors={errors} name={formSnippetId} />}

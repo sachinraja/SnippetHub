@@ -1,54 +1,34 @@
-import {
-  inputObjectType,
-  intArg,
-  mutationField,
-  nonNull,
-  objectType,
-  stringArg,
-} from 'nexus'
+import { arg, inputObjectType, mutationField, nonNull, objectType } from 'nexus'
+import { Snippet as NexusSnippet } from 'nexus-prisma'
 import { updatePackLanguage } from '@graphql/utils/update-language'
-import { Language } from './language'
-import { Pack } from './pack'
-import type { Prisma, Pack as PrismaPack } from '@prisma/client'
 
 export const Snippet = objectType({
-  name: 'Snippet',
+  name: NexusSnippet.$name,
   definition(t) {
-    t.nonNull.int('id')
-    t.nonNull.string('name')
-    t.nonNull.string('code')
-    t.nonNull.int('packId')
-    t.nonNull.field('language', {
-      type: Language,
-    })
-    t.nonNull.field('pack', {
-      resolve(parent, args, ctx) {
-        return ctx.prisma.pack.findUnique({
-          where: { id: parent.packId },
-        }) as Prisma.Prisma__PackClient<PrismaPack>
-      },
-      type: Pack,
-    })
-    t.nonNull.dateTime('createdAt')
-    t.nonNull.dateTime('updatedAt')
+    t.field(NexusSnippet.id)
+    t.field(NexusSnippet.name)
+    t.field(NexusSnippet.code)
+    t.field(NexusSnippet.packId)
+    t.field(NexusSnippet.language)
+    t.field(NexusSnippet.pack)
+    t.field(NexusSnippet.createdAt)
+    t.field(NexusSnippet.updatedAt)
   },
 })
 
 export const SnippetInput = inputObjectType({
   name: 'SnippetInput',
   definition(t) {
-    t.nonNull.string('name')
-    t.nonNull.string('code')
-    t.nonNull.field('language', {
-      type: Language,
-    })
+    t.field(NexusSnippet.name)
+    t.field(NexusSnippet.code)
+    t.field(NexusSnippet.language)
   },
 })
 
 export const CreateSnippet = mutationField('createSnippet', {
   type: Snippet,
   args: {
-    packId: nonNull(intArg()),
+    packId: nonNull(arg(NexusSnippet.packId)),
     snippet: nonNull(SnippetInput),
   },
   async resolve(parent, args, ctx) {
@@ -79,8 +59,8 @@ export const CreateSnippet = mutationField('createSnippet', {
 export const DeleteSnippet = mutationField('deleteSnippet', {
   type: Snippet,
   args: {
-    packId: nonNull(intArg()),
-    id: nonNull(intArg()),
+    packId: nonNull(arg(NexusSnippet.packId)),
+    id: nonNull(arg(NexusSnippet.id)),
   },
   async resolve(parent, args, ctx) {
     const pack = await ctx.prisma.pack.findUnique({
@@ -88,7 +68,11 @@ export const DeleteSnippet = mutationField('deleteSnippet', {
       include: { snippets: true },
     })
 
-    if (!pack?.snippets || pack?.snippets.length === 1) return null
+    if (!pack) throw new Error('Pack does not exist.')
+    if (pack.snippets.length === 1)
+      throw new Error(
+        'You cannot delete a snippet if the pack has only one snippet left.',
+      )
 
     const deletedSnippet = await ctx.prisma.snippet.delete({
       where: { id: args.id },
@@ -111,8 +95,8 @@ export const DeleteSnippet = mutationField('deleteSnippet', {
 export const UpdateSnippetName = mutationField('updateSnippetName', {
   type: Snippet,
   args: {
-    id: nonNull(intArg()),
-    name: nonNull(stringArg()),
+    id: nonNull(arg(NexusSnippet.id)),
+    name: nonNull(arg(NexusSnippet.name)),
   },
   resolve(parent, args, ctx) {
     return ctx.prisma.snippet.update({
@@ -127,8 +111,8 @@ export const UpdateSnippetName = mutationField('updateSnippetName', {
 export const UpdateSnippetCode = mutationField('updateSnippetCode', {
   type: Snippet,
   args: {
-    id: nonNull(intArg()),
-    code: nonNull(stringArg()),
+    id: nonNull(arg(NexusSnippet.id)),
+    code: nonNull(arg(NexusSnippet.code)),
   },
   resolve(parent, args, ctx) {
     return ctx.prisma.snippet.update({
