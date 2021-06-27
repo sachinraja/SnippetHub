@@ -1,9 +1,10 @@
 import { rule, shield } from 'graphql-shield'
 import envConfig from 'src/config'
 import type { IOptionsConstructor } from 'graphql-shield/dist/types'
+import type { Context } from './context'
 
 const isAuthenticated = rule({ cache: 'contextual' })(
-  async (parent, args, ctx, info) => true,
+  async (parent, args, ctx: Context) => Boolean(ctx.session),
 )
 
 const options: IOptionsConstructor =

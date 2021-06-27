@@ -6,6 +6,11 @@ import type { PageConfig } from 'next'
 const server = new ApolloServer({
   schema: schemaWithMiddleware,
   context,
+  playground: {
+    settings: {
+      'request.credentials': 'include',
+    },
+  },
 })
 
 export const config: PageConfig = {

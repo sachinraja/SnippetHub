@@ -37,9 +37,8 @@
     "jsx": "preserve",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowJs": true
+    "allowJs": true,
+    "typeRoots": ["node_modules/@types", "src/types"]
   },
   "include": [
     "**/*.ts",

@@ -1,20 +1,20 @@
 import Select from 'react-select'
 import Paragraph from '@components/Paragraph'
 import languages from '@lib/language'
-import type { Props as ReactSelectProps } from 'react-select'
+import type { Language } from '@prisma/client'
+import type { NamedProps as ReactSelectProps } from 'react-select'
 
-type LanguageSelectInputProps = {
-  value: string
+type LanguageSelectInputProps = Partial<Omit<ReactSelectProps, 'value'>> & {
+  value: Language
   onChange: ReactSelectProps['onChange']
 }
 
 const LanguageSelectInput = ({
-  value: languageValue,
+  value: selectedValue,
   ...props
 }: LanguageSelectInputProps) => {
   const options = Object.entries(languages).map(([value, language]) => {
     return {
-      value,
       label: (
         <>
           <svg
@@ -29,16 +29,20 @@ const LanguageSelectInput = ({
           </Paragraph>
         </>
       ),
+      value,
     }
   })
 
   return (
+    // @ts-expect-error options accepts JSX, but it is typed so that it only accepts a string
     <Select
-      options={options as any}
-      defaultValue={
-        options.filter(({ value }) => value === languageValue) as any
-      }
-      styles={{ menu: (base) => ({ ...base, position: 'relative' }) }}
+      options={options}
+      value={options.filter(({ value }) => value === selectedValue)}
+      styles={{
+        menu: (base) => ({ ...base, position: 'relative' }),
+        option: (base) => ({ ...base, cursor: 'pointer' }),
+        control: (base) => ({ ...base, cursor: 'pointer' }),
+      }}
       className="z-10"
       theme={(theme) => ({
         ...theme,

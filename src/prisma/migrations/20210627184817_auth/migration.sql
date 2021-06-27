@@ -45,47 +45,19 @@ CREATE TABLE "account" (
 );
 
 -- CreateTable
-CREATE TABLE "session" (
-    "id" TEXT NOT NULL,
+CREATE TABLE "user_pack_upvote" (
     "user_id" TEXT NOT NULL,
-    "expires" TIMESTAMP(3) NOT NULL,
-    "session_token" TEXT NOT NULL,
-    "access_token" TEXT NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL,
-
-    PRIMARY KEY ("id")
+    "pack_id" INTEGER NOT NULL
 );
-
--- CreateTable
-CREATE TABLE "verification_request" (
-    "id" TEXT NOT NULL,
-    "identifier" TEXT NOT NULL,
-    "token" TEXT NOT NULL,
-    "expires" TIMESTAMP(3) NOT NULL,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL,
-
-    PRIMARY KEY ("id")
-);
-
--- CreateIndex
-CREATE UNIQUE INDEX "user.email_unique" ON "user"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "account.provider_id_provider_account_id_unique" ON "account"("provider_id", "provider_account_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "session.session_token_unique" ON "session"("session_token");
+CREATE UNIQUE INDEX "user_pack_upvote.user_id_pack_id_unique" ON "user_pack_upvote"("user_id", "pack_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "session.access_token_unique" ON "session"("access_token");
-
--- CreateIndex
-CREATE UNIQUE INDEX "verification_request.token_unique" ON "verification_request"("token");
-
--- CreateIndex
-CREATE UNIQUE INDEX "verification_request.identifier_token_unique" ON "verification_request"("identifier", "token");
+CREATE UNIQUE INDEX "user.email_unique" ON "user"("email");
 
 -- AddForeignKey
 ALTER TABLE "pack" ADD FOREIGN KEY ("author_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -94,4 +66,7 @@ ALTER TABLE "pack" ADD FOREIGN KEY ("author_id") REFERENCES "user"("id") ON DELE
 ALTER TABLE "account" ADD FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "session" ADD FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "user_pack_upvote" ADD FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "user_pack_upvote" ADD FOREIGN KEY ("pack_id") REFERENCES "pack"("id") ON DELETE CASCADE ON UPDATE CASCADE;

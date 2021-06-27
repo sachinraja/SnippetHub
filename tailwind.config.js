@@ -5,10 +5,10 @@ module.exports = {
   darkMode: false,
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
   purge: [
-    './src/components/**/*.tsx',
-    './src/layouts/**/*.tsx',
-    './src/pages/**/*.tsx',
-    './safelist.txt',
+    'src/components/**/*.tsx',
+    'src/layouts/**/*.tsx',
+    'src/pages/**/*.tsx',
+    'safelist.txt',
   ],
   theme: {
     extend: {

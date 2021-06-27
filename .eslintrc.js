@@ -21,12 +21,12 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
 
-    camelcase: [
-      'error',
-      {
-        allow: ['Prisma__UserClient', 'Prisma__PackClient', 'name_authorId'],
-      },
-    ],
+    // camelcase: [
+    //   'error',
+    //   {
+    //     allow: ['Prisma__UserClient', 'Prisma__PackClient', 'name_authorId'],
+    //   },
+    // ],
 
     // doesn't work with ts - use @typescript-eslint version
     'no-shadow': 'off',

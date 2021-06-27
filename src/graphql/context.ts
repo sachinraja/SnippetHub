@@ -1,10 +1,9 @@
+import { getSession } from 'next-auth/client'
 import prisma from '@lib/prisma'
-import type { PrismaClient } from '@prisma/client'
+import type { NextApiRequest } from 'next'
 
-export interface Context {
-  prisma: PrismaClient
-}
+export type Context = UnwrapPromise<ReturnType<typeof context>>
 
-export const context = {
-  prisma,
+export const context = async ({ req }: { req: NextApiRequest }) => {
+  return { prisma, session: await getSession({ req }) }
 }

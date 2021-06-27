@@ -93,6 +93,7 @@ const SnippetInput = ({ field, index, fieldArray }: SnippetInputProps) => {
               if (!val) return
               onChange(val.value)
             }}
+            instanceId={`snippet-language-select-${index}`}
           />
         )}
         defaultValue={field.language}
