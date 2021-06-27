@@ -1,7 +1,7 @@
 import { Dialog } from '@headlessui/react'
+import { Fragment, ReactNode } from 'react'
 import Heading from '@components/Heading'
 import type { HeadingProps } from '@components/Heading'
-import type { ReactNode } from 'react'
 
 type ConfirmModalProps = ExtractProps<typeof Dialog> & {
   heading: HeadingProps['children']
@@ -25,7 +25,7 @@ const ConfirmModal = ({
       <Dialog.Overlay className="fixed inset-0 bg-black opacity-80" />
 
       <div className="z-10 text-center mx-4">
-        <Dialog.Title>
+        <Dialog.Title as={Fragment}>
           <Heading priority={headingPriority} size="4xl">
             {heading}
           </Heading>

@@ -1,6 +1,6 @@
 import { Menu } from '@headlessui/react'
 import LinkWithPropsPassed from '@components/LinkWithPropsPassed'
-import type { ComponentProps, ReactNode } from 'react'
+import type { ComponentProps } from 'react'
 
 type NavMenuButtonProps = ExtractProps<typeof Menu.Button> & {
   open: boolean
@@ -24,31 +24,45 @@ const NavMenuItems = (props: ExtractProps<typeof Menu.Items>) => {
   )
 }
 
-type MenuItemProps = ComponentProps<'a'> & {
+type MenuLinkProps = ComponentProps<'a'> & {
   className?: string
-  children: ReactNode
   href: string
 }
 
-const NavMenuItem = ({
-  className,
-  children,
-  href,
-  ...props
-}: MenuItemProps) => {
+const NavMenuLink = ({ className, href, ...props }: MenuLinkProps) => {
   return (
     <Menu.Item>
       {({ active }) => (
-        <LinkWithPropsPassed href={href}>
-          <a
-            className={`block p-2 hover:bg-carbon-500 ${
-              active ? 'bg-carbon-500' : ''
-            } ${className}`}
-            {...props}
-          >
-            {children}
-          </a>
-        </LinkWithPropsPassed>
+        <LinkWithPropsPassed
+          href={href}
+          className={`block p-2 hover:bg-carbon-500 ${
+            active ? 'bg-carbon-500' : ''
+          } ${className}`}
+          {...props}
+        />
+      )}
+    </Menu.Item>
+  )
+}
+
+NavMenuLink.defaultProps = {
+  className: '',
+}
+
+type NavMenuItemProps = ComponentProps<'button'>
+
+const NavMenuItem = ({ className, ...props }: NavMenuItemProps) => {
+  return (
+    <Menu.Item>
+      {({ active }) => (
+        <button
+          type="button"
+          tabIndex={-1}
+          className={`p-2 w-full text-left hover:bg-carbon-500 ${
+            active ? 'bg-carbon-500' : ''
+          } ${className}`}
+          {...props}
+        />
       )}
     </Menu.Item>
   )
@@ -62,6 +76,7 @@ const NavMenu = {
   Button: NavMenuButton,
   Items: NavMenuItems,
   Item: NavMenuItem,
+  Link: NavMenuLink,
 }
 
 export default NavMenu

@@ -9,7 +9,7 @@ import { useRouter } from 'next/dist/client/router'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import { useSession } from 'next-auth/client'
+import { signOut, useSession } from 'next-auth/client'
 import NavMenu from '@components/nav/NavMenu'
 import NavLink from '@components/nav/NavLink'
 
@@ -82,7 +82,7 @@ const Nav = () => {
                       </NavMenu.Button>
 
                       <NavMenu.Items>
-                        <NavMenu.Item href="/new">New Pack</NavMenu.Item>
+                        <NavMenu.Link href="/new">New Pack</NavMenu.Link>
                       </NavMenu.Items>
                     </>
                   )
@@ -109,10 +109,12 @@ const Nav = () => {
                       </NavMenu.Button>
 
                       <NavMenu.Items>
-                        <NavMenu.Item href={`/@${session.user?.name}`}>
+                        <NavMenu.Link href={`/@${session.user?.name}`}>
                           Profile
+                        </NavMenu.Link>
+                        <NavMenu.Item onClick={() => signOut()}>
+                          Sign out
                         </NavMenu.Item>
-                        <NavMenu.Item href="/new">Sign out</NavMenu.Item>
                       </NavMenu.Items>
                     </>
                   )

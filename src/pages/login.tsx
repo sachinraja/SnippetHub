@@ -14,7 +14,7 @@ const Login = () => (
           <button
             type="button"
             className="inline-block bg-blue-800 hover:bg-blue-700 text-white text-lg p-1.5 rounded-md"
-            onClick={() => signIn('github')}
+            onClick={() => signIn('github', { callbackUrl: '/' })}
           >
             <svg
               className="ml-1 my-1 w-5 inline-block"

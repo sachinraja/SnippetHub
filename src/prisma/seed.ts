@@ -21,6 +21,13 @@ export async function seed() {
       username: githubUsername,
       image: `https://avatars.githubusercontent.com/u/${personalGitHubId}`,
       bio: 'A student and aspiring software engineer with a love for TypeScript and Python.',
+      accounts: {
+        create: {
+          providerType: 'oauth',
+          providerId: 'github',
+          providerAccountId: personalGitHubId.toString(),
+        },
+      },
       packs: {
         create: [
           {

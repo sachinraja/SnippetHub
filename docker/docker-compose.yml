@@ -8,7 +8,7 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    command: /bin/sh -c 'npx prisma migrate deploy --preview-feature && npx prisma db seed --preview-feature && npm run build && npm start -- -p 8080'
+    command: /bin/sh -c 'npx prisma migrate deploy && npm run prisma:seed && npm run build && npm start -- -p 8080'
     ports:
       - 8080:8080
     env_file:

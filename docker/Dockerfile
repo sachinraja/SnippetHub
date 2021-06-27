@@ -12,5 +12,4 @@ COPY . ./
 
 RUN npm run graphql:gen
 
-
 EXPOSE 3000

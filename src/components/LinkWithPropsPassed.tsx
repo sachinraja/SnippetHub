@@ -9,7 +9,7 @@ const LinkWithPropsPassed = ({
   ...props
 }: LinkWithPropsPassedProps) => {
   return (
-    <Link href={href}>
+    <Link href={href} passHref>
       <a {...props}>{children}</a>
     </Link>
   )

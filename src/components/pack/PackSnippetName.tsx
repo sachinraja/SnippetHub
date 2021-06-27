@@ -24,13 +24,8 @@ interface PackSnippetNameProps {
   setSnippets: Dispatch<SetStateAction<Snippet[]>>
 }
 
-const PackSnippetName = ({
-  snippet,
-  index,
-  methods,
-  snippets,
-  setSnippets,
-}: PackSnippetNameProps) => {
+const PackSnippetName = (props: PackSnippetNameProps) => {
+  const { snippet, index, methods, snippets, setSnippets } = props
   const [deleteSnippetMutation] = useDeleteSnippetMutation()
   const [updateSnippetNameMutation] = useUpdateSnippetNameMutation()
   const [isEditing, setIsEditing] = useState(false)
@@ -61,34 +56,41 @@ const PackSnippetName = ({
                 <DeleteIcon />
               </button>
 
-              <ConfirmModal
-                initialFocus={deleteButtonRef}
-                open={isDeleteModalOpen}
-                onClose={() => setIsDeleteModalOpen(false)}
-                heading={`Are you sure you want to delete snippet ${snippet.name}?`}
-                headingPriority={2}
-              >
-                <ButtonInput
-                  className="mt-4"
-                  onClick={() => {
-                    deleteSnippetMutation({
-                      variables: {
-                        packId: snippet.packId,
-                        snippetId: snippet.id,
-                      },
-                    })
-
-                    const newSnippets = [...snippets]
-                    newSnippets.splice(index, 1)
-                    setSnippets(newSnippets)
-
-                    methods.remove(index)
-                  }}
-                  ref={deleteButtonRef}
+              {/* needed or modal will not show when coming from new page */}
+              {isDeleteModalOpen && (
+                <ConfirmModal
+                  initialFocus={deleteButtonRef}
+                  open={isDeleteModalOpen}
+                  onClose={() => setIsDeleteModalOpen(false)}
+                  heading={`Are you sure you want to delete snippet ${snippet.name}?`}
+                  headingPriority={2}
                 >
-                  Confirm Deletion
-                </ButtonInput>
-              </ConfirmModal>
+                  <ButtonInput
+                    className="mt-4"
+                    onClick={() => {
+                      try {
+                        deleteSnippetMutation({
+                          variables: {
+                            packId: snippet.packId,
+                            snippetId: snippet.id,
+                          },
+                        })
+
+                        const newSnippets = [...snippets]
+                        newSnippets.splice(index, 1)
+                        setSnippets(newSnippets)
+
+                        methods.remove(index)
+                      } catch {
+                        toast.error('There was an error deleting this snippet.')
+                      }
+                    }}
+                    ref={deleteButtonRef}
+                  >
+                    Confirm Deletion
+                  </ButtonInput>
+                </ConfirmModal>
+              )}
             </>
           )}
 
