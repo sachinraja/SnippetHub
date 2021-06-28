@@ -28,11 +28,10 @@ const unvalidatedEnvConfig = convict({
       format: String,
     },
     password: {
-      default: null,
-      doc: 'The password for the user.',
+      default: 'postgres',
+      doc: 'The database password for the specified user.',
       env: 'POSTGRES_PASSWORD',
       format: String,
-      nullable: true,
     },
     port: {
       default: 5432,
@@ -48,7 +47,7 @@ const unvalidatedEnvConfig = convict({
     },
     user: {
       default: 'postgres',
-      doc: 'The name of the user.',
+      doc: 'The name of the database user.',
       env: 'POSTGRES_USER',
       format: String,
     },
@@ -62,13 +61,13 @@ const unvalidatedEnvConfig = convict({
   gitHub: {
     clientId: {
       default: '',
-      doc: 'The OAuth client id.',
+      doc: 'The GitHub OAuth client id.',
       env: 'GITHUB_CLIENT_ID',
       format: String,
     },
     clientSecret: {
       default: '',
-      doc: 'The OAuth client secret.',
+      doc: 'The GitHub OAuth client secret.',
       env: 'GITHUB_CLIENT_SECRET',
       format: String,
     },
@@ -77,6 +76,12 @@ const unvalidatedEnvConfig = convict({
       doc: 'Your GitHub id.',
       env: 'GITHUB_PERSONAL_ID',
       format: Number,
+    },
+    personalUsername: {
+      default: '',
+      doc: 'Your GitHub username. Used to seed the database and query it during tests.',
+      env: 'GITHUB_USERNAME',
+      format: String,
     },
   },
   jwt: {

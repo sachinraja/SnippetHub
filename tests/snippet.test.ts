@@ -1,4 +1,5 @@
 import prisma from '@lib/prisma'
+import envConfig from 'src/config'
 import type { Pack, Snippet, User } from '@prisma/client'
 
 let pack:
@@ -11,7 +12,7 @@ beforeAll(async () => {
   await prisma.$connect()
 
   const author = (await prisma.user.findUnique({
-    where: { username: 'sachinraja' },
+    where: { username: envConfig.get('gitHub.personalUsername') },
   })) as User
 
   pack = await prisma.pack.findUnique({

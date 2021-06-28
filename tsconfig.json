@@ -50,6 +50,7 @@
     ".cache",
   ],
   "ts-node": {
+    "require": ["tsconfig-paths/register"],
     "compilerOptions": {
       "module": "commonjs",
     },

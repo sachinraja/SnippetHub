@@ -1,24 +1,16 @@
-/* eslint-disable no-console */
 import { Language, PrismaClient, UserType } from '@prisma/client'
-import axios from 'axios'
-// must be relative import for ts-node resolution
-import envConfig from '../config'
+import envConfig from 'src/config'
 
 const prisma = new PrismaClient()
 
 export async function seed() {
-  const personalGitHubId = envConfig.get('gitHub.personalGitHubId')
-
-  // fetch username from github
-  const githubUsername: string = (
-    await axios.get(`https://api.github.com/user/${personalGitHubId}`)
-  ).data.login
+  const { personalGitHubId, personalUsername } = envConfig.get('gitHub')
 
   await prisma.user.upsert({
-    where: { username: githubUsername },
+    where: { username: personalUsername },
     create: {
       type: UserType.admin,
-      username: githubUsername,
+      username: personalUsername,
       image: `https://avatars.githubusercontent.com/u/${personalGitHubId}`,
       bio: 'A student and aspiring software engineer with a love for TypeScript and Python.',
       accounts: {
