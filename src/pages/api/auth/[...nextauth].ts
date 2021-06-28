@@ -3,8 +3,8 @@ import Providers from 'next-auth/providers'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import envConfig from 'src/config'
 import prisma from '@lib/prisma'
-import type { JWT } from 'next-auth/jwt'
 import type { Profile } from 'next-auth'
+import type { JWT } from 'next-auth/jwt'
 
 export default NextAuth({
   providers: [
@@ -25,6 +25,10 @@ export default NextAuth({
   ],
   adapter: PrismaAdapter(prisma),
   session: { jwt: true },
+  secret: envConfig.get('jwt.secret'),
+  jwt: {
+    signingKey: envConfig.get('jwt.signingPrivateKey'),
+  },
   callbacks: {
     jwt(token, user, account) {
       if (account?.accessToken) token.accessToken = account.accessToken

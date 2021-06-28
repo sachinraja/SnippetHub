@@ -3,8 +3,8 @@ import convict from 'convict'
 import dotenv from 'dotenv'
 
 function loadEnv() {
-  // load env from files if not in production
   if (process.env.NODE_ENV === 'production') return
+  // load env from files if not in production
   const envFileExt =
     process.env.NODE_ENV === 'development' ? '.env.local' : '.env.test.local'
   dotenv.config({ path: '.env.local' })
@@ -85,16 +85,16 @@ const unvalidatedEnvConfig = convict({
     },
   },
   jwt: {
-    accessTokenSecret: {
+    secret: {
       default: '',
-      doc: 'The secret used to sign the access token.',
-      env: 'ACCESS_TOKEN_SECRET',
+      doc: 'The secret used to sign tokens.',
+      env: 'JWT_SECRET',
       format: String,
     },
-    refreshTokenSecret: {
+    signingPrivateKey: {
       default: '',
-      doc: 'The secret used to sign the refresh token.',
-      env: 'REFRESH_TOKEN_SECRET',
+      doc: 'The private signing key used by next-auth to sign tokens.',
+      env: 'JWT_SIGNING_PRIVATE_KEY',
       format: String,
     },
   },
