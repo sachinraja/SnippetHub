@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Header from '@components/header/Header'
 import Heading from '@components/Heading'
 import SearchInput from '@components/hero/SearchInput'
+import logo from 'assets/logo.svg'
 
 interface HeroProps {
   searchInputValue?: string
@@ -12,7 +13,7 @@ const Hero = ({ searchInputValue }: HeroProps) => {
   const router = useRouter()
   const textInput = useRef<HTMLInputElement>(null)
   return (
-    <Header>
+    <Header className="flex">
       <section className="md:w-1/2">
         <Heading priority={1} size="4xl" bold>
           <span>SnippetHub</span>
@@ -37,10 +38,14 @@ const Hero = ({ searchInputValue }: HeroProps) => {
         />
       </section>
 
-      <section className="md:w-1/2">
-        <div className="relative h-full">
-          <Image src="/logo.svg" layout="fill" alt="" aria-hidden />
-        </div>
+      <section className="flex-grow items-center justify-center mx-4 hidden sm:flex">
+        <Image
+          src={logo}
+          width={170}
+          height={170}
+          alt="SnippetHub logo"
+          aria-hidden
+        />
       </section>
     </Header>
   )

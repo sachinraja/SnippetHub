@@ -16,7 +16,7 @@ const NavLink = ({
 }: NavLinkProps) => (
   <Link href={href}>
     <a
-      className={`px-3 py-2 text-sm font-medium sm:rounded-md ${
+      className={`px-3 py-2 text-sm font-medium rounded-md ${
         active ? 'bg-carbon-900' : 'text-carbon-300 hover:bg-carbon-700'
       } ${className}`}
       {...props}

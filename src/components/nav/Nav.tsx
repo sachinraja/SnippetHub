@@ -12,6 +12,8 @@ import { useState } from 'react'
 import { signOut, useSession } from 'next-auth/client'
 import NavMenu from '@components/nav/NavMenu'
 import NavLink from '@components/nav/NavLink'
+import logo from 'assets/logo.svg'
+import defaultProfilePic from 'assets/default-profile-pic.png'
 
 const links: Record<string, string> = {
   '/': 'Top Packs',
@@ -38,8 +40,8 @@ const Nav = () => {
   const [session] = useSession()
 
   return (
-    <nav className="bg-carbon-800 py-2 sm:py-4">
-      <div className="flex items-center px-2 sm:px-6">
+    <nav className="bg-carbon-800 px-2 py-2 sm:px-6 sm:py-4">
+      <div className="flex items-center">
         <button
           type="button"
           aria-label="toggle mobile menu"
@@ -59,7 +61,7 @@ const Nav = () => {
                 alt="SnippetHub Logo"
                 layout="fill"
                 objectFit="cover"
-                src="/logo.svg"
+                src={logo}
               />
             </a>
           </Link>
@@ -69,64 +71,68 @@ const Nav = () => {
           <NavLinks />
         </div>
 
-        {session && session.user ? (
-          <>
-            <div className="relative ml-auto">
-              <Menu>
-                {({ open }) => {
-                  return (
-                    <>
-                      <NavMenu.Button open={open} className="whitespace-nowrap">
-                        <PlusIcon className="h-6 w-6 inline" />
-                        <ChevronDownIcon className="h-6 w-4 inline translate-y-2 -translate-x-1" />
-                      </NavMenu.Button>
+        <div className="ml-auto flex">
+          {session ? (
+            <>
+              <div className="relative">
+                <Menu>
+                  {({ open }) => {
+                    return (
+                      <>
+                        <NavMenu.Button
+                          open={open}
+                          className="whitespace-nowrap"
+                        >
+                          <PlusIcon className="h-6 w-6 inline" />
+                          <ChevronDownIcon className="h-6 w-4 inline translate-y-2 -translate-x-1" />
+                        </NavMenu.Button>
 
-                      <NavMenu.Items>
-                        <NavMenu.Link href="/new">New Pack</NavMenu.Link>
-                      </NavMenu.Items>
-                    </>
-                  )
-                }}
-              </Menu>
-            </div>
+                        <NavMenu.Items>
+                          <NavMenu.Link href="/new">New Pack</NavMenu.Link>
+                        </NavMenu.Items>
+                      </>
+                    )
+                  }}
+                </Menu>
+              </div>
 
-            <div className="relative">
-              <Menu>
-                {({ open }) => {
-                  return (
-                    <>
-                      <NavMenu.Button open={open}>
-                        <div className="relative h-8 w-8">
-                          <Image
-                            alt="Profile"
-                            className="rounded-full"
-                            layout="fill"
-                            objectFit="cover"
-                            // TODO: fix type
-                            src={session.user?.image ?? ''}
-                          />
-                        </div>
-                      </NavMenu.Button>
+              <div className="relative">
+                <Menu>
+                  {({ open }) => {
+                    return (
+                      <>
+                        <NavMenu.Button open={open}>
+                          <div className="relative h-8 w-8">
+                            <Image
+                              alt="Profile"
+                              className="rounded-full"
+                              layout="fill"
+                              src={session.user.image ?? defaultProfilePic.src}
+                            />
+                          </div>
+                        </NavMenu.Button>
 
-                      <NavMenu.Items>
-                        <NavMenu.Link href={`/@${session.user?.name}`}>
-                          Profile
-                        </NavMenu.Link>
-                        <NavMenu.Item onClick={() => signOut()}>
-                          Sign out
-                        </NavMenu.Item>
-                      </NavMenu.Items>
-                    </>
-                  )
-                }}
-              </Menu>
-            </div>
-          </>
-        ) : (
-          <NavLink className="ml-auto" href="/login">
-            Login
-          </NavLink>
-        )}
+                        <NavMenu.Items>
+                          <NavMenu.Link href={`/@${session.user?.name}`}>
+                            Profile
+                          </NavMenu.Link>
+                          <NavMenu.Item onClick={() => signOut()}>
+                            Sign out
+                          </NavMenu.Item>
+                        </NavMenu.Items>
+                      </>
+                    )
+                  }}
+                </Menu>
+              </div>
+            </>
+          ) : (
+            <>
+              <NavLink href="/signup">Sign Up</NavLink>
+              <NavLink href="/login">Login</NavLink>
+            </>
+          )}
+        </div>
       </div>
 
       <div
