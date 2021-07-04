@@ -10,6 +10,7 @@ module.exports = {
     'plugin:prettier/recommended',
     'next',
   ],
+  plugins: ['@typescript-eslint', 'prettier', 'tailwindcss'],
   ignorePatterns: ['.next', '.cache', '__generated__', '**/*.graphql.d.ts'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -17,7 +18,6 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
 
@@ -91,6 +91,9 @@ module.exports = {
         devDependencies: ['*.config.{js,ts}', '**/*.test.ts', '**/*.preval.ts'],
       },
     ],
+
+    'tailwindcss/classnames-order': 'warn',
+    'tailwindcss/no-contradicting-classname': 'error',
   },
 
   settings: {

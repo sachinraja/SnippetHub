@@ -1,15 +1,16 @@
-import { Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import { Transition } from '@headlessui/react'
 import usePrefersReducedMotion from '@hooks/use-reduced-motion'
 import type { ComponentProps, ReactNode } from 'react'
+import type { TransitionEvents } from '@headlessui/react'
 
-interface FadeInProps {
+type FadeInProps = {
   as?: ComponentProps<typeof Transition>['as']
   from?: Direction
   children: ReactNode
-}
+} & TransitionEvents
 
-function FadeIn({ as, from, children }: FadeInProps) {
+function FadeIn({ as, from, children, ...props }: FadeInProps) {
   const prefersReducedMotion = usePrefersReducedMotion()
 
   function getDirectionClassName() {
@@ -38,6 +39,7 @@ function FadeIn({ as, from, children }: FadeInProps) {
       enter="transition duration-1000"
       enterFrom={`opacity-0 ${getDirectionClassName()}`}
       enterTo="opacity-100"
+      {...props}
     >
       {children}
     </Transition>
@@ -45,8 +47,8 @@ function FadeIn({ as, from, children }: FadeInProps) {
 }
 
 FadeIn.defaultProps = {
-  from: 'down',
   as: undefined,
+  from: 'down',
 }
 
 export default FadeIn

@@ -1,15 +1,15 @@
-import { ChevronUpIcon } from '@heroicons/react/outline'
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import languages from '@lib/language'
 import FadeIn from '@components/transitions/FadeIn'
+import CardUpvote from './CardUpvote'
 import type { ReactNode } from 'react'
 import type { Language } from '@prisma/client'
 
 export interface CardProps {
   bodyUrl?: string
-  count: string | number
+  upvotes: number | string
   description: string
   imageUrl?: string
   language: Language
@@ -19,7 +19,7 @@ export interface CardProps {
 
 const Card = ({
   bodyUrl,
-  count,
+  upvotes,
   description,
   imageUrl,
   language,
@@ -35,12 +35,12 @@ const Card = ({
 
   // detect flex wrap and style accordingly
   function checkFloat() {
-    const attributesElement = attributes.current
     const headerElement = header.current
+    const attributesElement = attributes.current
 
     if (
-      attributesElement &&
       headerElement &&
+      attributesElement &&
       attributesElement.offsetTop > headerElement.offsetTop
     ) {
       setAreAttributesFloatedRight(false)
@@ -49,9 +49,7 @@ const Card = ({
     }
   }
 
-  // continue running on client on resize
   useEffect(() => {
-    checkFloat()
     window.addEventListener('resize', checkFloat)
     return () => window.removeEventListener('resize', checkFloat)
   }, [])
@@ -67,7 +65,7 @@ const Card = ({
   }
 
   return (
-    <FadeIn as="article">
+    <FadeIn as="article" afterEnter={checkFloat}>
       <WithLink>
         <div className="bg-opacity-80 border-carbon-500 border-1 rounded p-2 motion-safe:hover:-translate-y-0.5 hover:border-carbon-50 transition-colors duration-500">
           <div className="flex flex-wrap">
@@ -88,13 +86,7 @@ const Card = ({
                 areAttributesFloatedRight ? 'justify-items-end' : ''
               }`}
             >
-              <div>
-                <div className="inline-block border-blue-500 border-2 rounded-sm">
-                  <ChevronUpIcon className="w-6 inline text-blue-600" />
-
-                  <p className="inline mx-1 text-blue-400">{count}</p>
-                </div>
-              </div>
+              <CardUpvote upvotes={upvotes} />
 
               <div className="mt-1">
                 <div
@@ -121,23 +113,23 @@ const Card = ({
                 </div>
               </div>
             </section>
-
-            {imageUrl && (
-              <div className="w-full">
-                <div className="relative w-10 top-3 left-2">
-                  <Image
-                    width={60}
-                    height={60}
-                    alt={`${subtitle} Profile`}
-                    className="rounded-full"
-                    src={imageUrl}
-                  />
-                </div>
-
-                <hr />
-              </div>
-            )}
           </div>
+
+          {imageUrl && (
+            <div className="w-full">
+              <div className="relative w-10 top-3 left-2">
+                <Image
+                  width={60}
+                  height={60}
+                  alt={`${subtitle} Profile`}
+                  className="rounded-full"
+                  src={imageUrl}
+                />
+              </div>
+
+              <hr />
+            </div>
+          )}
 
           <p className="mt-3">{description}</p>
         </div>

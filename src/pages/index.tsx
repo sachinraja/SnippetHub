@@ -1,4 +1,3 @@
-import { ChevronUpIcon } from '@heroicons/react/outline'
 import {
   GetTopPacksDocument,
   useGetTopPacksQuery,
@@ -7,6 +6,7 @@ import { initializeApollo } from '@lib/apollo-client'
 import Container from '@components/containers/Container'
 import SearchPageLayout from '@layouts/SearchPageLayout'
 import getCardFromPack from '@lib/pack/card'
+import UpvoteIcon from '@components/icons/UpvoteIcon'
 import type { InferGetStaticPropsType } from 'next'
 
 export const getStaticProps = async () => {
@@ -55,7 +55,10 @@ const HomePage = ({
         cards={cards}
         heading="Most Popular Snippet Packs"
         headingIcon={
-          <ChevronUpIcon className="h-full text-blue-600 motion-safe:animate-bounce" />
+          <UpvoteIcon
+            className="h-full motion-safe:animate-bounce"
+            width={undefined}
+          />
         }
         headingLabel="The snippet packs with the most votes."
       />

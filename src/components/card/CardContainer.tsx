@@ -7,7 +7,7 @@ interface CardContainerProps {
 
 const CardContainer = ({ children }: CardContainerProps) => {
   return (
-    <section className="grid md:grid-cols-4 sm:grid-cols-2 gap-1 break-words">
+    <section className="grid gap-1 break-words md:grid-cols-4 sm:grid-cols-2">
       {children}
     </section>
   )

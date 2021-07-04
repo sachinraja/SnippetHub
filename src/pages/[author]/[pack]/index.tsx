@@ -19,6 +19,8 @@ import PackShortDescription from '@components/pack/PackShortDescription'
 import PackSnippetCode from '@components/pack/PackSnippetCode'
 import PackSnippetName from '@components/pack/PackSnippetName'
 import Paragraph from '@components/Paragraph'
+import { numberWithCommas } from '@lib/utils/number'
+import CardUpvote from '@components/card/CardUpvote'
 
 export const getServerSideProps = async ({
   params,
@@ -90,10 +92,14 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
                 setPackName={setPackName}
               />
 
-              <div className="text-gray-400 my-2">
+              <div className="inline-grid grid-cols-2 gap-x-4 text-gray-400">
                 <Link href={`/@${author.username}`} prefetch={false}>
                   <a className="inline-flex items-center">
-                    <UserIcon width={25} aria-label="author icon" />
+                    <UserIcon
+                      className="text-carbon-200"
+                      width={25}
+                      aria-hidden
+                    />
 
                     <Heading
                       priority={2}
@@ -105,9 +111,22 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
                   </a>
                 </Link>
 
-                <div className="inline-flex items-center ml-4">
-                  <RefreshIcon width={25} />
-                  <Paragraph>{pack.updatedAt.toLocaleDateString()}</Paragraph>
+                <div className="inline-flex items-center">
+                  <RefreshIcon
+                    className="text-blue-300"
+                    width={25}
+                    aria-hidden
+                  />
+                  <Paragraph title="date updated">
+                    {pack.updatedAt.toLocaleDateString()}
+                  </Paragraph>
+                </div>
+
+                <div>
+                  <CardUpvote
+                    className="border-none"
+                    upvotes={numberWithCommas(pack.upvotes)}
+                  />
                 </div>
               </div>
 

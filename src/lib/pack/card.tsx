@@ -13,12 +13,12 @@ export default function getCardFromPack(
   pack: PackArg,
   author: Pick<User, 'username'> & { image?: string },
 ): ReactElement<CardProps> {
-  const count = numberWithCommas(pack.upvotes)
+  const upvotesWithCommas = numberWithCommas(pack.upvotes)
   return (
     <Card
       key={pack.id}
       bodyUrl={`/@${author.username}/${pack.name}`}
-      count={count}
+      upvotes={upvotesWithCommas}
       description={pack.shortDescription}
       imageUrl={author.image ?? undefined}
       language={pack.language}
