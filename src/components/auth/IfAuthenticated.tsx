@@ -1,15 +1,12 @@
 import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 
-interface AllowOnlyIfAuthenticatedProps {
+interface IfAuthenticatedProps {
   children: JSX.Element
   redirectTo?: string
 }
 
-const AllowOnlyIfAuthenticated = ({
-  children,
-  redirectTo,
-}: AllowOnlyIfAuthenticatedProps) => {
+const IfAuthenticated = ({ children, redirectTo }: IfAuthenticatedProps) => {
   const router = useRouter()
   const [session] = useSession()
 
@@ -22,8 +19,8 @@ const AllowOnlyIfAuthenticated = ({
   return children
 }
 
-AllowOnlyIfAuthenticated.defaultProps = {
+IfAuthenticated.defaultProps = {
   redirectTo: '/',
 }
 
-export default AllowOnlyIfAuthenticated
+export default IfAuthenticated

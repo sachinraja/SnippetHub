@@ -1,4 +1,5 @@
-/* eslint-disable global-require */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 /** @type {import("@types/tailwindcss/tailwind-config").TailwindConfig } */
 module.exports = {
   mode: 'jit',
@@ -30,7 +31,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        inter: ['Inter', 'Montserrat', 'Helvetica', 'Arial', 'sans-serif'],
+        inter: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       typography: (theme) => ({
         DEFAULT: {
@@ -61,7 +62,13 @@ module.exports = {
               color: theme('colors.carbon.300'),
             },
             a: {
-              color: theme('colors.carbon.600'),
+              color: theme('colors.carbon.500'),
+            },
+            pre: {
+              backgroundColor: 'transparent',
+            },
+            code: {
+              color: theme('colors.carbon.300'),
             },
             table: {
               textAlign: 'center',
@@ -94,6 +101,8 @@ module.exports = {
           css: {
             'blockquote p:first-of-type::before': { content: 'none' },
             'blockquote p:first-of-type::after': { content: 'none' },
+            'code::before': { content: 'none' },
+            'code::after': { content: 'none' },
           },
         },
         tight: {

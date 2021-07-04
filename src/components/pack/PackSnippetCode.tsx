@@ -5,7 +5,7 @@ import { useUpdateSnippetCodeMutation } from '@graphql/queries/update-snippet-co
 import CodeBlock from '@components/CodeBlock'
 import CodeInput from '@components/form-inputs/CodeInput'
 import FormError from '@components/forms/FormError'
-import PackEdit from '@components/pack/PackEdit'
+import EditLayout from '@layouts/EditLayout'
 import getLanguageMode from '@lib/language/get-language-mode'
 import type { Snippet } from '@prisma/client'
 import type { Dispatch, SetStateAction } from 'react'
@@ -43,7 +43,7 @@ const PackSnippetCode = ({
   const languageMode = getLanguageMode(snippet.language)
 
   return (
-    <PackEdit
+    <EditLayout
       displayComponent={
         <CodeBlock language={languageMode}>{snippet.code}</CodeBlock>
       }

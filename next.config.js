@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
 const createNextPluginPreval = require('next-plugin-preval/config')
 
 const withNextPluginPreval = createNextPluginPreval()

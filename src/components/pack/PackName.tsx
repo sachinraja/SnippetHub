@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import { useUpdatePackNameMutation } from '@graphql/queries/update-pack-name.graphql'
 import FormError from '@components/forms/FormError'
 import Heading from '@components/Heading'
-import PackEdit from '@components/pack/PackEdit'
+import EditLayout from '@layouts/EditLayout'
 import TextInput from '@components/form-inputs/TextInput'
 import type { Dispatch, SetStateAction } from 'react'
 import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
@@ -31,6 +31,8 @@ const PackName = ({ packId, packName, setPackName }: PackNameProps) => {
   const router = useRouter()
 
   useEffect(() => {
+    if (router.query.pack === packName) return
+
     router.replace(
       {
         pathname: router.pathname,
@@ -40,11 +42,10 @@ const PackName = ({ packId, packName, setPackName }: PackNameProps) => {
       `/${router.query.author}/${packName}`,
       { shallow: true },
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [packName])
+  }, [packName, router])
 
   return (
-    <PackEdit
+    <EditLayout
       displayComponent={
         <Heading className="font-inter" priority={1} size="4xl" bold>
           {packName}

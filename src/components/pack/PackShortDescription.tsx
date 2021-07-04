@@ -3,7 +3,7 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useUpdatePackShortDescriptionMutation } from '@graphql/queries/update-pack-short-description.graphql'
 import FormError from '@components/forms/FormError'
-import PackEdit from '@components/pack/PackEdit'
+import EditLayout from '@layouts/EditLayout'
 import Paragraph from '@components/Paragraph'
 import TextAreaInput from '@components/form-inputs/TextAreaInput'
 import type { Dispatch, SetStateAction } from 'react'
@@ -33,9 +33,9 @@ const PackShortDescription = ({
   } = useFormContext<PackEditFormInputs>()
 
   return (
-    <PackEdit
+    <EditLayout
       displayComponent={
-        <Paragraph className="font-inter mt-2" size="lg">
+        <Paragraph className="font-inter" size="lg">
           {packShortDescription}
         </Paragraph>
       }

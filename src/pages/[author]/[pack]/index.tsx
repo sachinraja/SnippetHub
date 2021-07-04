@@ -1,8 +1,9 @@
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { Language, Snippet } from '@prisma/client'
-import { PlusIcon } from '@heroicons/react/outline'
+import { PlusIcon, RefreshIcon, UserIcon } from '@heroicons/react/outline'
 import { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import Link from 'next/link'
 import { getAuthorFromParam, getPackFromParam } from '@lib/utils/url-params'
 import {
   PackEditFormInputs,
@@ -17,6 +18,7 @@ import PackName from '@components/pack/PackName'
 import PackShortDescription from '@components/pack/PackShortDescription'
 import PackSnippetCode from '@components/pack/PackSnippetCode'
 import PackSnippetName from '@components/pack/PackSnippetName'
+import Paragraph from '@components/Paragraph'
 
 export const getServerSideProps = async ({
   params,
@@ -88,6 +90,27 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
                 setPackName={setPackName}
               />
 
+              <div className="text-gray-400 my-2">
+                <Link href={`/@${author.username}`} prefetch={false}>
+                  <a className="inline-flex items-center">
+                    <UserIcon width={25} aria-label="author icon" />
+
+                    <Heading
+                      priority={2}
+                      size="lg"
+                      aria-label="author username"
+                    >
+                      {author.username}
+                    </Heading>
+                  </a>
+                </Link>
+
+                <div className="inline-flex items-center ml-4">
+                  <RefreshIcon width={25} />
+                  <Paragraph>{pack.updatedAt.toLocaleDateString()}</Paragraph>
+                </div>
+              </div>
+
               <PackShortDescription
                 packId={pack.id}
                 packShortDescription={packShortDescription}
@@ -97,7 +120,7 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
           </Header>
         </header>
 
-        <main className="mx-4 mt-2 mb-16">
+        <main className="mx-4 mb-16">
           <PackLongDescription
             packId={pack.id}
             packLongDescription={packLongDescription}

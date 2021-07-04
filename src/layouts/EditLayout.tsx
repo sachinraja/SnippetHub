@@ -3,7 +3,7 @@ import EditIcon from '@components/icons/EditIcon'
 import SubmitIcon from '@components/icons/SubmitIcon'
 import type { MouseEventHandler, ReactElement, ReactNode } from 'react'
 
-interface PackEditProps {
+interface EditLayoutProps {
   className?: string
   displayComponent: ReactNode
   editComponent: ReactNode
@@ -13,7 +13,7 @@ interface PackEditProps {
   formError: ReactElement<FormErrorProps>
 }
 
-const PackEdit = ({
+const EditLayout = ({
   className,
   displayComponent,
   editComponent,
@@ -21,7 +21,7 @@ const PackEdit = ({
   onEditClick,
   onConfirmClick,
   formError,
-}: PackEditProps) => {
+}: EditLayoutProps) => {
   return (
     <>
       <div className={`flex ${className}`}>
@@ -42,8 +42,8 @@ const PackEdit = ({
   )
 }
 
-PackEdit.defaultProps = {
+EditLayout.defaultProps = {
   className: '',
 }
 
-export default PackEdit
+export default EditLayout

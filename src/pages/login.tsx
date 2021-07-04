@@ -1,13 +1,13 @@
 import githubIcon from 'simple-icons/icons/github'
 import { signIn } from 'next-auth/client'
 import Container from '@components/containers/Container'
-import AllowOnlyIfUnauthenticated from '@components/auth/AllowOnlyIfUnauthenticated'
+import IfUnauthenticated from '@components/auth/IfUnauthenticated'
 
 const Login = () => {
   return (
-    <AllowOnlyIfUnauthenticated>
+    <IfUnauthenticated>
       <Container meta={{ title: 'Login to SnippetHub' }}>
-        <section className="md:w-1/2 w-2/3 m-auto mt-4">
+        <section className="m-auto mt-4 w-2/3 md:w-1/2 ">
           <div className="border-white border-1 rounded-md p-2">
             <h1 className="text-center text-white text-xl font-semibold">
               Login to SnippetHub
@@ -16,7 +16,7 @@ const Login = () => {
             <div className="flex justify-center mt-2">
               <button
                 type="button"
-                className="inline-block bg-blue-800 hover:bg-blue-700 text-white text-lg p-1.5 rounded-md"
+                className="inline-block text-white text-lg p-1.5 rounded-md bg-blue-800 hover:bg-blue-700"
                 onClick={() => signIn('github', { callbackUrl: '/' })}
               >
                 <svg
@@ -32,7 +32,7 @@ const Login = () => {
           </div>
         </section>
       </Container>
-    </AllowOnlyIfUnauthenticated>
+    </IfUnauthenticated>
   )
 }
 

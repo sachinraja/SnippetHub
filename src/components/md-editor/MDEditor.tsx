@@ -9,7 +9,7 @@ import Menu, { LeftAlign, RightAlign } from './Menu'
 import MenuItem from './MenuItem'
 import type { CodeInputProps } from '@components/form-inputs/CodeInput'
 
-type MDEditorProps = {
+export type MDEditorProps = {
   className?: string
   value?: string
   required?: boolean
@@ -64,18 +64,17 @@ const MDEditor = forwardRef<HTMLDivElement, MDEditorProps>(
             </RightAlign>
           </Menu>
 
-          <CodeInput
-            id={name}
-            className={`${writing ? undefined : 'hidden'}`}
-            ref={ref}
-            mode={LanguageMode.gfm}
-            value={value}
-            {...props}
-          />
-
-          <MDRenderer className={writing ? 'hidden' : undefined}>
-            {value ?? ''}
-          </MDRenderer>
+          {writing ? (
+            <CodeInput
+              id={name}
+              ref={ref}
+              mode={LanguageMode.gfm}
+              value={value}
+              {...props}
+            />
+          ) : (
+            <MDRenderer>{value ?? ''}</MDRenderer>
+          )}
         </div>
       </div>
     )

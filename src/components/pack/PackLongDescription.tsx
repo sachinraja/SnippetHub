@@ -5,7 +5,7 @@ import { useUpdatePackLongDescriptionMutation } from '@graphql/queries/update-pa
 import FormError from '@components/forms/FormError'
 import MDEditor from '@components/md-editor/MDEditor'
 import MDRenderer from '@components/md-renderer/MDRenderer'
-import PackEdit from '@components/pack/PackEdit'
+import EditLayout from '@layouts/EditLayout'
 import type { Dispatch, SetStateAction } from 'react'
 import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
 
@@ -32,7 +32,7 @@ const PackLongDescription = ({
   } = useFormContext<PackEditFormInputs>()
 
   return (
-    <PackEdit
+    <EditLayout
       className="justify-center"
       displayComponent={
         packLongDescription !== '' && (

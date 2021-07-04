@@ -113,7 +113,7 @@ const Nav = () => {
                         </NavMenu.Button>
 
                         <NavMenu.Items>
-                          <NavMenu.Link href={`/@${session.user?.name}`}>
+                          <NavMenu.Link href={`/@${session.user.username}`}>
                             Profile
                           </NavMenu.Link>
                           <NavMenu.Item onClick={() => signOut()}>

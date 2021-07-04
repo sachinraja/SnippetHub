@@ -6,6 +6,7 @@ import {
 } from 'react-hook-form'
 import { Language } from '@prisma/client'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useCallback } from 'react'
 import { packFormSchema } from '@lib/schemas/pack-schema'
 import ButtonInput from '@components/form-inputs/ButtonInput'
 import MDEditor from '@components/md-editor/MDEditor'
@@ -13,6 +14,7 @@ import TextAreaInput from '@components/form-inputs/TextAreaInput'
 import TextInput from '@components/form-inputs/TextInput'
 import SnippetInput from '@components/form-inputs/SnippetInput'
 import FormError from './FormError'
+import type { CodeInputProps } from '@components/form-inputs/CodeInput'
 import type { SubmitHandler } from 'react-hook-form'
 import type { PackFormInputs } from '@lib/schemas/pack-schema'
 
@@ -34,7 +36,6 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
     control,
     formState: { errors },
     setValue,
-    getValues,
     trigger,
   } = formMethods
 
@@ -44,6 +45,15 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
   })
 
   const { fields: snippetFields, append: appendSnippet } = snippetFieldArray
+
+  const mdEditorOnUpdate = useCallback<
+    Exclude<CodeInputProps['onUpdate'], undefined>
+  >(
+    (v) => {
+      setValue('packLongDescription', v.state.doc.toString())
+    },
+    [setValue],
+  )
 
   return (
     <FormProvider {...formMethods}>
@@ -67,21 +77,20 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
           <FormError name="packShortDescription" errors={errors} />
 
           <Controller
-            render={({ field: mdEditorField }) => (
-              <MDEditor
-                className="w-full"
-                {...mdEditorField}
-                onBlur={() => trigger('packLongDescription')}
-                onUpdate={(v) =>
-                  setValue('packLongDescription', v.state.doc.toString())
-                }
-                label="Long Description - Supports Markdown (GFM)"
-                value={getValues('packLongDescription')}
-              />
-            )}
+            render={({ field: mdEditorField }) => {
+              return (
+                <MDEditor
+                  className="w-full"
+                  onUpdate={mdEditorOnUpdate}
+                  label="Long Description - Supports Markdown (GFM)"
+                  {...mdEditorField}
+                />
+              )
+            }}
             control={control}
             name="packLongDescription"
           />
+
           <FormError name="packLongDescription" errors={errors} />
 
           {snippetFields.map((field, index) => {

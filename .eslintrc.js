@@ -100,4 +100,14 @@ module.exports = {
       },
     },
   },
+
+  overrides: [
+    {
+      files: ['*.config.{js,ts}'],
+      rules: {
+        'global-require': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+      },
+    },
+  ],
 }

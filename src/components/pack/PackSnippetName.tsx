@@ -7,7 +7,7 @@ import { useUpdateSnippetNameMutation } from '@graphql/queries/update-snippet-na
 import DeleteIcon from '@components/icons/DeleteIcon'
 import FormError from '@components/forms/FormError'
 import Heading from '@components/Heading'
-import PackEdit from '@components/pack/PackEdit'
+import EditLayout from '@layouts/EditLayout'
 import TextInput from '@components/form-inputs/TextInput'
 import ConfirmModal from '@components/modals/ConfirmModal'
 import ButtonInput from '@components/form-inputs/ButtonInput'
@@ -47,7 +47,7 @@ const PackSnippetName = (props: PackSnippetNameProps) => {
   const deleteButtonRef = useRef<HTMLButtonElement>(null)
 
   return (
-    <PackEdit
+    <EditLayout
       displayComponent={
         <>
           {snippets.length !== 1 && (

@@ -2,10 +2,10 @@ import githubIcon from 'simple-icons/icons/github'
 import { signIn } from 'next-auth/client'
 import { setCookie } from 'nookies'
 import Container from '@components/containers/Container'
-import AllowOnlyIfUnauthenticated from '@components/auth/AllowOnlyIfUnauthenticated'
+import IfUnauthenticated from '@components/auth/IfUnauthenticated'
 
 const Signup = () => (
-  <AllowOnlyIfUnauthenticated>
+  <IfUnauthenticated>
     <Container meta={{ title: 'Signup for SnippetHub' }}>
       <section className="md:w-1/2 w-2/3 m-auto mt-4">
         <div className="border-white border-1 rounded-md p-2">
@@ -39,7 +39,7 @@ const Signup = () => (
         </div>
       </section>
     </Container>
-  </AllowOnlyIfUnauthenticated>
+  </IfUnauthenticated>
 )
 
 export default Signup
