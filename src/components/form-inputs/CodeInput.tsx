@@ -1,6 +1,6 @@
 import { EditorState } from '@codemirror/state'
 import { EditorView, basicSetup } from '@codemirror/basic-setup'
-import { forwardRef, useEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useRef } from 'react'
 import { oneDark } from '@codemirror/theme-one-dark'
 import getImportFromMode from '@lib/utils/codemirror/get-import'
 import { LanguageMode } from '@lib/language/mode'
@@ -23,7 +23,6 @@ export type CodeInputProps = {
 const CodeInput = forwardRef<HTMLDivElement, CodeInputProps>(
   ({ label, className, id, mode, required, value, onUpdate, onBlur }, ref) => {
     const editor = useRef<HTMLDivElement>(null)
-    const [, setEditorView] = useState<EditorView | null>(null)
 
     useEffect(() => {
       const currentEditor = editor.current
@@ -45,26 +44,12 @@ const CodeInput = forwardRef<HTMLDivElement, CodeInputProps>(
           extensions,
         })
         view = new EditorView({ state, parent: currentEditor })
-        setEditorView(view)
       })()
 
-      return () => view && view.destroy()
+      return () => view?.destroy()
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [mode, editor, onUpdate])
-
-    // useEffect(() => {
-    //   if (!editorView) return
-    //   console.log('transaction useeffect')
-    //   const transaction = editorView.state.update({
-    //     changes: {
-    //       from: 0,
-    //       to: editorView.state.doc.length,
-    //       insert: value,
-    //     },
-    //   })
-    //   editorView.dispatch(transaction)
-    // }, [editorView, value])
+    }, [mode, editor])
 
     return (
       <div ref={ref} className={className}>
