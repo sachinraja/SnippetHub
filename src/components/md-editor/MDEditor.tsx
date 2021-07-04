@@ -32,7 +32,7 @@ const MDEditor = forwardRef<HTMLDivElement, MDEditorProps>(
           </Label>
         )}
 
-        <div className="ring-1 ring-carbon-400 mt-2">
+        <div className="mt-2 ring-1 ring-carbon-400">
           <Menu>
             <LeftAlign>
               <MenuItem
@@ -53,7 +53,7 @@ const MDEditor = forwardRef<HTMLDivElement, MDEditorProps>(
               <Link href="https://github.github.com/gfm/">
                 <a className="h-full" target="_blank" rel="noopener noreferrer">
                   <svg
-                    className="w-5 mr-2 h-full"
+                    className="mr-2 w-5 h-full"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >

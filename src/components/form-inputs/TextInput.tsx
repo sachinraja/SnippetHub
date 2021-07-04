@@ -19,7 +19,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         <input
           ref={ref}
           type="text"
-          className="text-xl bg-carbon-900 align-middle border-0 border-b-1 border-carbon-700 shadow-lg focus:ring-0 focus:border-carbon-400 transition-colors duration-500"
+          className="text-xl align-middle bg-carbon-900 border-0 border-b-1 border-carbon-700 focus:border-carbon-400 focus:ring-0 shadow-lg transition-colors duration-500"
           id={id}
           name={id}
           required={required}

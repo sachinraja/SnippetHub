@@ -40,12 +40,12 @@ const Nav = () => {
   const [session] = useSession()
 
   return (
-    <nav className="bg-carbon-800 px-2 py-2 sm:px-6 sm:py-4">
+    <nav className="py-2 sm:py-4 px-2 sm:px-6 bg-carbon-800">
       <div className="flex items-center">
         <button
           type="button"
           aria-label="toggle mobile menu"
-          className="p-1 rounded-md text-carbon-400 block mr-2 hover:bg-carbon-70 sm:hidden"
+          className="block sm:hidden p-1 mr-2 text-carbon-400 rounded-md hover:bg-carbon-70"
           onClick={() => {
             setIsMobileOpen(!isMobileOpen)
           }}
@@ -54,7 +54,7 @@ const Nav = () => {
         </button>
 
         {/* take up available space and center image inside */}
-        <div className="flex flex-1 items-center justify-center sm:flex-none sm:items-stretch sm:justify-start">
+        <div className="flex flex-1 sm:flex-none justify-center sm:justify-start items-center sm:items-stretch">
           <Link href="/">
             <a className="relative w-8 h-8">
               <Image
@@ -67,11 +67,11 @@ const Nav = () => {
           </Link>
         </div>
 
-        <div className="hidden space-x-4 ml-6 sm:flex">
+        <div className="hidden sm:flex ml-6 space-x-4">
           <NavLinks />
         </div>
 
-        <div className="ml-auto flex">
+        <div className="flex ml-auto">
           {session ? (
             <>
               <div className="relative">
@@ -83,8 +83,8 @@ const Nav = () => {
                           open={open}
                           className="whitespace-nowrap"
                         >
-                          <PlusIcon className="h-6 w-6 inline" />
-                          <ChevronDownIcon className="h-6 w-4 inline translate-y-2 -translate-x-1" />
+                          <PlusIcon className="inline w-6 h-6" />
+                          <ChevronDownIcon className="inline w-4 h-6 -translate-x-1 translate-y-2" />
                         </NavMenu.Button>
 
                         <NavMenu.Items>
@@ -102,7 +102,7 @@ const Nav = () => {
                     return (
                       <>
                         <NavMenu.Button open={open}>
-                          <div className="relative h-8 w-8">
+                          <div className="relative w-8 h-8">
                             <Image
                               alt="Profile"
                               className="rounded-full"

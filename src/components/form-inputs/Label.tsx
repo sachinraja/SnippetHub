@@ -17,7 +17,7 @@ const Label = forwardRef<HTMLLabelElement, LabelProps>(
       >
         {children}
         {required && (
-          <span className="text-red-500 ml-1" aria-hidden>
+          <span className="ml-1 text-red-500" aria-hidden>
             *
           </span>
         )}

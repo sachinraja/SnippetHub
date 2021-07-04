@@ -18,7 +18,7 @@ const NavMenuButton = ({ open, className, ...props }: NavMenuButtonProps) => (
 const NavMenuItems = (props: ExtractProps<typeof Menu.Items>) => {
   return (
     <Menu.Items
-      className="bg-carbon-700 z-10 rounded-lg overflow-hidden origin-top-right absolute right-0 mt-2 w-48"
+      className="overflow-hidden absolute right-0 z-10 mt-2 w-48 bg-carbon-700 rounded-lg origin-top-right"
       {...props}
     />
   )

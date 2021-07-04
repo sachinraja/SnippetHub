@@ -10,7 +10,7 @@ const CardUpvote = ({ className, upvotes }: CardUpvoteProps) => (
   <div
     className={`inline-block rounded-sm border-blue-500 border-2 ${className}`}
   >
-    <UpvoteIcon className="w-6 inline" />
+    <UpvoteIcon className="inline w-6" />
 
     <p className="inline mx-1 text-blue-400" aria-label="upvotes">
       {upvotes}

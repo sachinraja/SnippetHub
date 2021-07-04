@@ -29,7 +29,7 @@ const CodeInput = forwardRef<HTMLDivElement, CodeInputProps>(
       const currentEditor = editor.current
       if (!currentEditor) return undefined
 
-      let view: EditorView
+      let view: EditorView | undefined
       ;(async () => {
         const extensions: Extension[] = [
           basicSetup,
@@ -48,7 +48,8 @@ const CodeInput = forwardRef<HTMLDivElement, CodeInputProps>(
         setEditorView(view)
       })()
 
-      return () => view.destroy()
+      return () => view && view.destroy()
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mode, editor, onUpdate])
 

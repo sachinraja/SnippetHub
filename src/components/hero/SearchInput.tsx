@@ -10,15 +10,15 @@ interface SearchInputProps {
 const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ defaultValue, onSubmit, placeholder }: SearchInputProps, ref) => {
     return (
-      <div className="mt-10 flex justify-between w-5/6 focus-within:w-full transition-all">
+      <div className="flex justify-between mt-10 w-5/6 focus-within:w-full transition-all">
         <form
-          className="bg-carbon-900 focus-within:ring-carbon-500 focus-within:ring-2 shadow-md rounded-md inline-flex flex-grow transition-all duration-500"
+          className="inline-flex flex-grow bg-carbon-900 rounded-md focus-within:ring-2 focus-within:ring-carbon-500 shadow-md transition-all duration-500"
           onSubmit={onSubmit}
         >
           <input
             ref={ref}
             autoComplete="off"
-            className="text-xl bg-carbon-900 rounded-md w-full border-0 focus:ring-0"
+            className="w-full text-xl bg-carbon-900 rounded-md border-0 focus:ring-0"
             id="search"
             name="search"
             placeholder={placeholder}
@@ -26,7 +26,7 @@ const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
             defaultValue={defaultValue}
           />
           <button type="submit" name="Search">
-            <div className="inline-flex items-center hover:bg-carbon-500 p-2 cursor-pointer transition-colors duration-300 rounded-md">
+            <div className="inline-flex items-center p-2 hover:bg-carbon-500 rounded-md transition-colors duration-300 cursor-pointer">
               <SearchIcon height={35} width={35} />
             </div>
           </button>

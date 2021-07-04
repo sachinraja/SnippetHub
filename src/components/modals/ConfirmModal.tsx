@@ -21,10 +21,10 @@ const ConfirmModal = ({
     className={`fixed z-10 inset-0 overflow-y-auto ${className}`}
     {...props}
   >
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen">
       <Dialog.Overlay className="fixed inset-0 bg-black opacity-80" />
 
-      <div className="z-10 text-center mx-4">
+      <div className="z-10 mx-4 text-center">
         <Dialog.Title as={Fragment}>
           <Heading priority={headingPriority} size="4xl">
             {heading}

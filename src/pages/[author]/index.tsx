@@ -71,12 +71,12 @@ const AuthorPage = ({
                   src={author.image}
                 />
               )}
-              <Heading className="font-inter pl-2" priority={1} size="4xl" bold>
+              <Heading className="pl-2 font-inter" priority={1} size="4xl" bold>
                 {author.username}
               </Heading>
             </div>
 
-            <Paragraph className="font-inter mt-2">{author.bio}</Paragraph>
+            <Paragraph className="mt-2 font-inter">{author.bio}</Paragraph>
           </section>
         </Header>
       </header>

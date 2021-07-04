@@ -38,7 +38,7 @@ const Hero = ({ searchInputValue }: HeroProps) => {
         />
       </section>
 
-      <section className="flex-grow items-center justify-center mx-4 hidden sm:flex">
+      <section className="hidden sm:flex flex-grow justify-center items-center mx-4">
         <Image
           src={logo}
           width={170}

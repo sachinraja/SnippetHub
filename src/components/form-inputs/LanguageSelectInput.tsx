@@ -18,13 +18,13 @@ const LanguageSelectInput = ({
       label: (
         <>
           <svg
-            className="ml-1 my-1 w-5 inline-block"
+            className="inline-block my-1 ml-1 w-5"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d={language.icon.path} fill={language.color.icon} />
           </svg>
-          <Paragraph className="p-2 inline align-middle">
+          <Paragraph className="inline p-2 align-middle">
             {language.name}
           </Paragraph>
         </>

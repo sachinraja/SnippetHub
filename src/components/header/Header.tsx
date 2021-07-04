@@ -8,7 +8,7 @@ type HeaderProps = ComponentPropsWithRef<'div'> & {
 const Header = forwardRef<HTMLDivElement, HeaderProps>(
   ({ children, className, ...props }: HeaderProps, ref) => {
     return (
-      <div className="bg-gradient-to-b from-carbon-800 to-carbon-900 py-10">
+      <div className="py-10 bg-gradient-to-b from-carbon-800 to-carbon-900">
         <div className={`mx-12 ${className}`} ref={ref} {...props}>
           {children}
         </div>

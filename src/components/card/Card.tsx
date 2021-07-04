@@ -67,22 +67,22 @@ const Card = ({
   return (
     <FadeIn as="article" afterEnter={checkFloat}>
       <WithLink>
-        <div className="bg-opacity-80 border-carbon-500 border-1 rounded p-2 motion-safe:hover:-translate-y-0.5 hover:border-carbon-50 transition-colors duration-500">
+        <div className="p-2 bg-opacity-80 rounded border-1 border-carbon-500 hover:border-carbon-50 transition-colors duration-500 motion-safe:hover:-translate-y-0.5">
           <div className="flex flex-wrap">
             <section ref={header} className="flex-grow mr-2">
               <section>
-                <h3 className="font-mono text-gray-400 leading-none tracking-tighter text-sm">
+                <h3 className="font-mono text-sm tracking-tighter leading-none text-gray-400">
                   {subtitle}
                   <span aria-hidden>/</span>
                 </h3>
               </section>
 
-              <h2 className="font-extrabold font-mono text-lg">{title}</h2>
+              <h2 className="font-mono text-lg font-extrabold">{title}</h2>
             </section>
 
             <section
               ref={attributes}
-              className={`whitespace-nowrap font-inter font-bold grid grid-cols-1 ${
+              className={`font-inter whitespace-nowrap font-bold grid grid-cols-1 ${
                 areAttributesFloatedRight ? 'justify-items-end' : ''
               }`}
             >
@@ -90,11 +90,11 @@ const Card = ({
 
               <div className="mt-1">
                 <div
-                  className="inline-flex items-center border-2 rounded-sm"
+                  className="inline-flex items-center rounded-sm border-2"
                   style={{ borderColor: languageAttributes.color.border }}
                 >
                   <svg
-                    className="ml-1 my-1 w-5 inline-block"
+                    className="inline-block my-1 ml-1 w-5"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -117,7 +117,7 @@ const Card = ({
 
           {imageUrl && (
             <div className="w-full">
-              <div className="relative w-10 top-3 left-2">
+              <div className="relative top-3 left-2 w-10">
                 <Image
                   width={60}
                   height={60}

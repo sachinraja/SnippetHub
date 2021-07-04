@@ -5,7 +5,7 @@ interface MenuProps {
 }
 
 const Menu = ({ children }: MenuProps) => {
-  return <div className="list-none bg-carbon-700 flex">{children}</div>
+  return <div className="flex list-none bg-carbon-700">{children}</div>
 }
 
 export const LeftAlign = ({ children }: MenuProps) => {
