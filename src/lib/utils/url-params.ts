@@ -11,7 +11,7 @@ export async function getAuthorFromParam(authorUsername: string) {
 }
 
 export async function getPackFromParam(author: User, packName: string) {
-  return prisma.pack.findUnique({
+  const pack = await prisma.pack.findUnique({
     where: {
       name_authorId: {
         authorId: author.id,
@@ -22,4 +22,19 @@ export async function getPackFromParam(author: User, packName: string) {
       snippets: true,
     },
   })
+
+  if (!pack) return null
+
+  const upvoted = Boolean(
+    await prisma.userPackUpvote.findUnique({
+      where: {
+        userId_packId: {
+          userId: author.id,
+          packId: pack.id,
+        },
+      },
+    }),
+  )
+
+  return { ...pack, upvoted }
 }

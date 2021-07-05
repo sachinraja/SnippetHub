@@ -67,24 +67,28 @@ const PackSnippetName = (props: PackSnippetNameProps) => {
                 >
                   <ButtonInput
                     className="mt-4"
-                    onClick={() => {
-                      try {
-                        deleteSnippetMutation({
-                          variables: {
-                            packId: snippet.packId,
-                            snippetId: snippet.id,
-                          },
-                        })
+                    onClick={() =>
+                      (async () => {
+                        try {
+                          await deleteSnippetMutation({
+                            variables: {
+                              packId: snippet.packId,
+                              snippetId: snippet.id,
+                            },
+                          })
 
-                        const newSnippets = [...snippets]
-                        newSnippets.splice(index, 1)
-                        setSnippets(newSnippets)
+                          const newSnippets = [...snippets]
+                          newSnippets.splice(index, 1)
+                          setSnippets(newSnippets)
 
-                        methods.remove(index)
-                      } catch {
-                        toast.error('There was an error deleting this snippet.')
-                      }
-                    }}
+                          methods.remove(index)
+                        } catch {
+                          toast.error(
+                            'There was an error deleting this snippet.',
+                          )
+                        }
+                      })()
+                    }
                     ref={deleteButtonRef}
                   >
                     Confirm Deletion

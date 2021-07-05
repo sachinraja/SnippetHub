@@ -105,6 +105,6 @@ model UserPackUpvote {
   packId Int    @map("pack_id")
   pack   Pack   @relation(fields: [packId], references: [id])
 
-  @@unique([userId, packId])
+  @@id([userId, packId])
   @@map("user_pack_upvote")
 }

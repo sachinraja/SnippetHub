@@ -19,8 +19,7 @@ import PackShortDescription from '@components/pack/PackShortDescription'
 import PackSnippetCode from '@components/pack/PackSnippetCode'
 import PackSnippetName from '@components/pack/PackSnippetName'
 import Paragraph from '@components/Paragraph'
-import { numberWithCommas } from '@lib/utils/number'
-import CardUpvote from '@components/card/CardUpvote'
+import PackUpvote from '@components/pack/PackUpvote'
 
 export const getServerSideProps = async ({
   params,
@@ -123,9 +122,10 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
                 </div>
 
                 <div>
-                  <CardUpvote
-                    className="border-none"
-                    upvotes={numberWithCommas(pack.upvotes)}
+                  <PackUpvote
+                    packId={pack.id}
+                    upvotes={pack.upvotes}
+                    upvoted={pack.upvoted}
                   />
                 </div>
               </div>

@@ -13,6 +13,11 @@ export type PackFormInputs = {
 export const packName = Yup.string()
   .required(validationErrors.required)
   .max(50, validationErrors.maxLength)
+  .test(
+    'characters are alphanumeric with dashes',
+    'Characters can only be lowercase letters, uppercase letters, numbers, or dashes.',
+    (val) => (val ? /^[a-zA-Z0-9\-_]*$/.test(val as string) : false),
+  )
 
 export const packShortDescription = Yup.string()
   .required(validationErrors.required)

@@ -1,7 +1,7 @@
 import UpvoteIcon from '@components/icons/UpvoteIcon'
 import type { CardProps } from './Card'
 
-interface CardUpvoteProps {
+export interface CardUpvoteProps {
   className?: string
   upvotes: CardProps['upvotes']
 }

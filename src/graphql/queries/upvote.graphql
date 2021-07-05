@@ -1,9 +1,0 @@
-mutation Upvote(
-  $packId: Int!
-) {
-  upvote(
-    packId: $packId
-  ) {
-    username
-  }
-}
