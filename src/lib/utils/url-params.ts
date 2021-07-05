@@ -1,8 +1,8 @@
 import { getUser } from '@lib/user'
 import prisma from '@lib/prisma'
-import type { User } from '@prisma/client'
+import type { Pack, User } from '@prisma/client'
 
-export async function getAuthorFromParam(authorUsername: string) {
+export async function getAuthorFromParam(authorUsername: User['username']) {
   if (!authorUsername.startsWith('@')) return null
 
   const username = authorUsername.slice(1)
@@ -10,7 +10,24 @@ export async function getAuthorFromParam(authorUsername: string) {
   return getUser(username)
 }
 
-export async function getPackFromParam(author: User, packName: string) {
+export async function getPackFromParam(
+  author: User,
+  packName: Pack['name'],
+  userId?: User['id'],
+) {
+  const includeArgs = userId
+    ? {
+        snippets: true,
+        userPackUpvotes: {
+          where: {
+            userId,
+          },
+        },
+      }
+    : {
+        snippets: true,
+      }
+
   const pack = await prisma.pack.findUnique({
     where: {
       name_authorId: {
@@ -18,23 +35,12 @@ export async function getPackFromParam(author: User, packName: string) {
         name: packName,
       },
     },
-    include: {
-      snippets: true,
-    },
+    include: includeArgs,
   })
 
   if (!pack) return null
 
-  const upvoted = Boolean(
-    await prisma.userPackUpvote.findUnique({
-      where: {
-        userId_packId: {
-          userId: author.id,
-          packId: pack.id,
-        },
-      },
-    }),
-  )
+  const upvoted = pack.userPackUpvotes.length !== 0
 
   return { ...pack, upvoted }
 }

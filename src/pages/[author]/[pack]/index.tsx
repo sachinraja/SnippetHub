@@ -4,6 +4,7 @@ import { PlusIcon, RefreshIcon, UserIcon } from '@heroicons/react/outline'
 import { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
+import { getSession } from 'next-auth/client'
 import { getAuthorFromParam, getPackFromParam } from '@lib/utils/url-params'
 import {
   PackEditFormInputs,
@@ -20,21 +21,27 @@ import PackSnippetCode from '@components/pack/PackSnippetCode'
 import PackSnippetName from '@components/pack/PackSnippetName'
 import Paragraph from '@components/Paragraph'
 import PackUpvote from '@components/pack/PackUpvote'
+import type { GetServerSidePropsContext } from 'next'
 
 export const getServerSideProps = async ({
+  req,
   params,
 }: {
   params: PackParams
-}) => {
+} & GetServerSidePropsContext) => {
   const author = await getAuthorFromParam(params.author)
   if (!author) return { notFound: true }
 
-  const pack = await getPackFromParam(author, params.pack)
+  const session = await getSession({ req })
+
+  const pack = await getPackFromParam(author, params.pack, session?.user.id)
+
   if (!pack) return { notFound: true }
   return {
     props: {
       author,
       pack,
+      session,
     },
   }
 }
