@@ -12,6 +12,7 @@ import MDEditor from '@components/md-editor/MDEditor'
 import TextAreaInput from '@components/form-inputs/TextAreaInput'
 import TextInput from '@components/form-inputs/TextInput'
 import SnippetInput from '@components/form-inputs/SnippetInput'
+import Label from '@components/form-inputs/Label'
 import FormError from './FormError'
 import type { SubmitHandler } from 'react-hook-form'
 import type { PackFormInputs } from '@lib/schemas/pack-schema'
@@ -32,7 +33,7 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
     setValue,
     trigger,
   } = formMethods
@@ -48,41 +49,45 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
     <FormProvider {...formMethods}>
       <form onSubmit={handleSubmit(submitHandler)}>
         <div className="space-y-3">
-          <TextInput
-            id="packName"
-            label="Pack Name"
-            placeholder="React Snippets"
-            required
-            {...register('packName')}
-          />
-          <FormError name="packName" errors={errors} />
+          <div>
+            <Label text="Pack Name" required>
+              <TextInput
+                placeholder="React Snippets"
+                {...register('packName')}
+              />
+            </Label>
+            <FormError name="packName" errors={errors} />
+          </div>
 
-          <TextAreaInput
-            id="packShortDescription"
-            label="Short Description"
-            required
-            {...register('packShortDescription')}
-          />
-          <FormError name="packShortDescription" errors={errors} />
+          <div>
+            <Label text="Short Description" required>
+              <TextAreaInput {...register('packShortDescription')} />
+            </Label>
+            <FormError name="packShortDescription" errors={errors} />
+          </div>
 
-          <Controller
-            render={({ field: mdEditorField }) => {
-              return (
-                <MDEditor
-                  className="w-full"
-                  onUpdate={(v) => {
-                    setValue('packLongDescription', v.state.doc.toString())
-                  }}
-                  label="Long Description - Supports Markdown (GFM)"
-                  {...mdEditorField}
-                />
-              )
-            }}
-            control={control}
-            name="packLongDescription"
-          />
+          <div>
+            <Controller
+              render={({ field: mdEditorField }) => {
+                return (
+                  <>
+                    <Label text="Long Description - Supports Markdown (GFM)" />
+                    <MDEditor
+                      className="w-full"
+                      onUpdate={(v) => {
+                        setValue('packLongDescription', v.state.doc.toString())
+                      }}
+                      {...mdEditorField}
+                    />
+                  </>
+                )
+              }}
+              control={control}
+              name="packLongDescription"
+            />
 
-          <FormError name="packLongDescription" errors={errors} />
+            <FormError name="packLongDescription" errors={errors} />
+          </div>
 
           {snippetFields.map((field, index) => {
             return (
@@ -109,8 +114,7 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
         <FormError name="snippets" errors={errors} />
 
         <hr className="bg-carbon-600" />
-
-        <ButtonInput className="my-4" type="submit">
+        <ButtonInput className="my-4" type="submit" disabled={!isValid}>
           Create pack
         </ButtonInput>
       </form>

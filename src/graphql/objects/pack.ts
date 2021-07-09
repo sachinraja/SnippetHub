@@ -87,7 +87,7 @@ export const CreatePack = mutationField('createPack', {
       data: {
         author: {
           connect: {
-            username: 'sachinraja',
+            id: ctx.session?.user.id,
           },
         },
         name: args.name,

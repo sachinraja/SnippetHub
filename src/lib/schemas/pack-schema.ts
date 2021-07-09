@@ -1,6 +1,9 @@
 import * as Yup from 'yup'
 import { Language } from '@prisma/client'
 import validationErrors from '@lib/validation/error'
+import alphanumericWithDashes, {
+  alphanumerWithDashesErrorMessage,
+} from '@lib/validation/alphanumeric-with-dashes'
 import type { SnippetInput } from '@graphql-types'
 
 export type PackFormInputs = {
@@ -15,8 +18,8 @@ export const packName = Yup.string()
   .max(50, validationErrors.maxLength)
   .test(
     'characters are alphanumeric with dashes',
-    'Characters can only be lowercase letters, uppercase letters, numbers, or dashes.',
-    (val) => (val ? /^[a-zA-Z0-9\-_]*$/.test(val as string) : false),
+    alphanumerWithDashesErrorMessage,
+    (val) => (val ? alphanumericWithDashes.test(val as string) : false),
   )
 
 export const packShortDescription = Yup.string()

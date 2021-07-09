@@ -8,6 +8,7 @@ import LanguageSelectInput from '@components/form-inputs/LanguageSelectInput'
 import SubmitIcon from '@components/icons/SubmitIcon'
 import TextInput from '@components/form-inputs/TextInput'
 import getLanguageMode from '@lib/language/get-language-mode'
+import Label from '@components/form-inputs/Label'
 import type { UseFieldArrayReturn } from 'react-hook-form'
 import type { Snippet } from '@prisma/client'
 import type { Dispatch, SetStateAction } from 'react'
@@ -47,14 +48,15 @@ const CreateSnippet = ({
 
   return (
     <>
-      <div className="">
-        <TextInput
-          label="Name"
-          id={formSnippetNameId}
-          className="mb-3"
-          required
-          {...register(formSnippetNameId)}
-        />
+      <div>
+        <Label text="Name" required>
+          <TextInput
+            className="mb-3"
+            required
+            {...register(formSnippetNameId)}
+          />
+        </Label>
+
         <FormError name={formSnippetNameId} errors={errors} />
 
         <Controller
@@ -72,13 +74,11 @@ const CreateSnippet = ({
           name={formSnippetLanguageId}
         />
 
+        <Label text="Code" required />
         <CodeInput
-          label="Code"
           mode={getLanguageMode(
             watch(formSnippetLanguageId) ?? Language.javascript,
           )}
-          required
-          id={formSnippetCodeId}
           onBlur={() => trigger(formSnippetCodeId)}
           onUpdate={(v) =>
             setValue(formSnippetCodeId, v.state.doc.toString() as never)

@@ -13,8 +13,8 @@ const PackFormLayout = ({
   ...props
 }: PackFormLayoutProps) => {
   return (
-    <div className="mx-4 mt-2 mb-16">
-      <div className="m-auto w-2/3">
+    <div className="mt-2 mb-16">
+      <div className="m-auto w-3/4 sm:w-2/3">
         <header className="mt-6">
           <Heading className="font-inter" priority={1} size="3xl">
             {heading}

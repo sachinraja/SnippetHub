@@ -6,6 +6,7 @@ import getLanguageMode from '@lib/language/get-language-mode'
 import FormError from '@components/forms/FormError'
 import DeleteIcon from '@components/icons/DeleteIcon'
 import ConfirmModal from '@components/modals/ConfirmModal'
+import Label from '@components/form-inputs/Label'
 import TextInput from './TextInput'
 import LanguageSelectInput from './LanguageSelectInput'
 import CodeInput from './CodeInput'
@@ -75,14 +76,14 @@ const SnippetInput = ({ field, index, fieldArray }: SnippetInputProps) => {
 
       <hr className="my-2 w-5/6 bg-carbon-600" />
 
-      <TextInput
-        label="Name"
-        id={snippetNameId}
-        className="mb-3"
-        required
-        defaultValue={getValues(snippetNameId)}
-        {...register(snippetNameId)}
-      />
+      <Label text="Name" required>
+        <TextInput
+          className="mb-3"
+          required
+          defaultValue={getValues(snippetNameId)}
+          {...register(snippetNameId)}
+        />
+      </Label>
       <FormError name={snippetNameId} errors={errors} />
 
       <Controller
@@ -101,11 +102,10 @@ const SnippetInput = ({ field, index, fieldArray }: SnippetInputProps) => {
         name={snippetLanguageId}
       />
 
+      <Label text="Code" required />
       <CodeInput
-        label="Code"
+        className="z-30"
         mode={getLanguageMode(watch(snippetLanguageId))}
-        required
-        id={snippetCodeId}
         onBlur={() => trigger(snippetCodeId)}
         onUpdate={(v) =>
           setValue(snippetCodeId, v.state.doc.toString() as never)

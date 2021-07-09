@@ -3,7 +3,6 @@ import Link from 'next/link'
 import markdownIcon from 'simple-icons/icons/markdown'
 import { LanguageMode } from '@lib/language/mode'
 import CodeInput from '@components/form-inputs/CodeInput'
-import Label from '@components/form-inputs/Label'
 import MDRenderer from '@components/md-renderer/MDRenderer'
 import Menu, { LeftAlign, RightAlign } from './Menu'
 import MenuItem from './MenuItem'
@@ -12,26 +11,14 @@ import type { CodeInputProps } from '@components/form-inputs/CodeInput'
 export type MDEditorProps = {
   className?: string
   value?: string
-  required?: boolean
-  name: string
 } & CodeInputProps
 
 const MDEditor = forwardRef<HTMLDivElement, MDEditorProps>(
-  (
-    { className, value, required, name, label, ...props }: MDEditorProps,
-    ref,
-  ) => {
+  ({ className, value, ...props }: MDEditorProps, ref) => {
     const [writing, setWriting] = useState(true)
 
     return (
       <div className={className}>
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        {label && (
-          <Label htmlFor={name} required={required}>
-            {label}
-          </Label>
-        )}
-
         <div className="mt-2 ring-1 ring-carbon-400">
           <Menu>
             <LeftAlign>
@@ -66,7 +53,6 @@ const MDEditor = forwardRef<HTMLDivElement, MDEditorProps>(
 
           {writing ? (
             <CodeInput
-              id={name}
               ref={ref}
               mode={LanguageMode.gfm}
               value={value}
@@ -86,7 +72,6 @@ MDEditor.displayName = 'MDEditor'
 MDEditor.defaultProps = {
   className: '',
   value: undefined,
-  required: false,
 }
 
 export default MDEditor

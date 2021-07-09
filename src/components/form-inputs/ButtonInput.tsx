@@ -12,7 +12,7 @@ const ButtonInput = forwardRef<HTMLButtonElement, ButtonInputProps>(
         ref={ref}
         // eslint-disable-next-line react/button-has-type
         type={type ?? 'button'}
-        className={`${className} text-xl bg-carbon-800 cursor-pointer py-1.5 px-5 rounded-md hover:bg-carbon-700 transition-colors`}
+        className={`${className} text-xl bg-carbon-800 disabled:opacity-60 hover:bg-carbon-700 disabled:hover:bg-carbon-800 py-1.5 px-5 rounded-md transition-colors`}
         {...props}
       />
     )

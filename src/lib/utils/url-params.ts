@@ -40,7 +40,7 @@ export async function getPackFromParam(
 
   if (!pack) return null
 
-  const upvoted = pack.userPackUpvotes.length !== 0
+  const upvoted = pack.userPackUpvotes && pack.userPackUpvotes.length !== 0
 
   return { ...pack, upvoted }
 }

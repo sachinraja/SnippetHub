@@ -41,7 +41,6 @@ const PackLongDescription = ({
       }
       editComponent={
         <MDEditor
-          name="Edit"
           className="w-3/4"
           value={getValues('packLongDescription')}
           onBlur={() => trigger('packLongDescription')}

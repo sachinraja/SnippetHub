@@ -1,12 +1,14 @@
 import { Language } from '@prisma/client'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/dist/client/router'
+import { useSession } from 'next-auth/client'
 import { useCreatePackMutation } from '@graphql/queries/create-pack.graphql'
 import Container from '@components/containers/Container'
 import PackFormLayout from '@layouts/PackFormLayout'
 
 const NewPack = () => {
   const [createPack] = useCreatePackMutation()
+  const [session] = useSession()
   const router = useRouter()
 
   return (
@@ -26,10 +28,19 @@ const NewPack = () => {
         submitHandler={async (data) => {
           try {
             await createPack({ variables: data })
-            router.push({
-              pathname: '/[author]/[pack]',
-              query: { author: '@sachinraja', pack: data.packName },
-            })
+
+            const username = session?.user.username
+
+            router.push(
+              {
+                pathname: '/[author]/[pack]',
+                query: {
+                  author: `@${username}`,
+                  pack: data.packName,
+                },
+              },
+              `/@${username}/${data.packName}`,
+            )
           } catch {
             toast.error('There was an error creating your pack.')
           }

@@ -4,25 +4,23 @@ import { forwardRef, useEffect, useRef } from 'react'
 import { oneDark } from '@codemirror/theme-one-dark'
 import getImportFromMode from '@lib/utils/codemirror/get-import'
 import { LanguageMode } from '@lib/language/mode'
-import Label from './Label'
+import useMergeRefs from '@hooks/use-merge-refs'
 import type { Extension } from '@codemirror/state'
 import type { FocusEventHandler } from 'react'
 import type { ViewUpdate } from '@codemirror/view'
 
 export type CodeInputProps = {
-  label?: string
-  id?: string
   className?: string
   mode?: LanguageMode
-  required?: boolean
   value?: string
   onUpdate?: (update: ViewUpdate) => void
   onBlur?: FocusEventHandler<HTMLDivElement>
 }
 
 const CodeInput = forwardRef<HTMLDivElement, CodeInputProps>(
-  ({ label, className, id, mode, required, value, onUpdate, onBlur }, ref) => {
+  ({ className, mode, value, onUpdate, onBlur }, ref) => {
     const editor = useRef<HTMLDivElement>(null)
+    const mergedRef = useMergeRefs(ref, editor)
 
     useEffect(() => {
       const currentEditor = editor.current
@@ -51,27 +49,14 @@ const CodeInput = forwardRef<HTMLDivElement, CodeInputProps>(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mode, editor])
 
-    return (
-      <div ref={ref} className={className}>
-        {label && (
-          <Label htmlFor={id} required={required}>
-            {label}
-          </Label>
-        )}
-
-        <div ref={editor} onBlur={onBlur} />
-      </div>
-    )
+    return <div ref={mergedRef} onBlur={onBlur} className={className} />
   },
 )
 
 CodeInput.displayName = 'CodeInput'
 
 CodeInput.defaultProps = {
-  label: undefined,
-  id: undefined,
   className: undefined,
-  required: false,
   value: '',
   onUpdate: undefined,
   onBlur: undefined,
