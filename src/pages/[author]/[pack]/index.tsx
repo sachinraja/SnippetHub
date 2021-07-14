@@ -4,7 +4,7 @@ import { PlusIcon, RefreshIcon, UserIcon } from '@heroicons/react/outline'
 import { useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
-import { getSession } from 'next-auth/client'
+import { getSession, useSession } from 'next-auth/client'
 import { getAuthorFromParam, getPackFromParam } from '@lib/utils/url-params'
 import {
   PackEditFormInputs,
@@ -86,6 +86,10 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
 
   const { fields: snippetFields } = snippetMethods
 
+  const [session] = useSession()
+
+  const isAuthor = session?.user.id === author.id
+
   return (
     <Container meta={{ title: `@${author.username}/${packName}` }}>
       <FormProvider {...methods}>
@@ -96,6 +100,7 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
                 packId={pack.id}
                 packName={packName}
                 setPackName={setPackName}
+                allowedToEdit={isAuthor}
               />
 
               <div className="inline-grid grid-cols-2 gap-x-4 text-gray-400">
@@ -141,6 +146,7 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
                 packId={pack.id}
                 packShortDescription={packShortDescription}
                 setPackShortDescription={setPackShortDescription}
+                allowedToEdit={isAuthor}
               />
             </section>
           </Header>
@@ -151,6 +157,7 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
             packId={pack.id}
             packLongDescription={packLongDescription}
             setPackLongDescription={setPackLongDescription}
+            allowedToEdit={isAuthor}
           />
 
           <div className="m-auto mt-5 w-3/4">
@@ -166,6 +173,7 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
                     methods={snippetMethods}
                     snippets={snippets}
                     setSnippets={setSnippets}
+                    allowedToEdit={isAuthor}
                   />
 
                   <PackSnippetCode
@@ -173,30 +181,32 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
                     index={index}
                     snippets={snippets}
                     setSnippets={setSnippets}
+                    allowedToEdit={isAuthor}
                   />
                 </article>
               )
             })}
 
-            {isCreatingSnippet ? (
-              <CreateSnippet
-                packId={pack.id}
-                methods={snippetMethods}
-                snippets={snippets}
-                setSnippets={setSnippets}
-                setIsCreatingSnippet={setIsCreatingSnippet}
-              />
-            ) : (
-              <button
-                type="button"
-                aria-label="Add a snippet"
-                onClick={() => {
-                  setIsCreatingSnippet(true)
-                }}
-              >
-                <PlusIcon width={35} />
-              </button>
-            )}
+            {isAuthor &&
+              (isCreatingSnippet ? (
+                <CreateSnippet
+                  packId={pack.id}
+                  methods={snippetMethods}
+                  snippets={snippets}
+                  setSnippets={setSnippets}
+                  setIsCreatingSnippet={setIsCreatingSnippet}
+                />
+              ) : (
+                <button
+                  type="button"
+                  aria-label="Add a snippet"
+                  onClick={() => {
+                    setIsCreatingSnippet(true)
+                  }}
+                >
+                  <PlusIcon width={35} />
+                </button>
+              ))}
           </div>
         </main>
       </FormProvider>

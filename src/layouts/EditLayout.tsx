@@ -11,6 +11,7 @@ interface EditLayoutProps {
   onEditClick: MouseEventHandler<HTMLButtonElement>
   onConfirmClick: MouseEventHandler<HTMLButtonElement>
   formError: ReactElement<FormErrorProps>
+  allowedToEdit: boolean
 }
 
 const EditLayout = ({
@@ -21,15 +22,18 @@ const EditLayout = ({
   onEditClick,
   onConfirmClick,
   formError,
+  allowedToEdit,
 }: EditLayoutProps) => {
   return (
     <>
       <div className={`flex ${className}`}>
         {isEditing ? editComponent : displayComponent}
 
-        <button className="ml-3" type="button" onClick={onEditClick}>
-          <EditIcon />
-        </button>
+        {allowedToEdit && (
+          <button className="ml-3" type="button" onClick={onEditClick}>
+            <EditIcon />
+          </button>
+        )}
 
         {isEditing && (
           <button type="button" aria-label="Confirm" onClick={onConfirmClick}>

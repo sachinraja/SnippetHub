@@ -22,10 +22,13 @@ interface PackSnippetNameProps {
   methods: UseFieldArrayReturn<PackFormInputs, 'snippets', 'id'>
   snippets: Snippet[]
   setSnippets: Dispatch<SetStateAction<Snippet[]>>
+  allowedToEdit: boolean
 }
 
 const PackSnippetName = (props: PackSnippetNameProps) => {
-  const { snippet, index, methods, snippets, setSnippets } = props
+  const { snippet, index, methods, snippets, setSnippets, allowedToEdit } =
+    props
+
   const [deleteSnippetMutation] = useDeleteSnippetMutation()
   const [updateSnippetNameMutation] = useUpdateSnippetNameMutation()
   const [isEditing, setIsEditing] = useState(false)
@@ -139,6 +142,7 @@ const PackSnippetName = (props: PackSnippetNameProps) => {
         })()
       }
       formError={<FormError errors={errors} name={formSnippetId} />}
+      allowedToEdit={allowedToEdit}
     />
   )
 }

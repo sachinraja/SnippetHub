@@ -16,6 +16,7 @@ interface PackSnippetCodeProps {
   index: number
   snippets: Snippet[]
   setSnippets: Dispatch<SetStateAction<Snippet[]>>
+  allowedToEdit: boolean
 }
 
 const PackSnippetCode = ({
@@ -23,6 +24,7 @@ const PackSnippetCode = ({
   index,
   snippets,
   setSnippets,
+  allowedToEdit,
 }: PackSnippetCodeProps) => {
   const [isEditing, setIsEditing] = useState(false)
 
@@ -88,6 +90,7 @@ const PackSnippetCode = ({
         })()
       }
       formError={<FormError errors={errors} name={formSnippetId} />}
+      allowedToEdit={allowedToEdit}
     />
   )
 }

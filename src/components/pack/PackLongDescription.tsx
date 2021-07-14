@@ -6,19 +6,22 @@ import FormError from '@components/forms/FormError'
 import MDEditor from '@components/md-editor/MDEditor'
 import MDRenderer from '@components/md-renderer/MDRenderer'
 import EditLayout from '@layouts/EditLayout'
+import type { Pack } from '@prisma/client'
 import type { Dispatch, SetStateAction } from 'react'
 import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
 
 interface PackLongDescriptionProps {
-  packId: number
+  packId: Pack['id']
   packLongDescription: string
   setPackLongDescription: Dispatch<SetStateAction<string>>
+  allowedToEdit: boolean
 }
 
 const PackLongDescription = ({
   packId,
   packLongDescription,
   setPackLongDescription,
+  allowedToEdit,
 }: PackLongDescriptionProps) => {
   const [updatePackLongDescriptionMutation] =
     useUpdatePackLongDescriptionMutation()
@@ -75,6 +78,7 @@ const PackLongDescription = ({
         })()
       }
       formError={<FormError errors={errors} name="packLongDescription" />}
+      allowedToEdit={allowedToEdit}
     />
   )
 }

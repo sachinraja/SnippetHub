@@ -13,12 +13,14 @@ interface PackShortDescriptionProps {
   packId: number
   packShortDescription: string
   setPackShortDescription: Dispatch<SetStateAction<string>>
+  allowedToEdit: boolean
 }
 
 const PackShortDescription = ({
   packId,
   packShortDescription,
   setPackShortDescription,
+  allowedToEdit,
 }: PackShortDescriptionProps) => {
   const [isEditing, setIsEditing] = useState(false)
 
@@ -71,6 +73,7 @@ const PackShortDescription = ({
         })()
       }
       formError={<FormError errors={errors} name="packShortDescription" />}
+      allowedToEdit={allowedToEdit}
     />
   )
 }

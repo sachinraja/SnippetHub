@@ -14,9 +14,15 @@ interface PackNameProps {
   packId: number
   packName: string
   setPackName: Dispatch<SetStateAction<string>>
+  allowedToEdit: boolean
 }
 
-const PackName = ({ packId, packName, setPackName }: PackNameProps) => {
+const PackName = ({
+  packId,
+  packName,
+  setPackName,
+  allowedToEdit,
+}: PackNameProps) => {
   const [isEditing, setIsEditing] = useState(false)
 
   const [updatePackNameMutation] = useUpdatePackNameMutation()
@@ -84,6 +90,7 @@ const PackName = ({ packId, packName, setPackName }: PackNameProps) => {
         })()
       }
       formError={<FormError errors={errors} name="packName" />}
+      allowedToEdit={allowedToEdit}
     />
   )
 }
