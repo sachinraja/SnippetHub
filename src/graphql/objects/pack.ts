@@ -101,3 +101,15 @@ export const CreatePack = mutationField('createPack', {
     })
   },
 })
+
+export const DeletePack = mutationField('deletePack', {
+  type: Pack,
+  args: {
+    id: nonNull(arg(NexusPack.id)),
+  },
+  resolve(parent, args, ctx) {
+    return ctx.prisma.pack.delete({
+      where: { id: args.id },
+    })
+  },
+})

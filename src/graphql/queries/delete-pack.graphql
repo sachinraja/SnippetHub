@@ -1,0 +1,9 @@
+mutation DeletePack(
+  $id: Int!
+) {
+  deletePack(
+    id: $id
+  ) {
+    name
+  }
+}

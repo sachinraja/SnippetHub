@@ -29,9 +29,10 @@ const PackSnippetName = (props: PackSnippetNameProps) => {
   const { snippet, index, methods, snippets, setSnippets, allowedToEdit } =
     props
 
+  const [isEditing, setIsEditing] = useState(false)
+
   const [deleteSnippetMutation] = useDeleteSnippetMutation()
   const [updateSnippetNameMutation] = useUpdateSnippetNameMutation()
-  const [isEditing, setIsEditing] = useState(false)
 
   const {
     register,
@@ -53,7 +54,7 @@ const PackSnippetName = (props: PackSnippetNameProps) => {
     <EditLayout
       displayComponent={
         <>
-          {snippets.length !== 1 && (
+          {allowedToEdit && snippets.length !== 1 && (
             <>
               <button type="button" onClick={() => setIsDeleteModalOpen(true)}>
                 <DeleteIcon />
