@@ -1,4 +1,9 @@
 import Image from 'next/image'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useSession } from 'next-auth/client'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { getAuthorFromParam } from '@lib/utils/url-params'
 import { getUserPacks } from '@lib/user'
 import CardContainer from '@components/card/CardContainer'
@@ -7,6 +12,11 @@ import Header from '@components/header/Header'
 import Heading from '@components/Heading'
 import Paragraph from '@components/Paragraph'
 import getCardFromPack from '@lib/pack/card'
+import { useUpdateUserBioMutation } from '@graphql/queries/update-user-bio.graphql'
+import EditLayout from '@layouts/EditLayout'
+import TextAreaInput from '@components/form-inputs/TextAreaInput'
+import FormError from '@components/forms/FormError'
+import { userSchema } from '@lib/schemas/user-schema'
 import type { GetStaticPaths } from 'next'
 
 export const getStaticProps = async ({
@@ -56,6 +66,27 @@ const AuthorPage = ({
     }),
   )
 
+  const [session] = useSession()
+
+  const [bio, setBio] = useState(author.bio ?? '')
+  const [updateUserBioMutation] = useUpdateUserBioMutation()
+  const [isEditingBio, setIsEditingBio] = useState(false)
+
+  const {
+    register,
+    getValues,
+    formState: { errors },
+    trigger,
+  } = useForm({
+    resolver: yupResolver(userSchema),
+    mode: 'onChange',
+    defaultValues: {
+      bio,
+    },
+  })
+
+  const isAuthor = session?.user.id === author.id
+
   return (
     <Container meta={{ title: `@${author.username}` }}>
       <header className="mt-0">
@@ -76,7 +107,43 @@ const AuthorPage = ({
               </Heading>
             </div>
 
-            <Paragraph className="mt-2 font-inter">{author.bio}</Paragraph>
+            <EditLayout
+              displayComponent={
+                <Paragraph className="mt-2 font-inter">{bio}</Paragraph>
+              }
+              editComponent={
+                <TextAreaInput
+                  {...register('bio')}
+                  defaultValue={getValues('bio')}
+                />
+              }
+              isEditing={isEditingBio}
+              onEditClick={() => setIsEditingBio(!isEditingBio)}
+              onConfirmClick={() =>
+                (async () => {
+                  await trigger('bio')
+
+                  if (errors.bio) return
+                  const formBio = getValues('bio')
+
+                  if (formBio !== bio) {
+                    try {
+                      await updateUserBioMutation({
+                        variables: {
+                          bio: formBio,
+                        },
+                      })
+                      setBio(formBio)
+                      setIsEditingBio(false)
+                    } catch {
+                      toast.error('There was an error updating your bio.')
+                    }
+                  }
+                })()
+              }
+              formError={<FormError name="bio" errors={errors} />}
+              allowedToEdit={isAuthor}
+            />
           </section>
         </Header>
       </header>
