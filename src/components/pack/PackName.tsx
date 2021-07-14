@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useRouter } from 'next/dist/client/router'
 import toast from 'react-hot-toast'
+import { useSession } from 'next-auth/client'
 import { useUpdatePackNameMutation } from '@graphql/queries/update-pack-name.graphql'
 import FormError from '@components/forms/FormError'
 import Heading from '@components/Heading'
@@ -13,6 +14,7 @@ import ConfirmModal from '@components/modals/ConfirmModal'
 import ButtonInput from '@components/form-inputs/ButtonInput'
 import type { Dispatch, SetStateAction } from 'react'
 import type { PackEditFormInputs } from '@lib/schemas/pack-edit-schema'
+import type { Session } from 'next-auth'
 
 interface PackNameProps {
   packId: number
@@ -27,6 +29,8 @@ const PackName = ({
   setPackName,
   allowedToEdit,
 }: PackNameProps) => {
+  const [session] = useSession()
+
   const [isEditing, setIsEditing] = useState(false)
 
   const [deletePackMutation] = useDeletePackMutation()
@@ -87,6 +91,19 @@ const PackName = ({
                               id: packId,
                             },
                           })
+
+                          // allowedToEdit will ensure this
+                          const { username } = (session as Session).user
+
+                          router.push(
+                            {
+                              pathname: '/[author]',
+                              query: {
+                                author: `@${username}`,
+                              },
+                            },
+                            `/@${username}`,
+                          )
                         } catch {
                           toast.error('There was an error deleting this pack.')
                         }
