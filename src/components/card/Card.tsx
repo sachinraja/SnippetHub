@@ -83,7 +83,9 @@ const Card = ({
             <section
               ref={attributes}
               className={`font-inter whitespace-nowrap font-bold grid grid-cols-1 ${
-                areAttributesFloatedRight ? 'justify-items-end' : ''
+                areAttributesFloatedRight
+                  ? 'justify-items-end'
+                  : 'justify-items-start'
               }`}
             >
               <CardUpvote upvotes={upvotes} />
