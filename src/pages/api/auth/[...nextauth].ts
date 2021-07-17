@@ -5,6 +5,7 @@ import { NextApiHandler } from 'next'
 import { destroyCookie, parseCookies } from 'nookies'
 import envConfig from 'src/config'
 import prisma from '@lib/prisma'
+import { userUsername } from '@lib/schemas/user-schema'
 import type { Profile } from 'next-auth'
 import type { JWT } from 'next-auth/jwt'
 
@@ -14,7 +15,7 @@ const handler: NextApiHandler = (req, res) =>
       Providers.GitHub({
         clientId: envConfig.get('gitHub.clientId'),
         clientSecret: envConfig.get('gitHub.clientSecret'),
-        profile(profile: Profile & GitHubFields) {
+        async profile(profile: Profile & GitHubFields) {
           const { requestedUsername } = parseCookies(
             { req },
             {
@@ -64,17 +65,14 @@ const handler: NextApiHandler = (req, res) =>
 
         return session
       },
-      signIn(user) {
-        // check if username cookie exists if user is signing in for first time
-        if (!user.username) {
-          const { requestedUsername } = parseCookies(
-            { req },
-            {
-              path: '/',
-            },
-          ) as { requestedUsername?: string }
-
-          return Boolean(requestedUsername)
+      async signIn(user) {
+        // will be undefined if user is signing in for the first time (yes, this is hacky)
+        if (!user.createdAt) {
+          try {
+            await userUsername.validate(user.username)
+          } catch {
+            return false
+          }
         }
 
         return true

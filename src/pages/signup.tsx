@@ -1,15 +1,14 @@
 import { setCookie } from 'nookies'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
 import Container from '@components/containers/Container'
 import IfUnauthenticated from '@components/auth/IfUnauthenticated'
 import TextInput from '@components/form-inputs/TextInput'
 import Label from '@components/form-inputs/Label'
 import FormError from '@components/forms/FormError'
-import alphanumericWithDashes, {
-  alphanumerWithDashesErrorMessage,
-} from '@lib/validation/alphanumeric-with-dashes'
-import validationErrors from '@lib/validation/error'
 import SignUpButtons from '@components/SignUpButtons'
+import { userUsername } from '@lib/schemas/user-schema'
 
 const Signup = () => {
   const {
@@ -17,6 +16,11 @@ const Signup = () => {
     getValues,
     formState: { errors, isValid },
   } = useForm<{ username: string }>({
+    resolver: yupResolver(
+      Yup.object().shape({
+        username: userUsername,
+      }),
+    ),
     mode: 'onChange',
   })
 
@@ -34,17 +38,7 @@ const Signup = () => {
                 <TextInput
                   placeholder="johndoe"
                   required
-                  {...register('username', {
-                    required: validationErrors.required,
-                    maxLength: {
-                      value: 39,
-                      message: validationErrors.maxLength({ max: 39 }),
-                    },
-                    pattern: {
-                      value: alphanumericWithDashes,
-                      message: alphanumerWithDashesErrorMessage,
-                    },
-                  })}
+                  {...register('username')}
                 />
               </Label>
               <FormError name="username" errors={errors} />

@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import { useSession } from 'next-auth/client'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
 import { getAuthorFromParam } from '@lib/utils/url-params'
 import { getUserPacks } from '@lib/user'
 import CardContainer from '@components/card/CardContainer'
@@ -16,7 +17,7 @@ import { useUpdateUserBioMutation } from '@graphql/queries/update-user-bio.graph
 import EditLayout from '@layouts/EditLayout'
 import TextAreaInput from '@components/form-inputs/TextAreaInput'
 import FormError from '@components/forms/FormError'
-import { userSchema } from '@lib/schemas/user-schema'
+import { userBio } from '@lib/schemas/user-schema'
 import type { GetStaticPaths } from 'next'
 
 export const getStaticProps = async ({
@@ -78,7 +79,11 @@ const AuthorPage = ({
     formState: { errors },
     trigger,
   } = useForm({
-    resolver: yupResolver(userSchema),
+    resolver: yupResolver(
+      Yup.object().shape({
+        bio: userBio,
+      }),
+    ),
     mode: 'onChange',
     defaultValues: {
       bio,
@@ -147,6 +152,7 @@ const AuthorPage = ({
           </section>
         </Header>
       </header>
+
       <main className="mx-4 mt-2 mb-16">
         <CardContainer>{cards}</CardContainer>
       </main>
