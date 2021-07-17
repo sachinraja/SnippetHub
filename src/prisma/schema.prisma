@@ -47,7 +47,7 @@ model Pack {
 model User {
   id              String           @id @default(cuid())
   name            String?
-  username        String           @unique
+  username        String           @unique @db.Citext
   email           String?          @unique
   emailVerified   DateTime?
   image           String?
