@@ -47,11 +47,11 @@ export const getServerSideProps = async ({
 }
 
 const PackPage = ({ author, pack }: AuthorPackProps) => {
-  const [packName, setPackName] = useState(pack.name)
-  const [packShortDescription, setPackShortDescription] = useState(
+  const [name, setName] = useState(pack.name)
+  const [shortDescription, setShortDescription] = useState(
     pack.shortDescription,
   )
-  const [packLongDescription, setPackLongDescription] = useState(
+  const [longDescription, setLongDescription] = useState(
     pack.longDescription ?? '',
   )
 
@@ -69,9 +69,9 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
     resolver: yupResolver(packEditFormSchema),
     mode: 'onBlur',
     defaultValues: {
-      packName,
-      packShortDescription,
-      packLongDescription,
+      name,
+      shortDescription,
+      longDescription,
       snippets,
       newSnippet: {
         language: Language.javascript,
@@ -91,15 +91,15 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
   const isAuthor = session?.user.id === author.id
 
   return (
-    <Container meta={{ title: `@${author.username}/${packName}` }}>
+    <Container meta={{ title: `@${author.username}/${name}` }}>
       <FormProvider {...methods}>
         <header className="mt-0">
           <Header>
             <section className="m-auto sm:w-2/3">
               <PackName
                 packId={pack.id}
-                packName={packName}
-                setPackName={setPackName}
+                packName={name}
+                setPackName={setName}
                 allowedToEdit={isAuthor}
               />
 
@@ -144,8 +144,8 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
 
               <PackShortDescription
                 packId={pack.id}
-                packShortDescription={packShortDescription}
-                setPackShortDescription={setPackShortDescription}
+                packShortDescription={shortDescription}
+                setPackShortDescription={setShortDescription}
                 allowedToEdit={isAuthor}
               />
             </section>
@@ -155,8 +155,8 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
         <main className="mx-4 mb-16">
           <PackLongDescription
             packId={pack.id}
-            packLongDescription={packLongDescription}
-            setPackLongDescription={setPackLongDescription}
+            packLongDescription={longDescription}
+            setPackLongDescription={setLongDescription}
             allowedToEdit={isAuthor}
           />
 

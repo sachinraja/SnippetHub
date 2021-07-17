@@ -6,7 +6,7 @@ import {
 } from 'react-hook-form'
 import { Language } from '@prisma/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { packFormSchema } from '@lib/schemas/pack-schema'
+import { packSchema } from '@lib/schemas/pack-schema'
 import ButtonInput from '@components/form-inputs/ButtonInput'
 import MDEditor from '@components/md-editor/MDEditor'
 import TextAreaInput from '@components/form-inputs/TextAreaInput'
@@ -24,7 +24,7 @@ export interface PackFormProps {
 
 const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
   const formMethods = useForm<PackFormInputs>({
-    resolver: yupResolver(packFormSchema),
+    resolver: yupResolver(packSchema),
     mode: 'onBlur',
     defaultValues,
   })
@@ -51,19 +51,16 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
         <div className="space-y-3">
           <div>
             <Label text="Pack Name" required>
-              <TextInput
-                placeholder="React Snippets"
-                {...register('packName')}
-              />
+              <TextInput placeholder="React Snippets" {...register('name')} />
             </Label>
-            <FormError name="packName" errors={errors} />
+            <FormError name="name" errors={errors} />
           </div>
 
           <div>
             <Label text="Short Description" required>
-              <TextAreaInput {...register('packShortDescription')} />
+              <TextAreaInput {...register('shortDescription')} />
             </Label>
-            <FormError name="packShortDescription" errors={errors} />
+            <FormError name="shortDescription" errors={errors} />
           </div>
 
           <div>
@@ -75,7 +72,7 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
                     <MDEditor
                       className="w-full"
                       onUpdate={(v) => {
-                        setValue('packLongDescription', v.state.doc.toString())
+                        setValue('longDescription', v.state.doc.toString())
                       }}
                       {...mdEditorField}
                     />
@@ -83,10 +80,10 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
                 )
               }}
               control={control}
-              name="packLongDescription"
+              name="longDescription"
             />
 
-            <FormError name="packLongDescription" errors={errors} />
+            <FormError name="longDescription" errors={errors} />
           </div>
 
           {snippetFields.map((field, index) => {

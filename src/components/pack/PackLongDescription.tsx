@@ -45,21 +45,19 @@ const PackLongDescription = ({
       editComponent={
         <MDEditor
           className="w-3/4"
-          value={getValues('packLongDescription')}
-          onBlur={() => trigger('packLongDescription')}
-          onUpdate={(v) =>
-            setValue('packLongDescription', v.state.doc.toString())
-          }
+          value={getValues('longDescription')}
+          onBlur={() => trigger('longDescription')}
+          onUpdate={(v) => setValue('longDescription', v.state.doc.toString())}
         />
       }
       isEditing={isEditing}
       onEditClick={() => setIsEditing(!isEditing)}
       onConfirmClick={() =>
         (async () => {
-          await trigger('packLongDescription')
-          if (errors.packLongDescription) return
+          await trigger('longDescription')
+          if (errors.longDescription) return
 
-          const formPackLongDescription = getValues('packLongDescription')
+          const formPackLongDescription = getValues('longDescription')
 
           if (formPackLongDescription !== packLongDescription) {
             try {
@@ -77,7 +75,7 @@ const PackLongDescription = ({
           }
         })()
       }
-      formError={<FormError errors={errors} name="packLongDescription" />}
+      formError={<FormError errors={errors} name="longDescription" />}
       allowedToEdit={allowedToEdit}
     />
   )

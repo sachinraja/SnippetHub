@@ -1,6 +1,7 @@
 import { mutationField, nonNull, objectType, arg } from 'nexus'
 import { User as NexusUser, Pack as NexusPack } from 'nexus-prisma'
 import NotLoggedInError from '@graphql/utils/not-logged-in-error'
+import { userBio } from '@lib/schemas/user-schema'
 import { Pack } from './pack'
 
 export const User = objectType({
@@ -97,7 +98,9 @@ export const UpdateUserBio = mutationField('updateUserBio', {
   args: {
     bio: nonNull(arg(NexusUser.bio)),
   },
-  resolve(parent, args, ctx) {
+  async resolve(parent, args, ctx) {
+    await userBio.validate(args.bio)
+
     return ctx.prisma.user.update({
       where: { id: ctx.session?.user.id },
       data: {

@@ -36,10 +36,10 @@ const NewPack = () => {
                 pathname: '/[author]/[pack]',
                 query: {
                   author: `@${username}`,
-                  pack: data.packName,
+                  pack: data.name,
                 },
               },
-              `/@${username}/${data.packName}`,
+              `/@${username}/${data.name}`,
             )
           } catch {
             toast.error('There was an error creating your pack.')

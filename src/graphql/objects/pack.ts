@@ -1,6 +1,12 @@
 import { arg, list, mutationField, nonNull, objectType } from 'nexus'
 import { Pack as NexusPack } from 'nexus-prisma'
 import { getLanguageFromSnippets } from '@graphql/utils/update-language'
+import {
+  packShortDescription,
+  packName,
+  packLongDescription,
+  packSchema,
+} from '@lib/schemas/pack-schema'
 import { SnippetInput } from './snippet'
 
 export const Pack = objectType({
@@ -26,7 +32,9 @@ export const UpdatePackName = mutationField('updatePackName', {
     id: nonNull(arg(NexusPack.id)),
     name: nonNull(arg(NexusPack.name)),
   },
-  resolve(parent, args, ctx) {
+  async resolve(parent, args, ctx) {
+    await packName.validate(args.name)
+
     return ctx.prisma.pack.update({
       where: { id: args.id },
       data: {
@@ -44,7 +52,9 @@ export const UpdatePackShortDescription = mutationField(
       id: nonNull(arg(NexusPack.id)),
       shortDescription: nonNull(arg(NexusPack.shortDescription)),
     },
-    resolve(parent, args, ctx) {
+    async resolve(parent, args, ctx) {
+      await packShortDescription.validate(args.shortDescription)
+
       return ctx.prisma.pack.update({
         where: { id: args.id },
         data: {
@@ -63,7 +73,9 @@ export const UpdatePackLongDescription = mutationField(
       id: nonNull(arg(NexusPack.id)),
       longDescription: nonNull(arg(NexusPack.longDescription)),
     },
-    resolve(parent, args, ctx) {
+    async resolve(parent, args, ctx) {
+      await packLongDescription.validate(args.longDescription)
+
       return ctx.prisma.pack.update({
         where: { id: args.id },
         data: {
@@ -82,7 +94,9 @@ export const CreatePack = mutationField('createPack', {
     longDescription: arg(NexusPack.longDescription),
     snippets: nonNull(list(nonNull(SnippetInput))),
   },
-  resolve(parent, args, ctx) {
+  async resolve(parent, args, ctx) {
+    await packSchema.validate(args)
+
     return ctx.prisma.pack.create({
       data: {
         author: {

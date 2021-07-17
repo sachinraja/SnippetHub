@@ -16,7 +16,7 @@ const Hero = ({ searchInputValue }: HeroProps) => {
     <Header className="flex">
       <section className="md:w-1/2">
         <Heading priority={1} size="4xl" bold>
-          <span>SnippetHub</span>
+          SnippetHub
         </Heading>
 
         <Heading className="mt-3" priority={2} size="xl">

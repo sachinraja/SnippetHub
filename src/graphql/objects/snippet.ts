@@ -1,6 +1,11 @@
 import { arg, inputObjectType, mutationField, nonNull, objectType } from 'nexus'
 import { Snippet as NexusSnippet } from 'nexus-prisma'
 import { updatePackLanguage } from '@graphql/utils/update-language'
+import {
+  snippetSchema,
+  snippetCode,
+  snippetName,
+} from '@lib/schemas/snippet-schema'
 
 export const Snippet = objectType({
   name: NexusSnippet.$name,
@@ -32,6 +37,8 @@ export const CreateSnippet = mutationField('createSnippet', {
     snippet: nonNull(SnippetInput),
   },
   async resolve(parent, args, ctx) {
+    await snippetSchema.validate(args.snippet)
+
     const pack = await ctx.prisma.pack.findUnique({
       where: { id: args.packId },
       include: { snippets: true },
@@ -98,7 +105,9 @@ export const UpdateSnippetName = mutationField('updateSnippetName', {
     id: nonNull(arg(NexusSnippet.id)),
     name: nonNull(arg(NexusSnippet.name)),
   },
-  resolve(parent, args, ctx) {
+  async resolve(parent, args, ctx) {
+    await snippetName.validate(args.name)
+
     return ctx.prisma.snippet.update({
       where: { id: args.id },
       data: {
@@ -114,7 +123,9 @@ export const UpdateSnippetCode = mutationField('updateSnippetCode', {
     id: nonNull(arg(NexusSnippet.id)),
     code: nonNull(arg(NexusSnippet.code)),
   },
-  resolve(parent, args, ctx) {
+  async resolve(parent, args, ctx) {
+    await snippetCode.validate(args.code)
+
     return ctx.prisma.snippet.update({
       where: { id: args.id },
       data: {

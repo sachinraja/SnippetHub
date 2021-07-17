@@ -43,18 +43,18 @@ const PackShortDescription = ({
       }
       editComponent={
         <TextAreaInput
-          {...register('packShortDescription')}
+          {...register('shortDescription')}
           className="inline m-0"
-          defaultValue={getValues('packShortDescription')}
+          defaultValue={getValues('shortDescription')}
         />
       }
       isEditing={isEditing}
       onEditClick={() => setIsEditing(!isEditing)}
       onConfirmClick={() =>
         (async () => {
-          await trigger('packShortDescription')
-          if (errors.packShortDescription) return
-          const formPackShortDescription = getValues('packShortDescription')
+          await trigger('shortDescription')
+          if (errors.shortDescription) return
+          const formPackShortDescription = getValues('shortDescription')
 
           if (formPackShortDescription !== packShortDescription) {
             try {
@@ -72,7 +72,7 @@ const PackShortDescription = ({
           }
         })()
       }
-      formError={<FormError errors={errors} name="packShortDescription" />}
+      formError={<FormError errors={errors} name="shortDescription" />}
       allowedToEdit={allowedToEdit}
     />
   )

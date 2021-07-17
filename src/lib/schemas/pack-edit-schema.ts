@@ -1,14 +1,15 @@
 import * as Yup from 'yup'
-import { packFormSchema, snippet } from '@lib/schemas/pack-schema'
+import { packSchema } from './pack-schema'
+import { snippetSchema } from './snippet-schema'
 import type { SnippetInput } from '@graphql-types'
-import type { PackFormInputs } from '@lib/schemas/pack-schema'
+import type { PackFormInputs } from './pack-schema'
 
 export type PackEditFormInputs = PackFormInputs & { newSnippet: SnippetInput }
 
-export const packEditFormSchema = packFormSchema.required().concat(
+export const packEditFormSchema = packSchema.required().concat(
   Yup.object()
     .shape({
-      newSnippet: snippet,
+      newSnippet: snippetSchema,
     })
     .required(),
 )

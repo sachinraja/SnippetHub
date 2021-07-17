@@ -125,19 +125,19 @@ const PackName = ({
       }
       editComponent={
         <TextInput
-          {...register('packName')}
+          {...register('name')}
           className="inline m-0"
-          defaultValue={getValues('packName')}
+          defaultValue={getValues('name')}
         />
       }
       isEditing={isEditing}
       onEditClick={() => setIsEditing(!isEditing)}
       onConfirmClick={() =>
         (async () => {
-          await trigger('packName')
-          if (errors.packName) return
+          await trigger('name')
+          if (errors.name) return
 
-          const formPackName = getValues('packName')
+          const formPackName = getValues('name')
 
           if (formPackName !== packName) {
             try {
@@ -155,7 +155,7 @@ const PackName = ({
           }
         })()
       }
-      formError={<FormError errors={errors} name="packName" />}
+      formError={<FormError errors={errors} name="name" />}
       allowedToEdit={allowedToEdit}
     />
   )
