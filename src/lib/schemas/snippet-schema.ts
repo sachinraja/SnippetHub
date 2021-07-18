@@ -1,14 +1,12 @@
 import * as Yup from 'yup'
 import { Language } from '@prisma/client'
-import validationErrors from '@lib/validation/error'
+import configureYupLocale from '@lib/validation/configure-yup-locale'
 
-export const snippetName = Yup.string()
-  .required(validationErrors.required)
-  .max(50, validationErrors.maxLength)
+configureYupLocale()
 
-export const snippetCode = Yup.string()
-  .required(validationErrors.required)
-  .max(5000, validationErrors.maxLength)
+export const snippetName = Yup.string().required().max(50)
+
+export const snippetCode = Yup.string().required().max(5000)
 
 export const snippetLanguage = Yup.string().oneOf(Object.values(Language))
 

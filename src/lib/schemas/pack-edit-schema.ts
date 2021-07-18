@@ -1,8 +1,11 @@
 import * as Yup from 'yup'
+import configureYupLocale from '@lib/validation/configure-yup-locale'
 import { packSchema } from './pack-schema'
 import { snippetSchema } from './snippet-schema'
 import type { SnippetInput } from '@graphql-types'
 import type { PackFormInputs } from './pack-schema'
+
+configureYupLocale()
 
 export type PackEditFormInputs = PackFormInputs & { newSnippet: SnippetInput }
 
