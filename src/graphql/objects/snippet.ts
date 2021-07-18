@@ -2,10 +2,14 @@ import { arg, inputObjectType, mutationField, nonNull, objectType } from 'nexus'
 import { Snippet as NexusSnippet } from 'nexus-prisma'
 import { updatePackLanguage } from '@graphql/utils/update-language'
 import {
-  snippetSchema,
-  snippetCode,
-  snippetName,
+  getSnippetSchema,
+  getSnippetCode,
+  getSnippetName,
 } from '@lib/schemas/snippet-schema'
+
+const snippetSchema = getSnippetSchema()
+const snippetName = getSnippetName()
+const snippetCode = getSnippetCode()
 
 export const Snippet = objectType({
   name: NexusSnippet.$name,

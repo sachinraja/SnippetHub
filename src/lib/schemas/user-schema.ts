@@ -1,23 +1,22 @@
 import * as Yup from 'yup'
 import alphanumericWithDashes, {
-  alphanumerWithDashesErrorMessage,
+  alphanumericWithDashesErrorMessage,
 } from '@lib/validation/alphanumeric-with-dashes'
-import configureYupLocale from '@lib/validation/configure-yup-locale'
 
-configureYupLocale()
+export const getUserUsername = () =>
+  Yup.string()
+    .required()
+    .max(39)
+    .test(
+      'characters are alphanumeric with dashes',
+      alphanumericWithDashesErrorMessage,
+      (val) => (val ? alphanumericWithDashes.test(val as string) : false),
+    )
 
-export const userUsername = Yup.string()
-  .required()
-  .max(39)
-  .test(
-    'characters are alphanumeric with dashes',
-    alphanumerWithDashesErrorMessage,
-    (val) => (val ? alphanumericWithDashes.test(val as string) : false),
-  )
+export const getUserBio = () => Yup.string().required().max(160)
 
-export const userBio = Yup.string().required().max(160)
-
-export const userSchema = Yup.object().shape({
-  bio: userBio,
-  username: userUsername,
-})
+export const getUserSchema = () =>
+  Yup.object().shape({
+    bio: getUserBio(),
+    username: getUserUsername(),
+  })

@@ -1,14 +1,14 @@
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
 import { Language, Snippet } from '@prisma/client'
 import { PlusIcon, RefreshIcon, UserIcon } from '@heroicons/react/outline'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
 import { getSession, useSession } from 'next-auth/client'
 import { getAuthorFromParam, getPackFromParam } from '@lib/utils/url-params'
 import {
   PackEditFormInputs,
-  packEditFormSchema,
+  getPackEditSchema,
 } from '@lib/schemas/pack-edit-schema'
 import Container from '@components/containers/Container'
 import CreateSnippet from '@components/pack/CreateSnippet'
@@ -21,6 +21,7 @@ import PackSnippetCode from '@components/pack/PackSnippetCode'
 import PackSnippetName from '@components/pack/PackSnippetName'
 import Paragraph from '@components/Paragraph'
 import PackUpvote from '@components/pack/PackUpvote'
+import configureYupLocale from '@lib/validation/configure-yup-locale'
 import type { GetServerSidePropsContext } from 'next'
 
 export const getServerSideProps = async ({
@@ -65,8 +66,13 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
 
   const [isCreatingSnippet, setIsCreatingSnippet] = useState(false)
 
+  const packEditSchema = useMemo(() => {
+    configureYupLocale()
+    return getPackEditSchema()
+  }, [])
+
   const methods = useForm<PackEditFormInputs>({
-    resolver: yupResolver(packEditFormSchema),
+    resolver: yupResolver(packEditSchema),
     mode: 'onBlur',
     defaultValues: {
       name,

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import toast from 'react-hot-toast'
 import { useSession } from 'next-auth/client'
 import { useForm } from 'react-hook-form'
@@ -17,7 +17,8 @@ import { useUpdateUserBioMutation } from '@graphql/queries/update-user-bio.graph
 import EditLayout from '@layouts/EditLayout'
 import TextAreaInput from '@components/form-inputs/TextAreaInput'
 import FormError from '@components/forms/FormError'
-import { userBio } from '@lib/schemas/user-schema'
+import { getUserBio } from '@lib/schemas/user-schema'
+import configureYupLocale from '@lib/validation/configure-yup-locale'
 import type { GetStaticPaths } from 'next'
 
 export const getStaticProps = async ({
@@ -73,17 +74,20 @@ const AuthorPage = ({
   const [updateUserBioMutation] = useUpdateUserBioMutation()
   const [isEditingBio, setIsEditingBio] = useState(false)
 
+  const userBioSchema = useMemo(() => {
+    configureYupLocale()
+
+    return Yup.object().shape({
+      bio: getUserBio(),
+    })
+  }, [])
   const {
     register,
     getValues,
     formState: { errors },
     trigger,
   } = useForm({
-    resolver: yupResolver(
-      Yup.object().shape({
-        bio: userBio,
-      }),
-    ),
+    resolver: yupResolver(userBioSchema),
     mode: 'onChange',
     defaultValues: {
       bio,

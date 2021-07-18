@@ -11,13 +11,14 @@ const configureYupLocale = () => {
   if (typeof window === 'undefined') return
 
   setLocale({
-    number: {
+    mixed: {
       required: 'Field is required',
+    },
+    number: {
       max: maxLengthMessage,
       min: minLengthMessage,
     },
     string: {
-      required: 'Field is required',
       max: maxLengthMessage,
       min: minLengthMessage,
     },

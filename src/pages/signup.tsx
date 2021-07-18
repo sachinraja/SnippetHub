@@ -2,25 +2,31 @@ import { setCookie } from 'nookies'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
+import { useMemo } from 'react'
 import Container from '@components/containers/Container'
 import IfUnauthenticated from '@components/auth/IfUnauthenticated'
 import TextInput from '@components/form-inputs/TextInput'
 import Label from '@components/form-inputs/Label'
 import FormError from '@components/forms/FormError'
 import SignUpButtons from '@components/SignUpButtons'
-import { userUsername } from '@lib/schemas/user-schema'
+import { getUserUsername } from '@lib/schemas/user-schema'
+import configureYupLocale from '@lib/validation/configure-yup-locale'
 
 const Signup = () => {
+  const usernameSchema = useMemo(() => {
+    configureYupLocale()
+
+    return Yup.object().shape({
+      username: getUserUsername(),
+    })
+  }, [])
+
   const {
     register,
     getValues,
     formState: { errors, isValid },
   } = useForm<{ username: string }>({
-    resolver: yupResolver(
-      Yup.object().shape({
-        username: userUsername,
-      }),
-    ),
+    resolver: yupResolver(usernameSchema),
     mode: 'onChange',
   })
 

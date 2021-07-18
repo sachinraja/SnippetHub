@@ -5,9 +5,11 @@ import { NextApiHandler } from 'next'
 import { destroyCookie, parseCookies } from 'nookies'
 import envConfig from 'src/config'
 import prisma from '@lib/prisma'
-import { userUsername } from '@lib/schemas/user-schema'
+import { getUserUsername } from '@lib/schemas/user-schema'
 import type { Profile } from 'next-auth'
 import type { JWT } from 'next-auth/jwt'
+
+const userUsername = getUserUsername()
 
 const handler: NextApiHandler = (req, res) =>
   NextAuth(req, res, {

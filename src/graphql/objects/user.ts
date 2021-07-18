@@ -1,8 +1,10 @@
 import { mutationField, nonNull, objectType, arg } from 'nexus'
 import { User as NexusUser, Pack as NexusPack } from 'nexus-prisma'
 import NotLoggedInError from '@graphql/utils/not-logged-in-error'
-import { userBio } from '@lib/schemas/user-schema'
+import { getUserBio } from '@lib/schemas/user-schema'
 import { Pack } from './pack'
+
+const userBio = getUserBio()
 
 export const User = objectType({
   name: NexusUser.$name,

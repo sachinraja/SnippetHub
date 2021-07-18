@@ -6,13 +6,15 @@ import {
 } from 'react-hook-form'
 import { Language } from '@prisma/client'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { packSchema } from '@lib/schemas/pack-schema'
+import { useMemo } from 'react'
+import { getPackSchema } from '@lib/schemas/pack-schema'
 import ButtonInput from '@components/form-inputs/ButtonInput'
 import MDEditor from '@components/md-editor/MDEditor'
 import TextAreaInput from '@components/form-inputs/TextAreaInput'
 import TextInput from '@components/form-inputs/TextInput'
 import SnippetInput from '@components/form-inputs/SnippetInput'
 import Label from '@components/form-inputs/Label'
+import configureYupLocale from '@lib/validation/configure-yup-locale'
 import FormError from './FormError'
 import type { SubmitHandler } from 'react-hook-form'
 import type { PackFormInputs } from '@lib/schemas/pack-schema'
@@ -23,6 +25,11 @@ export interface PackFormProps {
 }
 
 const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
+  const packSchema = useMemo(() => {
+    configureYupLocale()
+    return getPackSchema()
+  }, [])
+
   const formMethods = useForm<PackFormInputs>({
     resolver: yupResolver(packSchema),
     mode: 'onBlur',

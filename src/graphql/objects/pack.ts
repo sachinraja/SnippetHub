@@ -2,12 +2,17 @@ import { arg, list, mutationField, nonNull, objectType } from 'nexus'
 import { Pack as NexusPack } from 'nexus-prisma'
 import { getLanguageFromSnippets } from '@graphql/utils/update-language'
 import {
-  packShortDescription,
-  packName,
-  packLongDescription,
-  packSchema,
+  getPackShortDescription,
+  getPackName,
+  getPackLongDescription,
+  getPackSchema,
 } from '@lib/schemas/pack-schema'
 import { SnippetInput } from './snippet'
+
+const packName = getPackName()
+const packShortDescription = getPackShortDescription()
+const packLongDescription = getPackLongDescription()
+const packSchema = getPackSchema()
 
 export const Pack = objectType({
   name: NexusPack.$name,
