@@ -33,7 +33,7 @@
     "@codemirror/lang-javascript": "0.18.0",
     "@codemirror/lang-markdown": "0.18.4",
     "@codemirror/lang-python": "0.18.1",
-    "@codemirror/legacy-modes": "0.18.0",
+    "@codemirror/legacy-modes": "0.18.1",
     "@codemirror/state": "0.18.7",
     "@codemirror/stream-parser": "0.18.2",
     "@codemirror/text": "0.18.0",
