@@ -69,7 +69,7 @@
     "react-syntax-highlighter": "15.4.3",
     "remark-gfm": "1.0.0",
     "simple-icons": "5.4.0",
-    "tailwindcss": "2.2.4",
+    "tailwindcss": "2.2.6",
     "yup": "0.32.9"
   },
   "devDependencies": {
@@ -87,7 +87,7 @@
     "@types/react-select": "4.0.17",
     "@types/react-syntax-highlighter": "13.5.2",
     "@types/simple-icons": "5.0.0",
-    "@types/tailwindcss": "2.0.6",
+    "@types/tailwindcss": "2.2.1",
     "@typescript-eslint/eslint-plugin": "4.28.4",
     "@typescript-eslint/parser": "4.28.4",
     "autoprefixer": "10.2.6",
