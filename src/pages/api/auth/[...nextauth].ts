@@ -1,11 +1,11 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { NextApiHandler } from 'next'
 import { destroyCookie, parseCookies } from 'nookies'
 import envConfig from 'src/config'
 import prisma from '@lib/prisma'
 import { getUserUsername } from '@lib/schemas/user-schema'
+import CustomPrismaAdapter from '@lib/auth/prisma-adapter'
 import type { Profile } from 'next-auth'
 import type { JWT } from 'next-auth/jwt'
 
@@ -40,7 +40,7 @@ const handler: NextApiHandler = (req, res) =>
         },
       }),
     ],
-    adapter: PrismaAdapter(prisma),
+    adapter: CustomPrismaAdapter(prisma),
     session: { jwt: true },
     secret: envConfig.get('jwt.secret'),
     jwt: {
