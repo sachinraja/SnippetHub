@@ -109,7 +109,7 @@
     "jest": "27.0.6",
     "json5": "2.2.0",
     "next-plugin-preval": "1.2.1",
-    "postcss": "8.3.5",
+    "postcss": "8.3.6",
     "prettier": "2.3.2",
     "prisma": "2.27.0",
     "ts-jest": "27.0.3",
