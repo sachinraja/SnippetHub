@@ -106,7 +106,7 @@
     "eslint-plugin-tailwindcss": "1.13.4",
     "graphql-let": "0.18.4",
     "husky": "6.0.0",
-    "jest": "27.0.4",
+    "jest": "27.0.6",
     "json5": "2.2.0",
     "next-plugin-preval": "1.2.1",
     "postcss": "8.3.5",
