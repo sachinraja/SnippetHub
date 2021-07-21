@@ -18,6 +18,7 @@ import defaultProfilePic from 'assets/default-profile-pic.png'
 const links: Record<string, string> = {
   '/': 'Top Packs',
   '/search': 'Search Packs',
+  '/faq': 'FAQ',
 }
 
 const NavLinks = () => {
