@@ -1,17 +1,13 @@
-import fs from 'fs'
-import { pathsToModuleNameMapper } from 'ts-jest/utils'
-import JSON5 from 'json5'
-
-module.exports = {
+const jestConfig = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  moduleNameMapper: pathsToModuleNameMapper(
-    JSON5.parse(fs.readFileSync('tsconfig.json', 'utf-8')).compilerOptions
-      .paths,
-    {
-      prefix: '<rootDir>',
-    },
-  ),
-  modulePaths: ['node_modules', '<rootDir>'],
-  preset: 'ts-jest',
-  testEnvironment: 'node',
+  moduleDirectories: ['node_modules', '<rootDir>'],
+  moduleNameMapper: {
+    '^@components(.*)$': '<rootDir>/src/components$1',
+    '^@hooks(.*)$': '<rootDir>/src/hooks$1',
+    '^@layouts(.*)$': '<rootDir>/src/layouts$1',
+    '^@lib(.*)$': '<rootDir>/src/lib$1',
+    '^@graphql(.*)$': '<rootDir>/src/graphql$1',
+  },
 }
+
+export default jestConfig
