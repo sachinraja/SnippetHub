@@ -45,7 +45,7 @@
     "@hookform/resolvers": "2.6.1",
     "@next-auth/prisma-adapter": "0.5.3",
     "@prisma/client": "2.27.0",
-    "apollo-server-micro": "2.25.2",
+    "apollo-server-micro": "3.0.2",
     "axios": "0.21.1",
     "babel-jest": "27.0.6",
     "codemirror-lang-elixir": "1.0.4",
