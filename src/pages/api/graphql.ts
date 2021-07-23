@@ -1,16 +1,12 @@
 import { ApolloServer } from 'apollo-server-micro'
+import Cors from 'micro-cors'
 import { context } from '@graphql/context'
 import schemaWithMiddleware from '@graphql/schema'
-import type { PageConfig } from 'next'
+import type { NextApiHandler, PageConfig } from 'next'
 
 const server = new ApolloServer({
   schema: schemaWithMiddleware,
   context,
-  playground: {
-    settings: {
-      'request.credentials': 'include',
-    },
-  },
 })
 
 export const config: PageConfig = {
@@ -19,8 +15,20 @@ export const config: PageConfig = {
   },
 }
 
-function createHandler() {
-  return server.createHandler({ path: '/api/graphql' })
+const startServer = server.start()
+
+const cors = Cors()
+
+const handler: NextApiHandler = async (req, res) => {
+  if (req.method === 'OPTIONS') return res.end()
+
+  await startServer
+  await server.createHandler({
+    path: '/api/graphql',
+  })(req, res)
+
+  return res.end()
 }
 
-export default createHandler()
+// @ts-expect-error these are compatible
+export default cors(handler)
