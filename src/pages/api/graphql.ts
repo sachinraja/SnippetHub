@@ -15,20 +15,25 @@ export const config: PageConfig = {
   },
 }
 
-const startServer = server.start()
-
 const cors = Cors()
 
-const handler: NextApiHandler = async (req, res) => {
+const getHandler = async () => {
+  await server.start()
+  return server.createHandler({
+    path: '/api/graphql',
+  })
+}
+
+const apolloHandlerPromise = getHandler()
+
+const apiHandler: NextApiHandler = async (req, res) => {
   if (req.method === 'OPTIONS') return res.end()
 
-  await startServer
-  await server.createHandler({
-    path: '/api/graphql',
-  })(req, res)
+  const apolloHandler = await apolloHandlerPromise
+  await apolloHandler(req, res)
 
   return res.end()
 }
 
 // @ts-expect-error these are compatible
-export default cors(handler)
+export default cors(apiHandler)
