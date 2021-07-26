@@ -10,6 +10,7 @@ import typescriptIcon from 'simple-icons/icons/typescript'
 import { LanguageMode } from '@lib/language/mode'
 import colors from '@lib/styling/tailwind-colors.preval'
 import type { TailwindColorGroup } from 'tailwindcss/tailwind-config'
+import type { SimpleIcon } from 'simple-icons'
 
 interface LanguageColor {
   text: string
