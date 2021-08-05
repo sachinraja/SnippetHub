@@ -1,11 +1,5 @@
-mutation DeleteSnippet(
-  $packId: Int!
-  $snippetId: Int!
-) {
-  deleteSnippet(
-    packId: $packId
-    id: $snippetId
-  ) {
+mutation DeleteSnippet($packId: Int!, $snippetId: Int!) {
+  deleteSnippet(packId: $packId, id: $snippetId) {
     name
   }
 }

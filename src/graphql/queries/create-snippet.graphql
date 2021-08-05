@@ -1,11 +1,5 @@
-mutation CreateSnippet(
-  $packId: Int!
-  $snippet: SnippetInput!
-) {
-  createSnippet(
-    packId: $packId
-    snippet: $snippet
-  ) {
+mutation CreateSnippet($packId: Int!, $snippet: SnippetInput!) {
+  createSnippet(packId: $packId, snippet: $snippet) {
     id
     name
     code

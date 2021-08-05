@@ -5,21 +5,21 @@ module.exports = {
     node: true,
   },
   extends: [
-    "airbnb",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
-    "next",
+    'airbnb',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'next',
   ],
-  plugins: ["@typescript-eslint", "tailwindcss"],
-  ignorePatterns: [".next", ".cache", "__generated__", "**/*.graphql.d.ts"],
-  parser: "@typescript-eslint/parser",
+  plugins: ['@typescript-eslint', 'tailwindcss'],
+  ignorePatterns: ['.next', '.cache', '__generated__', '**/*.graphql.d.ts'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
   },
   rules: {
-    "@typescript-eslint/explicit-module-boundary-types": "off",
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
 
     // camelcase: [
     //   'error',
@@ -29,70 +29,70 @@ module.exports = {
     // ],
 
     // doesn't work with ts - use @typescript-eslint version
-    "no-shadow": "off",
-    "no-use-before-define": "off",
-    "@typescript-eslint/no-shadow": "error",
-    "@typescript-eslint/no-use-before-define": "error",
+    'no-shadow': 'off',
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-shadow': 'error',
+    '@typescript-eslint/no-use-before-define': 'error',
 
     // override airbnb
-    "import/extensions": [
-      "error",
-      "ignorePackages",
+    'import/extensions': [
+      'error',
+      'ignorePackages',
       {
-        ts: "never",
-        tsx: "never",
+        ts: 'never',
+        tsx: 'never',
       },
     ],
 
-    "no-param-reassign": [
-      "error",
+    'no-param-reassign': [
+      'error',
       // for Array.reduce
-      { ignorePropertyModificationsFor: ["accu"] },
+      { ignorePropertyModificationsFor: ['accu'] },
     ],
 
     // completely unnecessary and annoying
-    "import/prefer-default-export": "off",
+    'import/prefer-default-export': 'off',
 
     // easier to scan
-    "import/order": [
-      "error",
+    'import/order': [
+      'error',
       {
         groups: [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index",
-          "object",
-          "type",
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+          'object',
+          'type',
         ],
       },
     ],
 
     // not compatible with Next.js <Link /> components
-    "jsx-a11y/anchor-is-valid": "off",
+    'jsx-a11y/anchor-is-valid': 'off',
 
-    "react/jsx-filename-extension": ["warn", { extensions: [".tsx"] }],
+    'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],
 
     // using jsx transform
-    "react/react-in-jsx-scope": "off",
+    'react/react-in-jsx-scope': 'off',
 
-    "react/jsx-props-no-spreading": "off",
+    'react/jsx-props-no-spreading': 'off',
 
-    "import/no-extraneous-dependencies": [
-      "error",
+    'import/no-extraneous-dependencies': [
+      'error',
       {
-        devDependencies: ["*.config.{js,ts}", "**/*.test.ts", "**/*.preval.ts"],
+        devDependencies: ['*.config.{js,ts}', '**/*.test.ts', '**/*.preval.ts'],
       },
     ],
 
-    "tailwindcss/classnames-order": "warn",
-    "tailwindcss/no-contradicting-classname": "error",
+    'tailwindcss/classnames-order': 'warn',
+    'tailwindcss/no-contradicting-classname': 'error',
   },
 
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
       },
@@ -101,11 +101,11 @@ module.exports = {
 
   overrides: [
     {
-      files: ["*.config.{js,ts}"],
+      files: ['*.config.{js,ts}'],
       rules: {
-        "global-require": "off",
-        "@typescript-eslint/no-var-requires": "off",
+        'global-require': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
   ],
-};
+}

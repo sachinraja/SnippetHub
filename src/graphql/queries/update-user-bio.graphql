@@ -1,9 +1,5 @@
-mutation UpdateUserBio(
-  $bio: String!
-) {
-  updateUserBio(
-    bio: $bio
-  ) {
+mutation UpdateUserBio($bio: String!) {
+  updateUserBio(bio: $bio) {
     username
   }
 }

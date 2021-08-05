@@ -12,8 +12,8 @@ services:
     ports:
       - 8080:8080
     env_file:
-    - ../.env.local
-    - ../src/prisma/.env.local
+      - ../.env.local
+      - ../src/prisma/.env.local
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_SERVER_URL=http://localhost:8080

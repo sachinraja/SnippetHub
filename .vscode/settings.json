@@ -2,6 +2,6 @@
   "css.lint.unknownAtRules": "ignore",
   "files.exclude": {
     "**/__generated__": true,
-    ".cache": true,
-  },
+    ".cache": true
+  }
 }

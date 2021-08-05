@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css?family=Inter:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Inter:wght@700&display=swap');
 
 hr {
   background-color: white;
@@ -22,13 +22,13 @@ body {
   font-style: italic;
 }
 :-moz-placeholder {
-  font-style: italic;  
+  font-style: italic;
 }
 ::-moz-placeholder {
-  font-style: italic;  
+  font-style: italic;
 }
-:-ms-input-placeholder {  
-  font-style: italic; 
+:-ms-input-placeholder {
+  font-style: italic;
 }
 
 ::-webkit-scrollbar {
@@ -38,7 +38,7 @@ body {
 ::-webkit-scrollbar-track {
   @apply bg-carbon-700;
 }
- 
+
 ::-webkit-scrollbar-thumb {
   @apply bg-carbon-600;
 }
@@ -47,5 +47,10 @@ body {
   @apply bg-carbon-500;
 }
 
-.cm-editor { height: auto }
-.cm-editor .cm-content, .cm-editor .cm-gutter { min-height: 200px }
+.cm-editor {
+  height: auto;
+}
+.cm-editor .cm-content,
+.cm-editor .cm-gutter {
+  min-height: 200px;
+}

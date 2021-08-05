@@ -1,9 +1,5 @@
-mutation CreatePackUpvote(
-  $packId: Int!
-) {
-  createPackUpvote(
-    packId: $packId
-  ) {
+mutation CreatePackUpvote($packId: Int!) {
+  createPackUpvote(packId: $packId) {
     upvotes
   }
 }

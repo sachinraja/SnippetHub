@@ -1,11 +1,5 @@
-mutation UpdateSnippetCode(
-  $snippetId: Int!
-  $snippetCode: String!
-) {
-  updateSnippetCode(
-    id: $snippetId
-    code: $snippetCode
-  ) {
+mutation UpdateSnippetCode($snippetId: Int!, $snippetCode: String!) {
+  updateSnippetCode(id: $snippetId, code: $snippetCode) {
     name
   }
 }

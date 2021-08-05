@@ -1,9 +1,5 @@
-mutation DeletePackUpvote(
-  $packId: Int!
-) {
-  deletePackUpvote(
-    packId: $packId
-  ) {
+mutation DeletePackUpvote($packId: Int!) {
+  deletePackUpvote(packId: $packId) {
     upvotes
   }
 }
