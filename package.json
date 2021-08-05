@@ -11,6 +11,8 @@
     "start": "next start",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
     "type:check": "tsc",
     "type:gen": "npm run prisma:gen && npm run graphql:gen",
     "prisma:gen": "prisma generate",

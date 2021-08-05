@@ -1,13 +1,13 @@
 type PageNumbersProps = {
-  range: number;
-  className?: string;
-  constructHref: (index: number) => string;
-};
+  range: number
+  className?: string
+  constructHref: (index: number) => string
+}
 
 const PageNumbers = ({ range, className, constructHref }: PageNumbersProps) => (
   <div className={`flex flex-row space-x-4 w-full ${className}`}>
     {Array.from({ length: range }).map((_, index) => {
-      const href = constructHref(index);
+      const href = constructHref(index)
       return (
         // we don't use the <Link> component here because
         // we don't need prefetching on hover
@@ -20,18 +20,18 @@ const PageNumbers = ({ range, className, constructHref }: PageNumbersProps) => (
           className="p-2 w-full text-xl text-center text-carbon-300 bg-carbon-700 hover:bg-carbon-600 rounded-md transition-colors"
           onClick={(e) => {
             // allow user to open in new tab but optimize for button click
-            e.preventDefault();
+            e.preventDefault()
           }}
         >
           {index + 1}
         </a>
-      );
+      )
     })}
   </div>
-);
+)
 
 PageNumbers.defaultProps = {
-  className: "",
-};
+  className: '',
+}
 
-export default PageNumbers;
+export default PageNumbers
