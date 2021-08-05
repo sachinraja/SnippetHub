@@ -23,28 +23,26 @@ const EditLayout = ({
   onConfirmClick,
   formError,
   allowedToEdit,
-}: EditLayoutProps) => {
-  return (
-    <>
-      <div className={`flex ${className}`}>
-        {isEditing ? editComponent : displayComponent}
+}: EditLayoutProps) => (
+  <>
+    <div className={`flex ${className}`}>
+      {isEditing ? editComponent : displayComponent}
 
-        {allowedToEdit && (
-          <button className="ml-3" type="button" onClick={onEditClick}>
-            <EditIcon />
-          </button>
-        )}
+      {allowedToEdit && (
+        <button className="ml-3" type="button" onClick={onEditClick}>
+          <EditIcon />
+        </button>
+      )}
 
-        {isEditing && (
-          <button type="button" aria-label="Confirm" onClick={onConfirmClick}>
-            <SubmitIcon />
-          </button>
-        )}
-      </div>
-      {isEditing && formError}
-    </>
-  )
-}
+      {isEditing && (
+        <button type="button" aria-label="Confirm" onClick={onConfirmClick}>
+          <SubmitIcon />
+        </button>
+      )}
+    </div>
+    {isEditing && formError}
+  </>
+)
 
 EditLayout.defaultProps = {
   className: '',

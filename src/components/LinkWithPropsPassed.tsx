@@ -7,12 +7,10 @@ const LinkWithPropsPassed = ({
   href,
   children,
   ...props
-}: LinkWithPropsPassedProps) => {
-  return (
-    <Link href={href} passHref>
-      <a {...props}>{children}</a>
-    </Link>
-  )
-}
+}: LinkWithPropsPassedProps) => (
+  <Link href={href} passHref>
+    <a {...props}>{children}</a>
+  </Link>
+)
 
 export default LinkWithPropsPassed

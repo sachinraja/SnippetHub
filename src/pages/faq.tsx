@@ -64,20 +64,18 @@ const questionsAndAnswers: FAQDisclosureProps[] = [
   },
 ]
 
-const faqPage = () => {
-  return (
-    <Container meta={{ title: 'FAQ' }}>
-      <section className="m-auto mt-4 w-2/3 md:w-1/2">
-        <h1 className="p-2 text-3xl text-center text-white">FAQ</h1>
-      </section>
+const faqPage = () => (
+  <Container meta={{ title: 'FAQ' }}>
+    <section className="m-auto mt-4 w-2/3 md:w-1/2">
+      <h1 className="p-2 text-3xl text-center text-white">FAQ</h1>
+    </section>
 
-      <div className="flex flex-col mx-6 sm:mx-20 md:mx-44 space-y-4">
-        {questionsAndAnswers.map(({ question, answer }) => (
-          <FAQDisclosure key={question} question={question} answer={answer} />
-        ))}
-      </div>
-    </Container>
-  )
-}
+    <div className="flex flex-col mx-6 sm:mx-20 md:mx-44 space-y-4">
+      {questionsAndAnswers.map(({ question, answer }) => (
+        <FAQDisclosure key={question} question={question} answer={answer} />
+      ))}
+    </div>
+  </Container>
+)
 
 export default faqPage

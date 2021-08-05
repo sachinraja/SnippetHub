@@ -16,8 +16,8 @@ const CustomPrismaAdapter = (prisma: PrismaClient) => {
 
       const createUser = async (
         profile: Profile & { username: string; emailVerified?: Date },
-      ) => {
-        return prisma.user.create({
+      ) =>
+        prisma.user.create({
           data: {
             name: profile.name,
             email: profile.email,
@@ -26,7 +26,6 @@ const CustomPrismaAdapter = (prisma: PrismaClient) => {
             username: profile.username,
           },
         })
-      }
 
       const returning = {
         ...originalAdapter,

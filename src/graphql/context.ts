@@ -4,6 +4,7 @@ import type { NextApiRequest } from 'next'
 
 export type Context = UnwrapPromise<ReturnType<typeof context>>
 
-export const context = async ({ req }: { req: NextApiRequest }) => {
-  return { prisma, session: await getSession({ req }) }
-}
+export const context = async ({ req }: { req: NextApiRequest }) => ({
+  prisma,
+  session: await getSession({ req }),
+})

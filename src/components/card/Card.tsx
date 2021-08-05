@@ -54,15 +54,14 @@ const Card = ({
     return () => window.removeEventListener('resize', checkFloat)
   }, [])
 
-  const WithLink = ({ children }: { children: ReactNode }) => {
-    return bodyUrl ? (
+  const WithLink = ({ children }: { children: ReactNode }) =>
+    bodyUrl ? (
       <Link href={bodyUrl}>
         <a>{children}</a>
       </Link>
     ) : (
       <>{children}</>
     )
-  }
 
   return (
     <FadeIn as="article" afterEnter={checkFloat}>

@@ -13,25 +13,23 @@ const LanguageSelectInput = ({
   value: selectedValue,
   ...props
 }: LanguageSelectInputProps) => {
-  const options = Object.entries(languages).map(([value, language]) => {
-    return {
-      label: (
-        <>
-          <svg
-            className="inline-block my-1 ml-1 w-5"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d={language.icon.path} fill={language.color.icon} />
-          </svg>
-          <Paragraph className="inline p-2 align-middle">
-            {language.name}
-          </Paragraph>
-        </>
-      ),
-      value,
-    }
-  })
+  const options = Object.entries(languages).map(([value, language]) => ({
+    label: (
+      <>
+        <svg
+          className="inline-block my-1 ml-1 w-5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d={language.icon.path} fill={language.color.icon} />
+        </svg>
+        <Paragraph className="inline p-2 align-middle">
+          {language.name}
+        </Paragraph>
+      </>
+    ),
+    value,
+  }))
 
   return (
     // @ts-expect-error options accepts JSX, but it is typed so that it only accepts a string

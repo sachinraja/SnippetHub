@@ -170,28 +170,26 @@ const PackPage = ({ author, pack }: AuthorPackProps) => {
             <Heading className="mb-3" priority={2} size="4xl" bold>
               Snippets
             </Heading>
-            {snippetFields.map((field, index) => {
-              return (
-                <article key={field.id}>
-                  <PackSnippetName
-                    snippet={snippets[index]}
-                    index={index}
-                    methods={snippetMethods}
-                    snippets={snippets}
-                    setSnippets={setSnippets}
-                    allowedToEdit={isAuthor}
-                  />
+            {snippetFields.map((field, index) => (
+              <article key={field.id}>
+                <PackSnippetName
+                  snippet={snippets[index]}
+                  index={index}
+                  methods={snippetMethods}
+                  snippets={snippets}
+                  setSnippets={setSnippets}
+                  allowedToEdit={isAuthor}
+                />
 
-                  <PackSnippetCode
-                    snippet={snippets[index]}
-                    index={index}
-                    snippets={snippets}
-                    setSnippets={setSnippets}
-                    allowedToEdit={isAuthor}
-                  />
-                </article>
-              )
-            })}
+                <PackSnippetCode
+                  snippet={snippets[index]}
+                  index={index}
+                  snippets={snippets}
+                  setSnippets={setSnippets}
+                  allowedToEdit={isAuthor}
+                />
+              </article>
+            ))}
 
             {isAuthor &&
               (isCreatingSnippet ? (

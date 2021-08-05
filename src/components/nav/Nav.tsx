@@ -77,53 +77,46 @@ const Nav = () => {
             <>
               <div className="relative">
                 <Menu>
-                  {({ open }) => {
-                    return (
-                      <>
-                        <NavMenu.Button
-                          open={open}
-                          className="whitespace-nowrap"
-                        >
-                          <PlusIcon className="inline w-6 h-6" />
-                          <ChevronDownIcon className="inline w-4 h-6 -translate-x-1 translate-y-2" />
-                        </NavMenu.Button>
+                  {({ open }) => (
+                    <>
+                      <NavMenu.Button open={open} className="whitespace-nowrap">
+                        <PlusIcon className="inline w-6 h-6" />
+                        <ChevronDownIcon className="inline w-4 h-6 -translate-x-1 translate-y-2" />
+                      </NavMenu.Button>
 
-                        <NavMenu.Items>
-                          <NavMenu.Link href="/new">New Pack</NavMenu.Link>
-                        </NavMenu.Items>
-                      </>
-                    )
-                  }}
+                      <NavMenu.Items>
+                        <NavMenu.Link href="/new">New Pack</NavMenu.Link>
+                      </NavMenu.Items>
+                    </>
+                  )}
                 </Menu>
               </div>
 
               <div className="relative">
                 <Menu>
-                  {({ open }) => {
-                    return (
-                      <>
-                        <NavMenu.Button open={open}>
-                          <div className="relative w-8 h-8">
-                            <Image
-                              alt="Profile"
-                              className="rounded-full"
-                              layout="fill"
-                              src={session.user.image ?? defaultProfilePic.src}
-                            />
-                          </div>
-                        </NavMenu.Button>
+                  {({ open }) => (
+                    <>
+                      <NavMenu.Button open={open}>
+                        <div className="relative w-8 h-8">
+                          <Image
+                            alt="Profile"
+                            className="rounded-full"
+                            layout="fill"
+                            src={session.user.image ?? defaultProfilePic.src}
+                          />
+                        </div>
+                      </NavMenu.Button>
 
-                        <NavMenu.Items>
-                          <NavMenu.Link href={`/@${session.user.username}`}>
-                            Profile
-                          </NavMenu.Link>
-                          <NavMenu.Item onClick={() => signOut()}>
-                            Sign out
-                          </NavMenu.Item>
-                        </NavMenu.Items>
-                      </>
-                    )
-                  }}
+                      <NavMenu.Items>
+                        <NavMenu.Link href={`/@${session.user.username}`}>
+                          Profile
+                        </NavMenu.Link>
+                        <NavMenu.Item onClick={() => signOut()}>
+                          Sign out
+                        </NavMenu.Item>
+                      </NavMenu.Items>
+                    </>
+                  )}
                 </Menu>
               </div>
             </>

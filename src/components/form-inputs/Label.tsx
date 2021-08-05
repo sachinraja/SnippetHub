@@ -7,24 +7,22 @@ type LabelProps = ComponentPropsWithRef<'label'> & {
 }
 
 const Label = forwardRef<HTMLLabelElement, LabelProps>(
-  ({ children, text, required, htmlFor, ...props }: LabelProps, ref) => {
-    return (
-      <label ref={ref} htmlFor={htmlFor} {...props}>
-        {text && (
-          <p className="block sm:inline mr-2 text-lg">
-            {text}
-            {required && (
-              <span className="ml-1 text-red-500" aria-hidden>
-                *
-              </span>
-            )}
-          </p>
-        )}
+  ({ children, text, required, htmlFor, ...props }: LabelProps, ref) => (
+    <label ref={ref} htmlFor={htmlFor} {...props}>
+      {text && (
+        <p className="block sm:inline mr-2 text-lg">
+          {text}
+          {required && (
+            <span className="ml-1 text-red-500" aria-hidden>
+              *
+            </span>
+          )}
+        </p>
+      )}
 
-        {children}
-      </label>
-    )
-  },
+      {children}
+    </label>
+  ),
 )
 
 Label.displayName = 'Label'

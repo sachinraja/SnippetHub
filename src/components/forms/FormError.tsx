@@ -7,16 +7,14 @@ export interface FormErrorProps {
   errors: DeepMap<FieldValues, FieldError>
 }
 
-const FormError = ({ name, errors }: FormErrorProps) => {
-  return (
-    <ErrorMessage
-      name={name}
-      errors={errors}
-      render={({ message }) => (
-        <Paragraph className="p-1 text-red-400">{message}</Paragraph>
-      )}
-    />
-  )
-}
+const FormError = ({ name, errors }: FormErrorProps) => (
+  <ErrorMessage
+    name={name}
+    errors={errors}
+    render={({ message }) => (
+      <Paragraph className="p-1 text-red-400">{message}</Paragraph>
+    )}
+  />
+)
 
 export default FormError

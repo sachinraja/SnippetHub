@@ -12,14 +12,13 @@ function setRefs<T>(ref: Ref<T>, value: T) {
 const useMergeRefs = <ForwardRef, LocalRef extends ForwardRef>(
   forwardedRef: Ref<ForwardRef>,
   localRef: Ref<LocalRef>,
-): ((instance: LocalRef | null) => void) => {
-  return useCallback(
+): ((instance: LocalRef | null) => void) =>
+  useCallback(
     (value) => {
       setRefs(forwardedRef, value)
       setRefs(localRef, value)
     },
     [forwardedRef, localRef],
   )
-}
 
 export default useMergeRefs

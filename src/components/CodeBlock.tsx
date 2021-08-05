@@ -6,13 +6,11 @@ interface CodeBlockProps {
   children?: string
 }
 
-const CodeBlock = ({ language, children }: CodeBlockProps) => {
-  return (
-    <SyntaxHighlighter language={language} style={atomDark} showLineNumbers>
-      {children}
-    </SyntaxHighlighter>
-  )
-}
+const CodeBlock = ({ language, children }: CodeBlockProps) => (
+  <SyntaxHighlighter language={language} style={atomDark} showLineNumbers>
+    {children}
+  </SyntaxHighlighter>
+)
 
 CodeBlock.defaultProps = {
   language: '',

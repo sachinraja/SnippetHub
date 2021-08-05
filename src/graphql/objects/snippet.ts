@@ -90,9 +90,9 @@ export const DeleteSnippet = mutationField('deleteSnippet', {
     })
 
     // remove deleted snippet
-    const deletedSnippetIndex = pack.snippets.findIndex((snippet) => {
-      return snippet.id === deletedSnippet.id
-    })
+    const deletedSnippetIndex = pack.snippets.findIndex(
+      (snippet) => snippet.id === deletedSnippet.id,
+    )
 
     const newPackSnippets = pack.snippets.slice()
     newPackSnippets.splice(deletedSnippetIndex, 1)

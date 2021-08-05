@@ -72,20 +72,18 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
 
           <div>
             <Controller
-              render={({ field: mdEditorField }) => {
-                return (
-                  <>
-                    <Label text="Long Description - Supports Markdown (GFM)" />
-                    <MDEditor
-                      className="w-full"
-                      onUpdate={(v) => {
-                        setValue('longDescription', v.state.doc.toString())
-                      }}
-                      {...mdEditorField}
-                    />
-                  </>
-                )
-              }}
+              render={({ field: mdEditorField }) => (
+                <>
+                  <Label text="Long Description - Supports Markdown (GFM)" />
+                  <MDEditor
+                    className="w-full"
+                    onUpdate={(v) => {
+                      setValue('longDescription', v.state.doc.toString())
+                    }}
+                    {...mdEditorField}
+                  />
+                </>
+              )}
               control={control}
               name="longDescription"
             />
@@ -93,16 +91,14 @@ const PackForm = ({ defaultValues, submitHandler }: PackFormProps) => {
             <FormError name="longDescription" errors={errors} />
           </div>
 
-          {snippetFields.map((field, index) => {
-            return (
-              <SnippetInput
-                key={field.id}
-                field={field}
-                index={index}
-                fieldArray={snippetFieldArray}
-              />
-            )
-          })}
+          {snippetFields.map((field, index) => (
+            <SnippetInput
+              key={field.id}
+              field={field}
+              index={index}
+              fieldArray={snippetFieldArray}
+            />
+          ))}
         </div>
 
         <ButtonInput

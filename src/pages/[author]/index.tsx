@@ -43,14 +43,12 @@ export const getStaticProps = async ({
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    // nextjs passes empty props if fallback is true and page is on first render
-    // blocking works like SSR, but caches the page
-    fallback: 'blocking',
-    paths: [],
-  }
-}
+export const getStaticPaths: GetStaticPaths = async () => ({
+  // nextjs passes empty props if fallback is true and page is on first render
+  // blocking works like SSR, but caches the page
+  fallback: 'blocking',
+  paths: [],
+})
 
 const AuthorPage = ({
   author,
