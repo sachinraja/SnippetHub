@@ -1,15 +1,16 @@
 {
-	"name": "SnippetHub",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "devcontainer",
-	"forwardPorts": [3000],
-	"workspaceFolder": "/workspace",
-	"extensions": [
-		"dbaeumer.vscode-eslint",
-		"prisma.prisma",
-		"bradlc.vscode-tailwindcss",
-		"graphql.vscode-graphql"
-	],
-	"postCreateCommand": "npm run prisma:gen && npx prisma migrate dev && npm run prisma:seed && npm run graphql:gen",
-	"remoteUser": "node",
+  "name": "SnippetHub",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "devcontainer",
+  "forwardPorts": [3000],
+  "workspaceFolder": "/workspace",
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "prisma.prisma",
+    "bradlc.vscode-tailwindcss",
+    "graphql.vscode-graphql"
+  ],
+  "postCreateCommand": "npm run prisma:gen && npx prisma migrate dev && npm run prisma:seed && npm run graphql:gen",
+  "remoteUser": "node"
 }

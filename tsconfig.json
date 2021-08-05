@@ -2,31 +2,17 @@
   "compilerOptions": {
     "target": "es6",
     "module": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": ".",
     "paths": {
-      "@components/*": [
-        "src/components/*",
-      ],
-      "@hooks/*": [
-        "src/hooks/*",
-      ],
-      "@layouts/*": [
-        "src/layouts/*",
-      ],
-      "@lib/*": [
-        "src/lib/*",
-      ],
-      "@graphql/*": [
-        "src/graphql/*",
-      ],
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@lib/*": ["src/lib/*"],
+      "@graphql/*": ["src/graphql/*"],
       "@graphql-types": [
-        "node_modules/@types/graphql-let/__generated__/__types__",
-      ],
+        "node_modules/@types/graphql-let/__generated__/__types__"
+      ]
     },
     "skipLibCheck": true,
     "strict": true,
@@ -40,19 +26,12 @@
     "allowJs": true,
     "typeRoots": ["node_modules/@types", "src/types"]
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-  ],
-  "exclude": [
-    "node_modules",
-    ".next",
-    ".cache",
-  ],
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", ".next", ".cache"],
   "ts-node": {
     "require": ["tsconfig-paths/register"],
     "compilerOptions": {
-      "module": "commonjs",
-    },
-  },
+      "module": "commonjs"
+    }
+  }
 }
