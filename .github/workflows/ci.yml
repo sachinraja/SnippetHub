@@ -58,14 +58,14 @@ jobs:
       - name: check formatting
         run: npm run format
 
+      - name: lint
+        run: npm run lint
+
       - name: generate types
         run: npm run type:gen
 
       - name: type check
         run: npm run type:check
-
-      - name: lint
-        run: npm run lint
 
       - name: migrate and seed database
         run: npx prisma migrate deploy && npm run prisma:seed

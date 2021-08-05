@@ -10,9 +10,8 @@ const PageNumbers = ({ range, className, constructHref }: PageNumbersProps) => (
       const href = constructHref(index)
       return (
         // we don't use the <Link> component here because
-        // we don't need prefetching on hover
-        // the link should only work if the user clicks
-        // in a new tab anyway
+        // we don't need prefetching on hover, the link
+        // should only work if the user clicks in a new tab
         <a
           href={href}
           // eslint-disable-next-line react/no-array-index-key
