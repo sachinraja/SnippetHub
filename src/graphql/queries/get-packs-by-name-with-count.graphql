@@ -1,0 +1,16 @@
+query GetPacksByNameWithCount($name: String!, $skip: Int, $take: Int) {
+  getPacksByNameWithCount(name: $name, skip: $skip, take: $take) {
+    packs {
+      author {
+        username
+        image
+      }
+      id
+      name
+      shortDescription
+      language
+      upvotes
+    }
+    count
+  }
+}

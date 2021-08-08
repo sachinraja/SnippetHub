@@ -1,6 +1,8 @@
 import { intArg, list, nonNull, queryType, stringArg } from 'nexus'
 import { searchForPack } from '@lib/pack/search'
 import getTopPacks from '@lib/pack/top'
+import prisma from '@lib/prisma'
+import { countPacks } from '@lib/pack/count'
 import { Pack } from './pack'
 import { User } from './user'
 
@@ -15,6 +17,7 @@ export const Query = queryType({
       },
       type: User,
     })
+
     t.field('getTopPacks', {
       args: { skip: intArg(), take: intArg() },
       async resolve(parent, args) {
@@ -22,21 +25,43 @@ export const Query = queryType({
       },
       type: nonNull(list(nonNull(Pack))),
     })
-    t.field('getPackByName', {
+
+    t.field('getPacksByName', {
       args: {
         name: nonNull(stringArg()),
         skip: intArg(),
         take: intArg(),
       },
       async resolve(parent, args) {
-        const packs = await searchForPack(args.name, {
+        return searchForPack(args.name, {
           skip: args.skip ?? undefined,
           take: args.take ?? undefined,
         })
-
-        return packs
       },
       type: nonNull(list(nonNull(Pack))),
+    })
+
+    t.field('getPacksByNameWithCount', {
+      args: {
+        name: nonNull(stringArg()),
+        skip: intArg(),
+        take: intArg(),
+      },
+      async resolve(parent, args) {
+        const [packs, count] = await prisma.$transaction([
+          searchForPack(args.name, {
+            skip: args.skip ?? undefined,
+            take: args.take ?? undefined,
+          }),
+          countPacks(args.name),
+        ])
+
+        return {
+          packs,
+          count,
+        }
+      },
+      type: 'PacksWithCount',
     })
   },
 })

@@ -3,20 +3,13 @@ const prettierCmd = 'prettier --write'
 
 module.exports = {
   '*.{ts,tsx}': (filenames) => {
-    const eslintCmds = []
-    const prettierCmds = []
-
-    // only lint and format after types have been generated and checked
-    filenames.forEach((filename) => {
-      eslintCmds.push(`${eslintCmd} ${filename}`)
-      prettierCmds.push(`${prettierCmd} ${filename}`)
-    })
+    const joinedFilenames = filenames.join(' ')
 
     return [
       'npm run type:gen',
       'npm run type:check',
-      ...eslintCmds,
-      ...prettierCmds,
+      `${eslintCmd} ${joinedFilenames}`,
+      `${prettierCmd} ${joinedFilenames}`,
     ]
   },
   '*{.js,jsx}': [eslintCmd, prettierCmd],

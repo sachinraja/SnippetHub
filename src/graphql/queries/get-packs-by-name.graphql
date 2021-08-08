@@ -1,0 +1,13 @@
+query GetPacksByName($name: String!, $skip: Int, $take: Int) {
+  getPacksByName(name: $name, skip: $skip, take: $take) {
+    author {
+      username
+      image
+    }
+    id
+    name
+    shortDescription
+    language
+    upvotes
+  }
+}

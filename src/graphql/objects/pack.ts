@@ -31,6 +31,17 @@ export const Pack = objectType({
   },
 })
 
+export const PacksWithCount = objectType({
+  name: 'PacksWithCount',
+  definition(t) {
+    t.field('packs', {
+      type: nonNull(list(nonNull(Pack))),
+    })
+
+    t.int('count')
+  },
+})
+
 export const UpdatePackName = mutationField('updatePackName', {
   type: Pack,
   args: {

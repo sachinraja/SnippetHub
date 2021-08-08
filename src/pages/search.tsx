@@ -6,11 +6,13 @@ import { searchForPack } from '@lib/pack/search'
 import Container from '@components/containers/Container'
 import SearchPageLayout from '@layouts/SearchPageLayout'
 import getCardFromPack from '@lib/pack/card'
-import { useGetPackByNameLazyQuery } from '@graphql/queries/get-pack-by-name.graphql'
 import {
   getPageNumberFromParam,
   getSearchKeywordFromParam,
 } from '@lib/utils/client-url-params'
+import { useGetPacksByNameLazyQuery } from '@graphql/queries/get-packs-by-name.graphql'
+import { countPacks } from '@lib/pack/count'
+import prisma from '@lib/prisma'
 import type { ParsedUrlQuery } from 'querystring'
 
 export const getServerSideProps = async ({
@@ -23,12 +25,17 @@ export const getServerSideProps = async ({
 
   const pageNumber = getPageNumberFromParam(page)
 
+  const [foundPacks, count] = await prisma.$transaction([
+    searchForPack(searchKeyword, {
+      skip: 2 * (pageNumber - 1),
+      take: 2,
+    }),
+    countPacks(searchKeyword),
+  ])
   return {
     props: {
-      foundPacks: await searchForPack(searchKeyword, {
-        skip: 20 * (pageNumber - 1),
-        take: 20,
-      }),
+      foundPacks,
+      count,
       searchKeyword,
     },
   }
@@ -36,20 +43,21 @@ export const getServerSideProps = async ({
 
 const SearchPage = ({
   foundPacks,
+  count,
   searchKeyword,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
 
   // create components for found packs
   const [getPackByName, { data: getSearchedPacksOnPageClickData, loading }] =
-    useGetPackByNameLazyQuery()
+    useGetPacksByNameLazyQuery()
 
   const [packs, setPacks] =
     useState<
       Exclude<
         typeof getSearchedPacksOnPageClickData,
         undefined
-      >['getPackByName']
+      >['getPacksByName']
     >(foundPacks)
 
   useEffect(() => {
@@ -80,7 +88,7 @@ const SearchPage = ({
   useEffect(() => {
     if (loading || !getSearchedPacksOnPageClickData) return
 
-    setPacks(getSearchedPacksOnPageClickData.getPackByName)
+    setPacks(getSearchedPacksOnPageClickData.getPacksByName)
   }, [getSearchedPacksOnPageClickData, loading])
 
   return (
@@ -91,13 +99,11 @@ const SearchPage = ({
         headingIcon={
           <SearchIcon className="h-full text-blue-600 motion-safe:animate-pulse" />
         }
-        headingLabel={`${foundPacks.length} snippet pack${
-          foundPacks.length === 1 ? '' : 's'
-        } found.`}
+        headingLabel={`${count} snippet pack${count === 1 ? '' : 's'} found.`}
         searchInputValue={searchKeyword}
         onPageClick={(i) => {
           getPackByName({
-            variables: { name: searchKeyword, skip: 20 * i, take: 20 },
+            variables: { name: searchKeyword, skip: 2 * i, take: 2 },
           })
 
           router.push(
