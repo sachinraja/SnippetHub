@@ -39,6 +39,7 @@ const SearchPageLayout = ({
     <section className="mx-4 mt-2 mb-16">
       <CardContainer>{cards}</CardContainer>
       {children}
+
       <PageNumbers
         className="mt-10"
         range={10}
