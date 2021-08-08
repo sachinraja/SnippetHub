@@ -22,7 +22,7 @@ export const Query = queryType({
       },
       type: nonNull(list(nonNull(Pack))),
     })
-    t.field('packByName', {
+    t.field('getPackByName', {
       args: {
         name: nonNull(stringArg()),
         skip: intArg(),
@@ -36,7 +36,7 @@ export const Query = queryType({
 
         return packs
       },
-      type: list(nonNull(Pack)),
+      type: nonNull(list(nonNull(Pack))),
     })
   },
 })

@@ -1,10 +1,16 @@
-type PageNumbersProps = {
+export type PageNumbersProps = {
   range: number
   className?: string
   constructHref: (index: number) => string
+  onPageClick: (index: number) => void
 }
 
-const PageNumbers = ({ range, className, constructHref }: PageNumbersProps) => (
+const PageNumbers = ({
+  range,
+  className,
+  constructHref,
+  onPageClick,
+}: PageNumbersProps) => (
   <div className={`flex flex-row space-x-4 w-full ${className}`}>
     {Array.from({ length: range }).map((_, index) => {
       const href = constructHref(index)
@@ -20,6 +26,8 @@ const PageNumbers = ({ range, className, constructHref }: PageNumbersProps) => (
           onClick={(e) => {
             // allow user to open in new tab but optimize for button click
             e.preventDefault()
+
+            onPageClick(index)
           }}
         >
           {index + 1}

@@ -5,14 +5,18 @@ interface PackParams {
 
 type AuthorPropFromParam = Exclude<
   UnwrapPromise<
-    ReturnType<typeof import('@lib/utils/url-params')['getAuthorFromParam']>
+    ReturnType<
+      typeof import('@lib/utils/server-url-params')['getAuthorFromParam']
+    >
   >,
   null
 >
 
 type PackPropFromParam = Exclude<
   UnwrapPromise<
-    ReturnType<typeof import('@lib/utils/url-params')['getPackFromParam']>
+    ReturnType<
+      typeof import('@lib/utils/server-url-params')['getPackFromParam']
+    >
   >,
   null
 >

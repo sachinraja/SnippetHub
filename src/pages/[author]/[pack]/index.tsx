@@ -5,7 +5,10 @@ import { useState, useMemo } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Link from 'next/link'
 import { getSession, useSession } from 'next-auth/client'
-import { getAuthorFromParam, getPackFromParam } from '@lib/utils/url-params'
+import {
+  getAuthorFromParam,
+  getPackFromParam,
+} from '@lib/utils/server-url-params'
 import {
   PackEditFormInputs,
   getPackEditSchema,

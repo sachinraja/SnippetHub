@@ -2,7 +2,7 @@ import { getUser } from '@lib/user'
 import prisma from '@lib/prisma'
 import type { Pack, User } from '@prisma/client'
 
-export async function getAuthorFromParam(authorUsername: User['username']) {
+export const getAuthorFromParam = async (authorUsername: User['username']) => {
   if (!authorUsername.startsWith('@')) return null
 
   const username = authorUsername.slice(1)
@@ -10,11 +10,11 @@ export async function getAuthorFromParam(authorUsername: User['username']) {
   return getUser(username)
 }
 
-export async function getPackFromParam(
+export const getPackFromParam = async (
   author: User,
   packName: Pack['name'],
   userId?: User['id'],
-) {
+) => {
   const includeArgs = userId
     ? {
         snippets: true,

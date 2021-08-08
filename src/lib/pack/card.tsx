@@ -4,13 +4,13 @@ import type { Pack, User } from '@prisma/client'
 import type { ReactElement } from 'react'
 import type { CardProps } from '@components/card/Card'
 
-type PackArg = Pick<
+export type GetCardFromPackPackArg = Pick<
   Pack,
   'shortDescription' | 'id' | 'language' | 'name' | 'upvotes'
 >
 
 export default function getCardFromPack(
-  pack: PackArg,
+  pack: GetCardFromPackPackArg,
   author: Pick<User, 'username'> & { image?: string },
 ): ReactElement<CardProps> {
   const upvotesWithCommas = numberWithCommas(pack.upvotes)
