@@ -2,8 +2,6 @@ import CardContainer from '@components/card/CardContainer'
 import Heading from '@components/Heading'
 import Hero from '@components/hero/Hero'
 import Paragraph from '@components/Paragraph'
-import PageNumbers from '@components/nav/PageNumbers'
-import type { PageNumbersProps } from '@components/nav/PageNumbers'
 import type { ReactElement, ReactNode } from 'react'
 import type { CardProps } from '@components/card/Card'
 
@@ -14,7 +12,6 @@ interface SearchPageLayoutProps {
   headingIcon: ReactNode
   headingLabel: string
   searchInputValue?: string
-  onPageClick: PageNumbersProps['onPageClick']
 }
 
 const SearchPageLayout = ({
@@ -24,7 +21,6 @@ const SearchPageLayout = ({
   headingIcon,
   headingLabel,
   searchInputValue,
-  onPageClick,
 }: SearchPageLayoutProps) => (
   <>
     <Hero searchInputValue={searchInputValue} />
@@ -42,13 +38,6 @@ const SearchPageLayout = ({
     <section className="mx-4 mt-2 mb-16">
       <CardContainer>{cards}</CardContainer>
       {children}
-
-      <PageNumbers
-        className="mt-10"
-        range={10}
-        constructHref={(i) => `/search/?page=${i}`}
-        onPageClick={onPageClick}
-      />
     </section>
   </>
 )

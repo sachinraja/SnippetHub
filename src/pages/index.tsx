@@ -91,23 +91,23 @@ const HomePage = ({
           />
         }
         headingLabel="The snippet packs with the most votes."
-        onPageClick={(i) => {
-          getTopPacks({
-            variables: {
-              skip: 20 * i,
-              take: 20,
-            },
-          })
+        // onPageClick={(i) => {
+        //   getTopPacks({
+        //     variables: {
+        //       skip: 20 * i,
+        //       take: 20,
+        //     },
+        //   })
 
-          router.push(
-            {
-              pathname: router.pathname,
-              query: { page: i + 1 },
-            },
-            undefined,
-            { shallow: true },
-          )
-        }}
+        //   router.push(
+        //     {
+        //       pathname: router.pathname,
+        //       query: { page: i + 1 },
+        //     },
+        //     undefined,
+        //     { shallow: true },
+        //   )
+        // }}
       />
     </Container>
   )

@@ -10,9 +10,10 @@ import {
   getPageNumberFromParam,
   getSearchKeywordFromParam,
 } from '@lib/utils/client-url-params'
-import { useGetPacksByNameLazyQuery } from '@graphql/queries/get-packs-by-name.graphql'
+import { useGetPacksByNameWithCountLazyQuery } from '@graphql/queries/get-packs-by-name-with-count.graphql'
 import { countPacks } from '@lib/pack/count'
 import prisma from '@lib/prisma'
+import PageNumbers from '@components/nav/PageNumbers'
 import type { ParsedUrlQuery } from 'querystring'
 
 export const getServerSideProps = async ({
@@ -25,7 +26,7 @@ export const getServerSideProps = async ({
 
   const pageNumber = getPageNumberFromParam(page)
 
-  const [foundPacks, count] = await prisma.$transaction([
+  const [foundPacks, initialCount] = await prisma.$transaction([
     searchForPack(searchKeyword, {
       skip: 2 * (pageNumber - 1),
       take: 2,
@@ -35,7 +36,7 @@ export const getServerSideProps = async ({
   return {
     props: {
       foundPacks,
-      count,
+      initialCount,
       searchKeyword,
     },
   }
@@ -43,22 +44,29 @@ export const getServerSideProps = async ({
 
 const SearchPage = ({
   foundPacks,
-  count,
+  initialCount,
   searchKeyword,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
 
   // create components for found packs
   const [getPackByName, { data: getSearchedPacksOnPageClickData, loading }] =
-    useGetPacksByNameLazyQuery()
+    useGetPacksByNameWithCountLazyQuery()
 
   const [packs, setPacks] =
     useState<
-      Exclude<
-        typeof getSearchedPacksOnPageClickData,
-        undefined
-      >['getPacksByName']
+      NonNullable<
+        NonNullable<
+          typeof getSearchedPacksOnPageClickData
+        >['getPacksByNameWithCount']
+      >['packs']
     >(foundPacks)
+
+  const [packsCount, setPacksCount] = useState<number>(0)
+
+  useEffect(() => {
+    setPacksCount(initialCount)
+  }, [initialCount])
 
   useEffect(() => {
     setPacks(foundPacks)
@@ -86,9 +94,11 @@ const SearchPage = ({
   }, [packs])
 
   useEffect(() => {
-    if (loading || !getSearchedPacksOnPageClickData) return
+    const data = getSearchedPacksOnPageClickData?.getPacksByNameWithCount
+    if (loading || !data) return
 
-    setPacks(getSearchedPacksOnPageClickData.getPacksByName)
+    setPacks(data.packs)
+    setPacksCount(data.count)
   }, [getSearchedPacksOnPageClickData, loading])
 
   return (
@@ -99,23 +109,32 @@ const SearchPage = ({
         headingIcon={
           <SearchIcon className="h-full text-blue-600 motion-safe:animate-pulse" />
         }
-        headingLabel={`${count} snippet pack${count === 1 ? '' : 's'} found.`}
+        headingLabel={`${packsCount} snippet pack${
+          initialCount === 1 ? '' : 's'
+        } found.`}
         searchInputValue={searchKeyword}
-        onPageClick={(i) => {
-          getPackByName({
-            variables: { name: searchKeyword, skip: 2 * i, take: 2 },
-          })
+      >
+        <PageNumbers
+          className="mt-10"
+          range={packsCount / 2}
+          max={10}
+          constructHref={(i) => `/search/?page=${i + 1}`}
+          onPageClick={(i) => {
+            getPackByName({
+              variables: { name: searchKeyword, skip: 2 * i, take: 2 },
+            })
 
-          router.push(
-            {
-              pathname: router.pathname,
-              query: { q: searchKeyword, page: i + 1 },
-            },
-            undefined,
-            { shallow: true, scroll: false },
-          )
-        }}
-      />
+            router.push(
+              {
+                pathname: router.pathname,
+                query: { q: searchKeyword, page: i + 1 },
+              },
+              undefined,
+              { shallow: true, scroll: false },
+            )
+          }}
+        />
+      </SearchPageLayout>
     </Container>
   )
 }

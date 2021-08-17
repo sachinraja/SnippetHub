@@ -38,7 +38,7 @@ export const PacksWithCount = objectType({
       type: nonNull(list(nonNull(Pack))),
     })
 
-    t.int('count')
+    t.nonNull.int('count')
   },
 })
 
