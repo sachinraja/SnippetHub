@@ -116,7 +116,7 @@ const SearchPage = ({
       >
         <PageNumbers
           className="mt-10"
-          range={packsCount / 2}
+          range={Math.ceil(packsCount / 2)}
           max={10}
           constructHref={(i) => `/search/?page=${i + 1}`}
           onPageClick={(i) => {
