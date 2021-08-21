@@ -5,6 +5,7 @@ import prisma from '@lib/prisma'
 import { countPacks } from '@lib/pack/count'
 import { Pack } from './pack'
 import { User } from './user'
+import { countType } from './count'
 
 export const Query = queryType({
   definition(t) {
@@ -16,6 +17,18 @@ export const Query = queryType({
         })
       },
       type: User,
+    })
+
+    t.field('getUserPackCount', {
+      args: { id: nonNull(stringArg()) },
+      async resolve(parent, args, ctx) {
+        return {
+          count: await ctx.prisma.pack.count({
+            where: { authorId: args.id },
+          }),
+        }
+      },
+      type: countType,
     })
 
     t.field('getTopPacks', {

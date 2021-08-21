@@ -7,6 +7,7 @@ import {
   getPackLongDescription,
   getPackSchema,
 } from '@lib/schemas/pack-schema'
+import NotLoggedInError from '@graphql/utils/not-logged-in-error'
 import { SnippetInput } from './snippet'
 
 const packName = getPackName()
@@ -111,13 +112,22 @@ export const CreatePack = mutationField('createPack', {
     snippets: nonNull(list(nonNull(SnippetInput))),
   },
   async resolve(parent, args, ctx) {
+    if (!ctx.session) throw NotLoggedInError
+
     await packSchema.validate(args)
+
+    const userPacksCount = await ctx.prisma.pack.count({
+      where: { authorId: ctx.session.user.id },
+    })
+
+    if (userPacksCount >= 20)
+      throw new Error('You can only have up to 20 packs.')
 
     return ctx.prisma.pack.create({
       data: {
         author: {
           connect: {
-            id: ctx.session?.user.id,
+            id: ctx.session.user.id,
           },
         },
         name: args.name,

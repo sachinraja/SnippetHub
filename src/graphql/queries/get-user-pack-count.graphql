@@ -1,0 +1,5 @@
+query GetUserPackCount($id: String!) {
+  getUserPackCount(id: $id) {
+    count
+  }
+}
