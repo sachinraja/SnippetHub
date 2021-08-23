@@ -26,7 +26,7 @@
     "schema": "src/prisma/schema.prisma"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.8",
+    "@apollo/client": "3.4.8",
     "@codemirror/basic-setup": "0.18.2",
     "@codemirror/commands": "0.18.3",
     "@codemirror/history": "0.18.1",
@@ -47,7 +47,7 @@
     "@hookform/resolvers": "2.7.1",
     "@next-auth/prisma-adapter": "0.5.3",
     "@prisma/client": "2.27.0",
-    "apollo-server-micro": "^3.1.2",
+    "apollo-server-micro": "3.1.2",
     "axios": "0.21.1",
     "babel-jest": "27.0.6",
     "codemirror-lang-elixir": "1.0.4",
