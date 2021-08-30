@@ -87,7 +87,7 @@
     "@types/jest": "26.0.24",
     "@types/micro-cors": "0.1.2",
     "@types/node": "16.4.12",
-    "@types/react": "17.0.18",
+    "@types/react": "17.0.19",
     "@types/react-select": "4.0.17",
     "@types/react-syntax-highlighter": "13.5.2",
     "@types/simple-icons": "5.8.0",
