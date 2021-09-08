@@ -25,10 +25,14 @@ interface PackSnippetNameProps {
   allowedToEdit: boolean
 }
 
-const PackSnippetName = (props: PackSnippetNameProps) => {
-  const { snippet, index, methods, snippets, setSnippets, allowedToEdit } =
-    props
-
+const PackSnippetName = ({
+  snippet,
+  index,
+  methods,
+  snippets,
+  setSnippets,
+  allowedToEdit,
+}: PackSnippetNameProps) => {
   const [isEditing, setIsEditing] = useState(false)
 
   const [deleteSnippetMutation] = useDeleteSnippetMutation()
@@ -83,9 +87,9 @@ const PackSnippetName = (props: PackSnippetNameProps) => {
 
                           const newSnippets = [...snippets]
                           newSnippets.splice(index, 1)
-                          setSnippets(newSnippets)
 
                           methods.remove(index)
+                          setSnippets(newSnippets)
                         } catch {
                           toast.error(
                             'There was an error deleting this snippet.',

@@ -16,6 +16,7 @@ const modeToImport = {
       (await import('@codemirror/legacy-modes/mode/clike')).csharp,
     ),
   [LanguageMode.elixir]: async () =>
+    // @ts-expect-error these are compatible
     StreamLanguage.define((await import('codemirror-lang-elixir')).elixir),
   [LanguageMode.html]: async () =>
     (await import('@codemirror/lang-html')).html(),
