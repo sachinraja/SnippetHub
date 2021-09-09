@@ -56,7 +56,7 @@ jobs:
         run: npm i
 
       - name: check formatting
-        run: npm run format
+        run: npm run format:check
 
       - name: generate types
         run: npm run type:gen
