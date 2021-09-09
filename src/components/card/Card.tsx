@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import languages from '@lib/language'
@@ -34,7 +34,7 @@ const Card = ({
   const languageAttributes = languages[language]
 
   // detect flex wrap and style accordingly
-  function checkFloat() {
+  const checkFloat = useCallback(() => {
     const headerElement = header.current
     const attributesElement = attributes.current
 
@@ -47,12 +47,12 @@ const Card = ({
     } else {
       setAreAttributesFloatedRight(true)
     }
-  }
+  }, [])
 
   useEffect(() => {
     window.addEventListener('resize', checkFloat)
     return () => window.removeEventListener('resize', checkFloat)
-  }, [])
+  }, [checkFloat])
 
   const WithLink = ({ children }: { children: ReactNode }) =>
     bodyUrl ? (

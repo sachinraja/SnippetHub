@@ -1,6 +1,9 @@
 import path from 'path'
 import { applyMiddleware } from 'graphql-middleware'
 import { makeSchema } from 'nexus'
+// this is a problem with the nexus-prisma package,
+// not sure why it's erroring, but it does work
+// eslint-disable-next-line import/no-unresolved
 import NexusPrismaScalars from 'nexus-prisma/scalars'
 import * as types from './objects'
 import permissions from './permissions'
