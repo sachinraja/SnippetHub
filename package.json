@@ -26,7 +26,7 @@
     "schema": "src/prisma/schema.prisma"
   },
   "dependencies": {
-    "@apollo/client": "3.4.10",
+    "@apollo/client": "3.4.11",
     "@codemirror/basic-setup": "0.19.0",
     "@codemirror/commands": "0.19.2",
     "@codemirror/history": "0.19.0",
