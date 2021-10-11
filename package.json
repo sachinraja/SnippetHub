@@ -53,7 +53,7 @@
     "codemirror-lang-elixir": "1.0.4",
     "convict": "6.2.0",
     "dotenv": "10.0.0",
-    "graphql": "15.5.3",
+    "graphql": "15.6.1",
     "graphql-middleware": "6.1.7",
     "graphql-shield": "7.5.0",
     "micro-cors": "0.1.1",
