@@ -60,7 +60,7 @@
     "next": "11.1.2",
     "next-auth": "3.29.0",
     "nexus": "1.1.0",
-    "nexus-prisma": "0.33.0",
+    "nexus-prisma": "0.34.0",
     "nookies": "2.5.2",
     "pg": "8.7.1",
     "pg-hstore": "2.3.4",
