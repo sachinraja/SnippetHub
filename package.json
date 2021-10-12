@@ -74,7 +74,7 @@
     "remark-gfm": "2.0.0",
     "simple-icons": "5.18.0",
     "tailwindcss": "2.2.16",
-    "yup": "0.32.10"
+    "yup": "0.32.11"
   },
   "devDependencies": {
     "@graphql-codegen/import-types-preset": "2.1.4",
