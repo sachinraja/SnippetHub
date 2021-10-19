@@ -95,7 +95,7 @@
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "autoprefixer": "10.3.7",
-    "babel-plugin-superjson-next": "0.4.1",
+    "babel-plugin-superjson-next": "0.4.2",
     "dotenv-cli": "4.0.0",
     "eslint": "7.32.0",
     "eslint-config-airbnb": "18.2.1",
