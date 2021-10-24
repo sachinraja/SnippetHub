@@ -91,7 +91,7 @@
     "@types/react-select": "4.0.18",
     "@types/react-syntax-highlighter": "13.5.2",
     "@types/simple-icons": "5.8.0",
-    "@types/tailwindcss": "2.2.1",
+    "@types/tailwindcss": "2.2.2",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "autoprefixer": "10.3.7",
