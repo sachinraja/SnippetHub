@@ -3,7 +3,7 @@ import envConfig from 'src/config'
 
 const prisma = new PrismaClient()
 
-export async function seed() {
+async function seed() {
   const { personalGitHubId, personalUsername } = envConfig.get('gitHub')
 
   await prisma.user.upsert({
@@ -155,3 +155,5 @@ export async function seed() {
 
   prisma.$disconnect()
 }
+
+seed()

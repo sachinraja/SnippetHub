@@ -17,7 +17,7 @@ CREATE TABLE "snippet" (
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMPTZ NOT NULL,
 
-    PRIMARY KEY ("id")
+    CONSTRAINT "snippet_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -32,7 +32,7 @@ CREATE TABLE "pack" (
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMPTZ NOT NULL,
 
-    PRIMARY KEY ("id")
+    CONSTRAINT "pack_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -48,7 +48,7 @@ CREATE TABLE "user" (
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMPTZ NOT NULL,
 
-    PRIMARY KEY ("id")
+    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -64,7 +64,7 @@ CREATE TABLE "account" (
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 
-    PRIMARY KEY ("id")
+    CONSTRAINT "account_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -72,35 +72,35 @@ CREATE TABLE "user_pack_upvote" (
     "user_id" TEXT NOT NULL,
     "pack_id" INTEGER NOT NULL,
 
-    PRIMARY KEY ("user_id","pack_id")
+    CONSTRAINT "user_pack_upvote_pkey" PRIMARY KEY ("user_id","pack_id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "snippet.name_pack_id_unique" ON "snippet"("name", "pack_id");
+CREATE UNIQUE INDEX "snippet_name_pack_id_key" ON "snippet"("name", "pack_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "pack.name_author_id_unique" ON "pack"("name", "author_id");
+CREATE UNIQUE INDEX "pack_name_author_id_key" ON "pack"("name", "author_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "user.username_unique" ON "user"("username");
+CREATE UNIQUE INDEX "user_username_key" ON "user"("username");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "user.email_unique" ON "user"("email");
+CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "account.provider_id_provider_account_id_unique" ON "account"("provider_id", "provider_account_id");
+CREATE UNIQUE INDEX "account_provider_id_provider_account_id_key" ON "account"("provider_id", "provider_account_id");
 
 -- AddForeignKey
-ALTER TABLE "snippet" ADD FOREIGN KEY ("pack_id") REFERENCES "pack"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "snippet" ADD CONSTRAINT "snippet_pack_id_fkey" FOREIGN KEY ("pack_id") REFERENCES "pack"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "pack" ADD FOREIGN KEY ("author_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "pack" ADD CONSTRAINT "pack_author_id_fkey" FOREIGN KEY ("author_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "account" ADD FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "account" ADD CONSTRAINT "account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "user_pack_upvote" ADD FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "user_pack_upvote" ADD CONSTRAINT "user_pack_upvote_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "user_pack_upvote" ADD FOREIGN KEY ("pack_id") REFERENCES "pack"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "user_pack_upvote" ADD CONSTRAINT "user_pack_upvote_pack_id_fkey" FOREIGN KEY ("pack_id") REFERENCES "pack"("id") ON DELETE CASCADE ON UPDATE CASCADE;

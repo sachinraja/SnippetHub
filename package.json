@@ -16,14 +16,15 @@
     "type:check": "tsc",
     "type:gen": "npm run prisma:gen && npm run graphql:gen",
     "prisma:gen": "prisma generate",
-    "prisma:seed": "prisma db seed --preview-feature",
+    "prisma:seed": "prisma db seed",
     "nexus:gen": "ts-node -r tsconfig-paths/register --transpile-only src/graphql/schema.ts",
     "graphql-let:gen": "graphql-let",
     "graphql:gen": "npm run nexus:gen && npm run graphql-let:gen",
     "postinstall": "husky install"
   },
   "prisma": {
-    "schema": "src/prisma/schema.prisma"
+    "schema": "src/prisma/schema.prisma",
+    "seed": "ts-node src/prisma/seed.ts"
   },
   "dependencies": {
     "@apollo/client": "3.4.16",
@@ -46,7 +47,7 @@
     "@hookform/error-message": "2.0.0",
     "@hookform/resolvers": "2.8.2",
     "@next-auth/prisma-adapter": "0.5.4",
-    "@prisma/client": "2.30.3",
+    "@prisma/client": "3.3.0",
     "apollo-server-micro": "3.4.0",
     "axios": "0.24.0",
     "babel-jest": "27.3.1",
@@ -115,7 +116,7 @@
     "next-plugin-preval": "1.2.1",
     "postcss": "8.3.11",
     "prettier": "2.4.1",
-    "prisma": "2.30.3",
+    "prisma": "3.3.0",
     "ts-node": "10.4.0",
     "tsconfig-paths": "3.11.0",
     "typescript": "4.4.4"
