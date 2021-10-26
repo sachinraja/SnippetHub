@@ -15,40 +15,10 @@ loadEnv()
 
 const unvalidatedEnvConfig = convict({
   db: {
-    host: {
-      default: 'localhost',
-      doc: 'The host to make the connection to.',
-      env: 'DB_HOST',
-      format: String,
-    },
-    name: {
-      default: 'snippethub',
-      doc: 'The database name.',
-      env: 'POSTGRES_DB',
-      format: String,
-    },
-    password: {
-      default: 'postgres',
-      doc: 'The database password for the specified user.',
-      env: 'POSTGRES_PASSWORD',
-      format: String,
-    },
-    port: {
-      default: 5432,
-      doc: 'The database port.',
-      env: 'DB_PORT',
-      format: 'port',
-    },
     url: {
       default: '',
       doc: 'The databaase url.',
       env: 'DATABASE_URL',
-      format: String,
-    },
-    user: {
-      default: 'postgres',
-      doc: 'The name of the database user.',
-      env: 'POSTGRES_USER',
       format: String,
     },
   },
