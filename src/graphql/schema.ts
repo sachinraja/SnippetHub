@@ -9,7 +9,7 @@ import * as types from './objects'
 import permissions from './permissions'
 
 const dirPath = path.join(process.cwd(), 'src', 'graphql')
-
+console.log(process.cwd(), dirPath)
 const schema = makeSchema({
   contextType: {
     module: path.join(dirPath, 'context.ts'),
