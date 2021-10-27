@@ -55,7 +55,7 @@
     "convict": "6.2.1",
     "dotenv": "10.0.0",
     "graphql": "15.7.1",
-    "graphql-middleware": "6.1.10",
+    "graphql-middleware": "6.1.11",
     "graphql-shield": "7.5.0",
     "micro-cors": "0.1.1",
     "next": "11.1.2",
