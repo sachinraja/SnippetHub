@@ -3,7 +3,6 @@ on: [push, pull_request]
 
 env:
   GITHUB_PERSONAL_ID: 58836760
-  NEXT_PUBLIC_SERVER_URL: http://localhost:3000
   NEXTAUTH_URL: http://localhost:3000
   POSTGRES_DB: snippethub
   POSTGRES_USER: postgres

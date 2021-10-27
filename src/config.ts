@@ -68,12 +68,6 @@ const unvalidatedEnvConfig = convict({
       format: String,
     },
   },
-  serverUrl: {
-    default: 'http://localhost:3000',
-    doc: 'The server url.',
-    env: 'NEXT_PUBLIC_SERVER_URL',
-    format: String,
-  },
 })
 
 const envConfig = unvalidatedEnvConfig.validate({ allowed: 'strict' })
