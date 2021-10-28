@@ -21,9 +21,9 @@ const FAQDisclosure = ({ question, answer }: FAQDisclosureProps) => {
         <>
           <Disclosure.Button className="flex w-full text-2xl">
             {open ? (
-              <ChevronRightIcon {...iconProps} />
-            ) : (
               <ChevronDownIcon {...iconProps} />
+            ) : (
+              <ChevronRightIcon {...iconProps} />
             )}
 
             {question}
