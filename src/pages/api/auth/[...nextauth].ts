@@ -15,6 +15,7 @@ const handler: NextApiHandler = (req, res) =>
   NextAuth(req, res, {
     providers: [
       Providers.GitHub({
+        scope: 'read:user',
         clientId: envConfig.get('gitHub.clientId'),
         clientSecret: envConfig.get('gitHub.clientSecret'),
         async profile(profile: Profile & GitHubFields) {
