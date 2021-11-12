@@ -113,7 +113,7 @@
     "jest": "27.3.1",
     "json5": "2.2.0",
     "lint-staged": "11.2.6",
-    "next-plugin-preval": "1.2.1",
+    "next-plugin-preval": "1.2.2",
     "postcss": "8.3.11",
     "prettier": "2.4.1",
     "prisma": "3.4.2",
