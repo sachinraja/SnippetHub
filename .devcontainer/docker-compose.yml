@@ -15,7 +15,7 @@ services:
     command: /bin/sh -c "while sleep 1000; do :; done"
 
   db:
-    image: postgres:14.0-alpine
+    image: postgres:14.1-alpine
     env_file:
       - ../src/prisma/.env.local
     volumes:

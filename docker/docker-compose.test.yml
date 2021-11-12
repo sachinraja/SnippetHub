@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:14.0-alpine
+    image: postgres:14.1-alpine
     env_file: ../src/prisma/.env.test.local
     container_name: snippethub_test_db
     ports:
