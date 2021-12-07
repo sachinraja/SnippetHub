@@ -1,3 +1,4 @@
 {
-  extends: ['config:js-lib', 'github>sachinraja/renovate-config:js'],
+  enabled: false,
+  extends: ['config:js-app', 'github>sachinraja/renovate-config:js'],
 }
